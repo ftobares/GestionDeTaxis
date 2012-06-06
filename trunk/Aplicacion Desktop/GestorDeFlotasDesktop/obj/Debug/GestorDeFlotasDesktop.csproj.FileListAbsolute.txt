@@ -17,3 +17,13 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\GD\Aplicacion Desktop\GestorDeFlo
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\GD\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmAuto.AbmAuto.resources
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.exe
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.pdb
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.exe
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.pdb
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmAuto.AbmAuto.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Form1.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Login.Login.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Properties.Resources.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.pdb

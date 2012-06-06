@@ -16,51 +16,40 @@ namespace GestorDeFlotasDesktop.Login
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void btnLogIn_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.Cursor = Cursors.AppStarting;
+                lblEstado.Text = "Estableciendo conexión...";
+                lblEstado.Visible = true;
+                Application.DoEvents();
 
-        }
+                if (!GestorDeFlotasDesktop.BD.GD1C2012.conectar())
+                {
+                    //Muestro mensaje
+                    lblEstado.Text = "No se puedo conectar con la base de datos.";
+                    //Ocurrió un error al intentar conectar con la BD
+                    MessageBox.Show("No se pudo conectar con la base de datos, por favor chequee el estado de la misma", "No pudo conectar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    //Por las dudas hago un Close de la conexion.
+                    GestorDeFlotasDesktop.BD.GD1C2012.desconectar();
+                }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+                lblEstado.Text = "Conexión exitosa, iniciando aplicación.";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string sNomUsu;
-            sNomUsu = comboBox1.SelectedItem.ToString();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            string sPwd;
-            //string sNomUsu;
-            //sNomUsu = comboBox1.SelectedItem.ToString();/NO! se borra!
-
-            sPwd = textBox1.Text.ToString();
-            //ENC clave
-            /*if(sPwd == "1234")
-                MessageBox.Show("Validado!");
-            else
-                MessageBox.Show("No Validado!");*/
-        }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GestorDeFlotasDesktop.AbmAuto.AbmAuto abmAuto = new GestorDeFlotasDesktop.AbmAuto.AbmAuto();
-            abmAuto.Show();
-            Hide();
+            this.lblEstado.Visible = false;
         }
     }
 }
