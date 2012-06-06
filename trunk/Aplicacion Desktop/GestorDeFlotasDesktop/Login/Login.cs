@@ -33,9 +33,26 @@ namespace GestorDeFlotasDesktop.Login
                     MessageBox.Show("No se pudo conectar con la base de datos, por favor chequee el estado de la misma", "No pudo conectar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     //Por las dudas hago un Close de la conexion.
                     GestorDeFlotasDesktop.BD.GD1C2012.desconectar();
+                    return;
                 }
 
-                lblEstado.Text = "Conexión exitosa, iniciando aplicación.";
+
+                lblEstado.Text = "Verificando Credenciales.";
+                //Application.DoEvents()
+                if (logearUsuario())
+                {
+                    Usuario user = new Usuario();
+                    user._userName = txtUsuario.Text;
+
+                    Hide();
+
+                    GestorDeFlotasDesktop.Principal.GestorFlotas gestor = new GestorDeFlotasDesktop.Principal.GestorFlotas();
+                    gestor.Show();
+                }
+                else
+                {
+                    lblEstado.Text = "Credenciales Incorrectas.";
+                }
             }
             catch (Exception ex)
             {
@@ -50,6 +67,20 @@ namespace GestorDeFlotasDesktop.Login
         private void Login_Load(object sender, EventArgs e)
         {
             this.lblEstado.Visible = false;
+        }
+
+        private bool logearUsuario()
+        {
+            try
+            {
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
         }
     }
 }
