@@ -27,3 +27,4 @@ C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDeskt
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.pdb
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Principal.GestorFlotas.resources

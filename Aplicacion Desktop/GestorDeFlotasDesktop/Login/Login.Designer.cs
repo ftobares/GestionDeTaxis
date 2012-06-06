@@ -38,7 +38,7 @@ namespace GestorDeFlotasDesktop.Login
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnLogIn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
             this.lblEstado = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -94,12 +94,12 @@ namespace GestorDeFlotasDesktop.Login
             this.btnLogIn.UseVisualStyleBackColor = true;
             this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
-            // textBox1
+            // txtUsuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(130, 65);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 6;
+            this.txtUsuario.Location = new System.Drawing.Point(130, 65);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(121, 20);
+            this.txtUsuario.TabIndex = 6;
             // 
             // lblEstado
             // 
@@ -116,7 +116,7 @@ namespace GestorDeFlotasDesktop.Login
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.lblEstado);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label3);
@@ -139,7 +139,7 @@ namespace GestorDeFlotasDesktop.Login
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnLogIn;
-        private TextBox textBox1;
+        private TextBox txtUsuario;
         private Label lblEstado;
     }
 }

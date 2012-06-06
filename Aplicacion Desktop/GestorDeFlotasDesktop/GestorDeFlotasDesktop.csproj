@@ -122,6 +122,12 @@
     <Compile Include="MejoresClientes\MejoresClientes.Designer.cs">
       <DependentUpon>MejoresClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Principal\GestorFlotas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal\GestorFlotas.Designer.cs">
+      <DependentUpon>GestorFlotas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AbmAuto\AbmAuto.resx">
@@ -132,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Principal\GestorFlotas.resx">
+      <DependentUpon>GestorFlotas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,7 +173,7 @@
       <DependentUpon>RendierViajes.cs</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs" />
-    <Compile Include="Usuarios.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
