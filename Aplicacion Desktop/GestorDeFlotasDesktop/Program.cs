@@ -20,7 +20,7 @@ namespace GestorDeFlotasDesktop
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //log = new GestorDeFlotasDesktop.Login.Login();
-            Application.Run(form = new Form1());
+            Application.Run(new GestorDeFlotasDesktop.Login.Login());
         }
     }
 }

@@ -84,6 +84,7 @@
     <Compile Include="AbmUsuario\AbmUsuario.Designer.cs">
       <DependentUpon>AbmUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="BD\GD1C2012.cs" />
     <Compile Include="Facturar\Facturar.cs">
       <SubType>Form</SubType>
     </Compile>
