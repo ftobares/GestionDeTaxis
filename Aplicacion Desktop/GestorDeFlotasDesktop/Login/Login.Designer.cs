@@ -22,7 +22,7 @@ namespace GestorDeFlotasDesktop.Login
             base.Dispose(disposing);
             //form1.Show();
             //GestorDeFlotasDesktop.Program.form.Show();
-            Application.Restart();
+            //Application.Restart();
         }
 
         #region Windows Form Designer generated code

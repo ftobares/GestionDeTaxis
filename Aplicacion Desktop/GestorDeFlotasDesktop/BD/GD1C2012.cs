@@ -25,11 +25,15 @@ namespace GestorDeFlotasDesktop.BD
         
         public static bool conectar()
         {
+            GestorDeFlotasDesktop.BD.parametros config = new GestorDeFlotasDesktop.BD.parametros();
             try
             {
-                string dataSource = "EASTBLUE\\SQLSERVER2005";
-                string database = "GD1C2012";
-                connBD.ConnectionString = "Data Source=" + dataSource + ";Initial Catalog=" + database + ";Persist Security Info=True;User ID=gd;Password=gd2012";
+                string dataSource = config.dataSource;
+                string database = config.dataBase;
+                string pSInfo = config.persistSecurityInfo;
+                string user = config.userID;
+                string pass = config.pass;
+                SqlConnection connBD = new SqlConnection("Data Source=" + dataSource + ";Initial Catalog=" + database + ";Persist Security Info=" + pSInfo + ";User ID=" + user + ";Password=" + pass);
                 connBD.Open();
 
                 return true;

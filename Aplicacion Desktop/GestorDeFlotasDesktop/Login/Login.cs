@@ -42,7 +42,7 @@ namespace GestorDeFlotasDesktop.Login
                 if (logearUsuario())
                 {
                     Usuario user = new Usuario();
-                    user._userName = txtUsuario.Text;
+                    user.sUsuarioID = txtUsuario.Text;
 
                     Hide();
 

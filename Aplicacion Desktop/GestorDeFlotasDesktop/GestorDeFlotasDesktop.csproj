@@ -85,6 +85,12 @@
       <DependentUpon>AbmUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="BD\GD1C2012.cs" />
+    <Compile Include="BD\parametros.cs" />
+    <Compile Include="BD\parametros.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>parametros.settings</DependentUpon>
+    </Compile>
     <Compile Include="Facturar\Facturar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,7 +103,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Funcionalidades.cs" />
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +127,7 @@
     <Compile Include="MejoresClientes\MejoresClientes.Designer.cs">
       <DependentUpon>MejoresClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Pantalla.cs" />
     <Compile Include="Principal\GestorFlotas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
+    <None Include="BD\parametros.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>parametros.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -172,7 +183,9 @@
     <Compile Include="RendirViajes\RendierViajes.Designer.cs">
       <DependentUpon>RendierViajes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Roles.cs" />
+    <Compile Include="Rol.cs" />
+    <Compile Include="RolPantalla.cs" />
+    <Compile Include="RolUsuario.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
