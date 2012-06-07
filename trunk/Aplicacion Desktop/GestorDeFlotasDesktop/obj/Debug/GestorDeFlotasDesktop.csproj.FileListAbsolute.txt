@@ -41,3 +41,4 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\Gest
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe.config
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe.config
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe.config
