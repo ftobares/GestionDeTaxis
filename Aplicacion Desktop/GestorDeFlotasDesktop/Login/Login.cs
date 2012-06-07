@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace GestorDeFlotasDesktop.Login
 {
@@ -74,8 +75,23 @@ namespace GestorDeFlotasDesktop.Login
         {
             try
             {
+                string passEncript = GestorDeFlotasDesktop.BD.GD1C2012.encriptarStr(this.txtPassword.Text);
 
-                return true;
+                SqlParameter pUsuario = new SqlParameter("@pUsuario",SqlDbType.VarChar,20);
+                pUsuario.Value=txtUsuario.Text;
+                SqlParameter pClave = new SqlParameter("@pClave",SqlDbType.VarChar,100);
+                pClave.Value = passEncript;
+                SqlParameter pResultado = new SqlParameter("@pResultado",SqlDbType.VarChar,1);
+                pResultado.Direction = ParameterDirection.Output;
+
+                SqlParameter[] parametros = {pUsuario,pClave,pResultado};
+
+                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("verificarCredencialesLogueo", parametros);
+
+                if (pResultado.Value != null && pResultado.Value!=string.Empty && pResultado.Value=="1")
+                    return true;
+                else return false;
+                
             }
             catch (Exception e)
             {
