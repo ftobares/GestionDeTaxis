@@ -59,31 +59,19 @@ namespace GestorDeFlotasDesktop.BD
 
         }
 
-        public static DataTable obtenerFuncionalidades()
+        public static DataTable executeSqlQuery(string strQuery)
         {
             try
             {
-                DataTable dtRoles = new DataTable();
-
-                var querySQL = @"Select P.pantallaID, P.descripcion
-                                from Usuario U
-                                inner join RolUsuario RU on (U.usuarioID = RU.usuarioID)
-                                inner join Rol R on (RU.rolID = R.rolID)
-                                inner join RolPantalla RP on (R.rolID = RP.rolID)
-                                inner join Pantalla P on (RP.pantallaID = P.pantallaID)
-                                where	isnull(U.anulado,'0')='0'
-	                                    and isnull(R.anulado,'0')='0'
-	                                    and U.usuarioID = 'itata'
-	                                    and isnull(RP.acceso,'0')='1'";
+                DataTable dtResultados = new DataTable();
 
                 SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand(querySQL, connBD);
+                SqlCommand myCommand = new SqlCommand(strQuery, connBD);
                 myReader = myCommand.ExecuteReader();
 
-                dtRoles.Load(myReader);
+                dtResultados.Load(myReader);
 
-                return dtRoles;
-
+                return dtResultados;
             }
             catch (Exception e)
             {
