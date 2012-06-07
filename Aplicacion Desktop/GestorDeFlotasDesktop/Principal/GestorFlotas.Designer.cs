@@ -65,18 +65,18 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuItem3.Text = "Log Out";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(114, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(117, 22);
             this.toolStripMenuItem2.Text = "Salir";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 

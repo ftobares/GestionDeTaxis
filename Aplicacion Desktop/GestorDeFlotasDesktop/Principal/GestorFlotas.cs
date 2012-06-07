@@ -24,11 +24,32 @@ namespace GestorDeFlotasDesktop.Principal
 
         private void GestorFlotas_Load(object sender, EventArgs e)
         {
-            //DataSet funcionalidades = new DataSet();
-            GestorDeFlotasDesktop.BD.GD1C2012.obtenerFuncionalidades();
+            DataTable dtFunc = new DataTable();
+            dtFunc = GestorDeFlotasDesktop.BD.GD1C2012.obtenerFuncionalidades();
 
+            foreach (DataRow r in dtFunc.Rows)
+            {
 
+                ToolStripMenuItem tsmi = new ToolStripMenuItem(r[1].ToString(), null, new EventHandler(menuClick_Handler), r[0].ToString());
+                this.toolStripMenuItem4.DropDownItems.Add(tsmi);
+            }
 
+        }
+
+        private void menuClick_Handler(object sender, EventArgs e)
+        {
+            /*ToolStripMenuItem item = e.ClickedItem as ToolStripMenuItem;
+            
+            if (item == null)
+                return;
+
+            switch (item)
+            {
+                case "1":
+                    break;
+                default:
+                    break;
+            }*/
         }
     }
 }
