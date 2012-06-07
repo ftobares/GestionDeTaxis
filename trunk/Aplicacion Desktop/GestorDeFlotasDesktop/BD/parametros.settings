@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GestorDeFlotasDesktop.BD" GeneratedClassName="parametros">
+  <Profiles />
+  <Settings>
+    <Setting Name="dataSource" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost\SQLSERVER2005</Value>
+    </Setting>
+    <Setting Name="dataBase" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">GD1C2012</Value>
+    </Setting>
+    <Setting Name="persistSecurityInfo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="userID" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">gd</Value>
+    </Setting>
+    <Setting Name="pass" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">gd2012</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -27,6 +27,7 @@ namespace GestorDeFlotasDesktop.Principal
             DataTable dtFunc = new DataTable();
             dtFunc = GestorDeFlotasDesktop.BD.GD1C2012.obtenerFuncionalidades();
 
+            //TODO: Revisar dtFunc.Rows, cuando me logueo sin ingresar un usuario
             foreach (DataRow r in dtFunc.Rows)
             {
 

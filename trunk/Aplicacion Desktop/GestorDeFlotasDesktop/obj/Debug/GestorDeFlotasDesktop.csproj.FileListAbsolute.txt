@@ -28,3 +28,15 @@ C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDeskt
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.pdb
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Principal.GestorFlotas.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.exe
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.pdb
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.pdb
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmAuto.AbmAuto.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Form1.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Login.Login.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Principal.GestorFlotas.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Properties.Resources.resources
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.exe.config
