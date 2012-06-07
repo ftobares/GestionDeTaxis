@@ -8,7 +8,6 @@ namespace GestorDeFlotasDesktop
    
     static class Program
     {
-        public static Form1 form;
         //public static Login.Login log;
         /// <summary>
         /// The main entry point for the application.
