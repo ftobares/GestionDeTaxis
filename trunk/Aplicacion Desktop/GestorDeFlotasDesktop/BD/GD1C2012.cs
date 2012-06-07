@@ -55,11 +55,11 @@ namespace GestorDeFlotasDesktop.BD
 
         }
 
-        public static void obtenerFuncionalidades()
+        public static DataTable obtenerFuncionalidades()
         {
             try
             {
-                DataSet dsRoles = new DataSet();
+                DataTable dtRoles = new DataTable();
 
                 var querySQL = @"Select P.pantallaID, P.descripcion
                                 from Usuario U
@@ -76,17 +76,15 @@ namespace GestorDeFlotasDesktop.BD
                 SqlCommand myCommand = new SqlCommand(querySQL, connBD);
                 myReader = myCommand.ExecuteReader();
 
-                /*foreach (var item in queryResult)
-                {
-                    // add the root item and check if it has any children
-                    AddChildMenuItems(menuStrip.Items.Add(item, null,
-                                      new EventHandler(MenuItemClicked)));
-                }*/
+                dtRoles.Load(myReader);
+
+                return dtRoles;
 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                return null;
             }
         }
     }
