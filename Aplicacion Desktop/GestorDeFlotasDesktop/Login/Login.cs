@@ -67,6 +67,7 @@ namespace GestorDeFlotasDesktop.Login
         private void Login_Load(object sender, EventArgs e)
         {
             this.lblEstado.Visible = false;
+            this.txtUsuario.Focus();
         }
 
         private bool logearUsuario()
