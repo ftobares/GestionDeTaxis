@@ -38,6 +38,20 @@ namespace GestorDeFlotasDesktop.Principal
 
         private void menuClick_Handler(object sender, EventArgs e)
         {
+            ToolStripMenuItem itm = sender as ToolStripMenuItem;
+
+            switch (itm.Name)
+            {
+                case "abmAuto":
+                        MessageBox.Show("Autoooooo");
+                        break;
+                    default:
+                        MessageBox.Show("otra cosa!");
+                        break;
+
+            }
+            
+
             /*ToolStripMenuItem item = e.ClickedItem as ToolStripMenuItem;
             
             if (item == null)
