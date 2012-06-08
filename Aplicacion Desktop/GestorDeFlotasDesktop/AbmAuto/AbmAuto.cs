@@ -11,7 +11,18 @@ namespace GestorDeFlotasDesktop.AbmAuto
 {
     public partial class AbmAuto : Form
     {
-        public AbmAuto()
+
+        private static AbmAuto unicaInst = null;
+        public static AbmAuto Instance()
+        {
+            if (unicaInst == null)
+            {
+                unicaInst = new AbmAuto();
+            }
+            return unicaInst;
+        }
+
+        private AbmAuto()
         {
             InitializeComponent();
         }

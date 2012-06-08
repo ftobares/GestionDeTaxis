@@ -19,7 +19,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 components.Dispose();
             }
             base.Dispose(disposing);
-            Application.Exit();
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
@@ -52,6 +52,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.label1);
             this.Name = "AbmAuto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.AbmAuto_Load);
             this.ResumeLayout(false);
