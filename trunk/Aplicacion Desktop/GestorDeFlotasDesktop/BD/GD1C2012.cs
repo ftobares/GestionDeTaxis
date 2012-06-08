@@ -7,71 +7,40 @@ using System.Data.SqlClient;
 
 namespace GestorDeFlotasDesktop.BD
 {
-    public sealed class GD1C2012
+    public static class GD1C2012
     {
-        private static readonly GD1C2012 instance = new GD1C2012();
-
-        private GD1C2012() { }
-
-        public static SqlConnection connBD = new SqlConnection();
-
-        public static GD1C2012 Instance
+        private static string getConnectionString()
         {
-            get
-            {
-                return instance;
-            }
-        }
-        
-        public static bool conectar()
-        {
+            string connectionString = "";
             GestorDeFlotasDesktop.BD.parametros config = new GestorDeFlotasDesktop.BD.parametros();
-            try
-            {
-                string dataSource = config.dataSource;
-                string database = config.dataBase;
-                string pSInfo = config.persistSecurityInfo;
-                string user = config.userID;
-                string pass = config.pass;
-                connBD.ConnectionString = "Data Source=" + dataSource + ";Initial Catalog=" + database + ";Persist Security Info=" + pSInfo + ";User ID=" + user + ";Password=" + pass;
-                connBD.Open();
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-                return false;
-            }
-        }
-
-        public static void desconectar()
-        {
-            try
-            {
-                connBD.Close();
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
+            string dataSource = config.dataSource;
+            string database = config.dataBase;
+            string pSInfo = config.persistSecurityInfo;
+            string user = config.userID;
+            string pass = config.pass;
+            connectionString = "Data Source=" + dataSource + ";Initial Catalog=" + database + ";Persist Security Info=" + pSInfo + ";User ID=" + user + ";Password=" + pass;
+            return connectionString;
         }
 
         public static DataTable executeSqlQuery(string strQuery)
         {
             try
             {
-                DataTable dtResultados = new DataTable();
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
 
-                SqlDataReader myReader = null;
-                SqlCommand myCommand = new SqlCommand(strQuery, connBD);
-                myReader = myCommand.ExecuteReader();
+                    DataTable dtResultados = new DataTable();
 
-                dtResultados.Load(myReader);
+                    SqlDataReader myReader = null;
+                    SqlCommand myCommand = new SqlCommand(strQuery, connBD);
+                    myReader = myCommand.ExecuteReader();
 
-                return dtResultados;
+                    dtResultados.Load(myReader);
+
+                    return dtResultados;
+                }
             }
             catch (Exception e)
             {
@@ -105,13 +74,21 @@ namespace GestorDeFlotasDesktop.BD
         {
             try
             {
-                DataTable dtResultado = new DataTable();
-                SqlCommand cmd = new SqlCommand(spName, connBD);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddRange(parametros);
-                SqlDataReader rd = cmd.ExecuteReader();
-                dtResultado.Load(rd);
-                return dtResultado;
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
+
+                    DataTable dtResultado = new DataTable();
+                    SqlCommand cmd = new SqlCommand(spName, connBD);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(parametros);
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    dtResultado.Load(rd);
+
+                    return dtResultado;
+                }
+
             }
             catch (Exception e)
             {

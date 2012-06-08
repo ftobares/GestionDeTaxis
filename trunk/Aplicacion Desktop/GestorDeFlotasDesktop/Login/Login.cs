@@ -19,28 +19,39 @@ namespace GestorDeFlotasDesktop.Login
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
+            logearUsuario();
+        }
+
+        private bool controlarCamposCompletos()
+        {
+            if (this.txtUsuario.Text != string.Empty && this.txtPassword.Text != string.Empty)
+                return true;
+            else
+                return false;
+        }
+
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            this.lblEstado.Visible = false;
+            this.txtUsuario.Focus();
+        }
+
+        private void logearUsuario()
+        {
             try
             {
-                this.Cursor = Cursors.AppStarting;
-                lblEstado.Text = "Estableciendo conexión...";
-                lblEstado.Visible = true;
-                Application.DoEvents();
-
-                if (!GestorDeFlotasDesktop.BD.GD1C2012.conectar())
+                if (!controlarCamposCompletos())
                 {
-                    //Muestro mensaje
-                    lblEstado.Text = "No se puedo conectar con la base de datos.";
-                    //Ocurrió un error al intentar conectar con la BD
-                    MessageBox.Show("No se pudo conectar con la base de datos, por favor chequee el estado de la misma", "No pudo conectar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    //Por las dudas hago un Close de la conexion.
-                    GestorDeFlotasDesktop.BD.GD1C2012.desconectar();
+                    MessageBox.Show("Debe completar los campos Usuario y Password.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
+                this.Cursor = Cursors.AppStarting;
+                lblEstado.Text = "Verificando Credenciales...";
+                lblEstado.Visible = true;
 
-                lblEstado.Text = "Verificando Credenciales.";
-                //Application.DoEvents()
-                if (logearUsuario())
+                if (verificarCredenciales())
                 {
                     Usuario user = new Usuario();
                     user.sUsuarioID = txtUsuario.Text;
@@ -65,38 +76,48 @@ namespace GestorDeFlotasDesktop.Login
             }
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-            this.lblEstado.Visible = false;
-            this.txtUsuario.Focus();
-        }
-
-        private bool logearUsuario()
+        private bool verificarCredenciales()
         {
             try
             {
                 string passEncript = GestorDeFlotasDesktop.BD.GD1C2012.encriptarStr(this.txtPassword.Text);
 
-                SqlParameter pUsuario = new SqlParameter("@pUsuario",SqlDbType.VarChar,20);
-                pUsuario.Value=txtUsuario.Text;
-                SqlParameter pClave = new SqlParameter("@pClave",SqlDbType.VarChar,100);
+                SqlParameter pUsuario = new SqlParameter("@pUsuario", SqlDbType.VarChar, 20);
+                pUsuario.Value = txtUsuario.Text;
+                SqlParameter pClave = new SqlParameter("@pClave", SqlDbType.VarChar, 100);
                 pClave.Value = passEncript;
-                SqlParameter pResultado = new SqlParameter("@pResultado",SqlDbType.VarChar,1);
+                SqlParameter pResultado = new SqlParameter("@pResultado", SqlDbType.Bit);
                 pResultado.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = {pUsuario,pClave,pResultado};
+                SqlParameter[] parametros = { pUsuario, pClave, pResultado };
 
                 GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("verificarCredencialesLogueo", parametros);
 
-                if (pResultado.Value != null && pResultado.Value!=string.Empty && pResultado.Value=="1")
-                    return true;
-                else return false;
-                
+                //if (pResultado.Value != null && pResultado.Value != string.Empty && pResultado.Value == "1")
+                    return (bool)pResultado.Value;
+                //else return false;
+
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
                 return false;
+            }
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                this.txtPassword.Focus();
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                logearUsuario();
             }
         }
     }
