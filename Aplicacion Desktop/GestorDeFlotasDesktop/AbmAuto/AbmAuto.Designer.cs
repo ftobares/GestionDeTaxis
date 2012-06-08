@@ -31,6 +31,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.cmbTest = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -45,11 +46,21 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.label1.TabIndex = 0;
             this.label1.Text = "ABM Autos";
             // 
+            // cmbTest
+            // 
+            this.cmbTest.FormattingEnabled = true;
+            this.cmbTest.Location = new System.Drawing.Point(86, 108);
+            this.cmbTest.Name = "cmbTest";
+            this.cmbTest.Size = new System.Drawing.Size(121, 21);
+            this.cmbTest.TabIndex = 1;
+            this.cmbTest.SelectedIndexChanged += new System.EventHandler(this.cmbTest_SelectedIndexChanged);
+            // 
             // AbmAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.cmbTest);
             this.Controls.Add(this.label1);
             this.Name = "AbmAuto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -63,5 +74,6 @@ namespace GestorDeFlotasDesktop.AbmAuto
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private ComboBox cmbTest;
     }
 }
