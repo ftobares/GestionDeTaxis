@@ -83,8 +83,38 @@ namespace GestorDeFlotasDesktop.BD
                     SqlCommand cmd = new SqlCommand(spName, connBD);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(parametros);
-                    SqlDataReader rd = cmd.ExecuteReader();
-                    dtResultado.Load(rd);
+                    
+                    SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
+                    myAdapter.Fill(dtResultado);
+
+                    return dtResultado;
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+
+
+        public static DataTable ejecutarSP(string spName, SqlParameter parametro)
+        {
+            try
+            {
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
+
+                    DataTable dtResultado = new DataTable();
+                    SqlCommand cmd = new SqlCommand(spName, connBD);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(parametro);
+
+                    SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
+                    myAdapter.Fill(dtResultado);
 
                     return dtResultado;
                 }
