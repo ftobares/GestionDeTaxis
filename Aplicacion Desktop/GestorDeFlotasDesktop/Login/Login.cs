@@ -53,8 +53,10 @@ namespace GestorDeFlotasDesktop.Login
 
                 if (verificarCredenciales())
                 {
-                    Usuario user = new Usuario();
-                    user.sUsuarioID = txtUsuario.Text;
+                    UsuarioLogeado.usuarioID = this.txtUsuario.Text;
+
+                    //Usuario user = new Usuario();
+                    //user.sUsuarioID = txtUsuario.Text;
 
                     Hide();
 

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Data;
+using System.Data.SqlClient;
 
 namespace GestorDeFlotasDesktop.Principal
 {
@@ -66,18 +66,12 @@ namespace GestorDeFlotasDesktop.Principal
             {
                 DataTable dtRoles = new DataTable();
 
-                var querySQL = @"Select P.pantallaID, P.descripcion
-                                from Usuario U
-                                inner join RolUsuario RU on (U.usuarioID = RU.usuarioID)
-                                inner join Rol R on (RU.rolID = R.rolID)
-                                inner join RolPantalla RP on (R.rolID = RP.rolID)
-                                inner join Pantalla P on (RP.pantallaID = P.pantallaID)
-                                where	isnull(U.anulado,'0')='0'
-	                                    and isnull(R.anulado,'0')='0'
-	                                    and U.usuarioID = 'itata'
-	                                    and isnull(RP.acceso,'0')='1'";
+                SqlParameter pUsuario = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
+                pUsuario.Value = UsuarioLogeado.usuarioID;
 
-                dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(querySQL);
+                dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("ObtenerFuncionalidades",pUsuario);
+
+                //dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(querySQL);
 
                 //TODO: Revisar dtFunc.Rows, cuando me logueo sin ingresar un usuario
                 foreach (DataRow r in dtRoles.Rows)
