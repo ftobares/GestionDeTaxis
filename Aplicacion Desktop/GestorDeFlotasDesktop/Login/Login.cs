@@ -35,6 +35,11 @@ namespace GestorDeFlotasDesktop.Login
         {
             this.lblEstado.Visible = false;
             this.txtUsuario.Focus();
+
+            //Esto es temporal, me harto poner el usuario y clave
+            this.txtUsuario.Text = "Admin";
+            this.txtPassword.Text = "w23e";
+           // this.logearUsuario();
         }
 
         private void logearUsuario()
@@ -58,10 +63,10 @@ namespace GestorDeFlotasDesktop.Login
                     //Usuario user = new Usuario();
                     //user.sUsuarioID = txtUsuario.Text;
 
-                    Hide();
-
                     GestorDeFlotasDesktop.Principal.GestorFlotas gestor = new GestorDeFlotasDesktop.Principal.GestorFlotas();
                     gestor.Show();
+
+                    Hide();
                 }
                 else
                 {

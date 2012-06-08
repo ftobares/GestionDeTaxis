@@ -30,32 +30,29 @@ namespace GestorDeFlotasDesktop.Principal
         private void menuClick_Handler(object sender, EventArgs e)
         {
             ToolStripMenuItem itm = sender as ToolStripMenuItem;
-
             switch (itm.Name)
             {
                 case "abmAuto":
-                        MessageBox.Show("Autoooooo");
-                        break;
-                    default:
-                        MessageBox.Show("otra cosa!");
-                        break;
-
-            }
-            
-
-            /*ToolStripMenuItem item = e.ClickedItem as ToolStripMenuItem;
-            
-            if (item == null)
-                return;
-
-            switch (item)
-            {
-                case "1":
+                    GestorDeFlotasDesktop.AbmAuto.AbmAuto frmAuto = new GestorDeFlotasDesktop.AbmAuto.AbmAuto();
+                    frmAuto.MdiParent = this;
+                    frmAuto.Show();
                     break;
-                default:
+                case "abmChofer":
+                    GestorDeFlotasDesktop.AbmChofer.AbmChofer frmChofer = new GestorDeFlotasDesktop.AbmChofer.AbmChofer();
+                    frmChofer.MdiParent = this;
+                    frmChofer.Show();
                     break;
-            }*/
-     
+                case "abmReloj":
+                    GestorDeFlotasDesktop.AbmReloj.AbmReloj frmReloj = new GestorDeFlotasDesktop.AbmReloj.AbmReloj();
+                    frmReloj.MdiParent = this;
+                    frmReloj.Show();
+                    break;
+                case "abmRendicion":
+                    GestorDeFlotasDesktop.RendirViajes.RendierViajes frmRendicion = new GestorDeFlotasDesktop.RendirViajes.RendierViajes();
+                    frmRendicion.MdiParent = this;
+                    frmRendicion.Show();
+                    break;
+            }     
         }
 
 
@@ -71,9 +68,6 @@ namespace GestorDeFlotasDesktop.Principal
 
                 dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("ObtenerFuncionalidades",pUsuario);
 
-                //dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(querySQL);
-
-                //TODO: Revisar dtFunc.Rows, cuando me logueo sin ingresar un usuario
                 foreach (DataRow r in dtRoles.Rows)
                 {
 
