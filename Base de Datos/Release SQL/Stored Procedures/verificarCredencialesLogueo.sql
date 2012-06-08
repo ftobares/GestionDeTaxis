@@ -11,7 +11,7 @@
 create PROCEDURE verificarCredencialesLogueo
 	@pUsuario	VARCHAR(20),
 	@pClave		VARCHAR(100),
-	@pResultado	BIT OUT
+	@pResultado	VARCHAR(1) OUT
 
 AS
 DECLARE @clave VARCHAR(100)
@@ -19,12 +19,12 @@ BEGIN
 	
 	SELECT @clave = password from Usuario where usuarioID = @pUsuario
 
-	set @pResultado = 0
+	set @pResultado = '0'
 
 	if @clave = @pClave
-		Set @pResultado = 1
+		Set @pResultado = '1'
 	else
-		Set @pResultado = 0
+		Set @pResultado = '0'
 
 	return @pResultado
 		
