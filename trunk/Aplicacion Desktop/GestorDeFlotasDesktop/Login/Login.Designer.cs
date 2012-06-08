@@ -14,15 +14,11 @@ namespace GestorDeFlotasDesktop.Login
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            //Form1 form1 = new Form1();
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
             base.Dispose(disposing);
-            //form1.Show();
-            //GestorDeFlotasDesktop.Program.form.Show();
-            //Application.Restart();
         }
 
         #region Windows Form Designer generated code
@@ -128,6 +124,7 @@ namespace GestorDeFlotasDesktop.Login
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);

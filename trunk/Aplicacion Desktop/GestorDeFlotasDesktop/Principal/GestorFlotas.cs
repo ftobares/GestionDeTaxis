@@ -33,24 +33,9 @@ namespace GestorDeFlotasDesktop.Principal
             switch (itm.Name)
             {
                 case "abmAuto":
-                    GestorDeFlotasDesktop.AbmAuto.AbmAuto frmAuto = new GestorDeFlotasDesktop.AbmAuto.AbmAuto();
+                    GestorDeFlotasDesktop.AbmAuto.AbmAuto frmAuto = GestorDeFlotasDesktop.AbmAuto.AbmAuto.Instance();
                     frmAuto.MdiParent = this;
                     frmAuto.Show();
-                    break;
-                case "abmChofer":
-                    GestorDeFlotasDesktop.AbmChofer.AbmChofer frmChofer = new GestorDeFlotasDesktop.AbmChofer.AbmChofer();
-                    frmChofer.MdiParent = this;
-                    frmChofer.Show();
-                    break;
-                case "abmReloj":
-                    GestorDeFlotasDesktop.AbmReloj.AbmReloj frmReloj = new GestorDeFlotasDesktop.AbmReloj.AbmReloj();
-                    frmReloj.MdiParent = this;
-                    frmReloj.Show();
-                    break;
-                case "abmRendicion":
-                    GestorDeFlotasDesktop.RendirViajes.RendierViajes frmRendicion = new GestorDeFlotasDesktop.RendirViajes.RendierViajes();
-                    frmRendicion.MdiParent = this;
-                    frmRendicion.Show();
                     break;
             }     
         }
@@ -79,6 +64,17 @@ namespace GestorDeFlotasDesktop.Principal
             {
                 Console.WriteLine(e.ToString());
             }
+        }
+
+        private void GestorFlotas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+            
         }
     }
 }

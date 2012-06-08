@@ -66,7 +66,7 @@ namespace GestorDeFlotasDesktop.Login
                     GestorDeFlotasDesktop.Principal.GestorFlotas gestor = new GestorDeFlotasDesktop.Principal.GestorFlotas();
                     gestor.Show();
 
-                    Hide();
+                    this.Hide();
                 }
                 else
                 {
