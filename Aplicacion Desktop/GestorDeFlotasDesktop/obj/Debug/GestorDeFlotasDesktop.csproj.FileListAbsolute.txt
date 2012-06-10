@@ -59,3 +59,4 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - bck4\Aplicacion Desktop\Gest
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AbmCliente.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AltaModifCli.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmAuto.addEditAuto.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Buscador.Buscador.resources

@@ -124,6 +124,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>parametros.settings</DependentUpon>
     </Compile>
+    <Compile Include="Buscador\Buscador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Buscador\Buscador.Designer.cs">
+      <DependentUpon>Buscador.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturar\Facturar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\AltaModifCli.resx">
       <DependentUpon>AltaModifCli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Buscador\Buscador.resx">
+      <DependentUpon>Buscador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
