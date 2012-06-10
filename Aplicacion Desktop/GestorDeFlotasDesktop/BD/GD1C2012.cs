@@ -99,7 +99,7 @@ namespace GestorDeFlotasDesktop.BD
             }
         }
 
-        public static DataTable ejecutarSP(string spName, SqlParameter[] parametros)
+        public static bool ejecutarSP(string spName, SqlParameter[] parametros,DataTable dtResultado)
         {
             try
             {
@@ -108,7 +108,6 @@ namespace GestorDeFlotasDesktop.BD
                     connBD.ConnectionString = getConnectionString();
                     connBD.Open();
 
-                    DataTable dtResultado = new DataTable();
                     SqlCommand cmd = new SqlCommand(spName, connBD);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddRange(parametros);
@@ -116,19 +115,19 @@ namespace GestorDeFlotasDesktop.BD
                     SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
                     myAdapter.Fill(dtResultado);
 
-                    return dtResultado;
+                    return true;
                 }
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
-                return null;
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 
 
-        public static DataTable ejecutarSP(string spName, SqlParameter parametro)
+        public static bool ejecutarSP(string spName, SqlParameter parametro, DataTable dtResultado)
         {
             try
             {
@@ -137,7 +136,6 @@ namespace GestorDeFlotasDesktop.BD
                     connBD.ConnectionString = getConnectionString();
                     connBD.Open();
 
-                    DataTable dtResultado = new DataTable();
                     SqlCommand cmd = new SqlCommand(spName, connBD);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add(parametro);
@@ -145,15 +143,69 @@ namespace GestorDeFlotasDesktop.BD
                     SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
                     myAdapter.Fill(dtResultado);
 
-                    return dtResultado;
+                    return true;
                 }
 
             }
             catch (Exception e)
             {
-                MessageBox.Show("Por favor verifique que el nombre del Stored Procedure al cual está intentanto llamar es correcto.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(e.ToString());
-                return null;
+                return false;
+            }
+        }
+
+        public static bool ejecutarSP(string spName, SqlParameter[] parametros)
+        {
+            try
+            {
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
+
+                    SqlCommand cmd = new SqlCommand(spName, connBD);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(parametros);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+
+        public static bool ejecutarSP(string spName, SqlParameter parametro)
+        {
+            try
+            {
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
+
+                    SqlCommand cmd = new SqlCommand(spName, connBD);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(parametro);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(e.ToString());
+                return false;
             }
         }
     }

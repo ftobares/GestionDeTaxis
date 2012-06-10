@@ -33,7 +33,7 @@ namespace GestorDeFlotasDesktop.Principal
             switch (itm.Name)
             {
                 case "abmAuto":
-                    GestorDeFlotasDesktop.AbmAuto.AbmAuto frmAuto = GestorDeFlotasDesktop.AbmAuto.AbmAuto.Instance();
+                    GestorDeFlotasDesktop.AbmAuto.addEditAuto frmAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
                     frmAuto.MdiParent = this;
                     frmAuto.Show();
                     break;
@@ -56,7 +56,8 @@ namespace GestorDeFlotasDesktop.Principal
                 SqlParameter pUsuario = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
                 pUsuario.Value = UsuarioLogeado.usuarioID;
 
-                dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.ObtenerFuncionalidades",pUsuario);
+                if (!GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.ObtenerFuncionalidades",pUsuario, dtRoles))
+                    return;
 
                 foreach (DataRow r in dtRoles.Rows)
                 {
