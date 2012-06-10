@@ -56,3 +56,5 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - bck4\Aplicacion Desktop\Gest
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - bck4\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Debug\GestorDeFlotasDesktop.pdb
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - bck4\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AbmCliente.resources
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - bck4\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AltaModifCli.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AbmCliente.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AltaModifCli.resources

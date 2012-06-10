@@ -151,6 +151,7 @@ namespace GestorDeFlotasDesktop.BD
             }
             catch (Exception e)
             {
+                MessageBox.Show("Por favor verifique que el nombre del Stored Procedure al cual está intentanto llamar es correcto.","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine(e.ToString());
                 return null;
             }
