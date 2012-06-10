@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
@@ -28,30 +29,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbReloj = new System.Windows.Forms.ComboBox();
             this.txtReloj = new System.Windows.Forms.Label();
             this.txtRodado = new System.Windows.Forms.TextBox();
             this.lblRodado = new System.Windows.Forms.Label();
             this.txtLicencia = new System.Windows.Forms.TextBox();
             this.lblLicencia = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblModelo = new System.Windows.Forms.Label();
             this.lblMarca = new System.Windows.Forms.Label();
             this.cmbMarca = new System.Windows.Forms.ComboBox();
             this.mtxtPatente = new System.Windows.Forms.MaskedTextBox();
             this.llblPatente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnSeleccionarReloj = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // cmbReloj
-            // 
-            this.cmbReloj.FormattingEnabled = true;
-            this.cmbReloj.Location = new System.Drawing.Point(104, 191);
-            this.cmbReloj.Name = "cmbReloj";
-            this.cmbReloj.Size = new System.Drawing.Size(121, 21);
-            this.cmbReloj.TabIndex = 25;
             // 
             // txtReloj
             // 
@@ -94,12 +88,12 @@
             this.lblLicencia.TabIndex = 20;
             this.lblLicencia.Text = "Licencia:";
             // 
-            // textBox1
+            // txtModelo
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 113);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 19;
+            this.txtModelo.Location = new System.Drawing.Point(104, 113);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(100, 20);
+            this.txtModelo.TabIndex = 19;
             // 
             // lblModelo
             // 
@@ -156,39 +150,62 @@
             this.lblTitulo.TabIndex = 26;
             this.lblTitulo.Text = "titulo";
             // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(54, 240);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 27;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            // 
             // btnCancelar
             // 
+            this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelar.Location = new System.Drawing.Point(150, 240);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 28;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.accept;
+            this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAceptar.Location = new System.Drawing.Point(54, 240);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(87, 23);
+            this.btnAceptar.TabIndex = 27;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(104, 191);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 29;
+            // 
+            // btnSeleccionarReloj
+            // 
+            this.btnSeleccionarReloj.Location = new System.Drawing.Point(210, 189);
+            this.btnSeleccionarReloj.Name = "btnSeleccionarReloj";
+            this.btnSeleccionarReloj.Size = new System.Drawing.Size(24, 23);
+            this.btnSeleccionarReloj.TabIndex = 30;
+            this.btnSeleccionarReloj.Text = "...";
+            this.btnSeleccionarReloj.UseVisualStyleBackColor = true;
             // 
             // addEditAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 275);
+            this.Controls.Add(this.btnSeleccionarReloj);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.cmbReloj);
             this.Controls.Add(this.txtReloj);
             this.Controls.Add(this.txtRodado);
             this.Controls.Add(this.lblRodado);
             this.Controls.Add(this.txtLicencia);
             this.Controls.Add(this.lblLicencia);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtModelo);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.lblMarca);
             this.Controls.Add(this.cmbMarca);
@@ -196,6 +213,7 @@
             this.Controls.Add(this.llblPatente);
             this.Name = "addEditAuto";
             this.Text = "addEditAuto";
+            this.Load += new System.EventHandler(this.addEditAuto_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,13 +221,12 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbReloj;
         private System.Windows.Forms.Label txtReloj;
         private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.Label lblRodado;
         private System.Windows.Forms.TextBox txtLicencia;
         private System.Windows.Forms.Label lblLicencia;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label lblModelo;
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.ComboBox cmbMarca;
@@ -218,5 +235,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnSeleccionarReloj;
     }
 }

@@ -54,6 +54,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.Name = "AbmAuto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Autos";
+            this.Load += new System.EventHandler(this.AbmAuto_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

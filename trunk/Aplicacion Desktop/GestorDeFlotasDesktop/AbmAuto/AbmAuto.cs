@@ -27,5 +27,10 @@ namespace GestorDeFlotasDesktop.AbmAuto
         {
             InitializeComponent();
         }
+
+        private void AbmAuto_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
