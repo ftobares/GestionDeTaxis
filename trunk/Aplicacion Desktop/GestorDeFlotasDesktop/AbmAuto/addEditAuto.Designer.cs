@@ -41,9 +41,11 @@
             this.mtxtPatente = new System.Windows.Forms.MaskedTextBox();
             this.llblPatente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.txtReloj = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.txtReloj = new System.Windows.Forms.TextBox();
             this.btnSeleccionarReloj = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -120,6 +122,7 @@
             // 
             // cmbMarca
             // 
+            this.cmbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMarca.FormattingEnabled = true;
             this.cmbMarca.Location = new System.Drawing.Point(104, 86);
             this.cmbMarca.Name = "cmbMarca";
@@ -131,7 +134,7 @@
             this.mtxtPatente.Location = new System.Drawing.Point(104, 60);
             this.mtxtPatente.Mask = "???000";
             this.mtxtPatente.Name = "mtxtPatente";
-            this.mtxtPatente.Size = new System.Drawing.Size(100, 20);
+            this.mtxtPatente.Size = new System.Drawing.Size(66, 20);
             this.mtxtPatente.TabIndex = 15;
             // 
             // llblPatente
@@ -150,35 +153,11 @@
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblTitulo.Location = new System.Drawing.Point(83, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(102, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(58, 26);
             this.lblTitulo.TabIndex = 26;
             this.lblTitulo.Text = "titulo";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(150, 240);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(86, 23);
-            this.btnCancelar.TabIndex = 28;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.accept;
-            this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(54, 240);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(87, 23);
-            this.btnAceptar.TabIndex = 27;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // txtReloj
             // 
@@ -188,21 +167,71 @@
             this.txtReloj.Size = new System.Drawing.Size(100, 20);
             this.txtReloj.TabIndex = 29;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(176, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 13);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "[Formato: AAA111]";
+            // 
+            // button1
+            // 
+            this.button1.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(203, 229);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(83, 23);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "Limpiar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(111, 229);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(86, 23);
+            this.btnCancelar.TabIndex = 28;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
+            this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAceptar.Location = new System.Drawing.Point(28, 229);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(77, 23);
+            this.btnAceptar.TabIndex = 27;
+            this.btnAceptar.Text = "Guardar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
             // btnSeleccionarReloj
             // 
+            this.btnSeleccionarReloj.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
+            this.btnSeleccionarReloj.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSeleccionarReloj.Location = new System.Drawing.Point(210, 189);
             this.btnSeleccionarReloj.Name = "btnSeleccionarReloj";
-            this.btnSeleccionarReloj.Size = new System.Drawing.Size(24, 23);
-            this.btnSeleccionarReloj.TabIndex = 30;
-            this.btnSeleccionarReloj.Text = "...";
+            this.btnSeleccionarReloj.Size = new System.Drawing.Size(100, 23);
+            this.btnSeleccionarReloj.TabIndex = 33;
+            this.btnSeleccionarReloj.Text = "Seleccionar...";
+            this.btnSeleccionarReloj.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSeleccionarReloj.UseVisualStyleBackColor = true;
+            this.btnSeleccionarReloj.Click += new System.EventHandler(this.btnSeleccionarReloj_Click);
             // 
             // addEditAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 275);
+            this.ClientSize = new System.Drawing.Size(323, 268);
             this.Controls.Add(this.btnSeleccionarReloj);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtReloj);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -244,6 +273,8 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtReloj;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnSeleccionarReloj;
     }
 }

@@ -45,7 +45,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void cargarMarcas()
         {
-            string strQuery = "Select marca from FEMIG.marcas_autos";
+            string strQuery = "Select marca from FEMIG.marcas_autos order by marca";
             cmbMarca.DataSource = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
             cmbMarca.DisplayMember = "marca";
         }
@@ -109,6 +109,19 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnSeleccionarReloj_Click(object sender, EventArgs e)
+        {
+            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+            frmBuscadorReloj.strQueryPrincipal = "Select nroSerieReloj, marca, modelo, fechaVersion from femig.relojes where isnull(anulado,'0')='0' order by marca, modelo, nroSerieReloj";
+            frmBuscadorReloj.Filtro1Text = "Marca:";
+            frmBuscadorReloj.Filtro1Value = "marca";
+            frmBuscadorReloj.Filtro2Text = "Modelo:";
+            frmBuscadorReloj.Filtro2Value = "modelo";
+
+            frmBuscadorReloj.ShowDialog();
+            frmBuscadorReloj.Dispose();
         }
     }
 }
