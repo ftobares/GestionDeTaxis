@@ -27,19 +27,5 @@ namespace GestorDeFlotasDesktop.AbmAuto
         {
             InitializeComponent();
         }
-
-        private void AbmAuto_Load(object sender, EventArgs e)
-        {
-            DataTable dtRoles = new DataTable();
-
-            SqlParameter pUsuario = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
-            pUsuario.Value = UsuarioLogeado.usuarioID;
-
-            dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("ObtenerFuncionalidades", pUsuario);
-
-            this.cmbTest.DataSource=dtRoles;
-            this.cmbTest.DisplayMember = "descripcion";
-            this.cmbTest.ValueMember = "pantallaID";
-        }
     }
 }

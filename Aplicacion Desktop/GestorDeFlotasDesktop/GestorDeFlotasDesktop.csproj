@@ -69,6 +69,12 @@
     <Compile Include="AbmAuto\AbmAuto.Designer.cs">
       <DependentUpon>AbmAuto.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmAuto\addEditAuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmAuto\addEditAuto.Designer.cs">
+      <DependentUpon>addEditAuto.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmChofer\AbmChofer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     <EmbeddedResource Include="AbmAuto\AbmAuto.resx">
       <DependentUpon>AbmAuto.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmAuto\addEditAuto.resx">
+      <DependentUpon>addEditAuto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\AbmCliente.resx">
       <DependentUpon>AbmCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +230,9 @@
     <Compile Include="RolUsuario.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioLogeado.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Media\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

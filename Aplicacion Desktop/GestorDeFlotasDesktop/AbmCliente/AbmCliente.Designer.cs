@@ -205,7 +205,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Formulario Cliente";
             this.Load += new System.EventHandler(this.AbmCliente_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AbmCliente_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -13,7 +13,17 @@ namespace GestorDeFlotasDesktop.AbmCliente
 {
     public partial class AbmCliente : Form
     {
-        public AbmCliente()
+        private static AbmCliente unicaInst = null;
+        public static AbmCliente Instance()
+        {
+            if (unicaInst == null)
+            {
+                unicaInst = new AbmCliente();
+            }
+            return unicaInst;
+        }
+
+        private AbmCliente()
         {
             InitializeComponent();
         }
@@ -34,10 +44,6 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private void AbmCliente_Load(object sender, EventArgs e)
         {
 
-        }
-        private void AbmCliente_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void buttonNuevo_Click(object sender, EventArgs e)
