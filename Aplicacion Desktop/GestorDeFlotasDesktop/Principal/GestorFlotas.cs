@@ -76,5 +76,15 @@ namespace GestorDeFlotasDesktop.Principal
             Application.Restart();
             
         }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

@@ -65,6 +65,9 @@ namespace GestorDeFlotasDesktop.Login
 
                     GestorDeFlotasDesktop.Principal.GestorFlotas gestor = new GestorDeFlotasDesktop.Principal.GestorFlotas();
                     gestor.Show();
+                    //TODO: comentarr!
+                    GestorDeFlotasDesktop.AbmCliente.AbmCliente cli = new GestorDeFlotasDesktop.AbmCliente.AbmCliente();
+                    cli.Show();
 
                     this.Hide();
                 }
@@ -98,7 +101,7 @@ namespace GestorDeFlotasDesktop.Login
 
                 SqlParameter[] parametros = { pUsuario, pClave, pResultado };
 
-                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("verificarCredencialesLogueo", parametros);
+                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros);
 
                 //if (pResultado.Value != null && pResultado.Value != string.Empty && pResultado.Value == "1")
                     return (bool)pResultado.Value;
