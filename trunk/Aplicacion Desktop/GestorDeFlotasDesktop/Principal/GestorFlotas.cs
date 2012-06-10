@@ -37,6 +37,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmAuto.MdiParent = this;
                     frmAuto.Show();
                     break;
+                case "abmCliente":
+                    GestorDeFlotasDesktop.AbmCliente.AbmCliente frmCliente = GestorDeFlotasDesktop.AbmCliente.AbmCliente.Instance();
+                    frmCliente.MdiParent = this;
+                    frmCliente.Show();
+                    break;
             }     
         }
 
@@ -75,16 +80,6 @@ namespace GestorDeFlotasDesktop.Principal
         {
             Application.Restart();
             
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
     }
 }
