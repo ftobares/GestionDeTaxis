@@ -29,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtReloj = new System.Windows.Forms.Label();
+            this.lblReloj = new System.Windows.Forms.Label();
             this.txtRodado = new System.Windows.Forms.TextBox();
             this.lblRodado = new System.Windows.Forms.Label();
             this.txtLicencia = new System.Windows.Forms.TextBox();
@@ -43,18 +43,19 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtReloj = new System.Windows.Forms.TextBox();
             this.btnSeleccionarReloj = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // txtReloj
+            // lblReloj
             // 
-            this.txtReloj.AutoSize = true;
-            this.txtReloj.Location = new System.Drawing.Point(51, 194);
-            this.txtReloj.Name = "txtReloj";
-            this.txtReloj.Size = new System.Drawing.Size(34, 13);
-            this.txtReloj.TabIndex = 24;
-            this.txtReloj.Text = "Reloj:";
+            this.lblReloj.AutoSize = true;
+            this.lblReloj.ForeColor = System.Drawing.Color.Red;
+            this.lblReloj.Location = new System.Drawing.Point(51, 194);
+            this.lblReloj.Name = "lblReloj";
+            this.lblReloj.Size = new System.Drawing.Size(34, 13);
+            this.lblReloj.TabIndex = 24;
+            this.lblReloj.Text = "Reloj:";
             // 
             // txtRodado
             // 
@@ -66,6 +67,7 @@
             // lblRodado
             // 
             this.lblRodado.AutoSize = true;
+            this.lblRodado.ForeColor = System.Drawing.Color.Red;
             this.lblRodado.Location = new System.Drawing.Point(51, 168);
             this.lblRodado.Name = "lblRodado";
             this.lblRodado.Size = new System.Drawing.Size(48, 13);
@@ -82,6 +84,7 @@
             // lblLicencia
             // 
             this.lblLicencia.AutoSize = true;
+            this.lblLicencia.ForeColor = System.Drawing.Color.Red;
             this.lblLicencia.Location = new System.Drawing.Point(51, 142);
             this.lblLicencia.Name = "lblLicencia";
             this.lblLicencia.Size = new System.Drawing.Size(50, 13);
@@ -98,6 +101,7 @@
             // lblModelo
             // 
             this.lblModelo.AutoSize = true;
+            this.lblModelo.ForeColor = System.Drawing.Color.Red;
             this.lblModelo.Location = new System.Drawing.Point(51, 116);
             this.lblModelo.Name = "lblModelo";
             this.lblModelo.Size = new System.Drawing.Size(45, 13);
@@ -107,6 +111,7 @@
             // lblMarca
             // 
             this.lblMarca.AutoSize = true;
+            this.lblMarca.ForeColor = System.Drawing.Color.Red;
             this.lblMarca.Location = new System.Drawing.Point(51, 89);
             this.lblMarca.Name = "lblMarca";
             this.lblMarca.Size = new System.Drawing.Size(40, 13);
@@ -132,6 +137,7 @@
             // llblPatente
             // 
             this.llblPatente.AutoSize = true;
+            this.llblPatente.ForeColor = System.Drawing.Color.Red;
             this.llblPatente.Location = new System.Drawing.Point(51, 63);
             this.llblPatente.Name = "llblPatente";
             this.llblPatente.Size = new System.Drawing.Size(47, 13);
@@ -160,6 +166,7 @@
             this.btnCancelar.TabIndex = 28;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -173,13 +180,13 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // textBox1
+            // txtReloj
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 191);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 29;
+            this.txtReloj.Location = new System.Drawing.Point(104, 191);
+            this.txtReloj.Name = "txtReloj";
+            this.txtReloj.ReadOnly = true;
+            this.txtReloj.Size = new System.Drawing.Size(100, 20);
+            this.txtReloj.TabIndex = 29;
             // 
             // btnSeleccionarReloj
             // 
@@ -196,11 +203,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 275);
             this.Controls.Add(this.btnSeleccionarReloj);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtReloj);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.txtReloj);
+            this.Controls.Add(this.lblReloj);
             this.Controls.Add(this.txtRodado);
             this.Controls.Add(this.lblRodado);
             this.Controls.Add(this.txtLicencia);
@@ -212,6 +219,7 @@
             this.Controls.Add(this.mtxtPatente);
             this.Controls.Add(this.llblPatente);
             this.Name = "addEditAuto";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEditAuto";
             this.Load += new System.EventHandler(this.addEditAuto_Load);
             this.ResumeLayout(false);
@@ -221,7 +229,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label txtReloj;
+        private System.Windows.Forms.Label lblReloj;
         private System.Windows.Forms.TextBox txtRodado;
         private System.Windows.Forms.Label lblRodado;
         private System.Windows.Forms.TextBox txtLicencia;
@@ -235,7 +243,7 @@
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtReloj;
         private System.Windows.Forms.Button btnSeleccionarReloj;
     }
 }

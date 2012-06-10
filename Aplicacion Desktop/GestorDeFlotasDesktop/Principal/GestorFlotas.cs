@@ -51,12 +51,13 @@ namespace GestorDeFlotasDesktop.Principal
         {
             try
             {
+                string retCatchError = string.Empty;
                 DataTable dtRoles = new DataTable();
 
                 SqlParameter pUsuario = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
                 pUsuario.Value = UsuarioLogeado.usuarioID;
 
-                if (!GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.ObtenerFuncionalidades",pUsuario, dtRoles))
+                if (!GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.ObtenerFuncionalidades",pUsuario, dtRoles,retCatchError))
                     return;
 
                 foreach (DataRow r in dtRoles.Rows)

@@ -83,6 +83,7 @@ namespace GestorDeFlotasDesktop.Login
         {
             try
             {
+                string retCatchError = string.Empty;
                 string passEncript = GestorDeFlotasDesktop.BD.GD1C2012.encriptarStr(this.txtPassword.Text);
 
                 SqlParameter pUsuario = new SqlParameter("@pUsuario", SqlDbType.VarChar, 20);
@@ -94,7 +95,7 @@ namespace GestorDeFlotasDesktop.Login
 
                 SqlParameter[] parametros = { pUsuario, pClave, pResultado };
 
-                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros);
+                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros,retCatchError);
 
                 return (bool)pResultado.Value;
 
