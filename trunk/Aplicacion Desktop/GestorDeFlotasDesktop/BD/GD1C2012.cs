@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace GestorDeFlotasDesktop.BD
 {
@@ -44,6 +45,34 @@ namespace GestorDeFlotasDesktop.BD
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.Message, "Error DB", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+
+        public static DataSet executeSqlQuery_DS(string strQuery)
+        {
+            try
+            {
+                using (SqlConnection connBD = new SqlConnection())
+                {
+                    connBD.ConnectionString = getConnectionString();
+                    connBD.Open();
+
+                    DataTable dtResultados = new DataTable();
+
+                    //SqlDataReader myReader = null;
+                    SqlDataAdapter da = new SqlDataAdapter(strQuery, connBD);
+                    DataSet ds;ds = new DataSet();
+                    da.Fill(ds, "Tabla");
+                    //dtResultados.Load(myReader);
+
+                    return ds;
+                }
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.ToString());
                 return null;
             }
@@ -59,7 +88,7 @@ namespace GestorDeFlotasDesktop.BD
                 string sha256Str = string.Empty;
                 for (int i = 0; i < cryString.Length; i++)
                 {
-                    sha256Str += cryString[i].ToString("X");
+                    sha256Str += cryString[i].ToString("X").PadLeft(2,'0');
                 }
                 return sha256Str;
             }

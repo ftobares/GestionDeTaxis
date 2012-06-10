@@ -53,7 +53,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.cmbTest.Name = "cmbTest";
             this.cmbTest.Size = new System.Drawing.Size(121, 21);
             this.cmbTest.TabIndex = 1;
-            this.cmbTest.SelectedIndexChanged += new System.EventHandler(this.cmbTest_SelectedIndexChanged);
+            //this.cmbTest.SelectedIndexChanged += new System.EventHandler(this.cmbTest_SelectedIndexChanged);
             // 
             // AbmAuto
             // 
