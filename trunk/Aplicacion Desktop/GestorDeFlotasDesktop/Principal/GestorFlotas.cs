@@ -51,7 +51,7 @@ namespace GestorDeFlotasDesktop.Principal
                 SqlParameter pUsuario = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
                 pUsuario.Value = UsuarioLogeado.usuarioID;
 
-                dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("ObtenerFuncionalidades",pUsuario);
+                dtRoles = GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.ObtenerFuncionalidades",pUsuario);
 
                 foreach (DataRow r in dtRoles.Rows)
                 {

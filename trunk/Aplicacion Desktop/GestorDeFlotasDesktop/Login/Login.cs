@@ -39,7 +39,6 @@ namespace GestorDeFlotasDesktop.Login
             //Esto es temporal, me harto poner el usuario y clave
             this.txtUsuario.Text = "Admin";
             this.txtPassword.Text = "w23e";
-           // this.logearUsuario();
         }
 
         private void logearUsuario()
@@ -60,14 +59,8 @@ namespace GestorDeFlotasDesktop.Login
                 {
                     UsuarioLogeado.usuarioID = this.txtUsuario.Text;
 
-                    //Usuario user = new Usuario();
-                    //user.sUsuarioID = txtUsuario.Text;
-
                     GestorDeFlotasDesktop.Principal.GestorFlotas gestor = new GestorDeFlotasDesktop.Principal.GestorFlotas();
                     gestor.Show();
-                    //TODO: comentarr!
-                    GestorDeFlotasDesktop.AbmCliente.AbmCliente cli = new GestorDeFlotasDesktop.AbmCliente.AbmCliente();
-                    cli.Show();
 
                     this.Hide();
                 }
@@ -103,9 +96,7 @@ namespace GestorDeFlotasDesktop.Login
 
                 GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros);
 
-                //if (pResultado.Value != null && pResultado.Value != string.Empty && pResultado.Value == "1")
-                    return (bool)pResultado.Value;
-                //else return false;
+                return (bool)pResultado.Value;
 
             }
             catch (Exception e)
