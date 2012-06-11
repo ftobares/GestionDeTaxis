@@ -155,11 +155,10 @@ namespace GestorDeFlotasDesktop.AbmAuto
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
                             MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue editado exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
+                            this.DialogResult = DialogResult.OK;
                         }
                         else
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
                     }
                 }
 
@@ -172,7 +171,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void btnSeleccionarReloj_Click(object sender, EventArgs e)
