@@ -75,6 +75,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.dgAutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAutos.Size = new System.Drawing.Size(687, 255);
             this.dgAutos.TabIndex = 1;
+            this.dgAutos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgAutos_CellContentClick);
             // 
             // btnNuevoAuto
             // 
@@ -235,6 +236,9 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.Controls.Add(this.btnNuevoAuto);
             this.Controls.Add(this.dgAutos);
             this.Controls.Add(this.lblTitulo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AbmAuto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Autos";

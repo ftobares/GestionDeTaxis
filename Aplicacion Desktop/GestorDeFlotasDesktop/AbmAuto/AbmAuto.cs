@@ -123,6 +123,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void btnNuevoAuto_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.AbmAuto.addEditAuto frmAbmAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
+            frmAbmAuto.modoAbm = "Nuevo";
+            frmAbmAuto.tituloPantalla = "Agregar Nuevo Auto";
             frmAbmAuto.ShowDialog();
         }
 
@@ -135,6 +137,23 @@ namespace GestorDeFlotasDesktop.AbmAuto
         {
             inicializarFormulario();
             cargarQuery();
+        }
+
+        private void dgAutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex==0) //Assuming the button column as second column, if not can change the index
+            {
+                GestorDeFlotasDesktop.AbmAuto.addEditAuto frmEditarAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
+                frmEditarAuto.modoAbm = "Editar";
+                frmEditarAuto.tituloPantalla = "Editar Auto, patente: " + dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
+                frmEditarAuto.ShowDialog();
+            }
+
+            if (e.ColumnIndex == 1)
+            {
+                MessageBox.Show("Eliminar fila " + dgAutos.SelectedRows[0]);
+            }
+            
         }
     }
 }

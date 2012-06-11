@@ -12,7 +12,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
 {
     public partial class addEditAuto : Form
     {
-
+        public string modoAbm { get; set; }
+        public string tituloPantalla { get; set; }
         private static addEditAuto unicaInst = null;
         public static addEditAuto Instance()
         {
@@ -41,6 +42,13 @@ namespace GestorDeFlotasDesktop.AbmAuto
             txtLicencia.Text = "";
             txtRodado.Text = "";
             txtReloj.Text = "";
+            lblTitulo.Text = tituloPantalla;
+            this.Text = tituloPantalla;
+
+            if (modoAbm == "Editar")
+            {
+
+            }
         }
 
         private void cargarMarcas()
@@ -151,6 +159,16 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 txtReloj.Text = frmBuscadorReloj.valorRetorno;
 
             frmBuscadorReloj.Dispose();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            mtxtPatente.Text = "";
+            cmbMarca.Text = "";
+            txtModelo.Text = "";
+            txtLicencia.Text = "";
+            txtRodado.Text = "";
+            txtReloj.Text = "";
         }
     }
 }

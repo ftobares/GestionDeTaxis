@@ -42,7 +42,7 @@
             this.llblPatente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.txtReloj = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSeleccionarReloj = new System.Windows.Forms.Button();
@@ -64,7 +64,7 @@
             this.txtRodado.MaxLength = 10;
             this.txtRodado.Name = "txtRodado";
             this.txtRodado.Size = new System.Drawing.Size(100, 20);
-            this.txtRodado.TabIndex = 23;
+            this.txtRodado.TabIndex = 4;
             // 
             // lblRodado
             // 
@@ -82,7 +82,7 @@
             this.txtLicencia.MaxLength = 26;
             this.txtLicencia.Name = "txtLicencia";
             this.txtLicencia.Size = new System.Drawing.Size(100, 20);
-            this.txtLicencia.TabIndex = 21;
+            this.txtLicencia.TabIndex = 3;
             // 
             // lblLicencia
             // 
@@ -100,7 +100,7 @@
             this.txtModelo.MaxLength = 255;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(100, 20);
-            this.txtModelo.TabIndex = 19;
+            this.txtModelo.TabIndex = 2;
             // 
             // lblModelo
             // 
@@ -129,7 +129,7 @@
             this.cmbMarca.Location = new System.Drawing.Point(104, 86);
             this.cmbMarca.Name = "cmbMarca";
             this.cmbMarca.Size = new System.Drawing.Size(121, 21);
-            this.cmbMarca.TabIndex = 16;
+            this.cmbMarca.TabIndex = 1;
             // 
             // mtxtPatente
             // 
@@ -138,7 +138,7 @@
             this.mtxtPatente.Name = "mtxtPatente";
             this.mtxtPatente.ResetOnSpace = false;
             this.mtxtPatente.Size = new System.Drawing.Size(66, 20);
-            this.mtxtPatente.TabIndex = 15;
+            this.mtxtPatente.TabIndex = 0;
             // 
             // llblPatente
             // 
@@ -156,7 +156,7 @@
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblTitulo.Location = new System.Drawing.Point(102, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(43, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(58, 26);
             this.lblTitulo.TabIndex = 26;
@@ -168,18 +168,20 @@
             this.txtReloj.Name = "txtReloj";
             this.txtReloj.ReadOnly = true;
             this.txtReloj.Size = new System.Drawing.Size(100, 20);
-            this.txtReloj.TabIndex = 29;
+            this.txtReloj.TabIndex = 20;
+            this.txtReloj.TabStop = false;
             // 
-            // button1
+            // btnLimpiar
             // 
-            this.button1.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(203, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 23);
-            this.button1.TabIndex = 32;
-            this.button1.Text = "Limpiar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
+            this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimpiar.Location = new System.Drawing.Point(203, 229);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
+            this.btnLimpiar.TabIndex = 8;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCancelar
             // 
@@ -188,7 +190,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(111, 229);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
-            this.btnCancelar.TabIndex = 28;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -200,7 +202,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(28, 229);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 27;
+            this.btnAceptar.TabIndex = 6;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -212,7 +214,7 @@
             this.btnSeleccionarReloj.Location = new System.Drawing.Point(210, 189);
             this.btnSeleccionarReloj.Name = "btnSeleccionarReloj";
             this.btnSeleccionarReloj.Size = new System.Drawing.Size(100, 23);
-            this.btnSeleccionarReloj.TabIndex = 33;
+            this.btnSeleccionarReloj.TabIndex = 5;
             this.btnSeleccionarReloj.Text = "Seleccionar...";
             this.btnSeleccionarReloj.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSeleccionarReloj.UseVisualStyleBackColor = true;
@@ -224,7 +226,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(323, 268);
             this.Controls.Add(this.btnSeleccionarReloj);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.txtReloj);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -240,6 +242,9 @@
             this.Controls.Add(this.cmbMarca);
             this.Controls.Add(this.mtxtPatente);
             this.Controls.Add(this.llblPatente);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "addEditAuto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEditAuto";
@@ -266,7 +271,7 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtReloj;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnSeleccionarReloj;
     }
 }
