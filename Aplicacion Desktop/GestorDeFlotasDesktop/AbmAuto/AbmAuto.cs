@@ -12,7 +12,20 @@ namespace GestorDeFlotasDesktop.AbmAuto
 {
     public partial class AbmAuto : Form
     {
-
+        private string camposSelect = "patente, marca, modelo, licencia, rodado, nroSerieReloj";
+        private string whereObligatorio = "isnull(anulado,'0')='0'";
+        private string consultaOrderBy = "patente";
+        private string nombreTabla = "Femig.Autos";
+        private string filtro1Value = "patente";
+        private string filtro2Value = "marca";
+        private string filtro3Value = "modelo";
+        private string filtro4Value = "nroSerieReloj";
+        private string filtro5Value = "licencia";
+        private string filtro1Text = "Patente:";
+        private string filtro2Text = "Marca:";
+        private string filtro3Text = "Modelo:";
+        private string filtro4Text = "Reloj:";
+        private string filtro5Text = "Licencia:";
         private static AbmAuto unicaInst = null;
         public static AbmAuto Instance()
         {
@@ -31,6 +44,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void AbmAuto_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
+            cargarQuery();
         }
 
         private void inicializarFormulario()
@@ -39,19 +53,70 @@ namespace GestorDeFlotasDesktop.AbmAuto
             txtModelo.Text = "";
             txtMarca.Text = "";
             txtReloj.Text = "";
-            cargarGrillaAutos();
+            txtLicencia.Text = "";
         }
 
-        private void cargarGrillaAutos()
+        private string construirQuery()
         {
-            string strQuery = "SELECT [patente],[marca],[modelo],[licencia],[rodado],[nroSerieReloj] FROM [GD1C2012].[FEMIG].[autos] WHERE ISNULL(ANULADO,'0')='0'";
-            dgAutos.DataSource=GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
+
+            string strQuery = "select " + camposSelect + " from " + nombreTabla + " where 1=1";
+            if (!string.IsNullOrEmpty(whereObligatorio))
+                strQuery += " and " + whereObligatorio;
+            if (!string.IsNullOrEmpty(txtPatente.Text))
+                strQuery += " and cast(" + filtro1Value + " as varchar) like '%" + txtPatente.Text + "%'";
+            if (!string.IsNullOrEmpty(txtMarca.Text))
+                strQuery += " and cast(" + filtro2Value + " as varchar) like '%" + txtMarca.Text + "%'";
+            if (!string.IsNullOrEmpty(txtModelo.Text))
+                strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtModelo.Text + "%'";
+            if (!string.IsNullOrEmpty(txtReloj.Text))
+                strQuery += " and cast(" + filtro4Value + " as varchar) like '%" + txtReloj.Text + "%'";
+            if (!string.IsNullOrEmpty(txtLicencia.Text))
+                strQuery += " and cast(" + filtro5Value + " as varchar) like '%" + txtLicencia.Text + "%'";
+            strQuery += " order by " + consultaOrderBy;
+
+            return strQuery;
+        }
+
+        private void cargarQuery()
+        {
+            string strQuery = construirQuery();
+            dgAutos.DataSource = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
+
+            string leyendaFiltrosInicial = "Filtros Aplicados: ";
+            string leyendaFiltros = "";
+            if (!string.IsNullOrEmpty(txtPatente.Text))
+                leyendaFiltros += filtro1Text + " " + txtPatente.Text;
+            if (!string.IsNullOrEmpty(txtMarca.Text))
+                leyendaFiltros += ", " + filtro2Text + " " + txtMarca.Text;
+            if (!string.IsNullOrEmpty(txtModelo.Text))
+                leyendaFiltros += ", " + filtro3Text + " " + txtModelo.Text;
+            if (!string.IsNullOrEmpty(txtReloj.Text))
+                leyendaFiltros += ", " + filtro4Text + " " + txtReloj.Text;
+            if (!string.IsNullOrEmpty(txtLicencia.Text))
+                leyendaFiltros += ", " + filtro5Text + " " + txtLicencia.Text;
+
+            if (string.IsNullOrEmpty(leyendaFiltros))
+                lblFiltro.Text = "No se seleccionó ningún filtro.";
+            else
+                lblFiltro.Text = leyendaFiltrosInicial + leyendaFiltros;
+
         }
 
         private void btnNuevoAuto_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.AbmAuto.addEditAuto frmAbmAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
             frmAbmAuto.ShowDialog();
+        }
+
+        private void txtFiltrar_Click(object sender, EventArgs e)
+        {
+            cargarQuery();
+        }
+
+        private void txtLimpiar_Click(object sender, EventArgs e)
+        {
+            inicializarFormulario();
+            cargarQuery();
         }
     }
 }
