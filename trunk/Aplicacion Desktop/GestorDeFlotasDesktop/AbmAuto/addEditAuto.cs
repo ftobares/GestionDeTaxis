@@ -12,6 +12,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 {
     public partial class addEditAuto : Form
     {
+        public string patenteAuto { get; set; }
         public string modoAbm { get; set; }
         public string tituloPantalla { get; set; }
         private static addEditAuto unicaInst = null;
@@ -48,7 +49,24 @@ namespace GestorDeFlotasDesktop.AbmAuto
             if (modoAbm == "Editar")
             {
 
+                getDatosRegistro(patenteAuto);
+                mtxtPatente.ReadOnly = true;
+
+
             }
+        }
+
+        private void getDatosRegistro(string patente)
+        {
+            DataTable dtValores = new DataTable();
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select patente, marca, modelo, licencia, rodado, nroSerieReloj from femig.autos where patente = '" + patente + "'");
+            mtxtPatente.Text = dtValores.Rows[0]["patente"].ToString();
+            cmbMarca.Text = dtValores.Rows[0]["marca"].ToString();
+            txtModelo.Text = dtValores.Rows[0]["modelo"].ToString();
+            txtLicencia.Text = dtValores.Rows[0]["licencia"].ToString();
+            txtReloj.Text = dtValores.Rows[0]["nroSerieReloj"].ToString();
+            txtLicencia.Text = dtValores.Rows[0]["licencia"].ToString();
+            txtRodado.Text = dtValores.Rows[0]["rodado"].ToString();
         }
 
         private void cargarMarcas()
@@ -91,9 +109,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
                     frmErrores.ShowDialog();
                     frmErrores.Dispose();
-                    /*MessageBox.Show("Debe completar los campos marcados en Rojo obligatoriamente.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;*/
-
+                    
                     return;
                 }
 
@@ -118,17 +134,35 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
                 SqlParameter[] parametros = { pPatente, pMarca, pModelo, pLicencia, pRodado, pNroSerieReloj, pAnulado, pRetCatchError };
 
-                if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.crearAuto", parametros))
+                if (modoAbm == "Nuevo")
                 {
-                    if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
+                    if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.crearAuto", parametros))
                     {
-                        MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue dato de alta exitosamente.", "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.inicializarFormulario();
-                    }
-                    else
-                        MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
+                        {
+                            MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue dato de alta exitosamente.", "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.inicializarFormulario();
+                        }
+                        else
+                            MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                    }
                 }
+                else
+                {
+                    if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.editarAuto", parametros))
+                    {
+                        if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
+                        {
+                            MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue editado exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -163,7 +197,9 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            mtxtPatente.Text = "";
+            if (modoAbm=="Nuevo")
+                mtxtPatente.Text = "";
+            
             cmbMarca.Text = "";
             txtModelo.Text = "";
             txtLicencia.Text = "";

@@ -145,14 +145,23 @@ namespace GestorDeFlotasDesktop.AbmAuto
             {
                 GestorDeFlotasDesktop.AbmAuto.addEditAuto frmEditarAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
                 frmEditarAuto.modoAbm = "Editar";
+                frmEditarAuto.patenteAuto = dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
                 frmEditarAuto.tituloPantalla = "Editar Auto, patente: " + dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
                 frmEditarAuto.ShowDialog();
             }
 
             if (e.ColumnIndex == 1)
             {
-                MessageBox.Show("Eliminar fila " + dgAutos.SelectedRows[0]);
+                if (MessageBox.Show("¿Esta seguro que deséa eliminar este Auto?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    SqlParameter pPatente = new SqlParameter("@pPatente", SqlDbType.VarChar, 10);
+                    pPatente.Value = dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
+                    GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarAuto", pPatente);
+                    cargarQuery();
+                }
             }
+
+            cargarQuery();
             
         }
     }
