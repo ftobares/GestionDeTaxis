@@ -43,8 +43,27 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void AbmAuto_Load(object sender, EventArgs e)
         {
+
             inicializarFormulario();
             cargarQuery();
+
+            DataGridViewImageColumn btnEditar = new DataGridViewImageColumn();
+            btnEditar.Description = "Editar";
+            btnEditar.HeaderText = "Editar";
+            btnEditar.Name = "btnEditar";
+            btnEditar.Image = global::GestorDeFlotasDesktop.Properties.Resources.application_edit;
+            dgAutos.Columns.Add(btnEditar);
+            btnEditar.DisplayIndex = 0;
+            btnEditar.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            DataGridViewImageColumn btnEliminar = new DataGridViewImageColumn();
+            btnEliminar.Description = "Eliminar";
+            btnEliminar.HeaderText = "Eliminar";
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Image = global::GestorDeFlotasDesktop.Properties.Resources.delete;
+            dgAutos.Columns.Add(btnEliminar);
+            btnEliminar.DisplayIndex = 1;
+            btnEliminar.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void inicializarFormulario()
@@ -99,7 +118,6 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 lblFiltro.Text = "No se seleccionó ningún filtro.";
             else
                 lblFiltro.Text = leyendaFiltrosInicial + leyendaFiltros;
-
         }
 
         private void btnNuevoAuto_Click(object sender, EventArgs e)
