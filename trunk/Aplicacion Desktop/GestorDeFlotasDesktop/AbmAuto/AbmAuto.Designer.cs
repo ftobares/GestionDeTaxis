@@ -72,6 +72,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.dgAutos.Location = new System.Drawing.Point(5, 149);
             this.dgAutos.MultiSelect = false;
             this.dgAutos.Name = "dgAutos";
+            this.dgAutos.ReadOnly = true;
             this.dgAutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgAutos.Size = new System.Drawing.Size(687, 255);
             this.dgAutos.TabIndex = 1;
