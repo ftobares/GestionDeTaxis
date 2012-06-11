@@ -21,7 +21,7 @@ GO
 /*++++++++++++++++++++++++++++++++++++++*/
 BEGIN TRANSACTION
 CREATE TABLE GD1C2012.FEMIG.relojes ( 
-	nroSerieReloj numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(10000,1),
+	nroSerieReloj varchar(18) NOT NULL PRIMARY KEY CLUSTERED,
 	marca varchar(255) NOT NULL,
 	modelo varchar(255) NOT NULL,
 	fechaVersion datetime NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE GD1C2012.FEMIG.autos (
 	modelo varchar(255) NOT NULL,
 	licencia varchar(26) NOT NULL,
 	rodado varchar(10) NOT NULL,
-	nroSerieReloj numeric(18) NOT NULL FOREIGN KEY REFERENCES GD1C2012.FEMIG.relojes(nroSerieReloj),
+	nroSerieReloj varchar(18) NOT NULL FOREIGN KEY REFERENCES GD1C2012.FEMIG.relojes(nroSerieReloj),
 	anulado bit default 0, -- 0: El auto está activo 1: El auto esta inhabilitado
 	constraint fk_marca foreign key (marca) references GD1C2012.FEMIG.marcas_autos (marca)
 );
@@ -216,8 +216,8 @@ WHERE factura_fecha_inicio IS NOT NULL
 AND factura_fecha_fin IS NOT NULL
 order by cliente_dni,factura_fecha_inicio asc;
 
-INSERT INTO FEMIG.relojes (marca,modelo,fechaVersion)
-SELECT DISTINCT(reloj_marca),reloj_modelo,reloj_fecha_ver
+INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
+SELECT DISTINCT(reloj_marca),reloj_modelo,reloj_fecha_ver /*Falta agregar el nroSerieReloj, tiene que ser UNICO - ALFANUMERICO*/
 FROM gd_esquema.maestra
 order by reloj_marca asc;
 
