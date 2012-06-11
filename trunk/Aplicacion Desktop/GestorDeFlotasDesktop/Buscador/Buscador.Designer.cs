@@ -128,7 +128,6 @@
             this.dgResultados.AllowUserToAddRows = false;
             this.dgResultados.AllowUserToDeleteRows = false;
             this.dgResultados.AllowUserToResizeRows = false;
-            this.dgResultados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgResultados.Location = new System.Drawing.Point(12, 112);
             this.dgResultados.MultiSelect = false;
