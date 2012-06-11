@@ -36,9 +36,9 @@ CREATE TABLE GD1C2012.FEMIG.autos (
 	patente varchar(10) NOT NULL PRIMARY KEY CLUSTERED,
 	marca varchar(255) NOT NULL,
 	modelo varchar(255) NOT NULL,
-	licencia varchar(26) NOT NULL UNIQUE,
+	licencia varchar(26) NOT NULL,
 	rodado varchar(10) NOT NULL,
-	nroSerieReloj numeric(18) NOT NULL UNIQUE FOREIGN KEY REFERENCES GD1C2012.FEMIG.relojes(nroSerieReloj),
+	nroSerieReloj numeric(18) NOT NULL FOREIGN KEY REFERENCES GD1C2012.FEMIG.relojes(nroSerieReloj),
 	anulado bit default 0, -- 0: El auto está activo 1: El auto esta inhabilitado
 	constraint fk_marca foreign key (marca) references GD1C2012.FEMIG.marcas_autos (marca)
 );
