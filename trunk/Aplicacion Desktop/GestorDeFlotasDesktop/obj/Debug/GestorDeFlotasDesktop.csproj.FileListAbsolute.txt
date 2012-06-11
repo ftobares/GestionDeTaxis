@@ -60,3 +60,4 @@ C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDeskt
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmCliente.AltaModifCli.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmAuto.addEditAuto.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Buscador.Buscador.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.ListaErrores.ListaErrores.resources

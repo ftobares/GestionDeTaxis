@@ -142,6 +142,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListaErrores\ListaErrores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListaErrores\ListaErrores.Designer.cs">
+      <DependentUpon>ListaErrores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaErrores\ListaErrores.resx">
+      <DependentUpon>ListaErrores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -636,6 +645,7 @@
     <Content Include="Media\Iconos\error_add.png" />
     <Content Include="Media\Iconos\error_delete.png" />
     <Content Include="Media\Iconos\error_go.png" />
+    <None Include="Media\Iconos\Exclamation-icon.png" />
     <Content Include="Media\Iconos\exclamation.png" />
     <Content Include="Media\Iconos\eye.png" />
     <Content Include="Media\Iconos\feed.png" />

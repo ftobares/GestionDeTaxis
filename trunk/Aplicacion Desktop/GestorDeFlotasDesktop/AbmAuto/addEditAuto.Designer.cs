@@ -42,7 +42,6 @@
             this.llblPatente = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.txtReloj = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -62,6 +61,7 @@
             // txtRodado
             // 
             this.txtRodado.Location = new System.Drawing.Point(104, 165);
+            this.txtRodado.MaxLength = 10;
             this.txtRodado.Name = "txtRodado";
             this.txtRodado.Size = new System.Drawing.Size(100, 20);
             this.txtRodado.TabIndex = 23;
@@ -79,6 +79,7 @@
             // txtLicencia
             // 
             this.txtLicencia.Location = new System.Drawing.Point(104, 139);
+            this.txtLicencia.MaxLength = 26;
             this.txtLicencia.Name = "txtLicencia";
             this.txtLicencia.Size = new System.Drawing.Size(100, 20);
             this.txtLicencia.TabIndex = 21;
@@ -96,6 +97,7 @@
             // txtModelo
             // 
             this.txtModelo.Location = new System.Drawing.Point(104, 113);
+            this.txtModelo.MaxLength = 255;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(100, 20);
             this.txtModelo.TabIndex = 19;
@@ -132,8 +134,9 @@
             // mtxtPatente
             // 
             this.mtxtPatente.Location = new System.Drawing.Point(104, 60);
-            this.mtxtPatente.Mask = "???000";
+            this.mtxtPatente.Mask = "AAAAAA";
             this.mtxtPatente.Name = "mtxtPatente";
+            this.mtxtPatente.ResetOnSpace = false;
             this.mtxtPatente.Size = new System.Drawing.Size(66, 20);
             this.mtxtPatente.TabIndex = 15;
             // 
@@ -166,15 +169,6 @@
             this.txtReloj.ReadOnly = true;
             this.txtReloj.Size = new System.Drawing.Size(100, 20);
             this.txtReloj.TabIndex = 29;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(176, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 13);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "[Formato: AAA111]";
             // 
             // button1
             // 
@@ -231,7 +225,6 @@
             this.ClientSize = new System.Drawing.Size(323, 268);
             this.Controls.Add(this.btnSeleccionarReloj);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtReloj);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -273,7 +266,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtReloj;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnSeleccionarReloj;
     }
