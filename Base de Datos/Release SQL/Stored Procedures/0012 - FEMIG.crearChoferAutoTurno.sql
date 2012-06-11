@@ -30,12 +30,12 @@ BEGIN
 		return
 	end
 
-	--Controlo que para un mismo auto en la misma fecha y turno, no haya dos choferes
-	if exists (select 1 from FEMIG.ChoferAutoTurno where fecha = @pFecha AND turnoID = @pTurnoID AND dniChofer = @pDniChofer)
+	--Controlo que para un mismo auto en la misma fecha y turno, no haya dos choferes (No es necesario este control, se filtra en el if de arriba)
+	/*if exists (select 1 from FEMIG.ChoferAutoTurno where fecha = @pFecha AND turnoID = @pTurnoID AND dniChofer = @pDniChofer)
 	begin
 		set @retCatchError = 'Ya fue asignado el chofer ' + cast(@pDniChofer as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + ', el turno ' + cast(@pTurnoID as varchar) + 'y el auto ' + @pPatente + '.'
 		return
-	end
+	end*/
 	
 	INSERT INTO [GD1C2012].[FEMIG].[ChoferAutoTurno]
            (fecha,dniChofer,turnoID,patente)
