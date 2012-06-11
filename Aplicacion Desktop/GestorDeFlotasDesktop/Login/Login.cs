@@ -95,7 +95,7 @@ namespace GestorDeFlotasDesktop.Login
 
                 SqlParameter[] parametros = { pUsuario, pClave, pResultado };
 
-                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros,retCatchError);
+                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.verificarCredencialesLogueo", parametros);
 
                 return (bool)pResultado.Value;
 

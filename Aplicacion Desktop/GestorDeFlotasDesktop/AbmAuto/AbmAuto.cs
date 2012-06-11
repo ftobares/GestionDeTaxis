@@ -30,7 +30,28 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void AbmAuto_Load(object sender, EventArgs e)
         {
+            inicializarFormulario();
+        }
 
+        private void inicializarFormulario()
+        {
+            txtPatente.Text = "";
+            txtModelo.Text = "";
+            txtMarca.Text = "";
+            txtReloj.Text = "";
+            cargarGrillaAutos();
+        }
+
+        private void cargarGrillaAutos()
+        {
+            string strQuery = "SELECT [patente],[marca],[modelo],[licencia],[rodado],[nroSerieReloj] FROM [GD1C2012].[FEMIG].[autos] WHERE ISNULL(ANULADO,'0')='0'";
+            dgAutos.DataSource=GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
+        }
+
+        private void btnNuevoAuto_Click(object sender, EventArgs e)
+        {
+            GestorDeFlotasDesktop.AbmAuto.addEditAuto frmAbmAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
+            frmAbmAuto.ShowDialog();
         }
     }
 }

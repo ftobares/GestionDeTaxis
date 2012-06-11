@@ -99,7 +99,7 @@ namespace GestorDeFlotasDesktop.BD
             }
         }
 
-        public static bool ejecutarSP(string spName, SqlParameter[] parametros,DataTable dtResultado,string retCatchError)
+        public static bool ejecutarSP(string spName, SqlParameter[] parametros,DataTable dtResultado)
         {
             try
             {
@@ -115,10 +115,7 @@ namespace GestorDeFlotasDesktop.BD
                     SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
                     myAdapter.Fill(dtResultado);
 
-                    if (retCatchError == string.Empty)
-                        return true;
-                    else
-                        return false;
+                    return true;
                 }
 
             }
@@ -130,7 +127,7 @@ namespace GestorDeFlotasDesktop.BD
         }
 
 
-        public static bool ejecutarSP(string spName, SqlParameter parametro, DataTable dtResultado, string retCatchError)
+        public static bool ejecutarSP(string spName, SqlParameter parametro, DataTable dtResultado)
         {
             try
             {
@@ -146,10 +143,7 @@ namespace GestorDeFlotasDesktop.BD
                     SqlDataAdapter myAdapter = new SqlDataAdapter(cmd);
                     myAdapter.Fill(dtResultado);
 
-                    if (retCatchError == string.Empty)
-                        return true;
-                    else
-                        return false;
+                    return true;
                 }
 
             }
@@ -161,7 +155,7 @@ namespace GestorDeFlotasDesktop.BD
             }
         }
 
-        public static bool ejecutarSP(string spName, SqlParameter[] parametros, string retCatchError)
+        public static bool ejecutarSP(string spName, SqlParameter[] parametros)
         {
             try
             {
@@ -176,10 +170,7 @@ namespace GestorDeFlotasDesktop.BD
 
                     cmd.ExecuteNonQuery();
 
-                    if (retCatchError == string.Empty)
-                        return true;
-                    else
-                        return false;
+                    return true;
                 }
 
             }
@@ -191,7 +182,7 @@ namespace GestorDeFlotasDesktop.BD
         }
 
 
-        public static bool ejecutarSP(string spName, SqlParameter parametro, string retCatchError)
+        public static bool ejecutarSP(string spName, SqlParameter parametro)
         {
             try
             {
@@ -206,10 +197,8 @@ namespace GestorDeFlotasDesktop.BD
 
                     cmd.ExecuteNonQuery();
 
-                    if (retCatchError == string.Empty)
-                        return true;
-                    else
-                        return false;
+
+                    return true;
                 }
 
             }

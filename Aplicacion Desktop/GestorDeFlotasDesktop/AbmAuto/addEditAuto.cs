@@ -64,38 +64,61 @@ namespace GestorDeFlotasDesktop.AbmAuto
             {
                 if (!validaCamposRequeridos())
                 {
-                    MessageBox.Show("Debe completar los campos marcados en Rojo obligatoriamente.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    GestorDeFlotasDesktop.ListaErrores.ListaErrores frmErrores = new GestorDeFlotasDesktop.ListaErrores.ListaErrores();
+
+                    frmErrores.setTitulo("Ocurrieron algunos errores al intentar crear el nuevo Auto.");
+
+                    if (string.IsNullOrEmpty(mtxtPatente.Text) | !mtxtPatente.MaskFull)
+                        frmErrores.agregarError("Debe completar la patente de 6 caracteres/dígitos.");
+                    if (string.IsNullOrEmpty(cmbMarca.Text))
+                        frmErrores.agregarError("Debe seleccionar la marca del auto.");
+                    if (string.IsNullOrEmpty(txtModelo.Text))
+                        frmErrores.agregarError("Debe especificar el modelo del auto.");
+                    if (string.IsNullOrEmpty(txtLicencia.Text))
+                        frmErrores.agregarError("Debe ingresar la Licencia del auto.");
+                    if (string.IsNullOrEmpty(txtRodado.Text))
+                        frmErrores.agregarError("Debe especificar el rodado del auto.");
+                    if (string.IsNullOrEmpty(txtReloj.Text))
+                        frmErrores.agregarError("Debe especificar el reloj asociado al auto.");
+
+                    frmErrores.ShowDialog();
+                    frmErrores.Dispose();
+                    /*MessageBox.Show("Debe completar los campos marcados en Rojo obligatoriamente.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;*/
+
                     return;
                 }
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pPatente = new SqlParameter("@pPatente", SqlDbType.VarChar, 20);
+                SqlParameter pPatente = new SqlParameter("@pPatente", SqlDbType.VarChar, 10);
                 pPatente.Value = mtxtPatente.Text;
-                SqlParameter pMarca = new SqlParameter("@pMarca", SqlDbType.VarChar, 100);
+                SqlParameter pMarca = new SqlParameter("@pMarca", SqlDbType.VarChar, 255);
                 pMarca.Value = cmbMarca.Text;
-                SqlParameter pModelo = new SqlParameter("@pModelo", SqlDbType.VarChar, 20);
+                SqlParameter pModelo = new SqlParameter("@pModelo", SqlDbType.VarChar, 255);
                 pModelo.Value = txtModelo.Text;
-                SqlParameter pLicencia = new SqlParameter("@pLicencia", SqlDbType.VarChar, 100);
+                SqlParameter pLicencia = new SqlParameter("@pLicencia", SqlDbType.VarChar, 26);
                 pLicencia.Value = txtLicencia.Text;
-                SqlParameter pRodado = new SqlParameter("@pRodado", SqlDbType.VarChar, 20);
+                SqlParameter pRodado = new SqlParameter("@pRodado", SqlDbType.VarChar, 10);
                 pRodado.Value = txtRodado.Text;
-                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.VarChar, 100);
+                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.Int);
                 pNroSerieReloj.Value = txtReloj.Text;
-                SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.VarChar, 20);
-                pAnulado.Value = "0";
+                SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
+                pAnulado.Value = 0;
+                SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
+                pRetCatchError.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = { pPatente, pMarca, pModelo, pLicencia, pRodado, pNroSerieReloj, pAnulado };
+                SqlParameter[] parametros = { pPatente, pMarca, pModelo, pLicencia, pRodado, pNroSerieReloj, pAnulado, pRetCatchError };
 
-                if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.crearAuto", parametros, retCatchError))
+                if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.crearAuto", parametros))
                 {
-                    if (retCatchError == string.Empty)
+                    if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                     {
                         MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue dato de alta exitosamente.", "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.inicializarFormulario();
                     }
                     else
-                        MessageBox.Show(retCatchError, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 }
             }
@@ -113,6 +136,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void btnSeleccionarReloj_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+
             frmBuscadorReloj.campoRetorno = "nroSerieReloj";
             frmBuscadorReloj.Filtro1Text = "Marca:";
             frmBuscadorReloj.Filtro1Value = "marca";

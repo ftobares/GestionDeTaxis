@@ -60,9 +60,23 @@ namespace GestorDeFlotasDesktop.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap _new {
+            get {
+                object obj = ResourceManager.GetObject("new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap accept {
             get {
                 object obj = ResourceManager.GetObject("accept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -77,6 +91,13 @@ namespace GestorDeFlotasDesktop.Properties {
         internal static System.Drawing.Bitmap disk {
             get {
                 object obj = ResourceManager.GetObject("disk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Exclamation_icon {
+            get {
+                object obj = ResourceManager.GetObject("Exclamation-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
