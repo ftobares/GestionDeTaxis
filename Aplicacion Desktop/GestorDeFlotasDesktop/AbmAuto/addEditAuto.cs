@@ -103,7 +103,6 @@ namespace GestorDeFlotasDesktop.AbmAuto
             {
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -114,13 +113,19 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void btnSeleccionarReloj_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
-            frmBuscadorReloj.strQueryPrincipal = "Select nroSerieReloj, marca, modelo, fechaVersion from femig.relojes where isnull(anulado,'0')='0' order by marca, modelo, nroSerieReloj";
+            frmBuscadorReloj.campoRetorno = "nroSerieReloj";
             frmBuscadorReloj.Filtro1Text = "Marca:";
             frmBuscadorReloj.Filtro1Value = "marca";
             frmBuscadorReloj.Filtro2Text = "Modelo:";
             frmBuscadorReloj.Filtro2Value = "modelo";
+            frmBuscadorReloj.nombreTabla = "femig.relojes";
+            frmBuscadorReloj.camposSelect = "nroSerieReloj, marca, modelo, fechaVersion";
+            frmBuscadorReloj.orderBy = "marca, modelo, nroSerieReloj";
+            frmBuscadorReloj.whereObligatorio = "isnull(anulado,'0')='0'";
 
-            frmBuscadorReloj.ShowDialog();
+            if (frmBuscadorReloj.ShowDialog() == DialogResult.OK)
+                txtReloj.Text = frmBuscadorReloj.valorRetorno;
+
             frmBuscadorReloj.Dispose();
         }
     }
