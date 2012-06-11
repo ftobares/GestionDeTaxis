@@ -147,8 +147,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 frmEditarAuto.modoAbm = "Editar";
                 frmEditarAuto.patenteAuto = dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
                 frmEditarAuto.tituloPantalla = "Editar Auto, patente: " + dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
-                frmEditarAuto.ShowDialog();
-                cargarQuery();
+                if (frmEditarAuto.ShowDialog() == DialogResult.OK)
+                    cargarQuery();
             }
 
             if (e.ColumnIndex == 1)
