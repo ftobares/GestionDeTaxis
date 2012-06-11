@@ -132,6 +132,7 @@
             this.dgResultados.Location = new System.Drawing.Point(12, 112);
             this.dgResultados.MultiSelect = false;
             this.dgResultados.Name = "dgResultados";
+            this.dgResultados.ReadOnly = true;
             this.dgResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgResultados.Size = new System.Drawing.Size(552, 232);
             this.dgResultados.TabIndex = 9;
