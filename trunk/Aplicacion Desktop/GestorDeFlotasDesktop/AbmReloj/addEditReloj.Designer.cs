@@ -185,6 +185,7 @@
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.lblMarca);
             this.Name = "addEditReloj";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEditReloj";
             this.Load += new System.EventHandler(this.addEditReloj_Load);
             this.ResumeLayout(false);

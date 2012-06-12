@@ -250,6 +250,7 @@
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.lblTitulo);
             this.Name = "addEditChofer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEditChofer";
             this.Load += new System.EventHandler(this.addEditChofer_Load);
             this.ResumeLayout(false);

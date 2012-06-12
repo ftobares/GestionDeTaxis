@@ -47,6 +47,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmReloj.MdiParent = this;
                     frmReloj.Show();
                     break;
+                case "abmTurno":
+                    GestorDeFlotasDesktop.AbmTurno.AbmTurno frmTurno = GestorDeFlotasDesktop.AbmTurno.AbmTurno.Instance();
+                    frmTurno.MdiParent = this;
+                    frmTurno.Show();
+                    break;
                 case "abmCliente":
                     GestorDeFlotasDesktop.AbmCliente.AbmCliente frmCliente = GestorDeFlotasDesktop.AbmCliente.AbmCliente.Instance();
                     frmCliente.MdiParent = this;
