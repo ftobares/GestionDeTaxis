@@ -105,6 +105,12 @@
     <Compile Include="AbmReloj\AbmReloj.Designer.cs">
       <DependentUpon>AbmReloj.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmReloj\addEditReloj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmReloj\addEditReloj.Designer.cs">
+      <DependentUpon>addEditReloj.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmRol\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\AltaModifCli.resx">
       <DependentUpon>AltaModifCli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmReloj\AbmReloj.resx">
+      <DependentUpon>AbmReloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmReloj\addEditReloj.resx">
+      <DependentUpon>addEditReloj.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Buscador\Buscador.resx">
       <DependentUpon>Buscador.cs</DependentUpon>
