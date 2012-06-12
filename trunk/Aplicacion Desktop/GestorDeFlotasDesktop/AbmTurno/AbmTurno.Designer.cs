@@ -136,7 +136,8 @@
             "20",
             "21",
             "22",
-            "23"});
+            "23",
+            "24"});
             this.cmbHoraFin.Location = new System.Drawing.Point(255, 19);
             this.cmbHoraFin.Name = "cmbHoraFin";
             this.cmbHoraFin.Size = new System.Drawing.Size(111, 21);
@@ -170,7 +171,8 @@
             "20",
             "21",
             "22",
-            "23"});
+            "23",
+            "24"});
             this.cmbHoraInicio.Location = new System.Drawing.Point(73, 19);
             this.cmbHoraInicio.Name = "cmbHoraInicio";
             this.cmbHoraInicio.Size = new System.Drawing.Size(109, 21);
