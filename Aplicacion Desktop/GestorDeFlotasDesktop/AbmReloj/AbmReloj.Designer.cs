@@ -34,6 +34,10 @@
             this.lblModelo = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.lblMarca = new System.Windows.Forms.Label();
             this.lblFechaHasta = new System.Windows.Forms.Label();
@@ -41,11 +45,7 @@
             this.lblNroSerieReloj = new System.Windows.Forms.Label();
             this.dgRelojes = new System.Windows.Forms.DataGridView();
             this.lblFiltro = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnFiltrar = new System.Windows.Forms.Button();
             this.btnNuevoReloj = new System.Windows.Forms.Button();
-            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
-            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRelojes)).BeginInit();
             this.SuspendLayout();
@@ -108,6 +108,48 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros de Búsqueda";
             // 
+            // dtpHasta
+            // 
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(439, 19);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(100, 20);
+            this.dtpHasta.TabIndex = 34;
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(245, 19);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(100, 20);
+            this.dtpDesde.TabIndex = 33;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
+            this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimpiar.Location = new System.Drawing.Point(589, 44);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 31;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
+            this.btnFiltrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFiltrar.Location = new System.Drawing.Point(508, 44);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 29;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
             // txtMarca
             // 
             this.txtMarca.Location = new System.Drawing.Point(59, 44);
@@ -162,6 +204,7 @@
             this.dgRelojes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgRelojes.Size = new System.Drawing.Size(687, 255);
             this.dgRelojes.TabIndex = 16;
+            this.dgRelojes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgRelojes_CellContentClick);
             // 
             // lblFiltro
             // 
@@ -171,30 +214,6 @@
             this.lblFiltro.Size = new System.Drawing.Size(35, 13);
             this.lblFiltro.TabIndex = 19;
             this.lblFiltro.Text = "label5";
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
-            this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(589, 44);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 31;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
-            this.btnFiltrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFiltrar.Location = new System.Drawing.Point(508, 44);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.btnFiltrar.TabIndex = 29;
-            this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFiltrar.UseVisualStyleBackColor = true;
             // 
             // btnNuevoReloj
             // 
@@ -207,22 +226,7 @@
             this.btnNuevoReloj.Text = "Nuevo Reloj";
             this.btnNuevoReloj.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevoReloj.UseVisualStyleBackColor = true;
-            // 
-            // dtpDesde
-            // 
-            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(245, 19);
-            this.dtpDesde.Name = "dtpDesde";
-            this.dtpDesde.Size = new System.Drawing.Size(100, 20);
-            this.dtpDesde.TabIndex = 33;
-            // 
-            // dtpHasta
-            // 
-            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(439, 19);
-            this.dtpHasta.Name = "dtpHasta";
-            this.dtpHasta.Size = new System.Drawing.Size(100, 20);
-            this.dtpHasta.TabIndex = 34;
+            this.btnNuevoReloj.Click += new System.EventHandler(this.btnNuevoReloj_Click);
             // 
             // AbmReloj
             // 
