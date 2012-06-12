@@ -86,8 +86,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
             if (!string.IsNullOrEmpty(txtModelo.Text))
                 strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtModelo.Text + "%'";
 
-                strQuery += " and fechaVersion >= '" + dtpDesde.Value.ToString() + "'";
-                strQuery += " and fechaVersion <= '" + dtpHasta.Value.ToString() + "'";
+            strQuery += " and fechaVersion between '" + dtpDesde.Value.ToString("yyyy-MM-dd") + "' and '" + dtpHasta.Value.ToString("yyyy-MM-dd") + "'";
 
             strQuery += " order by " + consultaOrderBy;
 
@@ -117,7 +116,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
                 lblFiltro.Text = leyendaFiltrosInicial + leyendaFiltros;
         }
 
-        private void btnNuevoAuto_Click(object sender, EventArgs e)
+        private void btnNuevoReloj_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.AbmReloj.addEditReloj frmAbmReloj = GestorDeFlotasDesktop.AbmReloj.addEditReloj.Instance();
             frmAbmReloj.modoAbm = "Nuevo";
@@ -127,18 +126,18 @@ namespace GestorDeFlotasDesktop.AbmReloj
             frmAbmReloj.Close();
         }
 
-        private void txtFiltrar_Click(object sender, EventArgs e)
+        private void btnFiltrar_Click(object sender, EventArgs e)
         {
             cargarQuery();
         }
 
-        private void txtLimpiar_Click(object sender, EventArgs e)
+        private void btnLimpiar_Click(object sender, EventArgs e)
         {
             inicializarFormulario();
             cargarQuery();
         }
 
-        private void dgAutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgRelojes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
             {
