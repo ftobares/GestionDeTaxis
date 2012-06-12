@@ -51,8 +51,6 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
                 getDatosRegistro(patenteAuto);
                 mtxtPatente.ReadOnly = true;
-
-
             }
         }
 
@@ -141,7 +139,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
                             MessageBox.Show("El auto con patente: " + mtxtPatente.Text + " fue dato de alta exitosamente.", "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.inicializarFormulario();
+                            this.DialogResult = DialogResult.OK;
                         }
                         else
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

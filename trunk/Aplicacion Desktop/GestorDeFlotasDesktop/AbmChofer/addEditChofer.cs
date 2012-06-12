@@ -50,11 +50,8 @@ namespace GestorDeFlotasDesktop.AbmChofer
 
             if (modoAbm == "Editar")
             {
-
                 getDatosRegistro(dniChofer);
                 txtDniChofer.ReadOnly = true;
-
-
             }
         }
 
@@ -123,8 +120,8 @@ namespace GestorDeFlotasDesktop.AbmChofer
                 pTelefono.Value = txtTelefono.Text;
                 SqlParameter pEmail = new SqlParameter("@pEmail", SqlDbType.VarChar,50);
                 pEmail.Value = txtEmail.Text;
-                SqlParameter pFechaNacimiento = new SqlParameter("@pFechaNacimiento", SqlDbType.Date);
-                pFechaNacimiento.Value = dtpNacimiento.Value.ToString();
+                SqlParameter pFechaNacimiento = new SqlParameter("@pFechaNacimiento", SqlDbType.DateTime);
+                pFechaNacimiento.Value = dtpNacimiento.Value;
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
                 pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar, 1000);
@@ -139,7 +136,7 @@ namespace GestorDeFlotasDesktop.AbmChofer
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
                             MessageBox.Show("El chofer con dni: " + txtDniChofer.Text + " fue dato de alta exitosamente.", "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.inicializarFormulario();
+                            this.DialogResult = DialogResult.OK;
                         }
                         else
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

@@ -125,7 +125,9 @@ namespace GestorDeFlotasDesktop.AbmAuto
             GestorDeFlotasDesktop.AbmAuto.addEditAuto frmAbmAuto = GestorDeFlotasDesktop.AbmAuto.addEditAuto.Instance();
             frmAbmAuto.modoAbm = "Nuevo";
             frmAbmAuto.tituloPantalla = "Agregar Nuevo Auto";
-            frmAbmAuto.ShowDialog();
+            if (frmAbmAuto.ShowDialog() == DialogResult.OK)
+                cargarQuery();
+            frmAbmAuto.Close();
         }
 
         private void txtFiltrar_Click(object sender, EventArgs e)
@@ -149,6 +151,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 frmEditarAuto.tituloPantalla = "Editar Auto, patente: " + dgAutos.SelectedRows[0].Cells["patente"].Value.ToString();
                 if (frmEditarAuto.ShowDialog() == DialogResult.OK)
                     cargarQuery();
+                frmEditarAuto.Close();
             }
 
             if (e.ColumnIndex == 1)
