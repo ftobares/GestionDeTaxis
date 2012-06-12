@@ -149,7 +149,7 @@ namespace GestorDeFlotasDesktop.AbmTurno
             cargarQuery();
         }
 
-        private void dgAutos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgTurnos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
             {

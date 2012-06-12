@@ -256,6 +256,7 @@
             this.dgTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTurnos.Size = new System.Drawing.Size(687, 255);
             this.dgTurnos.TabIndex = 16;
+            this.dgTurnos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTurnos_CellContentClick);
             // 
             // btnNuevoTurno
             // 
