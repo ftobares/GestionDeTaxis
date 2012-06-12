@@ -155,7 +155,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
                 if (MessageBox.Show("¿Esta seguro que deséa eliminar este Reloj?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.VarChar, 10);
-                    pNroSerieReloj.Value = dgRelojes.SelectedRows[0].Cells["pNroSerieReloj"].Value.ToString();
+                    pNroSerieReloj.Value = dgRelojes.SelectedRows[0].Cells["nroSerieReloj"].Value.ToString();
                     GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarReloj", pNroSerieReloj);
                     cargarQuery();
                 }
