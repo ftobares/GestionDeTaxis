@@ -56,7 +56,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(207, 256);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
-            this.btnLimpiar.TabIndex = 30;
+            this.btnLimpiar.TabIndex = 9;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -69,7 +69,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(115, 256);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
-            this.btnCancelar.TabIndex = 29;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(32, 256);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 28;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -126,7 +126,7 @@
             this.txtNombre.MaxLength = 255;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 35;
+            this.txtNombre.TabIndex = 1;
             // 
             // txtApellido
             // 
@@ -134,7 +134,7 @@
             this.txtApellido.MaxLength = 255;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 20);
-            this.txtApellido.TabIndex = 36;
+            this.txtApellido.TabIndex = 2;
             // 
             // lblApellido
             // 
@@ -152,7 +152,7 @@
             this.txtDireccion.MaxLength = 255;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(200, 20);
-            this.txtDireccion.TabIndex = 38;
+            this.txtDireccion.TabIndex = 3;
             // 
             // lblDireccion
             // 
@@ -170,7 +170,7 @@
             this.txtTelefono.MaxLength = 15;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(100, 20);
-            this.txtTelefono.TabIndex = 40;
+            this.txtTelefono.TabIndex = 4;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // lblTelefono
@@ -188,7 +188,7 @@
             this.txtEmail.Location = new System.Drawing.Point(90, 186);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(100, 20);
-            this.txtEmail.TabIndex = 42;
+            this.txtEmail.TabIndex = 5;
             // 
             // lblEmail
             // 
@@ -205,7 +205,7 @@
             this.dtpNacimiento.Location = new System.Drawing.Point(114, 213);
             this.dtpNacimiento.Name = "dtpNacimiento";
             this.dtpNacimiento.Size = new System.Drawing.Size(113, 20);
-            this.dtpNacimiento.TabIndex = 44;
+            this.dtpNacimiento.TabIndex = 6;
             // 
             // lblFNacimiento
             // 
@@ -223,7 +223,7 @@
             this.txtDniChofer.MaxLength = 10;
             this.txtDniChofer.Name = "txtDniChofer";
             this.txtDniChofer.Size = new System.Drawing.Size(100, 20);
-            this.txtDniChofer.TabIndex = 46;
+            this.txtDniChofer.TabIndex = 0;
             this.txtDniChofer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDniChofer_KeyPress);
             // 
             // addEditChofer

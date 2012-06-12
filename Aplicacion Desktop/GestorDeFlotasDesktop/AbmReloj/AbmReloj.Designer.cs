@@ -238,6 +238,9 @@
             this.Controls.Add(this.dgRelojes);
             this.Controls.Add(this.btnNuevoReloj);
             this.Controls.Add(this.lblFiltro);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AbmReloj";
             this.Text = "ABM Relojes";
             this.Load += new System.EventHandler(this.AbmReloj_Load);
