@@ -225,6 +225,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AbmChofer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Choferes";
             this.Load += new System.EventHandler(this.AbmChofer_Load);
             this.groupBox2.ResumeLayout(false);

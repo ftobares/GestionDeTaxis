@@ -242,6 +242,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AbmReloj";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Relojes";
             this.Load += new System.EventHandler(this.AbmReloj_Load);
             this.groupBox2.ResumeLayout(false);

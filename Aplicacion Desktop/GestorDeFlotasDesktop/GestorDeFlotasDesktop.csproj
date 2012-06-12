@@ -123,6 +123,12 @@
     <Compile Include="AbmTurno\AbmTurno.Designer.cs">
       <DependentUpon>AbmTurno.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmTurno\addEditTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmTurno\addEditTurno.Designer.cs">
+      <DependentUpon>addEditTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmUsuario\AbmUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +222,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmReloj\addEditReloj.resx">
       <DependentUpon>addEditReloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmTurno\AbmTurno.resx">
+      <DependentUpon>AbmTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmTurno\addEditTurno.resx">
+      <DependentUpon>addEditTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Buscador\Buscador.resx">
       <DependentUpon>Buscador.cs</DependentUpon>
