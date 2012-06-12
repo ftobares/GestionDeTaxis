@@ -118,7 +118,10 @@ namespace GestorDeFlotasDesktop.AbmChofer
             GestorDeFlotasDesktop.AbmChofer.addEditChofer frmAbmChofer = GestorDeFlotasDesktop.AbmChofer.addEditChofer.Instance();
             frmAbmChofer.modoAbm = "Nuevo";
             frmAbmChofer.tituloPantalla = "Agregar Nuevo Chofer";
-            frmAbmChofer.ShowDialog();
+            if (frmAbmChofer.ShowDialog() == DialogResult.OK)
+                cargarQuery();
+            frmAbmChofer.Close();
+
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -142,6 +145,7 @@ namespace GestorDeFlotasDesktop.AbmChofer
                 frmEditarChofer.tituloPantalla = "Editar Chofer, Dni: " + dgChoferes.SelectedRows[0].Cells["dniChofer"].Value.ToString();
                 if (frmEditarChofer.ShowDialog() == DialogResult.OK)
                     cargarQuery();
+                frmEditarChofer.Close();
             }
 
             if (e.ColumnIndex == 1)

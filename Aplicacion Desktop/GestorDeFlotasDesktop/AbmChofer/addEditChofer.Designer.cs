@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
