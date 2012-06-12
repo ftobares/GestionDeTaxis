@@ -77,7 +77,7 @@ namespace GestorDeFlotasDesktop.AbmTurno
         private void inicializarFormulario()
         {
             cmbHoraInicio.Text = "00";
-            cmbHoraFin.Text = "23";
+            cmbHoraFin.Text = "24";
             txtDescripcion.Text = "";
             txtMaxFicha.Text = "";
             txtMaxBandera.Text = "";
