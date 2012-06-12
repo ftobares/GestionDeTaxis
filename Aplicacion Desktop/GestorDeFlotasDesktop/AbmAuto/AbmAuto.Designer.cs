@@ -36,8 +36,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtLicencia = new System.Windows.Forms.TextBox();
             this.lblLicencia = new System.Windows.Forms.Label();
-            this.txtLimpiar = new System.Windows.Forms.Button();
-            this.txtFiltrar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.txtMarca = new System.Windows.Forms.TextBox();
@@ -95,8 +95,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
             // 
             this.groupBox2.Controls.Add(this.txtLicencia);
             this.groupBox2.Controls.Add(this.lblLicencia);
-            this.groupBox2.Controls.Add(this.txtLimpiar);
-            this.groupBox2.Controls.Add(this.txtFiltrar);
+            this.groupBox2.Controls.Add(this.btnLimpiar);
+            this.groupBox2.Controls.Add(this.btnFiltrar);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtModelo);
             this.groupBox2.Controls.Add(this.txtMarca);
@@ -128,31 +128,31 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.lblLicencia.TabIndex = 32;
             this.lblLicencia.Text = "Licencia";
             // 
-            // txtLimpiar
+            // btnLimpiar
             // 
-            this.txtLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
-            this.txtLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtLimpiar.Location = new System.Drawing.Point(589, 44);
-            this.txtLimpiar.Name = "txtLimpiar";
-            this.txtLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.txtLimpiar.TabIndex = 31;
-            this.txtLimpiar.Text = "Limpiar";
-            this.txtLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.txtLimpiar.UseVisualStyleBackColor = true;
-            this.txtLimpiar.Click += new System.EventHandler(this.txtLimpiar_Click);
+            this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
+            this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimpiar.Location = new System.Drawing.Point(589, 44);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 31;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.txtLimpiar_Click);
             // 
-            // txtFiltrar
+            // btnFiltrar
             // 
-            this.txtFiltrar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
-            this.txtFiltrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtFiltrar.Location = new System.Drawing.Point(508, 44);
-            this.txtFiltrar.Name = "txtFiltrar";
-            this.txtFiltrar.Size = new System.Drawing.Size(75, 23);
-            this.txtFiltrar.TabIndex = 29;
-            this.txtFiltrar.Text = "Filtrar";
-            this.txtFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.txtFiltrar.UseVisualStyleBackColor = true;
-            this.txtFiltrar.Click += new System.EventHandler(this.txtFiltrar_Click);
+            this.btnFiltrar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
+            this.btnFiltrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnFiltrar.Location = new System.Drawing.Point(508, 44);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 29;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.txtFiltrar_Click);
             // 
             // label4
             // 
@@ -258,8 +258,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private DataGridView dgAutos;
         private Button btnNuevoAuto;
         private GroupBox groupBox2;
-        private Button txtLimpiar;
-        private Button txtFiltrar;
+        private Button btnLimpiar;
+        private Button btnFiltrar;
         private Label label4;
         private TextBox txtModelo;
         private TextBox txtMarca;
