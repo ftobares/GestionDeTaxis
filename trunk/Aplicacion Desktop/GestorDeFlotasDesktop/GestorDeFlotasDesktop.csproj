@@ -81,6 +81,12 @@
     <Compile Include="AbmChofer\AbmChofer.Designer.cs">
       <DependentUpon>AbmChofer.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmChofer\addEditChofer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmChofer\addEditChofer.Designer.cs">
+      <DependentUpon>addEditChofer.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmCliente\AbmCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmAuto\addEditAuto.resx">
       <DependentUpon>addEditAuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmChofer\AbmChofer.resx">
+      <DependentUpon>AbmChofer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmChofer\addEditChofer.resx">
+      <DependentUpon>addEditChofer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmCliente\AbmCliente.resx">
       <DependentUpon>AbmCliente.cs</DependentUpon>

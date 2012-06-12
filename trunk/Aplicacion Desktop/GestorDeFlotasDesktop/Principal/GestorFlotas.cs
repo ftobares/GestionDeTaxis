@@ -37,6 +37,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmAuto.MdiParent = this;
                     frmAuto.Show();
                     break;
+                case "abmChofer":
+                    GestorDeFlotasDesktop.AbmChofer.AbmChofer frmChofer = GestorDeFlotasDesktop.AbmChofer.AbmChofer.Instance();
+                    frmChofer.MdiParent = this;
+                    frmChofer.Show();
+                    break;
                 case "abmCliente":
                     GestorDeFlotasDesktop.AbmCliente.AbmCliente frmCliente = GestorDeFlotasDesktop.AbmCliente.AbmCliente.Instance();
                     frmCliente.MdiParent = this;
