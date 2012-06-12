@@ -27,9 +27,9 @@ CREATE PROCEDURE [FEMIG].[cliente]
 AS
 BEGIN
 	--Controlo que no haya duplicados de Patente
-	if exists (select 1 from FEMIG.cliente where dniCliente = @dniCliente)
+	if exists (select 1 from FEMIG.cliente where dniCliente = @pDniCliente)
 	begin
-		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + @dniCliente + '.'
+		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + @pDniCliente + '.'
 		return
 	end
 

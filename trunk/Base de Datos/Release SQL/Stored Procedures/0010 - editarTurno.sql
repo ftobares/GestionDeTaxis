@@ -27,11 +27,11 @@ AS
 BEGIN
 
 	UPDATE [GD1C2012].[FEMIG].[turnos]
-	   SET [dniCliente] = @pHoraInicio
-		  ,[nombre] = @pHoraFin
-		  ,[apellido] = @pDescripcion
-		  ,[telefono] = @pValorFicha
-		  ,[direccion] = @pValorBandera
+	   SET [horaInicio] = @pHoraInicio
+		  ,[horaFin] = @pHoraFin
+		  ,[descripcion] = @pDescripcion
+		  ,[valorFicha] = @pValorFicha
+		  ,[valorBandera] = @pValorBandera
 	 WHERE turnoID = @pTurnoID
 	
 END

@@ -23,13 +23,13 @@ CREATE PROCEDURE [FEMIG].[editarCliente]
 	@pEmail				VARCHAR(255),
 	@pFechaNacimiento 	DATETIME,
 	@pAnulado			BIT,
-	@retCatchError		VARCHAR(MAX) out
+	@rRetCatchError		VARCHAR(MAX) out
 AS
 BEGIN
 	--Controlo que no haya duplicados de Patente
 	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
 	begin
-		set @pRetCatchError = 'No existe un cliente con el mismo DNI ' + @pDniCliente + '.'
+		set @rRetCatchError = 'No existe un cliente con el mismo DNI ' + @pDniCliente + '.'
 		return
 	end
 
