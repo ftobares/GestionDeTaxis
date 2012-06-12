@@ -26,7 +26,7 @@ AS
 BEGIN
 
 	INSERT INTO [GD1C2012].[FEMIG].[turnos]
-           (horaInicio,horaFin,descripcion,valorFicha,valorBandera)
+           (horaInicio,horaFin,descripcion,valorFicha,valorBandera,anulado)
     VALUES
            (@pHoraInicio
            ,@pHoraFin
