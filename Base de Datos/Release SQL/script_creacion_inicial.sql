@@ -12,14 +12,12 @@
 /*Creacion del shema					*/
 /*++++++++++++++++++++++++++++++++++++++*/
 USE [GD1C2012]
-GO
-CREATE SCHEMA [FEMIG] AUTHORIZATION [gd]
-GO
+go
 
 /*++++++++++++++++++++++++++++++++++++++*/
 /*Creacion de tablas en la base de datos*/
 /*++++++++++++++++++++++++++++++++++++++*/
-BEGIN TRANSACTION
+
 CREATE TABLE GD1C2012.FEMIG.relojes ( 
 	nroSerieReloj varchar(18) NOT NULL PRIMARY KEY CLUSTERED,
 	marca varchar(255) NOT NULL,
@@ -65,11 +63,11 @@ CREATE TABLE GD1C2012.FEMIG.turnos (
 );
 
 CREATE TABLE GD1C2012.FEMIG.ChoferAutoTurno ( 
+	asignacionId NUMERIC(18,0) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	fecha datetime NOT NULL,
 	dniChofer numeric(18) NOT NULL,
 	turnoID numeric(20) NOT NULL,
 	patente varchar(10),
-	constraint pk_choferautoturno primary key CLUSTERED (dniChofer, turnoID),
 	constraint fk_cat_chofer foreign key (dniChofer) references GD1C2012.FEMIG.choferes(dniChofer),
 	constraint fk_cat_turno foreign key (turnoID) references GD1C2012.FEMIG.turnos(turnoID)
 );
@@ -93,13 +91,12 @@ CREATE TABLE GD1C2012.FEMIG.facturas (
 	importe_total numeric(18) DEFAULT 0 NOT NULL
 );
 
-CREATE TABLE GD1C2012.FEMIG.rendicion ( 
+CREATE TABLE GD1C2012.FEMIG.rendicion (
+	rendicionID NUMERIC(18,0) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	fecha datetime NOT NULL,
-	dniChofer numeric(18) NOT NULL,
-	turnoID numeric(20) NOT NULL,
+	asignacionId NUMERIC(18,0) NOT NULL,
 	importe numeric(10) DEFAULT 0 NOT NULL,
-	constraint pk_rendicion primary key CLUSTERED (fecha, dniChofer, turnoID),
-	constraint fk_rendicion_cat foreign key (dniChofer, turnoID) references GD1C2012.FEMIG.ChoferAutoTurno(dniChofer, turnoID)
+	constraint fk_rendicion_cat foreign key (asignacionId) references GD1C2012.FEMIG.ChoferAutoTurno(asignacionId)
 );
 
 CREATE TABLE GD1C2012.FEMIG.viajes ( 
@@ -154,11 +151,12 @@ CREATE TABLE GD1C2012.FEMIG.RolUsuario (
 	constraint fk_ru_rol foreign key (rolID) references GD1C2012.FEMIG.rol(rolID),
 	constraint fk_ru_usuario foreign key (usuarioID) references GD1C2012.FEMIG.usuario(usuarioID)
 );
-END TRANSACTION
+
 /*++++++++++++++++++++++++++++++++++++++*/
 /*Creacion de Propiedades Extendidas	*/
 /*++++++++++++++++++++++++++++++++++++++*/
 GO
+
 EXEC sp_addextendedproperty 'MS_Description', '0: El rol está activo
 1: El rol esta inhabilitado', 'Schema', FEMIG, 'table', Rol, 'column', anulado;
 
