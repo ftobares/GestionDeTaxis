@@ -261,6 +261,7 @@
             this.Controls.Add(this.lblViaje);
             this.Name = "RegistrarViajes";
             this.Text = "RegistrarViajes";
+            this.Load += new System.EventHandler(this.RegistrarViajes_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

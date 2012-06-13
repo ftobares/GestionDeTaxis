@@ -29,7 +29,7 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
             InitializeComponent();
         }
 
-        private void addEditAuto_Load(object sender, EventArgs e)
+        private void RegistrarViajes_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
         }
