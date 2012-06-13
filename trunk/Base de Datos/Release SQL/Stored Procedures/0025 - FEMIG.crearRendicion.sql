@@ -38,6 +38,6 @@ BEGIN
     VALUES
            (@pFecha
            ,@pDniChofer
-           ,cast(@pTurnoID AS bigint)
+           ,@pTurnoID
            ,@pImporteTotal)
 END
