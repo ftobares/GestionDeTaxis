@@ -67,7 +67,8 @@ CREATE TABLE GD1C2012.FEMIG.ChoferAutoTurno (
 	dniChofer numeric(18) NOT NULL,
 	turnoID numeric(18) NOT NULL,
 	patente varchar(10) NOT NULL,
-	fecha datetime NOT NULL
+	fecha datetime NOT NULL,
+	anulado bit default 0 -- 0: La asignacion está activa 1: La aasignacion esta inhabilitada
 );
 
 ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Chofer 
