@@ -41,7 +41,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.colMofificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.colEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -51,18 +50,19 @@
             // 
             label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label1.Location = new System.Drawing.Point(97, 9);
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label1.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            label1.Location = new System.Drawing.Point(271, 9);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(91, 26);
+            label1.Size = new System.Drawing.Size(145, 26);
             label1.TabIndex = 0;
-            label1.Text = "Clientes";
+            label1.Text = "ABM Clientes";
             // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(32, 111);
+            this.label2.Location = new System.Drawing.Point(32, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 1;
@@ -72,7 +72,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 19);
+            this.label3.Location = new System.Drawing.Point(14, 30);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 65);
+            this.label4.Location = new System.Drawing.Point(14, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 3;
@@ -91,7 +91,7 @@
             // txtNombre
             // 
             this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtNombre.Location = new System.Drawing.Point(67, 16);
+            this.txtNombre.Location = new System.Drawing.Point(67, 27);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 4;
@@ -109,7 +109,7 @@
             // txtDNI
             // 
             this.txtDNI.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtDNI.Location = new System.Drawing.Point(67, 108);
+            this.txtDNI.Location = new System.Drawing.Point(67, 96);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(100, 20);
             this.txtDNI.TabIndex = 6;
@@ -118,22 +118,28 @@
             // buttonBuscar
             // 
             this.buttonBuscar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonBuscar.Location = new System.Drawing.Point(50, 196);
+            this.buttonBuscar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_find;
+            this.buttonBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonBuscar.Location = new System.Drawing.Point(251, 196);
             this.buttonBuscar.Name = "buttonBuscar";
             this.buttonBuscar.Size = new System.Drawing.Size(65, 25);
             this.buttonBuscar.TabIndex = 7;
-            this.buttonBuscar.Text = "Buscar";
+            this.buttonBuscar.Text = "Filtrar";
+            this.buttonBuscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonBuscar.UseVisualStyleBackColor = true;
             this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
             // buttonNuevo
             // 
             this.buttonNuevo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.buttonNuevo.Location = new System.Drawing.Point(175, 196);
+            this.buttonNuevo.Image = global::GestorDeFlotasDesktop.Properties.Resources.find;
+            this.buttonNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonNuevo.Location = new System.Drawing.Point(376, 196);
             this.buttonNuevo.Name = "buttonNuevo";
             this.buttonNuevo.Size = new System.Drawing.Size(65, 25);
             this.buttonNuevo.TabIndex = 8;
             this.buttonNuevo.Text = "Nuevo";
+            this.buttonNuevo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.buttonNuevo.UseVisualStyleBackColor = true;
             this.buttonNuevo.Click += new System.EventHandler(this.buttonNuevo_Click);
             // 
@@ -146,11 +152,12 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(35, 43);
+            this.groupBox1.Location = new System.Drawing.Point(234, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(218, 144);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtros de busqueda";
             // 
             // dataGridView1
             // 
@@ -162,13 +169,12 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colMofificar,
-            this.colEliminar});
+            this.colMofificar});
             this.dataGridView1.Location = new System.Drawing.Point(12, 230);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(260, 143);
+            this.dataGridView1.Size = new System.Drawing.Size(663, 188);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -181,22 +187,13 @@
             this.colMofificar.Text = "Modificar";
             this.colMofificar.UseColumnTextForButtonValue = true;
             this.colMofificar.Visible = false;
-            // 
-            // colEliminar
-            // 
-            this.colEliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colEliminar.HeaderText = "Eliminar";
-            this.colEliminar.Name = "colEliminar";
-            this.colEliminar.ReadOnly = true;
-            this.colEliminar.Text = "Eliminar";
-            this.colEliminar.UseColumnTextForButtonValue = true;
-            this.colEliminar.Visible = false;
+            this.colMofificar.Width = 56;
             // 
             // AbmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 385);
+            this.ClientSize = new System.Drawing.Size(687, 430);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonNuevo);
@@ -227,6 +224,5 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewButtonColumn colMofificar;
-        private System.Windows.Forms.DataGridViewButtonColumn colEliminar;
     }
 }

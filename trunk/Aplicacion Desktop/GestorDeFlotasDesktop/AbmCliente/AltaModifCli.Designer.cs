@@ -47,18 +47,17 @@
             this.txtMail = new System.Windows.Forms.TextBox();
             this.txtTel = new System.Windows.Forms.TextBox();
             this.txtCalle = new System.Windows.Forms.TextBox();
-            this.txtCP = new System.Windows.Forms.TextBox();
+            this.txtNumCalle = new System.Windows.Forms.TextBox();
             this.txtFchNac = new System.Windows.Forms.TextBox();
             this.txtPiso = new System.Windows.Forms.TextBox();
             this.txtDpto = new System.Windows.Forms.TextBox();
             this.txtLocalidad = new System.Windows.Forms.TextBox();
-            this.txtNumCalle = new System.Windows.Forms.TextBox();
+            this.txtCP = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -247,14 +246,14 @@
             this.txtCalle.TabIndex = 19;
             this.txtCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCalle_keyPress);
             // 
-            // txtCP
+            // txtNumCalle
             // 
-            this.txtCP.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtCP.Location = new System.Drawing.Point(116, 218);
-            this.txtCP.Name = "txtCP";
-            this.txtCP.Size = new System.Drawing.Size(100, 20);
-            this.txtCP.TabIndex = 20;
-            this.txtCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCP_keyPress);
+            this.txtNumCalle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtNumCalle.Location = new System.Drawing.Point(275, 168);
+            this.txtNumCalle.Name = "txtNumCalle";
+            this.txtNumCalle.Size = new System.Drawing.Size(61, 20);
+            this.txtNumCalle.TabIndex = 20;
+            this.txtNumCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCP_keyPress);
             // 
             // txtFchNac
             // 
@@ -292,34 +291,34 @@
             this.txtLocalidad.TabIndex = 24;
             this.txtLocalidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLocalidad_keyPress);
             // 
-            // txtNumCalle
+            // txtCP
             // 
-            this.txtNumCalle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtNumCalle.Location = new System.Drawing.Point(275, 168);
-            this.txtNumCalle.Name = "txtNumCalle";
-            this.txtNumCalle.Size = new System.Drawing.Size(61, 20);
-            this.txtNumCalle.TabIndex = 25;
-            this.txtNumCalle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttxtNumCalle_keyPress);
+            this.txtCP.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCP.Location = new System.Drawing.Point(116, 218);
+            this.txtCP.Name = "txtCP";
+            this.txtCP.Size = new System.Drawing.Size(61, 20);
+            this.txtCP.TabIndex = 25;
+            this.txtCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txttxtNumCalle_keyPress);
             // 
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.Location = new System.Drawing.Point(144, 304);
+            this.button1.Location = new System.Drawing.Point(222, 241);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 26;
-            this.button1.Text = "Grabar";
+            this.button1.Text = "Seleccionar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.Location = new System.Drawing.Point(264, 304);
+            this.button2.Location = new System.Drawing.Point(141, 285);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 27;
-            this.button2.Text = "Limpiar";
+            this.button2.Text = "Grabar";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -335,11 +334,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(231, 241);
+            this.button3.Location = new System.Drawing.Point(261, 285);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 29;
-            this.button3.Text = "Seleccionar";
+            this.button3.Text = "Limpiar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -352,33 +351,22 @@
             this.monthCalendar1.Visible = false;
             this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar_DateSelected);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(116, 279);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(65, 17);
-            this.checkBox1.TabIndex = 31;
-            this.checkBox1.Text = "Anulado";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // AltaModifCli
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(357, 369);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtNumCalle);
+            this.Controls.Add(this.txtCP);
             this.Controls.Add(this.txtLocalidad);
             this.Controls.Add(this.txtDpto);
             this.Controls.Add(this.txtPiso);
             this.Controls.Add(this.txtFchNac);
-            this.Controls.Add(this.txtCP);
+            this.Controls.Add(this.txtNumCalle);
             this.Controls.Add(this.txtCalle);
             this.Controls.Add(this.txtTel);
             this.Controls.Add(this.txtMail);
@@ -401,7 +389,6 @@
             this.Name = "AltaModifCli";
             this.Text = "Alta Cliente";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,18 +414,17 @@
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.TextBox txtTel;
         private System.Windows.Forms.TextBox txtCalle;
-        private System.Windows.Forms.TextBox txtCP;
+        private System.Windows.Forms.TextBox txtNumCalle;
         private System.Windows.Forms.TextBox txtFchNac;
         private System.Windows.Forms.TextBox txtPiso;
         private System.Windows.Forms.TextBox txtDpto;
         private System.Windows.Forms.TextBox txtLocalidad;
-        private System.Windows.Forms.TextBox txtNumCalle;
+        private System.Windows.Forms.TextBox txtCP;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

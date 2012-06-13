@@ -48,46 +48,67 @@ namespace GestorDeFlotasDesktop.AbmCliente
 
         private void buttonNuevo_Click(object sender, EventArgs e)
         {
-            GestorDeFlotasDesktop.AbmCliente.AltaModifCli altaModifCliente = new GestorDeFlotasDesktop.AbmCliente.AltaModifCli();
-            altaModifCliente.Show();
+            try
+            {
+                GestorDeFlotasDesktop.AbmCliente.AltaModifCli altaModifCliente = GestorDeFlotasDesktop.AbmCliente.AltaModifCli.Instance();
+                altaModifCliente.modoAbm = "Nuevo";
+                altaModifCliente.ShowDialog();
+                string sQuery = cargarQuery();
+                DataSet dsResultados = new DataSet();
+                dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
+                dataGridView1.DataSource = dsResultados.Tables["Tabla"];
+                dataGridView1.RowHeadersVisible = true;
+                colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count;
+                colMofificar.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private string cargarQuery()
+        {
+            //TODO: modificar este query dependiendo la cunsulta.
+            string sQuery = "SELECT * FROM FEMIG.Clientes where ";
+            if (txtNombre.Text != string.Empty)
+            {
+                sQuery += "nombre like '" + txtNombre.Text + "%'";
+                if (txtApellido.Text != string.Empty || txtDNI.Text != string.Empty)
+                    sQuery += " AND ";
+            }
+            if (txtApellido.Text != string.Empty)
+            {
+                sQuery += "apellido like '" + txtApellido.Text + "%'";
+                if (txtDNI.Text != string.Empty)
+                    sQuery += " AND ";
+            }
+            if (txtDNI.Text != string.Empty)
+                sQuery += "dniCliente = " + txtDNI.Text;
+            //sQuery += " AND anulado = 0";
+            return sQuery;
         }
 
         private void mostrarClientes()
         {
             try
             {
-                DataSet dsResultados = new DataSet();
-
                 if (!controlarCamposCompletos())
                 {
                     MessageBox.Show("Debe completar al menos un campo.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
-                //TODO: modificar este query dependiendo la cunsulta.
-                string sQuery = "SELECT * FROM FEMIG.Cliente where ";
-                if (txtNombre.Text != string.Empty)
-                {
-                    sQuery += "nombre like '" + txtNombre.Text + "%'";
-                    if (txtApellido.Text != string.Empty || txtDNI.Text != string.Empty)
-                        sQuery += " AND ";
-                }
-                if (txtApellido.Text != string.Empty)
-                {
-                    sQuery += "apellido like '" + txtApellido.Text + "%'";
-                    if(txtDNI.Text!=string.Empty)
-                        sQuery += " AND ";
-                }
-                if (txtDNI.Text != string.Empty)
-                    sQuery += "dniCliente = " + txtDNI.Text;
-
+                string sQuery = cargarQuery();
+                DataSet dsResultados = new DataSet();
                 dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
                 dataGridView1.DataSource = dsResultados.Tables["Tabla"];
                 dataGridView1.RowHeadersVisible = true;
-                colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count+1;
+                colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count;
                 colMofificar.Visible = true;
-                colEliminar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count+1;
-                colEliminar.Visible = true;
             }
             catch (Exception ex)
             {
@@ -101,7 +122,45 @@ namespace GestorDeFlotasDesktop.AbmCliente
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            int iIndex = e.RowIndex;
+            
+            if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
+            {
+                GestorDeFlotasDesktop.AbmCliente.AltaModifCli altaModifCliente = GestorDeFlotasDesktop.AbmCliente.AltaModifCli.Instance();
+                altaModifCliente.modoAbm = "Editar";
+                altaModifCliente.dniCliente = dataGridView1.Rows[e.RowIndex].Cells["dniCliente"].Value.ToString();
+                
+                altaModifCliente.ShowDialog();
+                string sQuery = cargarQuery();
+                DataSet dsResultados = new DataSet();
+                dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
+                dataGridView1.DataSource = dsResultados.Tables["Tabla"];
+                dataGridView1.RowHeadersVisible = true;
+                colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count;
+                colMofificar.Visible = true;
+            }
+            string sCheck = dataGridView1.Rows[e.RowIndex].Cells["anulado"].Value.ToString();
+            if (e.ColumnIndex == dataGridView1.ColumnCount - 1 && sCheck == "False")
+            {
+                if (MessageBox.Show("¿Esta seguro que deséa eliminar este Auto?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {    
+                    string sCheckAnuklado = "1";
+
+                    string sQuery = "UPDATE FEMIG.Clientes SET anulado ='" + sCheckAnuklado + "' WHERE dniCliente = " + dataGridView1.Rows[e.RowIndex].Cells["dniCliente"].Value.ToString();
+                    DataTable dtResult = new DataTable();
+                    dtResult = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(sQuery);
+                    if (dtResult != null)
+                        MessageBox.Show("Se Elimino al cliente correctamente.", "Datos Insertados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    sQuery = cargarQuery();
+                    DataSet dsResultados = new DataSet();
+                    dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
+                    dataGridView1.DataSource = dsResultados.Tables["Tabla"];
+                    dataGridView1.RowHeadersVisible = true;
+                    colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count;
+                    colMofificar.Visible = true;
+                }
+
+            }
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)

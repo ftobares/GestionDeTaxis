@@ -135,6 +135,18 @@
     <Compile Include="AbmUsuario\AbmUsuario.Designer.cs">
       <DependentUpon>AbmUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="AsignacionChofer-AutoTurno\addChofer_AutoTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsignacionChofer-AutoTurno\addChofer_AutoTurno.Designer.cs">
+      <DependentUpon>addChofer_AutoTurno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AsignacionChofer-AutoTurno\AsignacionChofer_AutoTurno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsignacionChofer-AutoTurno\AsignacionChofer_AutoTurno.Designer.cs">
+      <DependentUpon>AsignacionChofer_AutoTurno.cs</DependentUpon>
+    </Compile>
     <Compile Include="BD\GD1C2012.cs" />
     <Compile Include="BD\parametros.cs" />
     <Compile Include="BD\parametros.Designer.cs">
@@ -228,6 +240,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AbmTurno\addEditTurno.resx">
       <DependentUpon>addEditTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsignacionChofer-AutoTurno\addChofer_AutoTurno.resx">
+      <DependentUpon>addChofer_AutoTurno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsignacionChofer-AutoTurno\AsignacionChofer_AutoTurno.resx">
+      <DependentUpon>AsignacionChofer_AutoTurno.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Buscador\Buscador.resx">
       <DependentUpon>Buscador.cs</DependentUpon>
