@@ -28,7 +28,7 @@ SET @sFecha = CAST(CAST(@pFecha AS date) AS varchar) + ' %'
 DECLARE @iAsignacionID numeric(18) 
 BEGIN
 
-	--Controlo si 2 Viajes para el mismo cliente a la misma hora
+	--Controlo si 2 Viajes para el mismo cliente a la misma fecha y hora
 	iF exists	(SELECT	1 FROM femig.Viajes
 				WHERE	 (fecha = @pFecha)
 						AND (@pDniCliente = dniCliente))
