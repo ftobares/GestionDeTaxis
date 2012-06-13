@@ -148,7 +148,9 @@
             // 
             this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpNacimiento.Location = new System.Drawing.Point(108, 71);
+            this.dtpNacimiento.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpNacimiento.Name = "dtpNacimiento";
+            this.dtpNacimiento.ShowUpDown = true;
             this.dtpNacimiento.Size = new System.Drawing.Size(121, 20);
             this.dtpNacimiento.TabIndex = 40;
             // 
