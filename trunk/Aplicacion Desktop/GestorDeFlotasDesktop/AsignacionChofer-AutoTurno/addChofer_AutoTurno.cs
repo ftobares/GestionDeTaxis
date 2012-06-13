@@ -205,11 +205,11 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             frmBuscadorReloj.campoRetorno = "turnoID";
             frmBuscadorReloj.Filtro1Text = "Hora Inicio:";
             frmBuscadorReloj.Filtro1Value = "horaInicio";
-            frmBuscadorReloj.Filtro2Text = "Hora Fin:";
-            frmBuscadorReloj.Filtro2Value = "horaFin";
+            //frmBuscadorReloj.Filtro2Text = "Hora Fin:";
+            //frmBuscadorReloj.Filtro2Value = "horaFin";
             frmBuscadorReloj.nombreTabla = "femig.turnos";
             frmBuscadorReloj.camposSelect = "turnoID, horaInicio, horaFin";
-            frmBuscadorReloj.orderBy = "horaInicio, horaFin, turnoID";
+            frmBuscadorReloj.orderBy = "horaInicio, turnoID";
             frmBuscadorReloj.whereObligatorio = "isnull(anulado,'0')='0'";
 
             if (frmBuscadorReloj.ShowDialog() == DialogResult.OK)
