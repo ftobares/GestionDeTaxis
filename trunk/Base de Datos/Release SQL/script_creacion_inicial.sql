@@ -90,7 +90,7 @@ CREATE TABLE GD1C2012.FEMIG.clientes (
 	anulado bit default 0 -- 0: El cliente está activo 1: El cliente esta inhabilitado
 );
 
-CREATE TABLE GD1C2012.FEMIG.facturas ( 
+CREATE TABLE GD1C2012.FEMIG.Facturas ( 
 	codFactura numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(100000,1),
 	fechaInicio datetime NOT NULL,
 	fechaFin datetime NOT NULL,
