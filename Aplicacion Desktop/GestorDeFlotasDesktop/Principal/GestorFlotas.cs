@@ -57,6 +57,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmCliente.MdiParent = this;
                     frmCliente.Show();
                     break;
+                case "abmChoferAuto":
+                    GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.AsignacionChofer_AutoTurno frmCAT = GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.AsignacionChofer_AutoTurno.Instance();
+                    frmCAT.MdiParent = this;
+                    frmCAT.Show();
+                    break;
             }     
         }
 

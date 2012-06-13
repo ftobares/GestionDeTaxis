@@ -11,28 +11,52 @@ namespace GestorDeFlotasDesktop.AbmCliente
 {
     public partial class AltaModifCli : Form
     {
-        public AltaModifCli()
+        public string dniCliente { get; set; }
+        public string modoAbm { get; set; }
+        public string tituloPantalla { get; set; }
+        private static AltaModifCli unicaInst = null;
+        public static AltaModifCli Instance()
+        {
+            if (unicaInst == null)
+            {
+                unicaInst = new AltaModifCli();
+            }
+            return unicaInst;
+        }
+
+        private AltaModifCli()
         {
             InitializeComponent();
         }
+
         private bool controlarCamposCompletos()
         {
             if (this.txtNombre.Text == string.Empty || this.txtApellido.Text == string.Empty || this.txtDNI.Text == string.Empty
-                    || this.txtTel.Text == string.Empty || this.txtCalle.Text == string.Empty || this.txtNumCalle.Text == string.Empty
+                    || this.txtTel.Text == string.Empty || this.txtCalle.Text == string.Empty || this.txtCP.Text == string.Empty
                         || this.txtLocalidad.Text == string.Empty || this.txtFchNac.Text == string.Empty)
                 return true;
             else
                 return false;
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void inicializarFormulario()
         {
-            //this.te
-        }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //Application.Exit();
+            limpiarCampos();
+            this.txtDNI.ReadOnly = false;
+
+            if (modoAbm == "Editar")
+            {
+
+                getDatosRegistro(dniCliente);
+                this.txtDNI.ReadOnly = true;
+            }
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            inicializarFormulario();
+        }
+    
         private void txtNombre_keyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -77,7 +101,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                this.txtNumCalle.Focus();
+                this.txtCP.Focus();
             }
         }
 
@@ -109,7 +133,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                this.txtCP.Focus();
+                this.txtNumCalle.Focus();
             }
         }
 
@@ -121,9 +145,18 @@ namespace GestorDeFlotasDesktop.AbmCliente
             }
         }
 
+        private void limpiarCampos()
+        {
+            this.txtNombre.Text = ""; this.txtApellido.Text = ""; this.txtDNI.Text = "";
+            this.txtTel.Text = ""; this.txtCalle.Text = ""; this.txtCP.Text = "";
+            this.txtPiso.Text = ""; this.txtDpto.Text = ""; this.txtLocalidad.Text = "";
+            this.txtNumCalle.Text = ""; this.txtFchNac.Text = ""; this.txtMail.Text = "";
+            this.txtMail.Text = "";
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            this.monthCalendar1.Visible = true;
+            limpiarCampos();
         }
 
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
@@ -132,15 +165,36 @@ namespace GestorDeFlotasDesktop.AbmCliente
             this.txtFchNac.Text = this.monthCalendar1.SelectionEnd.ToShortDateString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.txtNombre.Text = ""; this.txtApellido.Text = "" ; this.txtDNI.Text = "";
-                this.txtTel.Text = ""; this.txtCalle.Text = ""; this.txtNumCalle.Text = "";
-                    this.txtPiso.Text = ""; this.txtDpto.Text = ""; this.txtLocalidad.Text = "";
-                        this.txtCP.Text = ""; this.txtFchNac.Text = ""; this.txtMail.Text = "";
+            this.monthCalendar1.Visible = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void getDatosRegistro(string dniCliente)
+        {
+            DataTable dtValores = new DataTable();
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select dniCliente, nombre, apellido, telefono, direccion, email, fechaNacimiento from femig.clientes where dniCliente = '" + dniCliente + "'");
+            txtDNI.Text = dtValores.Rows[0]["dniCliente"].ToString();
+            txtNombre.Text = dtValores.Rows[0]["nombre"].ToString();
+            txtApellido.Text = dtValores.Rows[0]["apellido"].ToString();
+            txtTel.Text = dtValores.Rows[0]["telefono"].ToString();
+            string sDir = dtValores.Rows[0]["direccion"].ToString() + "||||";
+            string[] strDir = sDir.Split('|');
+            txtCalle.Text = "";  txtNumCalle.Text = ""; txtPiso.Text = ""; txtDpto.Text = ""; txtLocalidad.Text = ""; txtCP.Text = "";
+            txtCalle.Text = strDir[0];
+            if (strDir.Length > 1)
+            {
+                txtNumCalle.Text = strDir[1];
+                txtPiso.Text = strDir[2];
+                txtDpto.Text = strDir[3];
+                txtLocalidad.Text = strDir[4];
+                txtCP.Text = strDir[5];
+            }
+            txtMail.Text = dtValores.Rows[0]["email"].ToString();
+            txtFchNac.Text = dtValores.Rows[0]["fechaNacimiento"].ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             try
             {
@@ -151,22 +205,47 @@ namespace GestorDeFlotasDesktop.AbmCliente
                 }
 
                 //TODO: modificar este query dependiendo la cunsulta.
-                string sCheckAnuklado = "0";
+                /*string sCheckAnuklado = "0";
                 if (checkBox1.Checked)
-                    sCheckAnuklado = "1";
-
-                string sQuery = "INSERT INTO FEMIG.Cliente VALUES (" + this.txtDNI.Text + ",'" + this.txtNombre.Text
-                    + "','" + this.txtApellido.Text + "'," + this.txtTel.Text + ",'LOC{" + this.txtLocalidad.Text + "} CP{" + this.txtCP.Text + "} " + this.txtCalle.Text + " "
-                        + this.txtNumCalle.Text + " PISO{" + this.txtPiso.Text + "} DPTO{" + this.txtDpto.Text + "}',";
-                if (this.txtMail.Text==string.Empty)
-                    sQuery += "NULL";
+                    sCheckAnuklado = "1";*/
+                if (this.modoAbm == "Nuevo")
+                {
+                    string sCheckAnulado = "0";
+                    string sQuery = "INSERT INTO FEMIG.Clientes VALUES (" + this.txtDNI.Text + ",'" + this.txtNombre.Text
+                        + "','" + this.txtApellido.Text + "'," + this.txtTel.Text + ",'" + this.txtCalle.Text + "|" + this.txtNumCalle.Text + "|"
+                            + this.txtPiso.Text + "|" + this.txtDpto.Text + "|" + this.txtLocalidad.Text + "|" + this.txtCP.Text + "',";
+                    if (this.txtMail.Text == string.Empty)
+                        sQuery += "NULL";
+                    else
+                        sQuery += "'" + this.txtMail.Text + "'";
+                    sQuery += ",'" + this.txtFchNac.Text + "','" + sCheckAnulado + "')";
+                    DataTable dtResult = new DataTable();
+                    dtResult = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(sQuery);
+                    if (dtResult != null)
+                    {
+                        MessageBox.Show("Se dio de Alta al cliente correctamente.", "Datos Insertados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarCampos();
+                    }
+                }
                 else
-                    sQuery += "'" + this.txtMail.Text + "'";
-                sQuery += ",'" + this.txtFchNac.Text + "','" + sCheckAnuklado + "')";
-                DataTable dtResult = new DataTable();
-                dtResult = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(sQuery);
-                if(dtResult!= null)
-                    MessageBox.Show("Se dio de Alta al cliente correctamente.", "Datos Insertados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                {
+                    string sCheckAnuklado = "0";
+                    string sQuery = "UPDATE FEMIG.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + this.txtApellido.Text + "', telefono = "
+                        + this.txtTel.Text + ", direccion = '" + this.txtCalle.Text + "|" + this.txtNumCalle.Text + "|" + this.txtPiso.Text + "|" + this.txtDpto.Text + "|"
+                            + this.txtLocalidad.Text + "|" + this.txtCP.Text + "', email = ";
+                    if (this.txtMail.Text == string.Empty)
+                        sQuery += "NULL";
+                    else
+                        sQuery += "'" + this.txtMail.Text + "'";
+                    sQuery += ",fechaNacimiento = '" + this.txtFchNac.Text.Substring(0,10) + "', anulado ='" + sCheckAnuklado + "' WHERE dniCliente = " + this.txtDNI.Text;
+                    DataTable dtResult = new DataTable();
+                    dtResult = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(sQuery);
+                    if (dtResult != null)
+                    {
+                        MessageBox.Show("Se habilito y edito al cliente correctamente.", "Datos Insertados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -177,6 +256,5 @@ namespace GestorDeFlotasDesktop.AbmCliente
                 this.Cursor = Cursors.Arrow;
             }
         }
-
     }
 }
