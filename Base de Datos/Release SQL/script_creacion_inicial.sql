@@ -53,7 +53,7 @@ CREATE TABLE GD1C2012.FEMIG.choferes (
 );
 
 CREATE TABLE GD1C2012.FEMIG.turnos ( 
-	turnoID numeric(20) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
+	turnoID numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	horaInicio numeric(18) NOT NULL,
 	horaFin numeric(18) NOT NULL,
 	descripcion varchar(255) NOT NULL,
@@ -63,14 +63,21 @@ CREATE TABLE GD1C2012.FEMIG.turnos (
 );
 
 CREATE TABLE GD1C2012.FEMIG.ChoferAutoTurno ( 
-	asignacionId NUMERIC(18,0) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
-	fecha datetime NOT NULL,
+	asignacionId numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	dniChofer numeric(18) NOT NULL,
-	turnoID numeric(20) NOT NULL,
-	patente varchar(10),
-	constraint fk_cat_chofer foreign key (dniChofer) references GD1C2012.FEMIG.choferes(dniChofer),
-	constraint fk_cat_turno foreign key (turnoID) references GD1C2012.FEMIG.turnos(turnoID)
+	turnoID numeric(18) NOT NULL,
+	patente varchar(10) NOT NULL,
+	fecha datetime NOT NULL
 );
+
+ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Chofer 
+	FOREIGN KEY (dniChofer) REFERENCES GD1C2012.FEMIG.Choferes (dniChofer)
+
+ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Turno 
+	FOREIGN KEY (turnoID) REFERENCES GD1C2012.FEMIG.Turnos (turnoID)
+	
+ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Auto
+	FOREIGN KEY (patente) REFERENCES GD1C2012.FEMIG.Autos (patente)	
 
 CREATE TABLE GD1C2012.FEMIG.clientes ( 
 	dniCliente numeric(18) NOT NULL PRIMARY KEY CLUSTERED,
@@ -85,33 +92,40 @@ CREATE TABLE GD1C2012.FEMIG.clientes (
 
 CREATE TABLE GD1C2012.FEMIG.facturas ( 
 	codFactura numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(100000,1),
-	fecha_inicio datetime NOT NULL,
-	fecha_fin datetime NOT NULL,
+	fechaInicio datetime NOT NULL,
+	fechaFin datetime NOT NULL,
 	dniCliente numeric(18) NOT NULL,
-	importe_total numeric(18) DEFAULT 0 NOT NULL
+	importeTotal numeric(18,5) DEFAULT 0 NOT NULL
 );
 
-CREATE TABLE GD1C2012.FEMIG.rendicion (
-	rendicionID NUMERIC(18,0) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
+CREATE TABLE GD1C2012.FEMIG.Rendiciones ( 
+	codRendicion numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	fecha datetime NOT NULL,
-	asignacionId NUMERIC(18,0) NOT NULL,
-	importe numeric(10) DEFAULT 0 NOT NULL,
-	constraint fk_rendicion_cat foreign key (asignacionId) references GD1C2012.FEMIG.ChoferAutoTurno(asignacionId)
-);
+	dniChofer numeric(18) NOT NULL,
+	turnoID varchar(20) NOT NULL,
+	importeTotal numeric(18,5) NOT NULL
+)
 
 CREATE TABLE GD1C2012.FEMIG.viajes ( 
 	viajeID numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	tipoViaje varchar(10) NOT NULL,
+	asignacionId numeric(18) NOT NULL,
 	cantFichas numeric(18) NOT NULL,
 	fecha datetime NOT NULL,
-	dniCliente numeric(18) NOT NULL,
-	codFactura numeric(18) NOT NULL,
-	dniChofer numeric(18) NOT NULL,
-	turnoID numeric(20) NOT NULL,
+	dniCliente numeric(18),
+	codFactura numeric(18),
+	codRendicion numeric(18)
 );
-ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (dniChofer, turnoID) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (dniChofer, turnoID);
-ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_Factura FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.facturas (codFactura);
-ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_Cliente FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.clientes (dniCliente);
+ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+
+ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
+	FOREIGN KEY (codFactura) REFERENCES Facturas (codFactura)
+
+ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion 
+	FOREIGN KEY (codRendicion) REFERENCES Rendiciones (codRendicion)
+
+ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
+	FOREIGN KEY (dniCliente) REFERENCES Clientes (dniCliente)
 
 CREATE TABLE GD1C2012.FEMIG.Pantalla ( 
 	pantallaID varchar(255) NOT NULL PRIMARY KEY CLUSTERED,
