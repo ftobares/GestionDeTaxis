@@ -24,7 +24,7 @@ CREATE PROCEDURE [FEMIG].[crearViaje]
 	@pRetCatchError		VARCHAR(MAX) out
 AS
 DECLARE @sFecha varchar(MAX) 
-SET @sFecha = CAST(CAST(@pFecha AS date) AS varchar) + ' %'
+SET @sFecha = CAST(CONVERT(CHAR(10), @pFecha, 101) AS varchar) + ' %'
 DECLARE @iAsignacionID numeric(18) 
 BEGIN
 
@@ -38,7 +38,8 @@ BEGIN
 	end
 	
 	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
-	iF exists (SELECT TOP(1) @iAsignacionID  = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha ))
+	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
+	IF (@iAsignacionID != null)
 	begin
 		set @pRetCatchError = 'El Chofer no esta registrado para ese turno y fecha '
 		return
