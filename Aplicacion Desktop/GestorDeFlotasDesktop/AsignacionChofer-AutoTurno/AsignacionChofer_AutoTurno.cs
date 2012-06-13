@@ -13,7 +13,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
     public partial class AsignacionChofer_AutoTurno : Form
     {
         private string whereObligatorio = "";
-        private string camposSelect = "ID_asign, fecha, dniChofer, patente, turnoID";
+        private string camposSelect = "asignacionID, fecha, dniChofer, patente, turnoID";
         private string consultaOrderBy = "fecha,dniChofer";
         private string nombreTabla = "Femig.ChoferAutoTurno";
         private string filtro1Value = "fecha";
@@ -140,7 +140,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             {
                 GestorDeFlotasDesktop.AbmChofer.addEditChofer frmEditarChofer = GestorDeFlotasDesktop.AbmChofer.addEditChofer.Instance();
                 frmEditarChofer.modoAbm = "Editar";
-                frmEditarChofer.dniChofer = long.Parse(dgChoferes.SelectedRows[0].Cells["ID_asign"].Value.ToString());
+                frmEditarChofer.dniChofer = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
                 frmEditarChofer.tituloPantalla = "Editar Relacion ";
                 if (frmEditarChofer.ShowDialog() == DialogResult.OK)
                     cargarQuery();
@@ -152,7 +152,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
                 if (MessageBox.Show("¿Esta seguro que deséa eliminar esta Relacion?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     SqlParameter pDniChofer = new SqlParameter("@pDniChofer", SqlDbType.Int);
-                    pDniChofer.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["ID_asign"].Value.ToString());
+                    pDniChofer.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
                     GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarChoferAutoTurno", pDniChofer);
                     cargarQuery();
                 }

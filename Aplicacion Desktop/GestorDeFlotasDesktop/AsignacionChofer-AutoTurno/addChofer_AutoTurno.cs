@@ -12,7 +12,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 {
      public partial class addChofer_AutoTurno : Form
     {
-        public long ID_Asign { get; set; }
+        public long asignacionID { get; set; }
         public string modoAbm { get; set; }
         public string tituloPantalla { get; set; }
         private static addChofer_AutoTurno unicaInst = null;
@@ -43,14 +43,14 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
             if (modoAbm == "Editar")
             {
-                getDatosRegistro(ID_Asign);
+                getDatosRegistro(asignacionID);
             }
         }
 
         private void getDatosRegistro(long dniChofer)
         {
             DataTable dtValores = new DataTable();
-            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select fecha, dniChofer, turnoID, patente from femig.ChoferAutoTurno where id_asign = " + ID_Asign);
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select fecha, dniChofer, turnoID, patente from femig.ChoferAutoTurno where asignacionID = " + asignacionID);
         }
 
         private bool validaCamposRequeridos()
@@ -80,8 +80,8 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pId_asign = new SqlParameter("@pNombre", SqlDbType.Int);
-                pId_asign.Value = ID_Asign.ToString();
+                SqlParameter pAsignacionID = new SqlParameter("@pAsignacionID", SqlDbType.Int);
+                pAsignacionID.Value = asignacionID.ToString();
                 SqlParameter pNombre = new SqlParameter("@pNombre", SqlDbType.DateTime);
                 pNombre.Value = dtpNacimiento.Text;
                 SqlParameter pApellido = new SqlParameter("@pApellido", SqlDbType.Int);
@@ -113,7 +113,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
                 }
                 else
                 {
-                    SqlParameter[] parametros2 = { pId_asign, pNombre, pApellido, pTurno, pDireccion, pRetCatchError };
+                    SqlParameter[] parametros2 = { pAsignacionID, pNombre, pApellido, pTurno, pDireccion, pRetCatchError };
                     if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.editarChoferAutoTurno", parametros2))
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
