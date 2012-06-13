@@ -29,6 +29,6 @@ BEGIN
 		  ,[dniChofer] = @pDniChofer
 		  ,[turnoID] = @pTurnoID
 		  ,[patente] = @pPatente
-	 WHERE ID_Asign= @pId_Asign
+	 WHERE asignacionID= @pId_Asign
 	
 END
