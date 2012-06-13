@@ -15,7 +15,7 @@ GO
 *	Fernando N. Tobares Garcia          *
 *+++++++++++++++++++++++++++++++++++++++*/
 CREATE PROCEDURE [FEMIG].[crearViaje] 
-	@pTipoViaje varchar(10) NOT NULL,
+	@pTipoViaje varchar(10),
 	@pDniChofer numeric(18) ,
 	@pTurnoID numeric(18) ,
 	@pCantFichas numeric(18) ,
@@ -37,8 +37,8 @@ BEGIN
 		return
 	end
 	
-	SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
-	iF exists (@iAsignacionID)
+	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
+	iF exists (SELECT TOP(1) @iAsignacionID  = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha ))
 	begin
 		set @pRetCatchError = 'El Chofer no esta registrado para ese turno y fecha '
 		return
@@ -46,7 +46,7 @@ BEGIN
 	
 	IF (@pTipoViaje = 'registrado')
 	begin
-		set @dniCliente = null;
+		set @pDniCliente = null;
 	end
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Viajes]
