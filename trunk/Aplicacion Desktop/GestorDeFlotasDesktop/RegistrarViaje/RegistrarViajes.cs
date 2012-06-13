@@ -40,6 +40,8 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
             cargarViaje();
             txtChofer.Text = "";
             txtCliente.Text = "";
+            txtCliente.Hide();
+            label6.Hide();
             txtFichas.Text = "";
             txtTurno.Text = "";
 
@@ -75,19 +77,22 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
 
                     frmErrores.setTitulo("Ocurrieron algunos errores al intentar dar de alta el Viaje");
 
-                    /*if (string.IsNullOrEmpty(mtxtPatente.Text) | !mtxtPatente.MaskFull)
-                        frmErrores.agregarError("Debe completar la patente de 6 caracteres/dígitos.");
-                    if (string.IsNullOrEmpty(cmbMarca.Text))
-                        frmErrores.agregarError("Debe seleccionar la marca del auto.");
-                    if (string.IsNullOrEmpty(txtModelo.Text))
-                        frmErrores.agregarError("Debe especificar el modelo del auto.");
-                    if (string.IsNullOrEmpty(txtLicencia.Text))
-                        frmErrores.agregarError("Debe ingresar la Licencia del auto.");
-                    if (string.IsNullOrEmpty(txtRodado.Text))
-                        frmErrores.agregarError("Debe especificar el rodado del auto.");
-                    if (string.IsNullOrEmpty(txtReloj.Text))
-                        frmErrores.agregarError("Debe especificar el reloj asociado al auto.");
-                    */
+                    if (string.IsNullOrEmpty(cmbViaje.Text))
+                        frmErrores.agregarError("Debe seleccionar el Tipo de Viaje");
+                    if (string.IsNullOrEmpty(txtChofer.Text))
+                        frmErrores.agregarError("Debe ingresar el DNI del Chofer.");
+                    if (string.IsNullOrEmpty(txtTurno.Text))
+                        frmErrores.agregarError("Debe ingresar el Id del Turno.");
+                    if (string.IsNullOrEmpty(txtFichas.Text))
+                        frmErrores.agregarError("Debe ingresar la Cantidad de Fichas");
+                    if (string.IsNullOrEmpty(dtpFecha.Text))
+                        frmErrores.agregarError("Debe especificar la Fecha del Viaje.");
+                    if (string.IsNullOrEmpty(dtHora.Text))
+                        frmErrores.agregarError("Debe especificar la Hora del Viaje.");
+                    if(cmbViaje.Text=="registrado" || cmbViaje.Text == string.Empty)
+                        if (string.IsNullOrEmpty(txtCliente.Text))
+                            frmErrores.agregarError("Debe especificar el DNI del Cliente.");
+                    
                     frmErrores.ShowDialog();
                     frmErrores.Dispose();
                     
@@ -96,17 +101,17 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pTipo = new SqlParameter("@pTipo", SqlDbType.VarChar, 10);
+                SqlParameter pTipo = new SqlParameter("@pTipoViaje", SqlDbType.VarChar, 10);
                 pTipo.Value = cmbViaje.Text;
-                SqlParameter pChofer = new SqlParameter("@pChofer", SqlDbType.BigInt);
+                SqlParameter pChofer = new SqlParameter("@pDniChofer", SqlDbType.BigInt);
                 pChofer.Value = txtChofer.Text;
-                SqlParameter pTurno = new SqlParameter("@pTurno", SqlDbType.Int);
+                SqlParameter pTurno = new SqlParameter("@pTurnoID", SqlDbType.BigInt);
                 pTurno.Value = txtTurno.Text;
-                SqlParameter pCantFichas = new SqlParameter("@pCantFichas", SqlDbType.Int);
+                SqlParameter pCantFichas = new SqlParameter("@pCantFichas", SqlDbType.BigInt);
                 pCantFichas.Value = txtFichas.Text;
-                SqlParameter pFchHora = new SqlParameter("@pFchHora", SqlDbType.DateTime);
+                SqlParameter pFchHora = new SqlParameter("@pFecha", SqlDbType.DateTime);
                 pFchHora.Value = dtpFecha.Text+" "+dtHora.Text;
-                SqlParameter pCliente = new SqlParameter("@pCliente", SqlDbType.Int);
+                SqlParameter pCliente = new SqlParameter("@pDniCliente", SqlDbType.BigInt);
                     pCliente.Value = txtCliente.Text;
                 
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
@@ -120,7 +125,7 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
-                            MessageBox.Show("Se dio de Alta al Vieje correctamente","OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Se dio de Alta al Viaje correctamente","OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                         }
                         else

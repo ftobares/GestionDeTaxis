@@ -144,10 +144,8 @@
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFecha.Location = new System.Drawing.Point(112, 162);
-            this.dtpFecha.MaxDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpFecha.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.ShowUpDown = true;
             this.dtpFecha.Size = new System.Drawing.Size(82, 20);
             this.dtpFecha.TabIndex = 41;
             this.dtpFecha.Value = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
@@ -156,7 +154,6 @@
             // 
             this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtHora.Location = new System.Drawing.Point(239, 162);
-            this.dtHora.MaxDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtHora.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtHora.Name = "dtHora";
             this.dtHora.ShowUpDown = true;
@@ -280,8 +277,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dtpFecha;
-        private System.Windows.Forms.DateTimePicker dtHora;
         private System.Windows.Forms.TextBox txtTurno;
         private System.Windows.Forms.TextBox txtFichas;
         private System.Windows.Forms.TextBox txtCliente;
@@ -289,6 +284,8 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label lblTitulo;
+        public System.Windows.Forms.DateTimePicker dtpFecha;
+        public System.Windows.Forms.DateTimePicker dtHora;
 
 
     }
