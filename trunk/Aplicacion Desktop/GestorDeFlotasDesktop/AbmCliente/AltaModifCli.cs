@@ -147,7 +147,9 @@ namespace GestorDeFlotasDesktop.AbmCliente
 
         private void limpiarCampos()
         {
-            this.txtNombre.Text = ""; this.txtApellido.Text = ""; this.txtDNI.Text = "";
+            if(modoAbm=="Nuevo")
+                this.txtDNI.Text = "";
+            this.txtNombre.Text = ""; this.txtApellido.Text = "";
             this.txtTel.Text = ""; this.txtCalle.Text = ""; this.txtCP.Text = "";
             this.txtPiso.Text = ""; this.txtDpto.Text = ""; this.txtLocalidad.Text = "";
             this.txtNumCalle.Text = ""; this.txtFchNac.Text = ""; this.txtMail.Text = "";
