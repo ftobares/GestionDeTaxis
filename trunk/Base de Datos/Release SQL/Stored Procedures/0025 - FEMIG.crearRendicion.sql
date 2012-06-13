@@ -27,7 +27,7 @@ BEGIN
 	--Controlo si 2 Rendiciones para el mismo chofer a la misma Fecha
 	iF exists	(SELECT	1 FROM femig.Rendiciones
 				WHERE	 (fecha = @pFecha)
-						AND (@pDniChofer = dniChofer)
+						AND (@pDniChofer = dniChofer))
 	begin
 	set @pRetCatchError = 'La rendicion que intenta ingresar ya fue ingresada.'
 		return
@@ -40,4 +40,4 @@ BEGIN
            ,@pDniChofer
            ,cast(@pTurnoID AS bigint)
            ,@pImporteTotal)
-	
+END
