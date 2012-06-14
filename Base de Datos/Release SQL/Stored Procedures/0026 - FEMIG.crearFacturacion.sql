@@ -27,7 +27,7 @@ BEGIN
 	SET @pImporteTotal = 0
 	DECLARE @canFichas numeric(18)
 	
-	SELECT @canFichas = SUM(cantFichas) FROM FEMIG.viajes WHERE (dniCliente = @pDniCliente AND fecha >= @pFechaInicio AND fecha <= @pFechaFin AND codFactura = null)
+	--SELECT @canFichas = SUM(cantFichas) FROM FEMIG.viajes WHERE (dniCliente = @pDniCliente AND fecha >= @pFechaInicio AND fecha <= @pFechaFin AND codFactura = null)
 	
 
 		
