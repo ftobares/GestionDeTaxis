@@ -72,7 +72,7 @@ namespace GestorDeFlotasDesktop.Principal
                     frmRendV.MdiParent = this;
                     frmRendV.Show();
                     break;
-                case "abmFacutracion":
+                case "abmFacturacion":
                     GestorDeFlotasDesktop.Facturar.Facturar frmFact = GestorDeFlotasDesktop.Facturar.Facturar.Instance();
                     frmFact.MdiParent = this;
                     frmFact.Show();
