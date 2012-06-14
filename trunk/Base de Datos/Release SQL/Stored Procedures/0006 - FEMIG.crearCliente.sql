@@ -18,7 +18,7 @@ CREATE PROCEDURE [FEMIG].[cliente]
 	@pDniCliente		NUMERIC(18),
 	@pNombre			VARCHAR(255),
 	@pApellido			VARCHAR(255),
-	@pTelefono			VARCHAR(18),
+	@pTelefono			numeric(18),
 	@pDireccion			VARCHAR(255),
 	@pEmail				VARCHAR(255),
 	@pFechaNacimiento 	DATETIME,
