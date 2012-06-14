@@ -33,7 +33,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         {
             if (this.txtNombre.Text == string.Empty || this.txtApellido.Text == string.Empty || this.txtDNI.Text == string.Empty
                     || this.txtTel.Text == string.Empty || this.txtCalle.Text == string.Empty || this.txtCP.Text == string.Empty
-                        || this.txtLocalidad.Text == string.Empty || this.txtFchNac.Text == string.Empty)
+                        || this.txtLocalidad.Text == string.Empty || this.txtFchNac.Text == string.Empty || this.txtMail.Text == string.Empty)
                 return true;
             else
                 return false;
