@@ -132,7 +132,8 @@ ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente
 
 CREATE TABLE GD1C2012.FEMIG.Pantalla ( 
 	pantallaID varchar(255) NOT NULL PRIMARY KEY CLUSTERED,
-	descripcion varchar(255) NOT NULL);
+	descripcion varchar(255) NOT NULL
+);
 
 CREATE TABLE GD1C2012.FEMIG.Rol ( 
 	rolID varchar(20) NOT NULL PRIMARY KEY CLUSTERED,
@@ -296,7 +297,7 @@ WHERE gd.chofer_dni = ch.dniChofer
 AND gd.auto_patente = at.patente
 AND gd.turno_hora_inicio = tr.horaInicio
 and gd.turno_hora_fin = tr.horaFin
-order by viaje_fecha, chofer_dni;
+order by chofer_dni, viaje_fecha;
 
 INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento) 
 VALUES (0,'clienteCalle','clienteCalle',0,'no aplica','no aplica',cast(0 as datetime));
@@ -329,10 +330,10 @@ and tr.horaFin = gd.turno_hora_fin
 group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
 order by chofer_dni, rendicion_fecha, turnoID;
 
---viajes
+--viajes -- VERLO
 BEGIN TRAN
-DROP TABLE #maestra;
-CREATE TABLE #maestra(
+
+DECLARE #maestra TABLE (
 	chofer_dni numeric(18) NOT NULL,
 	cliente_dni numeric(18) NOT NULL,
 	viaje_cant_fichas numeric(18) NOT NULL,
@@ -345,6 +346,7 @@ SELECT chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha
 FROM gd_esquema.maestra
 WHERE cliente_dni is not null;
 
+INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
 SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
 FROM #maestra m
 INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
@@ -361,27 +363,10 @@ COMMIT TRAN
 --rolpantalla
 
 --usuario
+INSERT INTO femig.usuario (nombre,apellido,email,password,cantIntentosFallo,cantMaxIntentos)
+VALUE('admin','admin','admin@taxis.com.ar','E6B87050BFCB8143FCB8DB0170A4DC9ED00D904DDD3E2A4AD1B1E8DC0FDC9BE7',0,0);
 
 --rolusuario
-
-/*Testear
-INSERT INTO FEMIG.viajes (tipoViaje,cantFichas,fecha,dniCliente,codFactura,dniChofer,turnoID)
-SELECT 'cliente',gd.viaje_cant_fichas, gd.viaje_fecha, gd.dniCliente,fac.codFactura,cat.dniChofer,
-cat.turnoID
-FROM  gd_esquema.maestra gd, femig.facturas fac, femig.choferautoturno cat
-where gd.dniCliente = fac.dniCliente
-and gd.factura_fecha_inicio = fac.fecha_incio
-and gd.factura_fecha_fin = fac.fecha_fin
-and gd.viaje_fecha = cat.fecha;
-
-INSERT INTO FEMIG.viajes (tipoViaje,cantFichas,fecha,dniCliente,codFactura,dniChofer,turnoID)
-SELECT 'calle',gd.viaje_cant_fichas, gd.viaje_fecha, 0, 0,cat.dniChofer, cat.turnoID
-FROM  gd_esquema.maestra gd, femig.choferautoturno cat
-where gd.dniCliente is null
-and gd.factura_fecha_inicio is null
-and gd.factura_fecha_fin is null
-and gd.viaje_fecha = cat.fecha;
-*/
 
 COMMIT TRANSACTION migracion;
 
