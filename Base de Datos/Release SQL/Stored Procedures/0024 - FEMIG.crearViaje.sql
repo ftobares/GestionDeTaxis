@@ -10,7 +10,7 @@ GO
 *	Ignacio Angel Tata                  *
 *	Fernando N. Tobares Garcia          *
 *+++++++++++++++++++++++++++++++++++++++*/
-ALTER PROCEDURE [FEMIG].[crearViaje] 
+CREATE PROCEDURE [FEMIG].[crearViaje] 
 	@pTipoViaje varchar(10),
 	@pDniChofer numeric(18) ,
 	@pTurnoID numeric(18) ,
@@ -24,14 +24,13 @@ DECLARE @sFecha varchar(MAX)
 DECLARE @iAsignacionID numeric(18) 
 BEGIN
 
-	
 	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
-	/*SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND year(fecha) = year(@sFecha) AND month(fecha) = month(@sFecha) AND day(fecha) = day(@sFecha))
+	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
 		set @pRetCatchError = 'El Chofer no esta registrado para ese turno y fecha '
-		return -1
-	end*/
+		return 
+	end
 	
 	IF (@pTipoViaje = 'calle')
 	begin
@@ -42,7 +41,7 @@ BEGIN
            (tipoViaje,asignacionId,cantFichas,fecha,dniCliente)
     VALUES
            (@pTipoViaje
-           ,1
+           ,@iAsignacionID
            ,@pCantFichas
            ,@pFecha
            ,@pDniCliente)
