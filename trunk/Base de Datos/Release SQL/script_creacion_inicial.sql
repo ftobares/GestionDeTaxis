@@ -330,6 +330,29 @@ group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
 order by chofer_dni, rendicion_fecha, turnoID;
 
 --viajes
+BEGIN TRAN
+DROP TABLE #maestra;
+CREATE TABLE #maestra(
+	chofer_dni numeric(18) NOT NULL,
+	cliente_dni numeric(18) NOT NULL,
+	viaje_cant_fichas numeric(18) NOT NULL,
+	viaje_fecha datetime NOT NULL
+);
+CREATE INDEX IDX_maestra_1 ON #maestra(chofer_dni);
+CREATE INDEX IDX_maestra_2 ON #maestra(cliente_dni);
+INSERT INTO #maestra (chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha)
+SELECT chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha
+FROM gd_esquema.maestra
+WHERE cliente_dni is not null;
+
+SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+FROM #maestra m
+INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+WHERE m.cliente_dni is not null
+
+COMMIT TRAN
 
 --pantalla
 
