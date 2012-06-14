@@ -12,7 +12,9 @@
 /*Creacion del shema					*/
 /*++++++++++++++++++++++++++++++++++++++*/
 USE [GD1C2012]
-go
+GO
+CREATE SCHEMA [FEMIG] AUTHORIZATION [gd]
+GO
 
 /*++++++++++++++++++++++++++++++++++++++*/
 /*Creacion de tablas en la base de datos*/
@@ -47,7 +49,7 @@ CREATE TABLE GD1C2012.FEMIG.choferes (
 	apellido varchar(255) NOT NULL,
 	direccion varchar(255) NOT NULL,
 	telefono numeric(18) NOT NULL,
-	email varchar(50) UNIQUE,
+	email varchar(50) NOT NULL,
 	fechaNacimiento datetime NOT NULL,
 	anulado bit default 0 -- 0: El chofer está activo 1: El chofer esta inhabilitado
 );
@@ -96,7 +98,7 @@ CREATE TABLE GD1C2012.FEMIG.Facturas (
 	fechaInicio datetime NOT NULL,
 	fechaFin datetime NOT NULL,
 	dniCliente numeric(18) NOT NULL,
-	importeTotal numeric(18,5) DEFAULT 0 NOT NULL
+	importeTotal numeric(18,2) DEFAULT 0 NOT NULL
 );
 
 CREATE TABLE GD1C2012.FEMIG.Rendiciones ( 
@@ -104,8 +106,8 @@ CREATE TABLE GD1C2012.FEMIG.Rendiciones (
 	fecha datetime NOT NULL,
 	dniChofer numeric(18) NOT NULL,
 	turnoID varchar(20) NOT NULL,
-	importeTotal numeric(18,5) NOT NULL
-)
+	importeTotal numeric(18,2) NOT NULL
+);
 
 CREATE TABLE GD1C2012.FEMIG.viajes ( 
 	viajeID numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
@@ -203,36 +205,65 @@ GO
 BEGIN TRANSACTION migracion;
 
 BEGIN TRY
-INSERT INTO FEMIG.turnos (horaInicio,horaFin,descripcion,valorFicha,valorBandera)
-SELECT DISTINCT(turno_hora_inicio),turno_hora_fin,turno_descripcion,turno_valor_ficha,turno_valor_bandera
-FROM gd_esquema.maestra
-order by turno_hora_inicio asc;
 
-INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento) 
-VALUES (0,'clienteCalle','clienteCalle',0,'no aplica','no aplica',getdate());
+/*Inicio de Migración de la tabla Relojes*/
+BEGIN	
+	DECLARE @nroSerie varchar(18);
+	DECLARE @marca varchar(255);
+	DECLARE @modelo varchar(255);
+	DECLARE @fecha datetime;
+	DECLARE @posicion int;
+	DECLARE @alfabeto varchar(26);
+	DECLARE @contador int;
 
-INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento)
-SELECT DISTINCT(cliente_dni),cliente_nombre,cliente_apellido,cliente_telefono,cliente_direccion,cliente_mail,cliente_fecha_nac
-FROM  gd_esquema.maestra
-WHERE cliente_dni IS NOT NULL
-order by cliente_dni asc;
+	SET @contador = 1;
+	SET @posicion = 1;
+	SET @alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-SET IDENTITY_INSERT FEMIG.facturas ON
-INSERT INTO FEMIG.facturas (codFactura,fecha_inicio,fecha_fin,dniCliente)
-VALUES (0,getdate(),getdate(),0);
-SET IDENTITY_INSERT FEMIG.facturas OFF
+	DECLARE insert_relojes CURSOR FOR
+	SELECT DISTINCT(reloj_marca),reloj_modelo,reloj_fecha_ver
+	FROM gd_esquema.maestra
+	order by reloj_marca asc;
 
-INSERT INTO FEMIG.facturas (fecha_inicio,fecha_fin,dniCliente)
-SELECT DISTINCT(factura_fecha_inicio),factura_fecha_fin,cliente_dni
-FROM gd_esquema.maestra
-WHERE factura_fecha_inicio IS NOT NULL
-AND factura_fecha_fin IS NOT NULL
-order by cliente_dni,factura_fecha_inicio asc;
+	OPEN insert_relojes;
 
-INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
-SELECT DISTINCT(reloj_marca),reloj_modelo,reloj_fecha_ver /*Falta agregar el nroSerieReloj, tiene que ser UNICO - ALFANUMERICO*/
-FROM gd_esquema.maestra
-order by reloj_marca asc;
+	FETCH NEXT FROM insert_relojes
+	INTO  @marca, @modelo, @fecha;
+
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		IF @posicion < 27
+			BEGIN
+				SELECT @nroSerie = CHAR(ASCII(SUBSTRING(@alfabeto, @posicion, 1))); 
+				INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
+				VALUES (@nroSerie+cast(@contador as varchar(999)),@marca,@modelo,cast(@fecha as varchar(255)));
+				
+				FETCH NEXT FROM insert_relojes
+				INTO  @marca, @modelo, @fecha;
+
+				SET @posicion = @posicion + 1;
+				SET @contador = @contador + 1;
+			END
+		ELSE
+			BEGIN
+				SET @posicion = 1;
+
+				SELECT @nroSerie = CHAR(ASCII(SUBSTRING(@alfabeto, @posicion, 1))); 
+				INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
+				VALUES (@nroSerie+cast(@contador as varchar(999)),@marca,@modelo,cast(@fecha as varchar(255)));
+				
+				FETCH NEXT FROM insert_relojes
+				INTO  @marca, @modelo, @fecha;
+
+				SET @posicion = @posicion + 1;
+				SET @contador = @contador + 1;
+			END
+		
+	END
+	CLOSE insert_relojes;
+	DEALLOCATE insert_relojes;
+END
+/*Finalización de Migración de la tabla Relojes*/
 
 INSERT INTO GD1C2012.FEMIG.marcas_autos (marca)
 VALUES ('Otra');
@@ -254,16 +285,64 @@ SELECT DISTINCT(chofer_dni),chofer_nombre,chofer_apellido,chofer_direccion,chofe
 FROM gd_esquema.maestra
 order by chofer_dni asc;
 
-/*Testear
-INSERT INTO GD1C2012.FEMIG.ChoferAutoTurno (fecha,dniChofer,turnoID,patente)
-SELECT gd.viaje_fecha, ch.dniChofer, tur.turnoID, at.patente, count(*)
-FROM gd_esquema.maestra gd, femig.choferes ch, femig.turnos tur, femig.autos at
-WHERE gd.chofer_dni = ch.dniChofer
-and gd.turno_descripcion = tur.descripcion
-and gd.auto_patente = at.patente
-group by gd.viaje_fecha, ch.dniChofer, tur.turnoID, at.patente
-order by dniChofer, viaje_fecha asc;
+INSERT INTO FEMIG.turnos (horaInicio,horaFin,descripcion,valorFicha,valorBandera)
+SELECT DISTINCT(turno_hora_inicio),turno_hora_fin,turno_descripcion,turno_valor_ficha,turno_valor_bandera
+FROM gd_esquema.maestra
+order by turno_hora_inicio asc;
 
+INSERT INTO femig.ChoferAutoTurno (dniChofer,turnoID,patente,fecha)
+SELECT DISTINCT(gd.chofer_dni), tr.turnoID, gd.auto_patente, gd.viaje_fecha 
+FROM gd_esquema.maestra gd, femig.choferes ch, femig.autos at, femig.turnos tr
+WHERE gd.chofer_dni = ch.dniChofer
+AND gd.auto_patente = at.patente
+AND gd.turno_hora_inicio = tr.horaInicio
+and gd.turno_hora_fin = tr.horaFin
+order by viaje_fecha, chofer_dni;
+
+INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento) 
+VALUES (0,'clienteCalle','clienteCalle',0,'no aplica','no aplica',cast(0 as datetime));
+
+INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento)
+SELECT DISTINCT(cliente_dni),cliente_nombre,cliente_apellido,cliente_telefono,cliente_direccion,cliente_mail,cliente_fecha_nac
+FROM  gd_esquema.maestra
+WHERE cliente_dni IS NOT NULL
+order by cliente_dni asc;
+
+SET IDENTITY_INSERT FEMIG.facturas ON
+INSERT INTO FEMIG.facturas (codFactura,fechaInicio,fechaFin,dniCliente)
+VALUES (0,cast(0 as datetime),cast(0 as datetime),0);
+SET IDENTITY_INSERT FEMIG.facturas OFF
+
+INSERT INTO FEMIG.facturas (fechaInicio,fechaFin,dniCliente,importeTotal)
+select DISTINCT(factura_fecha_inicio),factura_fecha_fin, cliente_dni,
+SUM((viaje_cant_fichas * turno_valor_ficha) + turno_valor_bandera) as importeTotal
+from gd_esquema.maestra WHERE factura_fecha_inicio IS NOT NULL AND factura_fecha_fin IS NOT NULL
+group by cliente_dni, factura_fecha_inicio, factura_fecha_fin
+order by cliente_dni, factura_fecha_inicio;
+
+INSERT INTO femig.rendiciones (fecha,dniChofer,turnoID,importeTotal)
+select gd.rendicion_fecha, gd.chofer_dni, tr.turnoID,
+SUM(DISTINCT(gd.viaje_cant_fichas * gd.turno_valor_ficha) + gd.turno_valor_bandera) as importeTotal
+from gd_esquema.maestra gd, femig.turnos tr
+where gd.rendicion_fecha is not null 
+and tr.horaInicio = gd.turno_hora_inicio
+and tr.horaFin = gd.turno_hora_fin
+group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
+order by chofer_dni, rendicion_fecha, turnoID;
+
+--viajes
+
+--pantalla
+
+--rol
+
+--rolpantalla
+
+--usuario
+
+--rolusuario
+
+/*Testear
 INSERT INTO FEMIG.viajes (tipoViaje,cantFichas,fecha,dniCliente,codFactura,dniChofer,turnoID)
 SELECT 'cliente',gd.viaje_cant_fichas, gd.viaje_fecha, gd.dniCliente,fac.codFactura,cat.dniChofer,
 cat.turnoID
@@ -280,8 +359,6 @@ where gd.dniCliente is null
 and gd.factura_fecha_inicio is null
 and gd.factura_fecha_fin is null
 and gd.viaje_fecha = cat.fecha;
-
-INSERT INTO FEMIG.rendicion (fecha,auto_patente,importe,cantidad_viajes)
 */
 
 COMMIT TRANSACTION migracion;
