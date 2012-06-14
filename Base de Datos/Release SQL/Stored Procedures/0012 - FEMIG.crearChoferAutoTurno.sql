@@ -24,7 +24,7 @@ AS
 BEGIN
 
 	--Controlo que para una fecha, no haya dos turnos iguales
-	if exists (select 1 from FEMIG.ChoferAutoTurno where fecha = @pFecha AND turnoID = @pTurnoID)
+	if exists (select 1 from FEMIG.ChoferAutoTurno where datediff(day,fecha,@pFecha)=0 AND turnoID = @pTurnoID)
 	begin
 		set @retCatchError = 'Ya fue asignado el turno ' + cast(@pTurnoID as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + '.'
 		return
