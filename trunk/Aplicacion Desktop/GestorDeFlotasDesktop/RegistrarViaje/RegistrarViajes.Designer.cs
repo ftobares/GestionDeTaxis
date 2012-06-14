@@ -43,15 +43,16 @@
             this.txtTurno = new System.Windows.Forms.TextBox();
             this.txtFichas = new System.Windows.Forms.TextBox();
             this.txtCliente = new System.Windows.Forms.TextBox();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtChofer
             // 
-            this.txtChofer.Location = new System.Drawing.Point(112, 84);
+            this.txtChofer.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtChofer.Location = new System.Drawing.Point(131, 84);
             this.txtChofer.MaxLength = 255;
             this.txtChofer.Name = "txtChofer";
             this.txtChofer.Size = new System.Drawing.Size(100, 20);
@@ -59,9 +60,10 @@
             // 
             // lblViaje
             // 
+            this.lblViaje.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblViaje.AutoSize = true;
             this.lblViaje.ForeColor = System.Drawing.Color.Red;
-            this.lblViaje.Location = new System.Drawing.Point(25, 60);
+            this.lblViaje.Location = new System.Drawing.Point(44, 60);
             this.lblViaje.Name = "lblViaje";
             this.lblViaje.Size = new System.Drawing.Size(72, 13);
             this.lblViaje.TabIndex = 20;
@@ -69,12 +71,13 @@
             // 
             // cmbViaje
             // 
+            this.cmbViaje.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cmbViaje.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbViaje.FormattingEnabled = true;
             this.cmbViaje.Items.AddRange(new object[] {
             "calle",
             "registrado"});
-            this.cmbViaje.Location = new System.Drawing.Point(112, 57);
+            this.cmbViaje.Location = new System.Drawing.Point(131, 57);
             this.cmbViaje.Name = "cmbViaje";
             this.cmbViaje.Size = new System.Drawing.Size(121, 21);
             this.cmbViaje.TabIndex = 21;
@@ -82,9 +85,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(25, 87);
+            this.label1.Location = new System.Drawing.Point(44, 87);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 22;
@@ -92,9 +96,10 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(25, 113);
+            this.label2.Location = new System.Drawing.Point(44, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 23;
@@ -102,9 +107,10 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(25, 165);
+            this.label3.Location = new System.Drawing.Point(44, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 24;
@@ -112,9 +118,10 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(25, 139);
+            this.label4.Location = new System.Drawing.Point(44, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(84, 13);
             this.label4.TabIndex = 25;
@@ -122,9 +129,10 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(200, 165);
+            this.label5.Location = new System.Drawing.Point(219, 165);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 26;
@@ -132,9 +140,10 @@
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(25, 191);
+            this.label6.Location = new System.Drawing.Point(44, 191);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 27;
@@ -142,8 +151,9 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(112, 162);
+            this.dtpFecha.Location = new System.Drawing.Point(131, 162);
             this.dtpFecha.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(82, 20);
@@ -152,8 +162,9 @@
             // 
             // dtHora
             // 
+            this.dtHora.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtHora.Location = new System.Drawing.Point(239, 162);
+            this.dtHora.Location = new System.Drawing.Point(258, 162);
             this.dtHora.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtHora.Name = "dtHora";
             this.dtHora.ShowUpDown = true;
@@ -163,7 +174,8 @@
             // 
             // txtTurno
             // 
-            this.txtTurno.Location = new System.Drawing.Point(112, 110);
+            this.txtTurno.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtTurno.Location = new System.Drawing.Point(131, 110);
             this.txtTurno.MaxLength = 255;
             this.txtTurno.Name = "txtTurno";
             this.txtTurno.Size = new System.Drawing.Size(100, 20);
@@ -171,7 +183,8 @@
             // 
             // txtFichas
             // 
-            this.txtFichas.Location = new System.Drawing.Point(112, 136);
+            this.txtFichas.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtFichas.Location = new System.Drawing.Point(131, 136);
             this.txtFichas.MaxLength = 255;
             this.txtFichas.Name = "txtFichas";
             this.txtFichas.Size = new System.Drawing.Size(100, 20);
@@ -179,17 +192,31 @@
             // 
             // txtCliente
             // 
-            this.txtCliente.Location = new System.Drawing.Point(112, 188);
+            this.txtCliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txtCliente.Location = new System.Drawing.Point(131, 188);
             this.txtCliente.MaxLength = 255;
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.Size = new System.Drawing.Size(100, 20);
             this.txtCliente.TabIndex = 45;
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lblTitulo.Location = new System.Drawing.Point(126, 9);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(105, 26);
+            this.lblTitulo.TabIndex = 49;
+            this.lblTitulo.Text = "Alta Viaje";
+            // 
             // btnLimpiar
             // 
+            this.btnLimpiar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(203, 229);
+            this.btnLimpiar.Location = new System.Drawing.Point(222, 229);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 8;
@@ -200,9 +227,10 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(111, 229);
+            this.btnCancelar.Location = new System.Drawing.Point(130, 229);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 7;
@@ -213,9 +241,10 @@
             // 
             // btnAceptar
             // 
+            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(28, 229);
+            this.btnAceptar.Location = new System.Drawing.Point(47, 229);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 6;
@@ -223,18 +252,6 @@
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblTitulo.Location = new System.Drawing.Point(142, 9);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(105, 26);
-            this.lblTitulo.TabIndex = 49;
-            this.lblTitulo.Text = "Alta Viaje";
             // 
             // RegistrarViajes
             // 
