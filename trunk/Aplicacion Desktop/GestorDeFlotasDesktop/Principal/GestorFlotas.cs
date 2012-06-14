@@ -62,6 +62,21 @@ namespace GestorDeFlotasDesktop.Principal
                     frmCAT.MdiParent = this;
                     frmCAT.Show();
                     break;
+                case "abmViaje":
+                    GestorDeFlotasDesktop.RegistrarViaje.RegistrarViajes frmRegV = GestorDeFlotasDesktop.RegistrarViaje.RegistrarViajes.Instance();
+                    frmRegV.MdiParent = this;
+                    frmRegV.Show();
+                    break;
+                case "abmRendicion":
+                    GestorDeFlotasDesktop.RendirViajes.RendirViajes frmRendV = GestorDeFlotasDesktop.RendirViajes.RendirViajes.Instance();
+                    frmRendV.MdiParent = this;
+                    frmRendV.Show();
+                    break;
+                case "abmFacutracion":
+                    GestorDeFlotasDesktop.Facturar.Facturar frmFact = GestorDeFlotasDesktop.Facturar.Facturar.Instance();
+                    frmFact.MdiParent = this;
+                    frmFact.Show();
+                    break;
             }     
         }
 
