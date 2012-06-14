@@ -43,7 +43,26 @@ namespace GestorDeFlotasDesktop.AbmCliente
 
         private void AbmCliente_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                string sQuery = cargarQuery();
+                DataSet dsResultados = new DataSet();
+                dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
+                dataGridView1.DataSource = dsResultados.Tables["Tabla"];
+                dataGridView1.RowHeadersVisible = true;
+                colMofificar.DisplayIndex = dsResultados.Tables["Tabla"].Columns.Count;
+                colMofificar.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            
+            }
+            finally
+            {
+                this.Cursor = Cursors.Arrow;
+            }
         }
 
         private void buttonNuevo_Click(object sender, EventArgs e)
@@ -74,7 +93,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private string cargarQuery()
         {
             //TODO: modificar este query dependiendo la cunsulta.
-            string sQuery = "SELECT * FROM FEMIG.Clientes where ";
+            string sQuery = "SELECT * FROM FEMIG.Clientes where 1 = 1";
             if (txtNombre.Text != string.Empty)
             {
                 sQuery += "nombre like '" + txtNombre.Text + "%'";

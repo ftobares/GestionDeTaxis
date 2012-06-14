@@ -152,7 +152,8 @@
             // dtpFecha
             // 
             this.dtpFecha.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFecha.CustomFormat = "yyyy\'/\'MM\'/\'dd";
+            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFecha.Location = new System.Drawing.Point(131, 162);
             this.dtpFecha.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
@@ -163,6 +164,7 @@
             // dtHora
             // 
             this.dtHora.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.dtHora.CustomFormat = "hh\':\'mm tt";
             this.dtHora.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtHora.Location = new System.Drawing.Point(258, 162);
             this.dtHora.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
