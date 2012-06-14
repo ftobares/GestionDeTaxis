@@ -62,7 +62,7 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
         private bool validaCamposRequeridos()
         {
 
-            if (cmbViaje.Text.ToString() == string.Empty || txtChofer.Text.Trim() == string.Empty || txtCliente.Text.Trim() == string.Empty || txtFichas.Text.Trim() == string.Empty || txtTurno.Text.Trim() == string.Empty || dtpFecha.Text.Trim() == string.Empty || dtHora.Text.Trim() == string.Empty)
+            if (cmbViaje.Text.ToString() == string.Empty || txtChofer.Text.Trim() == string.Empty || txtFichas.Text.Trim() == string.Empty || txtTurno.Text.Trim() == string.Empty || dtpFecha.Text.Trim() == string.Empty || dtHora.Text.Trim() == string.Empty)
                 return false;
             else
                 return true;
@@ -110,9 +110,11 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
                 SqlParameter pCantFichas = new SqlParameter("@pCantFichas", SqlDbType.BigInt);
                 pCantFichas.Value = txtFichas.Text;
                 SqlParameter pFchHora = new SqlParameter("@pFecha", SqlDbType.DateTime);
-                pFchHora.Value = dtpFecha.Text+" "+dtHora.Text;
+                pFchHora.Value = dtpFecha.Text + " " + dtHora.Value.ToString("HH:mm");
                 SqlParameter pCliente = new SqlParameter("@pDniCliente", SqlDbType.BigInt);
-                    pCliente.Value = txtCliente.Text;
+                pCliente.Value = txtCliente.Text;
+                if (txtCliente.Text == "")    
+                    pCliente.Value = 0;
                 
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;

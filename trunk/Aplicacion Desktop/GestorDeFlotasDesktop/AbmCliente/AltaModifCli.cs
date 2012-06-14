@@ -164,7 +164,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             this.monthCalendar1.Visible = false;
-            this.txtFchNac.Text = this.monthCalendar1.SelectionEnd.ToShortDateString();
+            this.txtFchNac.Text = this.monthCalendar1.SelectionEnd.ToString("yyyy/MM/dd");
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -33,6 +33,7 @@
             this.lblDireccion = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -43,7 +44,6 @@
             this.dgChoferes = new System.Windows.Forms.DataGridView();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.btnNuevoChofer = new System.Windows.Forms.Button();
-            this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgChoferes)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +95,15 @@
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros de Búsqueda";
+            // 
+            // dtpNacimiento
+            // 
+            this.dtpNacimiento.CustomFormat = "yyyy\'/\'MM\'/\'dd";
+            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNacimiento.Location = new System.Drawing.Point(59, 16);
+            this.dtpNacimiento.Name = "dtpNacimiento";
+            this.dtpNacimiento.Size = new System.Drawing.Size(100, 20);
+            this.dtpNacimiento.TabIndex = 32;
             // 
             // btnLimpiar
             // 
@@ -201,14 +210,6 @@
             this.btnNuevoChofer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevoChofer.UseVisualStyleBackColor = true;
             this.btnNuevoChofer.Click += new System.EventHandler(this.btnNuevoChofer_Click);
-            // 
-            // dtpNacimiento
-            // 
-            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpNacimiento.Location = new System.Drawing.Point(59, 16);
-            this.dtpNacimiento.Name = "dtpNacimiento";
-            this.dtpNacimiento.Size = new System.Drawing.Size(100, 20);
-            this.dtpNacimiento.TabIndex = 32;
             // 
             // AsignacionChofer_AutoTurno
             // 

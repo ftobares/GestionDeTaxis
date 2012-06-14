@@ -136,27 +136,31 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
         private void dgChoferes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex==0) //Assuming the button column as second column, if not can change the index
+            if (e.RowIndex >= 0)
             {
-                GestorDeFlotasDesktop.AbmChofer.addEditChofer frmEditarChofer = GestorDeFlotasDesktop.AbmChofer.addEditChofer.Instance();
-                frmEditarChofer.modoAbm = "Editar";
-                frmEditarChofer.dniChofer = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
-                frmEditarChofer.tituloPantalla = "Editar Relacion ";
-                if (frmEditarChofer.ShowDialog() == DialogResult.OK)
-                    cargarQuery();
-                frmEditarChofer.Close();
-            }
-
-            if (e.ColumnIndex == 1)
-            {
-                if (MessageBox.Show("¿Esta seguro que deséa eliminar esta Relacion?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
                 {
-                    SqlParameter pDniChofer = new SqlParameter("@pDniChofer", SqlDbType.Int);
-                    pDniChofer.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
-                    GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarChoferAutoTurno", pDniChofer);
-                    cargarQuery();
+                    GestorDeFlotasDesktop.AbmChofer.addEditChofer frmEditarChofer = GestorDeFlotasDesktop.AbmChofer.addEditChofer.Instance();
+                    frmEditarChofer.modoAbm = "Editar";
+                    if (dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString() != string.Empty)
+                        frmEditarChofer.dniChofer = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
+                    frmEditarChofer.tituloPantalla = "Editar Relacion ";
+                    if (frmEditarChofer.ShowDialog() == DialogResult.OK)
+                        cargarQuery();
+                    frmEditarChofer.Close();
                 }
-                
+
+                if (e.ColumnIndex == 1)
+                {
+                    if (MessageBox.Show("¿Esta seguro que deséa eliminar esta Relacion?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        SqlParameter pDniChofer = new SqlParameter("@pDniChofer", SqlDbType.Int);
+                        pDniChofer.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
+                        GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarChoferAutoTurno", pDniChofer);
+                        cargarQuery();
+                    }
+
+                }
             }
         }
 

@@ -32,6 +32,54 @@ namespace GestorDeFlotasDesktop.Facturar
         private void Facturar_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
+            inicializarFormulario();
+            //cargarQuery();
+        }
+
+        private string construirQuery()
+        {
+            /*
+            string strQuery = "select " + camposSelect + " from " + nombreTabla + " where 1=1";
+            if (!string.IsNullOrEmpty(whereObligatorio))
+                strQuery += " and " + whereObligatorio;
+            if (!string.IsNullOrEmpty(txtPatente.Text))
+                strQuery += " and cast(" + filtro1Value + " as varchar) like '%" + txtPatente.Text + "%'";
+            if (!string.IsNullOrEmpty(txtMarca.Text))
+                strQuery += " and cast(" + filtro2Value + " as varchar) like '%" + txtMarca.Text + "%'";
+            if (!string.IsNullOrEmpty(txtModelo.Text))
+                strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtModelo.Text + "%'";
+            if (!string.IsNullOrEmpty(txtReloj.Text))
+                strQuery += " and cast(" + filtro4Value + " as varchar) like '%" + txtReloj.Text + "%'";
+            if (!string.IsNullOrEmpty(txtLicencia.Text))
+                strQuery += " and cast(" + filtro5Value + " as varchar) like '%" + txtLicencia.Text + "%'";
+            strQuery += " order by " + consultaOrderBy;
+            
+            return strQuery;*/
+            return "";
+        }
+
+        private void cargarQuery()
+        {
+            string strQuery = construirQuery();
+            dgFacturas.DataSource = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
+            /*
+            string leyendaFiltrosInicial = "Filtros Aplicados: ";
+            string leyendaFiltros = "";
+            if (!string.IsNullOrEmpty(txtPatente.Text))
+                leyendaFiltros += filtro1Text + " " + txtPatente.Text;
+            if (!string.IsNullOrEmpty(txtMarca.Text))
+                leyendaFiltros += ", " + filtro2Text + " " + txtMarca.Text;
+            if (!string.IsNullOrEmpty(txtModelo.Text))
+                leyendaFiltros += ", " + filtro3Text + " " + txtModelo.Text;
+            if (!string.IsNullOrEmpty(txtReloj.Text))
+                leyendaFiltros += ", " + filtro4Text + " " + txtReloj.Text;
+            if (!string.IsNullOrEmpty(txtLicencia.Text))
+                leyendaFiltros += ", " + filtro5Text + " " + txtLicencia.Text;
+
+            if (string.IsNullOrEmpty(leyendaFiltros))
+                lblFiltro.Text = "No se seleccionó ningún filtro.";
+            else
+                lblFiltro.Text = leyendaFiltrosInicial + leyendaFiltros;*/
         }
 
         private void inicializarFormulario()
@@ -103,11 +151,16 @@ namespace GestorDeFlotasDesktop.Facturar
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
-                            MessageBox.Show("Se dio de Alta la Facturacion correctamente","OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Se dio de Alta la Facturacion correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
+                            cargarQuery();
+                            dgFacturas.Visible = true;
                         }
                         else
+                        {
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            dgFacturas.Visible = false;
+                        }
 
                     }
                 }
@@ -134,7 +187,8 @@ namespace GestorDeFlotasDesktop.Facturar
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            //this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
