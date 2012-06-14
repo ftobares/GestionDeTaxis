@@ -18,19 +18,18 @@ CREATE PROCEDURE [FEMIG].[crearFacturacion]
 	@pFechaInicio datetime,
 	@pFechaFin datetime,
 	@pDniCliente numeric(18),
-	@pImporteTotal numeric(18,5),
+	@pImporteTotal numeric(18,5) out,
 	@pRetCatchError		VARCHAR(MAX) out
 AS
 
 BEGIN
 
-	/*Controlo si 2 Rendiciones para el mismo chofer a la misma Fecha
-	iF exists	(SELECT	1 FROM femig.Facturas
-				WHERE)
-	begin
-	set @pRetCatchError = 'La rendicion que intenta ingresar ya fue ingresada.'
-		return
-	end*/
+	SET @pImporteTotal = 0
+	DECLARE @canFichas numeric(18)
+	
+	SELECT @canFichas = SUM(cantFichas) FROM FEMIG.viajes WHERE (dniCliente = @pDniCliente AND fecha >= @pFechaInicio AND fecha <= @pFechaFin AND codFactura = null)
+	
+
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Facturas]
            (fechaInicio,fechaFin,dniCliente,importeTotal)
@@ -39,4 +38,5 @@ BEGIN
            ,@pFechaFin
            ,@pDniCliente
            ,@pImporteTotal)
+
 END
