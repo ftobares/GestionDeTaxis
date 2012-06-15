@@ -64,6 +64,15 @@ namespace GestorDeFlotasDesktop.AbmUsuario
             dgUsuarios.Columns.Add(btnEliminar);
             btnEliminar.DisplayIndex = 1;
             btnEliminar.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            DataGridViewImageColumn btnPermisos = new DataGridViewImageColumn();
+            btnPermisos.Description = "Permisos";
+            btnPermisos.HeaderText = "Permisos";
+            btnPermisos.Name = "btnPermisos";
+            btnPermisos.Image = global::GestorDeFlotasDesktop.Properties.Resources.shield;
+            dgUsuarios.Columns.Add(btnPermisos);
+            btnPermisos.DisplayIndex = 2;
+            btnPermisos.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void inicializarFormulario()
@@ -123,7 +132,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
         {
             GestorDeFlotasDesktop.AbmUsuario.addEditUsuario frmAbmUsuario = GestorDeFlotasDesktop.AbmUsuario.addEditUsuario.Instance();
             frmAbmUsuario.modoAbm = "Nuevo";
-            frmAbmUsuario.tituloPantalla = "Agregar Nuevo Auto";
+            frmAbmUsuario.tituloPantalla = "Agregar Nuevo Usuario";
             if (frmAbmUsuario.ShowDialog() == DialogResult.OK)
                 cargarQuery();
             frmAbmUsuario.Close();
@@ -144,13 +153,13 @@ namespace GestorDeFlotasDesktop.AbmUsuario
         {
             if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
             {
-                GestorDeFlotasDesktop.AbmUsuario.addEditUsuario frmEditarAuto = GestorDeFlotasDesktop.AbmUsuario.addEditUsuario.Instance();
-                frmEditarAuto.modoAbm = "Editar";
-                frmEditarAuto.usuarioID = dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
-                frmEditarAuto.tituloPantalla = "Editar Usuario ID: " + dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
-                if (frmEditarAuto.ShowDialog() == DialogResult.OK)
+                GestorDeFlotasDesktop.AbmUsuario.addEditUsuario frmEditarRol = GestorDeFlotasDesktop.AbmUsuario.addEditUsuario.Instance();
+                frmEditarRol.modoAbm = "Editar";
+                frmEditarRol.usuarioID = dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
+                frmEditarRol.tituloPantalla = "Editar Usuario ID: " + dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
+                if (frmEditarRol.ShowDialog() == DialogResult.OK)
                     cargarQuery();
-                frmEditarAuto.Close();
+                frmEditarRol.Close();
             }
 
             if (e.ColumnIndex == 1)

@@ -99,6 +99,18 @@
     <Compile Include="AbmCliente\AltaModifCli.Designer.cs">
       <DependentUpon>AltaModifCli.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbmPantallas\AbmPantalla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmPantallas\AbmPantalla.Designer.cs">
+      <DependentUpon>AbmPantalla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmPantallas\editPantalla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmPantallas\editPantalla.Designer.cs">
+      <DependentUpon>editPantalla.cs</DependentUpon>
+    </Compile>
     <Compile Include="AbmReloj\AbmReloj.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,11 +123,17 @@
     <Compile Include="AbmReloj\addEditReloj.Designer.cs">
       <DependentUpon>addEditReloj.cs</DependentUpon>
     </Compile>
-    <Compile Include="AbmRol\Form1.cs">
+    <Compile Include="AbmRol\AbmRoles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AbmRol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AbmRol\AbmRoles.Designer.cs">
+      <DependentUpon>AbmRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AbmRol\addEditRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbmRol\addEditRol.Designer.cs">
+      <DependentUpon>addEditRol.cs</DependentUpon>
     </Compile>
     <Compile Include="AbmTurno\AbmTurno.cs">
       <SubType>Form</SubType>
@@ -235,11 +253,23 @@
     <EmbeddedResource Include="AbmCliente\AltaModifCli.resx">
       <DependentUpon>AltaModifCli.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AbmPantallas\AbmPantalla.resx">
+      <DependentUpon>AbmPantalla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmPantallas\editPantalla.resx">
+      <DependentUpon>editPantalla.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AbmReloj\AbmReloj.resx">
       <DependentUpon>AbmReloj.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmReloj\addEditReloj.resx">
       <DependentUpon>addEditReloj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\AbmRoles.resx">
+      <DependentUpon>AbmRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbmRol\addEditRol.resx">
+      <DependentUpon>addEditRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbmTurno\AbmTurno.resx">
       <DependentUpon>AbmTurno.cs</DependentUpon>

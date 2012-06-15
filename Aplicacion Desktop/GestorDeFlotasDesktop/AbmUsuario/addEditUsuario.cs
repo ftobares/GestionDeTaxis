@@ -85,7 +85,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
                 {
                     GestorDeFlotasDesktop.ListaErrores.ListaErrores frmErrores = new GestorDeFlotasDesktop.ListaErrores.ListaErrores();
 
-                    frmErrores.setTitulo("Ocurrieron algunos errores al intentar crear el nuevo Auto.");
+                    frmErrores.setTitulo("Ocurrieron algunos errores al intentar crear el nuevo Usuario.");
 
                     if (string.IsNullOrEmpty(txtUsuarioID.Text))
                         frmErrores.agregarError("Debe completar el campo Usuario ID.");
