@@ -32,7 +32,6 @@ namespace GestorDeFlotasDesktop.Facturar
         private void Facturar_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
-            inicializarFormulario();
             //cargarQuery();
         }
 
