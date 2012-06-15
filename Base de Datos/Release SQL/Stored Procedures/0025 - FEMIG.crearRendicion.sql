@@ -19,10 +19,15 @@ CREATE PROCEDURE [FEMIG].[crearRendicion]
 	@pDniChofer numeric(18),
 	@pTurnoID varchar(20),
 	@pImporteTotal numeric(18,5) out,
+	@pCodRendicion	numeric(18) out,
 	@pRetCatchError		VARCHAR(MAX) out
 AS
-
+DECLARE @iAsignacionID numeric(18)
+DECLARE @iValorFicha numeric(18,2)
+DECLARE @iValorBandera numeric(18,2)
 BEGIN
+
+	SET @pImporteTotal = 0
 
 	--Controlo si hay 2 Rendiciones para el mismo chofer a la misma Fecha y el mismo turno
 	iF exists	(SELECT	1 FROM femig.Rendiciones
@@ -32,10 +37,18 @@ BEGIN
 	set @pRetCatchError = 'La rendicion que intenta ingresar ya fue ingresada.'
 		return
 	end
-	/*SELECT @pImporteTotal = SUM(tur.valorBandera + (vi.cantFichas * tur.valorFicha)) FROM femig.viajes vi
-		INNER JOIN GD1C2012.FEMIG.turnos tur on @pTurnoID = tur.turnoID
-			INNER JOIN GD1C2012.FEMIG.ChoferAutoTurno ch on @pDniChofer = ch.dniChofer 
-				WHERE datediff(day,@pFecha,vi.fecha)= 0*/
+
+	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
+	IF (isnull(@iAsignacionID,0) = 0)
+	begin
+		set @pRetCatchError = 'Los datos de la rendicion son incorrectos'
+		return 
+	end
+	
+	SELECT @iValorFicha = valorFicha, @iValorBandera = valorBandera FROM femig.Turnos where turnoID = @pTurnoID
+	
+	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
+				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Rendiciones]
            (fecha,dniChofer,turnoID,importeTotal)
@@ -44,4 +57,10 @@ BEGIN
            ,@pDniChofer
            ,@pTurnoID
            ,@pImporteTotal)
+	
+	SELECT @pCodRendicion = max(codRendicion) from femig.Rendiciones
+	
+	UPDATE femig.Viajes 
+		SET codRendicion = @pCodRendicion
+			WHERE asignacionID = @iASignacionID
 END
