@@ -55,13 +55,8 @@ namespace GestorDeFlotasDesktop.RendirViajes
             txtChofer.Text = "";
             txtTurno.Text = "";
             txtImporte.Text = "";
+            txtImporte.Visible = false;
 
-            /*if (modoAbm == "Editar")
-            {
-
-                getDatosRegistro(patenteAuto);
-                mtxtPatente.ReadOnly = true;
-            }*/
         }
 
         private bool validaCamposRequeridos()
@@ -86,8 +81,6 @@ namespace GestorDeFlotasDesktop.RendirViajes
                         frmErrores.agregarError("Debe ingresar el DNI del Chofer.");
                     if (string.IsNullOrEmpty(txtTurno.Text))
                         frmErrores.agregarError("Debe ingresar el Id del Turno.");
-                    if (string.IsNullOrEmpty(txtImporte.Text))
-                        frmErrores.agregarError("Debe ingresar la Cantidad de Fichas");
                     if (string.IsNullOrEmpty(dtpFecha.Text))
                         frmErrores.agregarError("Debe especificar la Fecha del Viaje.");
                     
@@ -113,7 +106,7 @@ namespace GestorDeFlotasDesktop.RendirViajes
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = { pFecha, pChofer, pTurno, pImporteTotal, pRetCatchError };
+                SqlParameter[] parametros = { pFecha, pChofer, pTurno, pImporteTotal, pCodRendicion, pRetCatchError };
 
                 //if (modoAbm == "Nuevo")
                 {
@@ -124,7 +117,7 @@ namespace GestorDeFlotasDesktop.RendirViajes
                             txtImporte.Text = pImporteTotal.Value.ToString();
                             txtImporte.Visible = true;
                             codRendicion = pCodRendicion.Value.ToString();
-                            MessageBox.Show("Se dio de Alta al Viaje correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Se dio de Alta La Rendicion correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                             dgRendicion.Visible = true;
                         }
