@@ -46,7 +46,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(203, 111);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
-            this.btnLimpiar.TabIndex = 35;
+            this.btnLimpiar.TabIndex = 4;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -59,7 +59,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(111, 111);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
-            this.btnCancelar.TabIndex = 34;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(28, 111);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 33;
+            this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             this.txtDescripcion.MaxLength = 255;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(100, 20);
-            this.txtDescripcion.TabIndex = 29;
+            this.txtDescripcion.TabIndex = 1;
             // 
             // lblDescripcion
             // 
@@ -121,9 +121,10 @@
             // txtPantallaID
             // 
             this.txtPantallaID.Location = new System.Drawing.Point(110, 49);
+            this.txtPantallaID.MaxLength = 255;
             this.txtPantallaID.Name = "txtPantallaID";
             this.txtPantallaID.Size = new System.Drawing.Size(100, 20);
-            this.txtPantallaID.TabIndex = 44;
+            this.txtPantallaID.TabIndex = 0;
             // 
             // editPantalla
             // 

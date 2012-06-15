@@ -87,15 +87,27 @@ namespace GestorDeFlotasDesktop.AbmPantallas
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pPantallaID = new SqlParameter("@pPantallaID", SqlDbType.VarChar, 10);
+                SqlParameter pPantallaID = new SqlParameter("@pPantallaID", SqlDbType.VarChar, 255);
                 pPantallaID.Value = txtPantallaID.Text;
                 SqlParameter pDescripcion = new SqlParameter("@pDescripcion", SqlDbType.VarChar, 255);
                 pDescripcion.Value = txtDescripcion.Text;
+                SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar, 1000);
+                pRetCatchError.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = { pPantallaID, pDescripcion};
+                SqlParameter[] parametros = { pPantallaID, pDescripcion,pRetCatchError};
 
 
-                GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.editarPantalla", parametros);
+                if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.editarPantalla", parametros))
+                {
+                    if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
+                    {
+                        MessageBox.Show("La Pantalla: " + txtPantallaID.Text + " fue editada exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.DialogResult = DialogResult.OK;
+                    }
+                    else
+                        MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
             }
             catch (Exception ex)
             {

@@ -69,6 +69,7 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnFiltrar
             // 
@@ -81,6 +82,7 @@
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // txtDescripcion
             // 
@@ -127,6 +129,7 @@
             this.dgPantallas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgPantallas.Size = new System.Drawing.Size(687, 281);
             this.dgPantallas.TabIndex = 21;
+            this.dgPantallas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgPantallas_CellContentClick);
             // 
             // lblFiltro
             // 
