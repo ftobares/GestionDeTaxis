@@ -25,7 +25,7 @@ CREATE TABLE GD1C2012.FEMIG.relojes (
 	marca varchar(255) NOT NULL,
 	modelo varchar(255) NOT NULL,
 	fechaVersion datetime NOT NULL,
-	anulado bit default 0 -- 0: El reloj est· activo 1: El reloj esta inhabilitado
+	anulado bit default 0 -- 0: El reloj est√° activo 1: El reloj esta inhabilitado
 );
 
 CREATE TABLE GD1C2012.FEMIG.marcas_autos (
@@ -39,7 +39,7 @@ CREATE TABLE GD1C2012.FEMIG.autos (
 	licencia varchar(26) NOT NULL,
 	rodado varchar(10) NOT NULL,
 	nroSerieReloj varchar(18) NOT NULL FOREIGN KEY REFERENCES GD1C2012.FEMIG.relojes(nroSerieReloj),
-	anulado bit default 0, -- 0: El auto est· activo 1: El auto esta inhabilitado
+	anulado bit default 0, -- 0: El auto est√° activo 1: El auto esta inhabilitado
 	constraint fk_marca foreign key (marca) references GD1C2012.FEMIG.marcas_autos (marca)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE GD1C2012.FEMIG.choferes (
 	telefono numeric(18) NOT NULL,
 	email varchar(50) NOT NULL,
 	fechaNacimiento datetime NOT NULL,
-	anulado bit default 0 -- 0: El chofer est· activo 1: El chofer esta inhabilitado
+	anulado bit default 0 -- 0: El chofer est√° activo 1: El chofer esta inhabilitado
 );
 
 CREATE TABLE GD1C2012.FEMIG.turnos ( 
@@ -61,7 +61,7 @@ CREATE TABLE GD1C2012.FEMIG.turnos (
 	descripcion varchar(255) NOT NULL,
 	valorFicha numeric(18,2) NOT NULL,
 	valorBandera numeric(18,2) NOT NULL,
-	anulado bit default 0 -- 0: El turno est· activo 1: El turno esta inhabilitado
+	anulado bit default 0 -- 0: El turno est√° activo 1: El turno esta inhabilitado
 );
 
 CREATE TABLE GD1C2012.FEMIG.ChoferAutoTurno ( 
@@ -70,7 +70,7 @@ CREATE TABLE GD1C2012.FEMIG.ChoferAutoTurno (
 	turnoID numeric(18) NOT NULL,
 	patente varchar(10) NOT NULL,
 	fecha datetime NOT NULL,
-	anulado bit default 0 -- 0: La asignacion est· activa 1: La aasignacion esta inhabilitada
+	anulado bit default 0 -- 0: La asignacion est√° activa 1: La aasignacion esta inhabilitada
 );
 
 ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Chofer 
@@ -90,7 +90,7 @@ CREATE TABLE GD1C2012.FEMIG.clientes (
 	direccion varchar(255) NOT NULL,
 	email varchar(255) NOT NULL,
 	fechaNacimiento datetime NOT NULL,
-	anulado bit default 0 -- 0: El cliente est· activo 1: El cliente esta inhabilitado
+	anulado bit default 0 -- 0: El cliente est√° activo 1: El cliente esta inhabilitado
 );
 
 CREATE TABLE GD1C2012.FEMIG.Facturas ( 
@@ -138,7 +138,7 @@ CREATE TABLE GD1C2012.FEMIG.Pantalla (
 CREATE TABLE GD1C2012.FEMIG.Rol ( 
 	rolID varchar(20) NOT NULL PRIMARY KEY CLUSTERED,
 	descripcion varchar(50) NOT NULL,
-	anulado bit default 0  -- 0: El rol est· activo 1: El rol esta inhabilitado 
+	anulado bit default 0  -- 0: El rol est√° activo 1: El rol esta inhabilitado 
 );
 
 CREATE TABLE GD1C2012.FEMIG.RolPantalla ( 
@@ -158,7 +158,7 @@ CREATE TABLE GD1C2012.FEMIG.Usuario (
 	password varchar(64) NOT NULL,
 	cantIntentosFallo numeric(18),
 	cantMaxIntentos numeric(18),
-	anulado bit default 0 -- 0: El usuario est· activo 1: El usuario esta inhabilitado
+	anulado bit default 0 -- 0: El usuario est√° activo 1: El usuario esta inhabilitado
 );
 	
 CREATE TABLE GD1C2012.FEMIG.RolUsuario ( 
@@ -173,39 +173,39 @@ CREATE TABLE GD1C2012.FEMIG.RolUsuario (
 /*Creacion de Propiedades Extendidas	*/
 /*++++++++++++++++++++++++++++++++++++++*/
 GO
-EXEC sp_addextendedproperty 'MS_Description', '0: El rol est· activo
+EXEC sp_addextendedproperty 'MS_Description', '0: El rol est√° activo
 1: El rol esta inhabilitado', 'Schema', FEMIG, 'table', Rol, 'column', anulado;
 
 EXEC sp_addextendedproperty 'MS_Description', '0 o null: no tiene acceso
 1: tiene acceso', 'Schema', FEMIG, 'table', RolPantalla, 'column', acceso;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El reloj est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El reloj est√° activo 
 1: El reloj esta inhabilitado', 'Schema', FEMIG, 'table', relojes, 'column', anulado;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El auto est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El auto est√° activo 
 1: El auto esta inhabilitado', 'Schema', FEMIG, 'table', autos, 'column', anulado;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El chofer est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El chofer est√° activo 
 1: El chofer esta inhabilitado', 'Schema', FEMIG, 'table', choferes, 'column', anulado;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El turno est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El turno est√° activo 
 1: El turno esta inhabilitado', 'Schema', FEMIG, 'table', turnos, 'column', anulado;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El cliente est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El cliente est√° activo 
 1: El cliente esta inhabilitado', 'Schema', FEMIG, 'table', clientes, 'column', anulado;
 
-EXEC sp_addextendedproperty 'MS_Description', '0: El usuario est· activo 
+EXEC sp_addextendedproperty 'MS_Description', '0: El usuario est√° activo 
 1: El usuario esta inhabilitado', 'Schema', FEMIG, 'table', Usuario, 'column', anulado;
 GO
 
 /*++++++++++++++++++++++++++++++++++++++*/
-/*		MigraciÛn de Datos				*/
+/*		Migraci√≥n de Datos				*/
 /*++++++++++++++++++++++++++++++++++++++*/
 BEGIN TRANSACTION migracion;
 
 BEGIN TRY
 
-	/*Inicio de MigraciÛn de la tabla Relojes*/
+	/*Inicio de Migraci√≥n de la tabla Relojes*/
 	BEGIN	
 		DECLARE @nroSerie varchar(18);
 		DECLARE @marca varchar(255);
@@ -262,7 +262,7 @@ BEGIN TRY
 		CLOSE insert_relojes;
 		DEALLOCATE insert_relojes;
 	END
-	/*FinalizaciÛn de MigraciÛn de la tabla Relojes*/
+	/*Finalizaci√≥n de Migraci√≥n de la tabla Relojes*/
 
 	INSERT INTO GD1C2012.FEMIG.marcas_autos (marca)
 	VALUES ('Otra');
@@ -329,7 +329,7 @@ BEGIN TRY
 	group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
 	order by chofer_dni, rendicion_fecha, turnoID;
 
-	/*Inicio de MigraciÛn de datos para la tabla Viajes*/
+	/*Inicio de Migraci√≥n de datos para la tabla Viajes*/
 	BEGIN
 	
 		DECLARE @chofer_dni numeric(8)
@@ -397,7 +397,7 @@ BEGIN TRY
 		DEALLOCATE temp_maestra;		
 		DROP TABLE #maestra;
 	END
-	/*FinalizaciÛn de MigraciÛn de datos para la tabla Viajes*/
+	/*Finalizaci√≥n de Migraci√≥n de datos para la tabla Viajes*/
 
 /*++++++++++++++++++++++++++++++++++*/
 /*		Carga de Funcionalidades	*/
@@ -411,11 +411,11 @@ BEGIN TRY
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmReloj','ABM Relojes')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmChofer','ABM Choferes')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmTurno','ABM Turnos')
-	INSERT INTO FEMIG.PANTALLA VALUES ('abmChoferAuto','RelaciÛn Chofer-Auto')
+	INSERT INTO FEMIG.PANTALLA VALUES ('abmChoferAuto','Relaci√≥n Chofer-Auto')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmViaje','Cargar Viajes')
-	INSERT INTO FEMIG.PANTALLA VALUES ('abmRendicion','RendiciÛn de Cuenta')
-	INSERT INTO FEMIG.PANTALLA VALUES ('abmFacturacion','FacturaciÛn')
-	INSERT INTO FEMIG.PANTALLA VALUES ('abmListado','Listados EstadÌsticos')
+	INSERT INTO FEMIG.PANTALLA VALUES ('abmRendicion','Rendici√≥n de Cuenta')
+	INSERT INTO FEMIG.PANTALLA VALUES ('abmFacturacion','Facturaci√≥n')
+	INSERT INTO FEMIG.PANTALLA VALUES ('abmListado','Listados Estad√≠sticos')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmPantalla','Pantallas del Sistema')
 	
 	/*ROL*/
@@ -1265,4 +1265,56 @@ BEGIN
 	   SET [descripcion] = @pDescripcion
 	 WHERE pantallaID = @pPantallaID
 		
+END
+
+/*PRC 0035 - Procedure Obtener Pantallas del Rol*/
+CREATE PROCEDURE [FEMIG].[getPantallasDeRol]
+        @pRolID VARCHAR(20)
+AS
+BEGIN
+        SELECT 'True' AS chk,P.PANTALLAID AS pantallaID,P.DESCRIPCION 
+        FROM FEMIG.ROLPANTALLA RP
+        INNER JOIN FEMIG.PANTALLA P ON (RP.PANTALLAID = P.PANTALLAID)
+        WHERE ROLID = @pRolID
+        UNION
+        SELECT 'False' AS chk,PANTALLAID AS pantallaID,P.DESCRIPCION  FROM FEMIG.PANTALLA P
+        WHERE NOT EXISTS (SELECT 1 FROM FEMIG.ROLPANTALLA RP WHERE RP.ROLID = @pRolID AND RP.PANTALLAID = P.PANTALLAID)
+END
+
+/*PRC 0036 - Procedure Asignar Pantalla no asignada a un RolPantalla*/
+CREATE PROCEDURE [FEMIG].[AsignarDesasignarRolPantalla]
+        @pRolID                 VARCHAR(20),
+        @pPantallaID    VARCHAR(255)
+AS
+BEGIN
+        IF NOT EXISTS (SELECT 1 FROM FEMIG.ROLPANTALLA WHERE ROLID = @pRolID AND PANTALLAID = @pPantallaID)
+                INSERT INTO FEMIG.ROLPANTALLA VALUES (@pRolID, @pPantallaID, '1')
+        ELSE
+               DELETE FROM FEMIG.ROLPANTALLA WHERE ROLID = @pRolID AND PANTALLAID = @pPantallaID
+END
+
+/*PRC 0037 - Procedure Obtener los Roles del Usuario*/
+CREATE PROCEDURE [FEMIG].[getRolesDeUsuario]
+        @pUsuarioID     VARCHAR(20)
+AS
+BEGIN
+        SELECT 'True' AS chk,R.ROLID AS rolID,R.DESCRIPCION 
+        FROM FEMIG.ROLUSUARIO RU
+        INNER JOIN FEMIG.ROL R ON (RU.ROLID = R.ROLID)
+        WHERE RU.usuarioID = @pUsuarioID
+        UNION
+        SELECT 'False' AS chk,ROLID AS rolID,R.DESCRIPCION  FROM FEMIG.ROL R
+        WHERE NOT EXISTS (SELECT 1 FROM FEMIG.ROLUSUARIO RU WHERE RU.UsuarioID = @pUsuarioID AND RU.ROLID = R.ROLID)
+END
+
+/*PRC 0038 - Procedure Asignar y Desasignar Rol-Usuario*/
+CREATE PROCEDURE [FEMIG].[AsignarDesasignarRolUsuario]
+        @pUsuarioID             VARCHAR(20),
+        @pRolID                 VARCHAR(255)
+AS
+BEGIN
+         IF NOT EXISTS (SELECT 1 FROM FEMIG.ROLUSUARIO WHERE USUARIOID = @pUsuarioID AND ROLID = @pRolID)
+                INSERT INTO FEMIG.ROLUSUARIO VALUES (@pUsuarioID, @pRolID)
+        ELSE
+                DELETE FROM FEMIG.ROLUSUARIO WHERE USUARIOID = @pUsuarioID AND ROLID = @pRolID
 END
