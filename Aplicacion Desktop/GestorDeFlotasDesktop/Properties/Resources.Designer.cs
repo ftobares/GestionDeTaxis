@@ -137,6 +137,13 @@ namespace GestorDeFlotasDesktop.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap key_icon {
+            get {
+                object obj = ResourceManager.GetObject("key-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap page_find {
             get {
                 object obj = ResourceManager.GetObject("page_find", resourceCulture);

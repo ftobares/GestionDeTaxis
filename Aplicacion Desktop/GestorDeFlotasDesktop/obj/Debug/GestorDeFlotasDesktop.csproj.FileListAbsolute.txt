@@ -123,3 +123,4 @@ C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDeskt
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmPantallas.AbmPantalla.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmPantallas.editPantalla.resources
 C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.RolPantallas.AsigRolPantallas.resources
+C:\gDatos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.UsuariosRoles.UsuariosRoles.resources

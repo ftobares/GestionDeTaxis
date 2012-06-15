@@ -8,18 +8,18 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace GestorDeFlotasDesktop.RolPantallas
+namespace GestorDeFlotasDesktop.UsuariosRoles
 {
-    public partial class AsigRolPantallas : Form
+    public partial class UsuariosRoles : Form
     {
-        public string rolID { get; set; }
+        public string usuarioID { get; set; }
 
-        public AsigRolPantallas()
+        public UsuariosRoles()
         {
             InitializeComponent();
         }
 
-        private void AsigRolPantallas_Load(object sender, EventArgs e)
+        private void UsuariosRoles_Load(object sender, EventArgs e)
         {
             DataGridViewCheckBoxColumn chkSeleccionar = new DataGridViewCheckBoxColumn();
             chkSeleccionar.Name = "chkSeleccionar";
@@ -37,10 +37,10 @@ namespace GestorDeFlotasDesktop.RolPantallas
         private void cargarQuery()
         {
             DataTable dtResultado = new DataTable();
-            SqlParameter pRolID = new SqlParameter("@pRolID", SqlDbType.VarChar,20);
-            pRolID.Value = rolID;
+            SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
+            pUsuarioID.Value = usuarioID;
 
-            GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.getPantallasDeRol", pRolID,dtResultado);
+            GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.getRolesDeUsuario", pUsuarioID, dtResultado);
 
             dgPantallas.DataSource = dtResultado;
 
@@ -52,33 +52,33 @@ namespace GestorDeFlotasDesktop.RolPantallas
             this.DialogResult = DialogResult.OK;
         }
 
-        private void dgPantallas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
-                cambiarSeleccionRolPantalla(dgPantallas.Rows[e.RowIndex].Cells["pantallaID"].Value.ToString());
+                cambiarSeleccionRolPantalla(dgPantallas.Rows[e.RowIndex].Cells["rolID"].Value.ToString());
             }
         }
 
-        private void cambiarSeleccionRolPantalla(string pantallaID)
+        private void cambiarSeleccionRolPantalla(string rolID)
         {
-            SqlParameter pRolID = new SqlParameter("@pRolID", SqlDbType.VarChar, 20);
+            SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
+            pUsuarioID.Value = usuarioID;
+            SqlParameter pRolID = new SqlParameter("@pRolID", SqlDbType.VarChar, 255);
             pRolID.Value = rolID;
-            SqlParameter pPantallaID = new SqlParameter("@pPantallaID", SqlDbType.VarChar, 255);
-            pPantallaID.Value = pantallaID;
 
-            SqlParameter[] parametros = { pRolID, pPantallaID };
+            SqlParameter[] parametros = { pUsuarioID, pRolID };
 
-            GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.AsignarDesasignarRolPantalla", parametros);
+            GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.AsignarDesasignarRolUsuario", parametros);
 
         }
 
         private void btnTodoNada_Click(object sender, EventArgs e)
         {
 
-            for (int i=0; i < dgPantallas.Rows.Count; i++)
+            for (int i = 0; i < dgPantallas.Rows.Count; i++)
             {
-                if (dgPantallas.Rows[i].Cells[0].Value.ToString()=="True")
+                if (dgPantallas.Rows[i].Cells[0].Value.ToString() == "True")
                 {
                     quitarSelecciones();
                     return;
@@ -92,10 +92,10 @@ namespace GestorDeFlotasDesktop.RolPantallas
 
         private void seleccionarTodo()
         {
-            for (int i=0; i < dgPantallas.Rows.Count; i++)
+            for (int i = 0; i < dgPantallas.Rows.Count; i++)
             {
                 dgPantallas.Rows[i].Cells[0].Value = true;
-                cambiarSeleccionRolPantalla(dgPantallas.Rows[i].Cells["pantallaID"].Value.ToString());
+                cambiarSeleccionRolPantalla(dgPantallas.Rows[i].Cells["rolID"].Value.ToString());
             }
         }
 
@@ -104,8 +104,9 @@ namespace GestorDeFlotasDesktop.RolPantallas
             for (int i = 0; i < dgPantallas.Rows.Count; i++)
             {
                 dgPantallas.Rows[i].Cells[0].Value = false;
-                cambiarSeleccionRolPantalla(dgPantallas.Rows[i].Cells["pantallaID"].Value.ToString());
+                cambiarSeleccionRolPantalla(dgPantallas.Rows[i].Cells["rolID"].Value.ToString());
             }
         }
     }
 }
+

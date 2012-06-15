@@ -174,6 +174,16 @@ namespace GestorDeFlotasDesktop.AbmUsuario
 
             }
 
+            if (e.ColumnIndex == 2)
+            {
+                GestorDeFlotasDesktop.UsuariosRoles.UsuariosRoles frmUsuariosRoles = new GestorDeFlotasDesktop.UsuariosRoles.UsuariosRoles();
+
+                frmUsuariosRoles.usuarioID = dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
+                frmUsuariosRoles.ShowDialog();
+                frmUsuariosRoles.Dispose();
+
+            }
+
 
 
         }

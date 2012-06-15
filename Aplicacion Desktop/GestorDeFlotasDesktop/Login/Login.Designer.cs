@@ -33,9 +33,9 @@ namespace GestorDeFlotasDesktop.Login
             this.lblPassword = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.btnLogIn = new System.Windows.Forms.Button();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.lblEstado = new System.Windows.Forms.Label();
+            this.btnLogIn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuario
@@ -52,7 +52,7 @@ namespace GestorDeFlotasDesktop.Login
             // 
             this.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(68, 94);
+            this.lblPassword.Location = new System.Drawing.Point(68, 91);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(56, 13);
             this.lblPassword.TabIndex = 1;
@@ -62,35 +62,24 @@ namespace GestorDeFlotasDesktop.Login
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label3.Location = new System.Drawing.Point(126, 23);
+            this.label3.Location = new System.Drawing.Point(125, 25);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 17);
+            this.label3.Size = new System.Drawing.Size(82, 25);
             this.label3.TabIndex = 2;
             this.label3.Text = "LOGIN!";
             // 
             // txtPassword
             // 
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtPassword.Location = new System.Drawing.Point(130, 91);
+            this.txtPassword.Location = new System.Drawing.Point(130, 88);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(121, 20);
             this.txtPassword.TabIndex = 4;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
-            // 
-            // btnLogIn
-            // 
-            this.btnLogIn.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnLogIn.Location = new System.Drawing.Point(129, 117);
-            this.btnLogIn.Name = "btnLogIn";
-            this.btnLogIn.Size = new System.Drawing.Size(122, 23);
-            this.btnLogIn.TabIndex = 5;
-            this.btnLogIn.Text = "Log In";
-            this.btnLogIn.UseVisualStyleBackColor = true;
-            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
             // txtUsuario
             // 
@@ -103,17 +92,30 @@ namespace GestorDeFlotasDesktop.Login
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
-            this.lblEstado.Location = new System.Drawing.Point(12, 163);
+            this.lblEstado.Location = new System.Drawing.Point(12, 211);
             this.lblEstado.Name = "lblEstado";
             this.lblEstado.Size = new System.Drawing.Size(35, 13);
             this.lblEstado.TabIndex = 7;
             this.lblEstado.Text = "label1";
             // 
+            // btnLogIn
+            // 
+            this.btnLogIn.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLogIn.Image = global::GestorDeFlotasDesktop.Properties.Resources.key_icon;
+            this.btnLogIn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLogIn.Location = new System.Drawing.Point(104, 147);
+            this.btnLogIn.Name = "btnLogIn";
+            this.btnLogIn.Size = new System.Drawing.Size(122, 44);
+            this.btnLogIn.TabIndex = 5;
+            this.btnLogIn.Text = "Log In";
+            this.btnLogIn.UseVisualStyleBackColor = true;
+            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(329, 272);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.btnLogIn);
@@ -121,6 +123,7 @@ namespace GestorDeFlotasDesktop.Login
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "Login";
