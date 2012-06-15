@@ -123,7 +123,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 pLicencia.Value = txtLicencia.Text;
                 SqlParameter pRodado = new SqlParameter("@pRodado", SqlDbType.VarChar, 10);
                 pRodado.Value = txtRodado.Text;
-                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.Int);
+                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.VarChar,18);
                 pNroSerieReloj.Value = txtReloj.Text;
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
                 pAnulado.Value = 0;
