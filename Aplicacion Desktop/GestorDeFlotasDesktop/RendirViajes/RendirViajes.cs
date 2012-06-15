@@ -12,7 +12,7 @@ namespace GestorDeFlotasDesktop.RendirViajes
 {
     public partial class RendirViajes : Form
     {
-        public string fecha { get; set; }
+        public string codRendicion { get; set; }
         public string tituloPantalla { get; set; }
         private static RendirViajes unicaInst = null;
         public static RendirViajes Instance()
@@ -32,6 +32,21 @@ namespace GestorDeFlotasDesktop.RendirViajes
         private void RendirViajes_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
+            //cargarQuery();
+        }
+
+        private string construirQuery()
+        {
+            string strQuery = "select " + "*" + " from " + "femig.Rendiciones" + " where 1=1";
+                strQuery += " AND codRendicion = " + codRendicion + " order by " + "importeTotal";
+            
+            return strQuery;
+        }
+
+        private void cargarQuery()
+        {
+            string strQuery = construirQuery();
+            dgRendicion.DataSource = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
         }
 
         private void inicializarFormulario()
@@ -90,9 +105,11 @@ namespace GestorDeFlotasDesktop.RendirViajes
                 pChofer.Value = txtChofer.Text;
                 SqlParameter pTurno = new SqlParameter("@pTurnoID", SqlDbType.VarChar,20); //TODO: revisar el tipo
                 pTurno.Value = txtTurno.Text;
+
                 SqlParameter pImporteTotal = new SqlParameter("@pImporteTotal", SqlDbType.Float);
-                pImporteTotal.Value = txtImporte.Text;
-                
+                pImporteTotal.Direction = ParameterDirection.Output;
+                SqlParameter pCodRendicion = new SqlParameter("@pCodRendicion", SqlDbType.Float);
+                pCodRendicion.Direction = ParameterDirection.Output;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
@@ -104,11 +121,18 @@ namespace GestorDeFlotasDesktop.RendirViajes
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
-                            MessageBox.Show("Se dio de Alta al Viaje correctamente","OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtImporte.Text = pImporteTotal.Value.ToString();
+                            txtImporte.Visible = true;
+                            codRendicion = pCodRendicion.Value.ToString();
+                            MessageBox.Show("Se dio de Alta al Viaje correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
+                            dgRendicion.Visible = true;
                         }
                         else
+                        {
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            dgRendicion.Visible = false;
+                        }
 
                     }
                 }
