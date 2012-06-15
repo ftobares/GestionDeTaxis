@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
@@ -54,7 +55,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(200, 242);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
-            this.btnLimpiar.TabIndex = 35;
+            this.btnLimpiar.TabIndex = 9;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -67,7 +68,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(108, 242);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
-            this.btnCancelar.TabIndex = 34;
+            this.btnCancelar.TabIndex = 8;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -80,7 +81,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(25, 242);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
-            this.btnAceptar.TabIndex = 33;
+            this.btnAceptar.TabIndex = 7;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = true;
@@ -153,7 +154,7 @@
             this.txtUsuarioID.MaxLength = 20;
             this.txtUsuarioID.Name = "txtUsuarioID";
             this.txtUsuarioID.Size = new System.Drawing.Size(100, 20);
-            this.txtUsuarioID.TabIndex = 51;
+            this.txtUsuarioID.TabIndex = 0;
             // 
             // txtNombre
             // 
@@ -161,7 +162,7 @@
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 52;
+            this.txtNombre.TabIndex = 2;
             // 
             // txtApellido
             // 
@@ -169,7 +170,7 @@
             this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 20);
-            this.txtApellido.TabIndex = 53;
+            this.txtApellido.TabIndex = 3;
             // 
             // txtEmail
             // 
@@ -177,7 +178,7 @@
             this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(220, 20);
-            this.txtEmail.TabIndex = 54;
+            this.txtEmail.TabIndex = 4;
             // 
             // txtMaxIntentos
             // 
@@ -185,7 +186,7 @@
             this.txtMaxIntentos.MaxLength = 5;
             this.txtMaxIntentos.Name = "txtMaxIntentos";
             this.txtMaxIntentos.Size = new System.Drawing.Size(100, 20);
-            this.txtMaxIntentos.TabIndex = 55;
+            this.txtMaxIntentos.TabIndex = 5;
             this.txtMaxIntentos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxIntentos_KeyPress);
             // 
             // chkDeshabilitado
@@ -194,7 +195,7 @@
             this.chkDeshabilitado.Location = new System.Drawing.Point(17, 212);
             this.chkDeshabilitado.Name = "chkDeshabilitado";
             this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
-            this.chkDeshabilitado.TabIndex = 56;
+            this.chkDeshabilitado.TabIndex = 6;
             this.chkDeshabilitado.Text = "Deshabilitado";
             this.chkDeshabilitado.UseVisualStyleBackColor = true;
             // 
@@ -215,7 +216,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(100, 20);
-            this.txtPassword.TabIndex = 58;
+            this.txtPassword.TabIndex = 1;
             // 
             // addEditUsuario
             // 

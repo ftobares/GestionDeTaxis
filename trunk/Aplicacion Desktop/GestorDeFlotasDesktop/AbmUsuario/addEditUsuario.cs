@@ -63,8 +63,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
             txtApellido.Text = dtValores.Rows[0]["apellido"].ToString();
             txtEmail.Text = dtValores.Rows[0]["email"].ToString();
             txtMaxIntentos.Text = dtValores.Rows[0]["cantMaxIntentos"].ToString();
-            txtPassword.Text = dtValores.Rows[0]["password"].ToString();
-            if (dtValores.Rows[0]["cantMaxIntentos"].ToString() == "1")
+            if (dtValores.Rows[0]["anulado"].ToString()=="True")
                 chkDeshabilitado.Checked = true;
             else
                 chkDeshabilitado.Checked = false;
@@ -107,15 +106,15 @@ namespace GestorDeFlotasDesktop.AbmUsuario
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 10);
+                SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
                 pUsuarioID.Value = txtUsuarioID.Text;
-                SqlParameter pNombre = new SqlParameter("@pNombre", SqlDbType.VarChar, 255);
+                SqlParameter pNombre = new SqlParameter("@pNombre", SqlDbType.VarChar, 50);
                 pNombre.Value = txtNombre.Text;
-                SqlParameter pApellido = new SqlParameter("@pApellido", SqlDbType.VarChar, 255);
+                SqlParameter pApellido = new SqlParameter("@pApellido", SqlDbType.VarChar, 50);
                 pApellido.Value = txtApellido.Text;
-                SqlParameter pEmail = new SqlParameter("@pEmail", SqlDbType.VarChar, 26);
+                SqlParameter pEmail = new SqlParameter("@pEmail", SqlDbType.VarChar, 100);
                 pEmail.Value = txtEmail.Text;
-                SqlParameter pPassword = new SqlParameter("@pPassword", SqlDbType.VarChar, 10);
+                SqlParameter pPassword = new SqlParameter("@pPassword", SqlDbType.VarChar, 64);
                 pPassword.Value = GestorDeFlotasDesktop.BD.GD1C2012.encriptarStr(txtPassword.Text);
                 SqlParameter pCantMaxIntentos = new SqlParameter("@pCantMaxIntentos", SqlDbType.Int);
                 pCantMaxIntentos.Value = txtMaxIntentos.Text;
@@ -179,7 +178,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
             txtApellido.Text = "";
             txtEmail.Text = "";
             txtPassword.Text = "";
-            txtMaxIntentos.Text = "";
+            txtMaxIntentos.Text = "0";
             chkDeshabilitado.Checked = false;
         }
 

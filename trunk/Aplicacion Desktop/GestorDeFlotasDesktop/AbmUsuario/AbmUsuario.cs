@@ -12,7 +12,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
 {
     public partial class AbmUsuario : Form
     {
-        private string camposSelect = "usuarioID, nombre, apellido, email, password, cantIntentosFallo, cantMaxIntentos, anulado";
+        private string camposSelect = "usuarioID, nombre, apellido, email, cantIntentosFallo, cantMaxIntentos, case when anulado=1 then 'SI' else 'NO' end as Anulado";
         private string whereObligatorio = "1=1";
         private string consultaOrderBy = "usuarioID";
         private string nombreTabla = "Femig.Usuario";
@@ -157,7 +157,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
             {
                 if (MessageBox.Show("¿Esta seguro que deséa deshabilitar al Usuario?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 10);
+                    SqlParameter pUsuarioID = new SqlParameter("@pUsuarioID", SqlDbType.VarChar, 20);
                     pUsuarioID.Value = dgUsuarios.SelectedRows[0].Cells["usuarioID"].Value.ToString();
                     GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarUsuario", pUsuarioID);
                     cargarQuery();
