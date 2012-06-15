@@ -34,16 +34,16 @@
             this.lblTitulo = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtUsuarioID = new System.Windows.Forms.TextBox();
             this.lblUsuarioId = new System.Windows.Forms.Label();
-            this.dgAutos = new System.Windows.Forms.DataGridView();
+            this.dgUsuarios = new System.Windows.Forms.DataGridView();
             this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.lblFiltro = new System.Windows.Forms.Label();
-            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAutos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // txtApellido
@@ -73,6 +73,7 @@
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // lblTitulo
             // 
@@ -97,6 +98,7 @@
             this.btnFiltrar.Text = "Filtrar";
             this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
             // 
             // groupBox2
             // 
@@ -115,6 +117,16 @@
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros de Búsqueda";
+            // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(195, 18);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 34;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
             // 
             // txtNombre
             // 
@@ -148,19 +160,19 @@
             this.lblUsuarioId.TabIndex = 13;
             this.lblUsuarioId.Text = "Usuario ID";
             // 
-            // dgAutos
+            // dgUsuarios
             // 
-            this.dgAutos.AllowUserToAddRows = false;
-            this.dgAutos.AllowUserToDeleteRows = false;
-            this.dgAutos.AllowUserToResizeRows = false;
-            this.dgAutos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgAutos.Location = new System.Drawing.Point(7, 149);
-            this.dgAutos.MultiSelect = false;
-            this.dgAutos.Name = "dgAutos";
-            this.dgAutos.ReadOnly = true;
-            this.dgAutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgAutos.Size = new System.Drawing.Size(687, 255);
-            this.dgAutos.TabIndex = 16;
+            this.dgUsuarios.AllowUserToAddRows = false;
+            this.dgUsuarios.AllowUserToDeleteRows = false;
+            this.dgUsuarios.AllowUserToResizeRows = false;
+            this.dgUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgUsuarios.Location = new System.Drawing.Point(7, 149);
+            this.dgUsuarios.MultiSelect = false;
+            this.dgUsuarios.Name = "dgUsuarios";
+            this.dgUsuarios.ReadOnly = true;
+            this.dgUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgUsuarios.Size = new System.Drawing.Size(687, 255);
+            this.dgUsuarios.TabIndex = 16;
             // 
             // btnNuevoUsuario
             // 
@@ -173,6 +185,7 @@
             this.btnNuevoUsuario.Text = "Nuevo Usuario";
             this.btnNuevoUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnNuevoUsuario.UseVisualStyleBackColor = true;
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
             // lblFiltro
             // 
@@ -183,16 +196,6 @@
             this.lblFiltro.TabIndex = 19;
             this.lblFiltro.Text = "label5";
             // 
-            // chkDeshabilitado
-            // 
-            this.chkDeshabilitado.AutoSize = true;
-            this.chkDeshabilitado.Location = new System.Drawing.Point(195, 18);
-            this.chkDeshabilitado.Name = "chkDeshabilitado";
-            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
-            this.chkDeshabilitado.TabIndex = 34;
-            this.chkDeshabilitado.Text = "Deshabilitado";
-            this.chkDeshabilitado.UseVisualStyleBackColor = true;
-            // 
             // AbmUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,7 +203,7 @@
             this.ClientSize = new System.Drawing.Size(702, 443);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.dgAutos);
+            this.Controls.Add(this.dgUsuarios);
             this.Controls.Add(this.btnNuevoUsuario);
             this.Controls.Add(this.lblFiltro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -208,9 +211,10 @@
             this.MinimizeBox = false;
             this.Name = "AbmUsuario";
             this.Text = "Administración de Usuarios y Permisos";
+            this.Load += new System.EventHandler(this.AbmUsuario_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgAutos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,7 +232,7 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.TextBox txtUsuarioID;
         private System.Windows.Forms.Label lblUsuarioId;
-        private System.Windows.Forms.DataGridView dgAutos;
+        private System.Windows.Forms.DataGridView dgUsuarios;
         private System.Windows.Forms.Button btnNuevoUsuario;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.CheckBox chkDeshabilitado;

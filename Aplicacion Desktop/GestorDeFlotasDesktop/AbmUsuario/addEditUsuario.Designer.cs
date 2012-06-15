@@ -42,43 +42,49 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtMaxIntentos = new System.Windows.Forms.TextBox();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(200, 193);
+            this.btnLimpiar.Location = new System.Drawing.Point(200, 242);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 35;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCancelar
             // 
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(108, 193);
+            this.btnCancelar.Location = new System.Drawing.Point(108, 242);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 34;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(25, 193);
+            this.btnAceptar.Location = new System.Drawing.Point(25, 242);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 33;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // lblTitulo
             // 
@@ -95,6 +101,7 @@
             // lblUsuarioID
             // 
             this.lblUsuarioID.AutoSize = true;
+            this.lblUsuarioID.ForeColor = System.Drawing.Color.Red;
             this.lblUsuarioID.Location = new System.Drawing.Point(14, 53);
             this.lblUsuarioID.Name = "lblUsuarioID";
             this.lblUsuarioID.Size = new System.Drawing.Size(60, 13);
@@ -104,7 +111,8 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(14, 79);
+            this.lblNombre.ForeColor = System.Drawing.Color.Red;
+            this.lblNombre.Location = new System.Drawing.Point(14, 105);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(47, 13);
             this.lblNombre.TabIndex = 45;
@@ -113,7 +121,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 105);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(14, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
             this.label3.TabIndex = 46;
@@ -122,7 +131,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(14, 131);
+            this.lblEmail.Location = new System.Drawing.Point(14, 157);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(35, 13);
             this.lblEmail.TabIndex = 48;
@@ -131,7 +140,8 @@
             // lblCantIntentos
             // 
             this.lblCantIntentos.AutoSize = true;
-            this.lblCantIntentos.Location = new System.Drawing.Point(14, 157);
+            this.lblCantIntentos.ForeColor = System.Drawing.Color.Red;
+            this.lblCantIntentos.Location = new System.Drawing.Point(14, 183);
             this.lblCantIntentos.Name = "lblCantIntentos";
             this.lblCantIntentos.Size = new System.Drawing.Size(180, 13);
             this.lblCantIntentos.TabIndex = 49;
@@ -147,7 +157,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(80, 76);
+            this.txtNombre.Location = new System.Drawing.Point(80, 102);
             this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
@@ -155,7 +165,7 @@
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(80, 102);
+            this.txtApellido.Location = new System.Drawing.Point(80, 128);
             this.txtApellido.MaxLength = 50;
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 20);
@@ -163,7 +173,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(80, 128);
+            this.txtEmail.Location = new System.Drawing.Point(80, 154);
             this.txtEmail.MaxLength = 100;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(220, 20);
@@ -171,17 +181,50 @@
             // 
             // txtMaxIntentos
             // 
-            this.txtMaxIntentos.Location = new System.Drawing.Point(200, 154);
+            this.txtMaxIntentos.Location = new System.Drawing.Point(200, 180);
             this.txtMaxIntentos.MaxLength = 5;
             this.txtMaxIntentos.Name = "txtMaxIntentos";
             this.txtMaxIntentos.Size = new System.Drawing.Size(100, 20);
             this.txtMaxIntentos.TabIndex = 55;
+            this.txtMaxIntentos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxIntentos_KeyPress);
+            // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(17, 212);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 56;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.ForeColor = System.Drawing.Color.Red;
+            this.lblPassword.Location = new System.Drawing.Point(14, 79);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(56, 13);
+            this.lblPassword.TabIndex = 57;
+            this.lblPassword.Text = "Password:";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(80, 76);
+            this.txtPassword.MaxLength = 20;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(100, 20);
+            this.txtPassword.TabIndex = 58;
             // 
             // addEditUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 236);
+            this.ClientSize = new System.Drawing.Size(312, 306);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.lblPassword);
+            this.Controls.Add(this.chkDeshabilitado);
             this.Controls.Add(this.txtMaxIntentos);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtApellido);
@@ -202,6 +245,7 @@
             this.Name = "addEditUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEditUsuario";
+            this.Load += new System.EventHandler(this.addEditUsuario_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,5 +267,8 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtMaxIntentos;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.TextBox txtPassword;
     }
 }
