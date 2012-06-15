@@ -28,14 +28,14 @@ BEGIN
 	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
-		set @pRetCatchError = 'El Chofer no esta registrado para ese turno y fecha '
+		set @pRetCatchError = 'Los datos del Viaje son incorrectos'
 		return 
 	end
 	
-	IF (@pTipoViaje = 'calle')
+	/*IF (@pTipoViaje = 'calle')
 	begin
 		set @pDniCliente = null;
-	end
+	end*/
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Viajes]
            (tipoViaje,asignacionId,cantFichas,fecha,dniCliente)

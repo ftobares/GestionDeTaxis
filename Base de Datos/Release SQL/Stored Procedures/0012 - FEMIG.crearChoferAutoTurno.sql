@@ -23,19 +23,19 @@ CREATE PROCEDURE [FEMIG].[crearChoferAutoTurno]
 AS
 BEGIN
 
-	--Controlo que para una fecha, no haya dos turnos iguales
-	if exists (select 1 from FEMIG.ChoferAutoTurno where datediff(day,fecha,@pFecha)=0 AND turnoID = @pTurnoID)
+	--Controlo que para una fecha, no haya dos turnos iguales con el mismo chofer
+	if exists (select 1 from FEMIG.ChoferAutoTurno where @pDniChofer=dniChofer AND datediff(day,fecha,@pFecha)=0 AND turnoID = @pTurnoID)
 	begin
-		set @retCatchError = 'Ya fue asignado el turno ' + cast(@pTurnoID as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + '.'
+		set @retCatchError = 'Ya fue asignado el chofer ' + cast(@pDniChofer as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + ', el turno ' + cast(@pTurnoID as varchar) + '.'
 		return
 	end
 
-	--Controlo que para un mismo auto en la misma fecha y turno, no haya dos choferes (No es necesario este control, se filtra en el if de arriba)
-	/*if exists (select 1 from FEMIG.ChoferAutoTurno where fecha = @pFecha AND turnoID = @pTurnoID AND dniChofer = @pDniChofer)
+	--Controlo que una misma fecha un taxi no puede tener 2 turnos iguales
+	if exists (select 1 from FEMIG.ChoferAutoTurno where datediff(day,fecha,@pFecha)=0 AND turnoID = @pTurnoID AND patente = @pPatente)
 	begin
-		set @retCatchError = 'Ya fue asignado el chofer ' + cast(@pDniChofer as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + ', el turno ' + cast(@pTurnoID as varchar) + 'y el auto ' + @pPatente + '.'
+		set @retCatchError = 'Ya fue asignado el auto ' + cast(@pPatente as varchar) + ' para la fecha ' + cast(@pFecha as varchar) + ', el turno ' + cast(@pTurnoID as varchar) + '.'
 		return
-	end*/
+	end
 	
 	INSERT INTO [GD1C2012].[FEMIG].[ChoferAutoTurno]
            (fecha,dniChofer,turnoID,patente)
