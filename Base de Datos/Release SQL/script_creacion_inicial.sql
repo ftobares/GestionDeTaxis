@@ -331,34 +331,70 @@ BEGIN TRY
 
 	/*Inicio de Migración de datos para la tabla Viajes*/
 	BEGIN
-
-		CREATE TABLE #maestra(
-			chofer_dni numeric(8) NOT NULL,
-			cliente_dni numeric(8),
-			viaje_cant_fichas numeric(1) NOT NULL,
-			viaje_fecha datetime NOT NULL
-		);
-		CREATE INDEX IDX_maestra_1 ON #maestra(chofer_dni);
-		INSERT INTO #maestra (chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha)
+	
+		DECLARE @chofer_dni numeric(8)
+		DECLARE @cliente_dni numeric(8)
+		DECLARE @viaje_cant_fichas numeric(1)
+		DECLARE @viaje_fecha datetime
+		DECLARE @cont int
+		
+		SET @cont = 0
+	
+		DECLARE temp_maestra CURSOR FOR
 		SELECT chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha
 		FROM gd_esquema.maestra;
 
-		INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
-		SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
-		FROM #maestra m
-		INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
-		INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-		INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
-		WHERE m.cliente_dni is not null;
+		OPEN temp_maestra;
 
-		INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
-		SELECT 'calle' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
-		FROM #maestra m
-		INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
-		INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-		INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
-		WHERE m.cliente_dni is not null;
+		FETCH NEXT FROM temp_maestra
+		INTO  @chofer_dni, @cliente_dni, @viaje_cant_fichas, @viaje_fecha;
 		
+		CREATE TABLE #maestra(
+				chofer_dni numeric(8) NOT NULL,
+				cliente_dni numeric(8),
+				viaje_cant_fichas numeric(1) NOT NULL,
+				viaje_fecha datetime NOT NULL
+			);
+		CREATE INDEX IDX_maestra_1 ON #maestra(chofer_dni);		
+
+		WHILE @@FETCH_STATUS = 0
+		BEGIN		
+			
+			WHILE (@cont < 1000) and (@@FETCH_STATUS = 0)
+			BEGIN
+				SET @cont = @cont + 1				
+				
+				INSERT INTO #maestra (chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha)
+				VALUES (@chofer_dni, @cliente_dni, @viaje_cant_fichas, @viaje_fecha)
+			
+				FETCH NEXT FROM temp_maestra
+				INTO  @chofer_dni, @cliente_dni, @viaje_cant_fichas, @viaje_fecha;
+			END
+
+			INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
+			SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+			FROM #maestra m
+			INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+			INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+			INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+			WHERE m.cliente_dni is not null;
+
+			INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
+			SELECT 'calle' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+			FROM #maestra m
+			INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+			INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+			INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+			WHERE m.cliente_dni is null;
+				
+			FETCH NEXT FROM temp_maestra
+			INTO  @chofer_dni, @cliente_dni, @viaje_cant_fichas, @viaje_fecha;
+		
+			SET @cont = 0
+			TRUNCATE TABLE #maestra;
+		END
+		CLOSE temp_maestra;
+		DEALLOCATE temp_maestra;		
 		DROP TABLE #maestra;
 	END
 	/*Finalización de Migración de datos para la tabla Viajes*/
