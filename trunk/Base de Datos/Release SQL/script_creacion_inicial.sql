@@ -173,7 +173,6 @@ CREATE TABLE GD1C2012.FEMIG.RolUsuario (
 /*Creacion de Propiedades Extendidas	*/
 /*++++++++++++++++++++++++++++++++++++++*/
 GO
-
 EXEC sp_addextendedproperty 'MS_Description', '0: El rol está activo
 1: El rol esta inhabilitado', 'Schema', FEMIG, 'table', Rol, 'column', anulado;
 
@@ -291,13 +290,13 @@ FROM gd_esquema.maestra
 order by turno_hora_inicio asc;
 
 INSERT INTO femig.ChoferAutoTurno (dniChofer,turnoID,patente,fecha)
-SELECT DISTINCT(gd.chofer_dni), tr.turnoID, gd.auto_patente, gd.viaje_fecha 
+SELECT DISTINCT(ch.dniChofer), tr.turnoID, at.patente, dateadd(dd, datediff(dd,0,gd.viaje_fecha),0) as viaje_fecha
 FROM gd_esquema.maestra gd, femig.choferes ch, femig.autos at, femig.turnos tr
 WHERE gd.chofer_dni = ch.dniChofer
 AND gd.auto_patente = at.patente
 AND gd.turno_hora_inicio = tr.horaInicio
 and gd.turno_hora_fin = tr.horaFin
-order by chofer_dni, viaje_fecha;
+order by ch.dniChofer, tr.turnoID;
 
 INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento) 
 VALUES (0,'clienteCalle','clienteCalle',0,'no aplica','no aplica',cast(0 as datetime));
@@ -330,32 +329,32 @@ and tr.horaFin = gd.turno_hora_fin
 group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
 order by chofer_dni, rendicion_fecha, turnoID;
 
---viajes -- VERLO
-BEGIN TRAN
+/*Inicio de Migración de datos para la tabla Viajes*/
+BEGIN
 
-DECLARE #maestra TABLE (
-	chofer_dni numeric(18) NOT NULL,
-	cliente_dni numeric(18) NOT NULL,
-	viaje_cant_fichas numeric(18) NOT NULL,
-	viaje_fecha datetime NOT NULL
-);
-CREATE INDEX IDX_maestra_1 ON #maestra(chofer_dni);
-CREATE INDEX IDX_maestra_2 ON #maestra(cliente_dni);
-INSERT INTO #maestra (chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha)
-SELECT chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha
-FROM gd_esquema.maestra
-WHERE cliente_dni is not null;
+	CREATE TABLE #maestra(
+		chofer_dni numeric(18) NOT NULL,
+		cliente_dni numeric(18) NOT NULL,
+		viaje_cant_fichas numeric(18) NOT NULL,
+		viaje_fecha datetime NOT NULL
+	);
+	CREATE INDEX IDX_maestra_1 ON #maestra(chofer_dni);
+	CREATE INDEX IDX_maestra_2 ON #maestra(cliente_dni);
+	INSERT INTO #maestra (chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha)
+	SELECT chofer_dni,cliente_dni,viaje_cant_fichas,viaje_fecha
+	FROM gd_esquema.maestra
+	WHERE cliente_dni is not null;
 
-INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
-SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
-FROM #maestra m
-INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
-INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
-WHERE m.cliente_dni is not null
+	INSERT INTO femig.viajes (tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
+	SELECT 'cliente' as tipoViaje,cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+	FROM #maestra m
+	INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+	INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+	INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+	WHERE m.cliente_dni is not null
 
-COMMIT TRAN
-
+COMMIT
+/*Finalización de Migración de datos para la tabla Viajes*/
 --pantalla
 
 --rol
@@ -375,7 +374,9 @@ END TRY
 BEGIN CATCH
 	PRINT 'Se ha procudido un error en la migracion de los datos'
 	PRINT ERROR_NUMBER()
+	PRINT ERROR_LINE()
 	PRINT ERROR_MESSAGE()
+	PRINT ERROR_SEVERITY()
 END CATCH
 /*++++++++++++++++++++++++++++++++++++++*/
 /*		Store Procedures				*/
