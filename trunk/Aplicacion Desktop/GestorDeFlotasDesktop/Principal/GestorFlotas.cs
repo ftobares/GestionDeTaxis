@@ -82,6 +82,16 @@ namespace GestorDeFlotasDesktop.Principal
                     frmAbmUsuario.MdiParent = this;
                     frmAbmUsuario.Show();
                     break;
+                case "abmRol":
+                    GestorDeFlotasDesktop.AbmRol.AbmRol frmAbmRol = GestorDeFlotasDesktop.AbmRol.AbmRol.Instance();
+                    frmAbmRol.MdiParent = this;
+                    frmAbmRol.Show();
+                    break;
+                case "abmPantalla":
+                    GestorDeFlotasDesktop.AbmPantallas.AbmPantalla frmAbmPantalla = GestorDeFlotasDesktop.AbmPantallas.AbmPantalla.Instance();
+                    frmAbmPantalla.MdiParent = this;
+                    frmAbmPantalla.Show();
+                    break;
             }     
         }
 

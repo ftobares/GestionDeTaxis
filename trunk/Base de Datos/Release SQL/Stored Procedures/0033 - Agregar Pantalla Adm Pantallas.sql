@@ -1,0 +1,1 @@
+INSERT INTO FEMIG.PANTALLA VALUES ('abmPantalla','Pantallas del Sistema')
