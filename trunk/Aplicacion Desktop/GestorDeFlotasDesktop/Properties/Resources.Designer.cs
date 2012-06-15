@@ -88,6 +88,20 @@ namespace GestorDeFlotasDesktop.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap application_view_tile {
+            get {
+                object obj = ResourceManager.GetObject("application_view_tile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap arrow_undo {
+            get {
+                object obj = ResourceManager.GetObject("arrow_undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap cancel {
             get {
                 object obj = ResourceManager.GetObject("cancel", resourceCulture);
