@@ -63,7 +63,7 @@ namespace GestorDeFlotasDesktop.AbmUsuario
             txtApellido.Text = dtValores.Rows[0]["apellido"].ToString();
             txtEmail.Text = dtValores.Rows[0]["email"].ToString();
             txtMaxIntentos.Text = dtValores.Rows[0]["cantMaxIntentos"].ToString();
-            txtPassword.Text = "*******";
+            txtPassword.Text = dtValores.Rows[0]["password"].ToString();
             if (dtValores.Rows[0]["cantMaxIntentos"].ToString() == "1")
                 chkDeshabilitado.Checked = true;
             else
