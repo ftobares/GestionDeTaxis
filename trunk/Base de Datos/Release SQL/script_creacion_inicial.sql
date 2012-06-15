@@ -380,12 +380,15 @@ BEGIN TRY
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmRendicion','Rendición de Cuenta')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmFacturacion','Facturación')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmListado','Listados Estadísticos')
-
+	INSERT INTO FEMIG.PANTALLA VALUES ('abmPantalla','Pantallas del Sistema')
+	
 	/*ROL*/
 	INSERT INTO FEMIG.Rol VALUES ('Administrador','Administrador de Sistema')
 	
+	INSERT INTO FEMIG.ROLPANTALLA VALUES ('Administrador','abmPantalla','1')
+	
 	INSERT INTO FEMIG.ROLPANTALLA
-	SELECT 'Administrador',PANTALLAID,'1' FROM FEMIG.PANTALLA
+	SELECT 'Administrador',PANTALLAID,'1' FROM FEMIG.PANTALLA	
 	
 	/*Carga Inicial de Usuario Administrador General*/
 	INSERT INTO femig.usuario (nombre,apellido,email,password,cantIntentosFallo,cantMaxIntentos)
@@ -1133,4 +1136,97 @@ BEGIN
 	update femig.Usuario set anulado = '1' where usuarioID = @pUsuarioID
 END
 
-/*PRC 0030 - Procedure */
+/*PRC 0030 - Procedure Crear Rol*/
+CREATE PROCEDURE [FEMIG].[crearRol] 
+	@pRolID				VARCHAR(20),
+	@pDescripcion		VARCHAR(50),
+	@pAnulado			BIT,
+	@pRetCatchError		VARCHAR(1000) out
+AS
+BEGIN
+	if exists (select 1 from FEMIG.Rol where rolID = @pRolID)
+	begin
+		set @pRetCatchError = 'Ya existe el rol ' + @pRolID + '.'
+		return
+	end
+
+	INSERT INTO [GD1C2012].[FEMIG].[Rol]
+           (rolID, descripcion, anulado)
+    VALUES
+           (@pRolID
+           ,@pDescripcion
+           ,@pAnulado)
+	
+END
+
+/*PRC 0031 - Procedure Eliminar Rol*/
+CREATE PROCEDURE [FEMIG].[eliminarRol] 
+	@pRolID			VARCHAR(20)
+AS
+BEGIN
+	update femig.Rol set anulado = '1' where rolID = @pRolID
+END
+
+/*PRC 0032 - Procedure Editar Rol*/
+CREATE PROCEDURE [FEMIG].[editarRol] 
+	@pRolID				VARCHAR(20),
+	@pDescripcion		VARCHAR(50),
+	@pAnulado			BIT,
+	@pRetCatchError		VARCHAR(1000) out
+AS
+BEGIN
+	--Controlo que no haya duplicados de Patente
+	if not exists (select 1 from FEMIG.Rol where rolID = @pRolID)
+	begin
+		set @pRetCatchError = 'No existe el Rol ' + @pRolID + '.'
+		return
+	end
+
+	UPDATE [GD1C2012].[FEMIG].[Rol]
+	   SET [descripcion] = @pDescripcion
+		  ,[anulado] = @pAnulado
+	 WHERE rolID = @pRolID
+	
+END
+
+/*PRC 0033 - Procedure Editar Rol*/
+CREATE PROCEDURE [FEMIG].[editarRol] 
+	@pRolID				VARCHAR(20),
+	@pDescripcion		VARCHAR(50),
+	@pAnulado			BIT,
+	@pRetCatchError		VARCHAR(1000) out
+AS
+BEGIN
+	--Controlo que no haya duplicados de Patente
+	if not exists (select 1 from FEMIG.Rol where rolID = @pRolID)
+	begin
+		set @pRetCatchError = 'No existe el Rol ' + @pRolID + '.'
+		return
+	end
+
+	UPDATE [GD1C2012].[FEMIG].[Rol]
+	   SET [descripcion] = @pDescripcion
+		  ,[anulado] = @pAnulado
+	 WHERE rolID = @pRolID
+	
+END
+
+/*PRC 0034 - Procedure Editar Pantalla*/
+CREATE PROCEDURE [FEMIG].[editarPantalla] 
+	@pPantallaID		VARCHAR(255),
+	@pDescripcion		VARCHAR(255),
+	@pRetCatchError		VARCHAR(1000) out
+AS
+BEGIN
+	--Controlo que no haya duplicados de Patente
+	if not exists (select 1 from FEMIG.Pantalla where pantallaID = @pPantallaID)
+	begin
+		set @pRetCatchError = 'No existe la Pantalla ' + cast(@pPantallaID as varchar) + '.'
+		return
+	END
+		
+	UPDATE [GD1C2012].[FEMIG].[Pantalla]
+	   SET [descripcion] = @pDescripcion
+	 WHERE pantallaID = @pPantallaID
+		
+END
