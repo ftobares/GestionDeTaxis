@@ -304,11 +304,11 @@
     <Compile Include="RegistrarViaje\RegistrarViajes.Designer.cs">
       <DependentUpon>RegistrarViajes.cs</DependentUpon>
     </Compile>
-    <Compile Include="RendirViajes\RendierViajes.cs">
+    <Compile Include="RendirViajes\RendirViajes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RendirViajes\RendierViajes.Designer.cs">
-      <DependentUpon>RendierViajes.cs</DependentUpon>
+    <Compile Include="RendirViajes\RendirViajes.Designer.cs">
+      <DependentUpon>RendirViajes.cs</DependentUpon>
     </Compile>
     <Compile Include="Rol.cs" />
     <Compile Include="RolPantalla.cs" />
