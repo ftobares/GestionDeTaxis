@@ -309,6 +309,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="RolPantallas\AsigRolPantallas.resx">
+      <DependentUpon>AsigRolPantallas.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -342,6 +345,12 @@
     </Compile>
     <Compile Include="Rol.cs" />
     <Compile Include="RolPantalla.cs" />
+    <Compile Include="RolPantallas\AsigRolPantallas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RolPantallas\AsigRolPantallas.Designer.cs">
+      <DependentUpon>AsigRolPantallas.cs</DependentUpon>
+    </Compile>
     <Compile Include="RolUsuario.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="UsuarioLogeado.cs" />

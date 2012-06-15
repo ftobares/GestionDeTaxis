@@ -62,6 +62,15 @@ namespace GestorDeFlotasDesktop.AbmRol
             dgRoles.Columns.Add(btnEliminar);
             btnEliminar.DisplayIndex = 1;
             btnEliminar.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+
+            DataGridViewImageColumn btnPantalla = new DataGridViewImageColumn();
+            btnPantalla.Description = "Pantallas";
+            btnPantalla.HeaderText = "Pantallas";
+            btnPantalla.Name = "btnPantalla";
+            btnPantalla.Image = global::GestorDeFlotasDesktop.Properties.Resources.application_view_tile;
+            dgRoles.Columns.Add(btnPantalla);
+            btnPantalla.DisplayIndex = 2;
+            btnPantalla.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
         }
 
         private void inicializarFormulario()
@@ -159,7 +168,17 @@ namespace GestorDeFlotasDesktop.AbmRol
 
             }
 
+            if (e.ColumnIndex == 2)
+            {
+                GestorDeFlotasDesktop.RolPantallas.AsigRolPantallas frmRolPantalla = new GestorDeFlotasDesktop.RolPantallas.AsigRolPantallas();
+                
+                frmRolPantalla.rolID=dgRoles.SelectedRows[0].Cells["rolID"].Value.ToString();
 
+                frmRolPantalla.ShowDialog();
+
+                frmRolPantalla.Dispose();
+
+            }
 
         }
     }
