@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
@@ -173,6 +174,7 @@
             this.dgUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgUsuarios.Size = new System.Drawing.Size(687, 255);
             this.dgUsuarios.TabIndex = 16;
+            this.dgUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgUsuarios_CellContentClick);
             // 
             // btnNuevoUsuario
             // 
@@ -210,6 +212,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AbmUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administración de Usuarios y Permisos";
             this.Load += new System.EventHandler(this.AbmUsuario_Load);
             this.groupBox2.ResumeLayout(false);

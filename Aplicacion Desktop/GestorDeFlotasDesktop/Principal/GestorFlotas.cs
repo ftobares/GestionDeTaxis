@@ -77,6 +77,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmFact.MdiParent = this;
                     frmFact.Show();
                     break;
+                case "abmUsuario":
+                    GestorDeFlotasDesktop.AbmUsuario.AbmUsuario frmAbmUsuario = GestorDeFlotasDesktop.AbmUsuario.AbmUsuario.Instance();
+                    frmAbmUsuario.MdiParent = this;
+                    frmAbmUsuario.Show();
+                    break;
             }     
         }
 
