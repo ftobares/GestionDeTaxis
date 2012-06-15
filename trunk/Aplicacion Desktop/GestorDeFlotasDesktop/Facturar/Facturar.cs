@@ -12,7 +12,7 @@ namespace GestorDeFlotasDesktop.Facturar
 {
     public partial class Facturar : Form
     {
-        public string dniCliente { get; set; }
+        public string codFactura { get; set; }
         public string tituloPantalla { get; set; }
         private static Facturar unicaInst = null;
         public static Facturar Instance()
@@ -37,61 +37,22 @@ namespace GestorDeFlotasDesktop.Facturar
 
         private string construirQuery()
         {
-            /*
-            string strQuery = "select " + camposSelect + " from " + nombreTabla + " where 1=1";
-            if (!string.IsNullOrEmpty(whereObligatorio))
-                strQuery += " and " + whereObligatorio;
-            if (!string.IsNullOrEmpty(txtPatente.Text))
-                strQuery += " and cast(" + filtro1Value + " as varchar) like '%" + txtPatente.Text + "%'";
-            if (!string.IsNullOrEmpty(txtMarca.Text))
-                strQuery += " and cast(" + filtro2Value + " as varchar) like '%" + txtMarca.Text + "%'";
-            if (!string.IsNullOrEmpty(txtModelo.Text))
-                strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtModelo.Text + "%'";
-            if (!string.IsNullOrEmpty(txtReloj.Text))
-                strQuery += " and cast(" + filtro4Value + " as varchar) like '%" + txtReloj.Text + "%'";
-            if (!string.IsNullOrEmpty(txtLicencia.Text))
-                strQuery += " and cast(" + filtro5Value + " as varchar) like '%" + txtLicencia.Text + "%'";
-            strQuery += " order by " + consultaOrderBy;
-            
-            return strQuery;*/
-            return "";
+            string strQuery = "select " + "*" + " from " + "femig.Rendiciones" + " where 1=1";
+            strQuery += " AND codRendicion = " + codFactura + " order by " + "importeTotal";
+            return strQuery;
         }
 
         private void cargarQuery()
         {
             string strQuery = construirQuery();
             dgFacturas.DataSource = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(strQuery);
-            /*
-            string leyendaFiltrosInicial = "Filtros Aplicados: ";
-            string leyendaFiltros = "";
-            if (!string.IsNullOrEmpty(txtPatente.Text))
-                leyendaFiltros += filtro1Text + " " + txtPatente.Text;
-            if (!string.IsNullOrEmpty(txtMarca.Text))
-                leyendaFiltros += ", " + filtro2Text + " " + txtMarca.Text;
-            if (!string.IsNullOrEmpty(txtModelo.Text))
-                leyendaFiltros += ", " + filtro3Text + " " + txtModelo.Text;
-            if (!string.IsNullOrEmpty(txtReloj.Text))
-                leyendaFiltros += ", " + filtro4Text + " " + txtReloj.Text;
-            if (!string.IsNullOrEmpty(txtLicencia.Text))
-                leyendaFiltros += ", " + filtro5Text + " " + txtLicencia.Text;
-
-            if (string.IsNullOrEmpty(leyendaFiltros))
-                lblFiltro.Text = "No se seleccionó ningún filtro.";
-            else
-                lblFiltro.Text = leyendaFiltrosInicial + leyendaFiltros;*/
         }
 
         private void inicializarFormulario()
         {
             txtCliente.Text = "";
             txtImporte.Text = "";
-
-            /*if (modoAbm == "Editar")
-            {
-
-                getDatosRegistro(patenteAuto);
-                mtxtPatente.ReadOnly = true;
-            }*/
+            txtImporte.Visible = false;
         }
 
         private bool validaCamposRequeridos()
@@ -114,8 +75,6 @@ namespace GestorDeFlotasDesktop.Facturar
 
                     if (string.IsNullOrEmpty(txtCliente.Text))
                         frmErrores.agregarError("Debe ingresar el DNI del Cliente.");
-                    if (string.IsNullOrEmpty(txtImporte.Text))
-                        frmErrores.agregarError("Debe ingresar el importe");
                     if (string.IsNullOrEmpty(dtpFecha.Text))
                         frmErrores.agregarError("Debe especificar la Fecha Inicial de Facturacion.");
                     if (string.IsNullOrEmpty(dtpFecha.Text))
@@ -135,14 +94,15 @@ namespace GestorDeFlotasDesktop.Facturar
                 pFechaFin.Value = dtpFecha.Text;
                 SqlParameter pCliente = new SqlParameter("@pDniCliente", SqlDbType.BigInt);
                 pCliente.Value = txtCliente.Text;
+
                 SqlParameter pImporteTotal = new SqlParameter("@pImporteTotal", SqlDbType.Float);
-                pImporteTotal.Value = txtImporte.Text;
                 pImporteTotal.Direction = ParameterDirection.Output;
-                
+                SqlParameter pCodFactura = new SqlParameter("@pCodFactura", SqlDbType.Float);
+                pCodFactura.Direction = ParameterDirection.Output;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = { pFecha, pFechaFin, pCliente, pImporteTotal, pRetCatchError };
+                SqlParameter[] parametros = { pFecha, pFechaFin, pCliente, pImporteTotal, pCodFactura, pRetCatchError };
 
                 //if (modoAbm == "Nuevo")
                 {
@@ -150,6 +110,9 @@ namespace GestorDeFlotasDesktop.Facturar
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
+                            txtImporte.Text = pImporteTotal.Value.ToString();
+                            txtImporte.Visible = true;
+                            codFactura = pCodFactura.Value.ToString();
                             MessageBox.Show("Se dio de Alta la Facturacion correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                             cargarQuery();
