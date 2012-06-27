@@ -18,6 +18,7 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+            unicaInst = null;
         }
 
         #region Windows Form Designer generated code
@@ -28,11 +29,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.dgFacturas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgFacturas)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // dgFacturas
+            // 
+            this.dgFacturas.AllowUserToAddRows = false;
+            this.dgFacturas.AllowUserToDeleteRows = false;
+            this.dgFacturas.AllowUserToResizeRows = false;
+            this.dgFacturas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgFacturas.Location = new System.Drawing.Point(12, 12);
+            this.dgFacturas.MultiSelect = false;
+            this.dgFacturas.Name = "dgFacturas";
+            this.dgFacturas.ReadOnly = true;
+            this.dgFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgFacturas.Size = new System.Drawing.Size(260, 238);
+            this.dgFacturas.TabIndex = 68;
+            // 
+            // MejoresAutos
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.dgFacturas);
+            this.Name = "MejoresAutos";
+            this.Text = "TOP Mejores Autos";
+            this.Load += new System.EventHandler(this.MejoresAutos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgFacturas)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView dgFacturas;
     }
 }

@@ -89,7 +89,7 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
                         frmErrores.agregarError("Debe especificar la Fecha del Viaje.");
                     if (string.IsNullOrEmpty(dtHora.Text))
                         frmErrores.agregarError("Debe especificar la Hora del Viaje.");
-                    if(cmbViaje.Text=="registrado" || cmbViaje.Text == string.Empty)
+                    if(cmbViaje.Text=="registrado")
                         if (string.IsNullOrEmpty(txtCliente.Text))
                             frmErrores.agregarError("Debe especificar el DNI del Cliente.");
                     

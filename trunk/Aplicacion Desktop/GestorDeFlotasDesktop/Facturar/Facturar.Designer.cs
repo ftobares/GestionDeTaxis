@@ -162,7 +162,7 @@
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(82, 20);
             this.dtpFecha.TabIndex = 58;
-            this.dtpFecha.Value = new System.DateTime(2012, 6, 13, 16, 48, 25, 0);
+            this.dtpFecha.Value = new System.DateTime(2012, 6, 26, 0, 0, 0, 0);
             // 
             // label1
             // 
@@ -199,7 +199,7 @@
             this.dtpFechaFin.Name = "dtpFechaFin";
             this.dtpFechaFin.Size = new System.Drawing.Size(82, 20);
             this.dtpFechaFin.TabIndex = 66;
-            this.dtpFechaFin.Value = new System.DateTime(2012, 6, 13, 16, 48, 25, 0);
+            this.dtpFechaFin.Value = new System.DateTime(2012, 6, 26, 0, 0, 0, 0);
             // 
             // Facturar
             // 

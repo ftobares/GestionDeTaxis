@@ -13,7 +13,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
     public partial class AsignacionChofer_AutoTurno : Form
     {
         private string whereObligatorio = "";
-        private string camposSelect = "asignacionID, fecha, dniChofer, patente, turnoID";
+        private string camposSelect = "asignacionID, fecha, dniChofer, patente, turnoID, anulado";
         private string consultaOrderBy = "fecha,dniChofer";
         private string nombreTabla = "Femig.ChoferAutoTurno";
         private string filtro1Value = "fecha";
@@ -73,12 +73,17 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
         private string construirQuery()
         {
+            string[] fech;
+            fech = dtpNacimiento.Text.Split('/');
 
             string strQuery = "select " + camposSelect + " from " + nombreTabla + " where 1=1";
             if (!string.IsNullOrEmpty(whereObligatorio))
                 strQuery += " and " + whereObligatorio;
             if (!string.IsNullOrEmpty(dtpNacimiento.Text))
-                strQuery += " and cast(" + filtro1Value + " as varchar) like '%" + dtpNacimiento.Text + "%'";
+               
+                strQuery += " and year(" + filtro1Value + ") = '" + fech[0] + "'";
+                strQuery += " and month(" + filtro1Value + ") = '" + fech[1] + "'";
+                strQuery += " and day(" + filtro1Value + ") = '" + fech[2] + "'";
             if (!string.IsNullOrEmpty(txtApellido.Text))
                 strQuery += " and cast(" + filtro2Value + " as varchar) like '%" + txtApellido.Text + "%'";
             if (!string.IsNullOrEmpty(txtNombre.Text))
@@ -140,23 +145,23 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             {
                 if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
                 {
-                    GestorDeFlotasDesktop.AbmChofer.addEditChofer frmEditarChofer = GestorDeFlotasDesktop.AbmChofer.addEditChofer.Instance();
-                    frmEditarChofer.modoAbm = "Editar";
+                    GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.addChofer_AutoTurno frmEditarChoferAT = GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.addChofer_AutoTurno.Instance();
+                    frmEditarChoferAT.modoAbm = "Editar";
                     if (dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString() != string.Empty)
-                        frmEditarChofer.dniChofer = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
-                    frmEditarChofer.tituloPantalla = "Editar Relacion ";
-                    if (frmEditarChofer.ShowDialog() == DialogResult.OK)
+                        frmEditarChoferAT.asignacionID = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
+                    frmEditarChoferAT.tituloPantalla = "Editar Relacion ";
+                    if (frmEditarChoferAT.ShowDialog() == DialogResult.OK)
                         cargarQuery();
-                    frmEditarChofer.Close();
+                    frmEditarChoferAT.Close();
                 }
 
                 if (e.ColumnIndex == 1)
                 {
                     if (MessageBox.Show("¿Esta seguro que deséa eliminar esta Relacion?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        SqlParameter pDniChofer = new SqlParameter("@pDniChofer", SqlDbType.Int);
-                        pDniChofer.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
-                        GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarChoferAutoTurno", pDniChofer);
+                        SqlParameter pAsignacionID = new SqlParameter("@pId_Asign", SqlDbType.Int);
+                        pAsignacionID.Value = long.Parse(dgChoferes.SelectedRows[0].Cells["asignacionID"].Value.ToString());
+                        GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("femig.eliminarChoferAutoTurno", pAsignacionID);
                         cargarQuery();
                     }
 

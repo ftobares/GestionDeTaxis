@@ -51,12 +51,16 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
         {
             DataTable dtValores = new DataTable();
             dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select fecha, dniChofer, turnoID, patente from femig.ChoferAutoTurno where asignacionID = " + asignacionID);
+            dtpNacimiento.Text = dtValores.Rows[0]["fecha"].ToString();
+            textChofer.Text = dtValores.Rows[0]["dniChofer"].ToString();
+            txtTurno.Text = dtValores.Rows[0]["turnoID"].ToString();
+            txtAuto.Text = dtValores.Rows[0]["patente"].ToString();
         }
 
         private bool validaCamposRequeridos()
         {
 
-            if (dtpNacimiento.Text == string.Empty || txtReloj.Text == string.Empty || textBox1.Text == string.Empty || textBox2.Text == string.Empty)
+            if (dtpNacimiento.Text == string.Empty || txtAuto.Text == string.Empty || textChofer.Text == string.Empty || txtTurno.Text == string.Empty)
                 return false;
             else
                 return true;
@@ -80,22 +84,23 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pAsignacionID = new SqlParameter("@pAsignacionID", SqlDbType.Int);
-                pAsignacionID.Value = asignacionID.ToString();
-                SqlParameter pNombre = new SqlParameter("@pNombre", SqlDbType.DateTime);
+                SqlParameter pId_Asign = new SqlParameter("@pId_Asign", SqlDbType.Int);
+                pId_Asign.Value = this.asignacionID;
+
+                SqlParameter pNombre = new SqlParameter("@pFecha", SqlDbType.DateTime);
                 pNombre.Value = dtpNacimiento.Text;
-                SqlParameter pApellido = new SqlParameter("@pApellido", SqlDbType.Int);
-                pApellido.Value = txtReloj.Text;
-                SqlParameter pDireccion = new SqlParameter("@pDireccion", SqlDbType.Int);
-                pDireccion.Value = textBox1.Text;
-                SqlParameter pTurno = new SqlParameter("@pTurno", SqlDbType.VarChar, 10);
-                pTurno.Value = textBox2.Text;
+                SqlParameter pApellido = new SqlParameter("@pDniChofer", SqlDbType.Int);
+                pApellido.Value = textChofer.Text;
+                SqlParameter pDireccion = new SqlParameter("@pTurnoID", SqlDbType.Int);
+                pDireccion.Value = txtTurno.Text;
+                SqlParameter pTurno = new SqlParameter("@pPatente", SqlDbType.VarChar, 10);
+                pTurno.Value = txtAuto.Text;
                 /*SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
                 pAnulado.Value = 0;*/
-                SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar, 1000);
+                SqlParameter pRetCatchError = new SqlParameter("@retCatchError", SqlDbType.VarChar, 1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
-                SqlParameter[] parametros = { pNombre, pApellido, pTurno, pDireccion, pRetCatchError };
+                SqlParameter[] parametros = { pNombre, pApellido, pDireccion, pTurno, pRetCatchError };
 
                 if (modoAbm == "Nuevo")
                 {
@@ -113,12 +118,12 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
                 }
                 else
                 {
-                    SqlParameter[] parametros2 = { pAsignacionID, pNombre, pApellido, pTurno, pDireccion, pRetCatchError };
+                    SqlParameter[] parametros2 = { pId_Asign, pNombre, pApellido, pTurno, pDireccion, pRetCatchError };
                     if (GestorDeFlotasDesktop.BD.GD1C2012.ejecutarSP("FEMIG.editarChoferAutoTurno", parametros2))
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
-                            MessageBox.Show("Fue editado exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Fue editado y dado de alta exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                         }
                         else
@@ -142,9 +147,9 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
         {
             //if (modoAbm == "Nuevo")
             //{
-                txtReloj.Text = "";
-                textBox1.Text = "";
-                textBox2.Text = "";
+                txtAuto.Text = "";
+                textChofer.Text = "";
+                txtTurno.Text = "";
             //}
         }
 
@@ -160,7 +165,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
 
         private void btnSeleccionarAuto_Click(object sender, EventArgs e)
         {
-            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador("patente");
 
             frmBuscadorReloj.campoRetorno = "patente";
             frmBuscadorReloj.Filtro1Text = "Marca:";
@@ -173,14 +178,14 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             frmBuscadorReloj.whereObligatorio = "isnull(anulado,'0')='0'";
 
             if (frmBuscadorReloj.ShowDialog() == DialogResult.OK)
-                txtReloj.Text = frmBuscadorReloj.valorRetorno;
+                txtAuto.Text = frmBuscadorReloj.valorRetorno;
 
             frmBuscadorReloj.Dispose();
         }
 
         private void btnSeleccionarChofer_Click(object sender, EventArgs e)
         {
-            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador("dniChofer");
 
             frmBuscadorReloj.campoRetorno = "dniChofer";
             frmBuscadorReloj.Filtro1Text = "Nombre:";
@@ -193,14 +198,14 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             frmBuscadorReloj.whereObligatorio = "isnull(anulado,'0')='0'";
 
             if (frmBuscadorReloj.ShowDialog() == DialogResult.OK)
-                textBox1.Text = frmBuscadorReloj.valorRetorno;
+                textChofer.Text = frmBuscadorReloj.valorRetorno;
 
             frmBuscadorReloj.Dispose();
         }
 
         private void btnSeleccionarTurno_Click(object sender, EventArgs e)
         {
-            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador("turnoID");
 
             frmBuscadorReloj.campoRetorno = "turnoID";
             frmBuscadorReloj.Filtro1Text = "Hora Inicio:";
@@ -213,7 +218,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
             frmBuscadorReloj.whereObligatorio = "isnull(anulado,'0')='0'";
 
             if (frmBuscadorReloj.ShowDialog() == DialogResult.OK)
-                textBox2.Text = frmBuscadorReloj.valorRetorno;
+                txtTurno.Text = frmBuscadorReloj.valorRetorno;
 
             frmBuscadorReloj.Dispose();
         }

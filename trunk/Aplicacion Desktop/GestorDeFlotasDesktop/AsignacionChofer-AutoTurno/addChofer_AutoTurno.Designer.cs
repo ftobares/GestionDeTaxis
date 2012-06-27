@@ -39,11 +39,11 @@
             this.lblDireccion = new System.Windows.Forms.Label();
             this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
             this.btnSeleccionarReloj = new System.Windows.Forms.Button();
-            this.txtReloj = new System.Windows.Forms.TextBox();
+            this.txtAuto = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textChofer = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTurno = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnLimpiar
@@ -146,7 +146,8 @@
             // 
             // dtpNacimiento
             // 
-            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNacimiento.CustomFormat = "yyyy\'/\'MM\'/\'dd";
+            this.dtpNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpNacimiento.Location = new System.Drawing.Point(108, 71);
             this.dtpNacimiento.MinDate = new System.DateTime(2012, 6, 13, 0, 0, 0, 0);
             this.dtpNacimiento.Name = "dtpNacimiento";
@@ -167,14 +168,14 @@
             this.btnSeleccionarReloj.UseVisualStyleBackColor = true;
             this.btnSeleccionarReloj.Click += new System.EventHandler(this.btnSeleccionarAuto_Click);
             // 
-            // txtReloj
+            // txtAuto
             // 
-            this.txtReloj.Location = new System.Drawing.Point(108, 107);
-            this.txtReloj.Name = "txtReloj";
-            this.txtReloj.ReadOnly = true;
-            this.txtReloj.Size = new System.Drawing.Size(100, 20);
-            this.txtReloj.TabIndex = 42;
-            this.txtReloj.TabStop = false;
+            this.txtAuto.Location = new System.Drawing.Point(108, 107);
+            this.txtAuto.Name = "txtAuto";
+            this.txtAuto.ReadOnly = true;
+            this.txtAuto.Size = new System.Drawing.Size(100, 20);
+            this.txtAuto.TabIndex = 42;
+            this.txtAuto.TabStop = false;
             // 
             // button1
             // 
@@ -189,14 +190,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnSeleccionarChofer_Click);
             // 
-            // textBox1
+            // textChofer
             // 
-            this.textBox1.Location = new System.Drawing.Point(108, 138);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 44;
-            this.textBox1.TabStop = false;
+            this.textChofer.Location = new System.Drawing.Point(108, 138);
+            this.textChofer.Name = "textChofer";
+            this.textChofer.ReadOnly = true;
+            this.textChofer.Size = new System.Drawing.Size(100, 20);
+            this.textChofer.TabIndex = 44;
+            this.textChofer.TabStop = false;
             // 
             // button2
             // 
@@ -211,14 +212,14 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnSeleccionarTurno_Click);
             // 
-            // textBox2
+            // txtTurno
             // 
-            this.textBox2.Location = new System.Drawing.Point(108, 165);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 46;
-            this.textBox2.TabStop = false;
+            this.txtTurno.Location = new System.Drawing.Point(108, 165);
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.ReadOnly = true;
+            this.txtTurno.Size = new System.Drawing.Size(100, 20);
+            this.txtTurno.TabIndex = 46;
+            this.txtTurno.TabStop = false;
             // 
             // addChofer_AutoTurno
             // 
@@ -226,11 +227,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 291);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtTurno);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textChofer);
             this.Controls.Add(this.btnSeleccionarReloj);
-            this.Controls.Add(this.txtReloj);
+            this.Controls.Add(this.txtAuto);
             this.Controls.Add(this.dtpNacimiento);
             this.Controls.Add(this.lblDireccion);
             this.Controls.Add(this.lblApellido);
@@ -261,10 +262,10 @@
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.DateTimePicker dtpNacimiento;
         private System.Windows.Forms.Button btnSeleccionarReloj;
-        private System.Windows.Forms.TextBox txtReloj;
+        private System.Windows.Forms.TextBox txtAuto;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textChofer;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTurno;
     }
 }

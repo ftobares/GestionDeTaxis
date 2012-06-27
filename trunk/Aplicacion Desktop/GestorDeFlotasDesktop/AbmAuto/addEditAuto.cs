@@ -174,7 +174,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
         private void btnSeleccionarReloj_Click(object sender, EventArgs e)
         {
-            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador();
+            GestorDeFlotasDesktop.Buscador.Buscador frmBuscadorReloj = new GestorDeFlotasDesktop.Buscador.Buscador("nroSerieReloj");
 
             frmBuscadorReloj.campoRetorno = "nroSerieReloj";
             frmBuscadorReloj.Filtro1Text = "Marca:";

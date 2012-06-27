@@ -180,7 +180,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
             txtNombre.Text = dtValores.Rows[0]["nombre"].ToString();
             txtApellido.Text = dtValores.Rows[0]["apellido"].ToString();
             txtTel.Text = dtValores.Rows[0]["telefono"].ToString();
-            string sDir = dtValores.Rows[0]["direccion"].ToString() + "||||";
+            string sDir = dtValores.Rows[0]["direccion"].ToString() + "|||||";
             string[] strDir = sDir.Split('|');
             txtCalle.Text = "";  txtNumCalle.Text = ""; txtPiso.Text = ""; txtDpto.Text = ""; txtLocalidad.Text = ""; txtCP.Text = "";
             txtCalle.Text = strDir[0];

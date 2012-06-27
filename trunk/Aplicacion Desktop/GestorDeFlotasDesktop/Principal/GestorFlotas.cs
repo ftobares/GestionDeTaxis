@@ -92,6 +92,11 @@ namespace GestorDeFlotasDesktop.Principal
                     frmAbmPantalla.MdiParent = this;
                     frmAbmPantalla.Show();
                     break;
+                case "abmListado":
+                    GestorDeFlotasDesktop.Listados.Listados frmAbmListados = GestorDeFlotasDesktop.Listados.Listados.Instance();
+                    frmAbmListados.MdiParent = this;
+                    frmAbmListados.Show();
+                    break;
             }     
         }
 
