@@ -164,12 +164,3 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - r126\gestion-de-datos\Aplica
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - r126\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.RegistrarViaje.RegistrarViajes.resources
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - r126\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Facturar.Facturar.resources
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP - r126\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.RendirViajes.RendirViajes.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmPantallas.AbmPantalla.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmPantallas.editPantalla.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmRol.AbmRol.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmRol.addEditRol.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmUsuario.AbmUsuario.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.AbmUsuario.addEditUsuario.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.Listados.Listados.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.RolPantallas.AsigRolPantallas.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Debug\GestorDeFlotasDesktop.UsuariosRoles.UsuariosRoles.resources
