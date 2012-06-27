@@ -10,35 +10,3 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\Gest
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.exe
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.pdb
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Release\GestorDeFlotasDesktop.exe.config
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.exe
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.pdb
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\ResolveAssemblyReference.cache
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmAuto.AbmAuto.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmAuto.addEditAuto.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmChofer.AbmChofer.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmChofer.addEditChofer.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmCliente.AbmCliente.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmCliente.AltaModifCli.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmPantallas.AbmPantalla.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmPantallas.editPantalla.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmReloj.AbmReloj.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmReloj.addEditReloj.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmRol.AbmRol.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmRol.addEditRol.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmTurno.AbmTurno.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmTurno.addEditTurno.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmUsuario.AbmUsuario.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AbmUsuario.addEditUsuario.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.addChofer_AutoTurno.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.AsignacionChofer_AutoTurno.AsignacionChofer_AutoTurno.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Buscador.Buscador.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Form1.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Listados.Listados.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.ListaErrores.ListaErrores.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Login.Login.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Principal.GestorFlotas.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.Properties.Resources.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.RolPantallas.AsigRolPantallas.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.UsuariosRoles.UsuariosRoles.resources
-C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
