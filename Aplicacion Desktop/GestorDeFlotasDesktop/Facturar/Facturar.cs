@@ -37,8 +37,8 @@ namespace GestorDeFlotasDesktop.Facturar
 
         private string construirQuery()
         {
-            string strQuery = "select " + "*" + " from " + "femig.Rendiciones" + " where 1=1";
-            strQuery += " AND codRendicion = " + codFactura + " order by " + "importeTotal";
+            string strQuery = "select " + "*" + " from " + "femig.viajes" + " where 1=1";
+            strQuery += " AND codFactura = " + codFactura; //+" order by " + "importeTotal";
             return strQuery;
         }
 
@@ -58,7 +58,7 @@ namespace GestorDeFlotasDesktop.Facturar
         private bool validaCamposRequeridos()
         {
 
-            if (txtCliente.Text.Trim() == string.Empty || txtImporte.Text.Trim() == string.Empty || dtpFecha.Text.Trim() == string.Empty || dtpFechaFin.Text.Trim() == string.Empty)
+            if (txtCliente.Text.Trim() == string.Empty || txtCliente.Text == "0" || dtpFecha.Text.Trim() == string.Empty || dtpFechaFin.Text.Trim() == string.Empty)
                 return false;
             else
                 return true;
@@ -88,16 +88,16 @@ namespace GestorDeFlotasDesktop.Facturar
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pFecha = new SqlParameter("@pFechaInicial", SqlDbType.DateTime);
+                SqlParameter pFecha = new SqlParameter("@pFechaInicio", SqlDbType.DateTime);
                 pFecha.Value = dtpFecha.Text;
-                SqlParameter pFechaFin = new SqlParameter("@pFechaFinal", SqlDbType.DateTime);
-                pFechaFin.Value = dtpFecha.Text;
+                SqlParameter pFechaFin = new SqlParameter("@pFechaFin", SqlDbType.DateTime);
+                pFechaFin.Value = dtpFechaFin.Text;
                 SqlParameter pCliente = new SqlParameter("@pDniCliente", SqlDbType.BigInt);
                 pCliente.Value = txtCliente.Text;
 
                 SqlParameter pImporteTotal = new SqlParameter("@pImporteTotal", SqlDbType.Float);
                 pImporteTotal.Direction = ParameterDirection.Output;
-                SqlParameter pCodFactura = new SqlParameter("@pCodFactura", SqlDbType.Float);
+                SqlParameter pCodFactura = new SqlParameter("@pCodFactura", SqlDbType.BigInt);
                 pCodFactura.Direction = ParameterDirection.Output;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
@@ -115,6 +115,7 @@ namespace GestorDeFlotasDesktop.Facturar
                             codFactura = pCodFactura.Value.ToString();
                             MessageBox.Show("Se dio de Alta la Facturacion correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
+                            this.codFactura= pCodFactura.Value.ToString();
                             cargarQuery();
                             dgFacturas.Visible = true;
                         }

@@ -11,6 +11,7 @@ namespace GestorDeFlotasDesktop.Buscador
 {
     public partial class Buscador : Form
     {
+        public string clave { get; set; }
         public string strQueryCombo { get; set; }
         public string strQuerySeleccionar { get; set; }
         public string Filtro1Value { get; set; }
@@ -28,8 +29,9 @@ namespace GestorDeFlotasDesktop.Buscador
         public string campoRetorno { get; set; }
         public string valorRetorno { get; set; }
 
-        public Buscador()
+        public Buscador(string sClave)
         {
+            this.clave = sClave;
             InitializeComponent();
         }
 
@@ -149,7 +151,7 @@ namespace GestorDeFlotasDesktop.Buscador
 
             if (dgResultados.SelectedRows.Count == 1)
             {
-                valorRetorno = dgResultados.SelectedRows[0].Cells["nroSerieReloj"].Value.ToString();
+                valorRetorno = dgResultados.SelectedRows[0].Cells[this.clave].Value.ToString();
                 this.DialogResult = DialogResult.OK;
             }
         }

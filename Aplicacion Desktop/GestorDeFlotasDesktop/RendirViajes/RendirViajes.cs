@@ -37,8 +37,8 @@ namespace GestorDeFlotasDesktop.RendirViajes
 
         private string construirQuery()
         {
-            string strQuery = "select " + "*" + " from " + "femig.Rendiciones" + " where 1=1";
-                strQuery += " AND codRendicion = " + codRendicion + " order by " + "importeTotal";
+            string strQuery = "select " + "*" + " from " + "femig.viajes" + " where 1=1";
+            strQuery += " AND codRendicion = " + codRendicion; //+ " order by " + "importeTotal";
             
             return strQuery;
         }
@@ -62,7 +62,7 @@ namespace GestorDeFlotasDesktop.RendirViajes
         private bool validaCamposRequeridos()
         {
 
-            if ( txtChofer.Text.Trim() == string.Empty || txtTurno.Text.Trim() == string.Empty || txtImporte.Text.Trim() == string.Empty || dtpFecha.Text.Trim() == string.Empty )
+            if ( txtChofer.Text.Trim() == string.Empty || txtTurno.Text.Trim() == string.Empty || dtpFecha.Text.Trim() == string.Empty )
                 return false;
             else
                 return true;
@@ -119,6 +119,8 @@ namespace GestorDeFlotasDesktop.RendirViajes
                             codRendicion = pCodRendicion.Value.ToString();
                             MessageBox.Show("Se dio de Alta La Rendicion correctamente", "OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
+                            this.codRendicion = pCodRendicion.Value.ToString();
+                            cargarQuery();
                             dgRendicion.Visible = true;
                         }
                         else

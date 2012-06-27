@@ -196,6 +196,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Listados\Listados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listados\Listados.Designer.cs">
+      <DependentUpon>Listados.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListaErrores\ListaErrores.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,14 +298,29 @@
     <EmbeddedResource Include="Buscador\Buscador.resx">
       <DependentUpon>Buscador.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Facturar\Facturar.resx">
+      <DependentUpon>Facturar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listados\Listados.resx">
+      <DependentUpon>Listados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaErrores\ListaErrores.resx">
       <DependentUpon>ListaErrores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MejoresAutos\MejoresAutos.resx">
+      <DependentUpon>MejoresAutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MejoresChoferes\MejoresChoferes.resx">
+      <DependentUpon>MejoresChoferes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MejoresClientes\MejoresClientes.resx">
+      <DependentUpon>MejoresClientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal\GestorFlotas.resx">
       <DependentUpon>GestorFlotas.cs</DependentUpon>
@@ -308,6 +329,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistrarViaje\RegistrarViajes.resx">
+      <DependentUpon>RegistrarViajes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RendirViajes\RendirViajes.resx">
+      <DependentUpon>RendirViajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RolPantallas\AsigRolPantallas.resx">
       <DependentUpon>AsigRolPantallas.cs</DependentUpon>

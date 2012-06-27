@@ -93,21 +93,21 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private string cargarQuery()
         {
             //TODO: modificar este query dependiendo la cunsulta.
-            string sQuery = "SELECT * FROM FEMIG.Clientes where 1 = 1";
+            string sQuery = "SELECT * FROM FEMIG.Clientes where 1 = 1 ";
             if (txtNombre.Text != string.Empty)
             {
-                sQuery += "nombre like '" + txtNombre.Text + "%'";
-                if (txtApellido.Text != string.Empty || txtDNI.Text != string.Empty)
-                    sQuery += " AND ";
+                sQuery += "AND nombre like '" + txtNombre.Text + "%'";
+                //if (txtApellido.Text != string.Empty || txtDNI.Text != string.Empty)
+                   // sQuery += " AND ";
             }
             if (txtApellido.Text != string.Empty)
             {
-                sQuery += "apellido like '" + txtApellido.Text + "%'";
-                if (txtDNI.Text != string.Empty)
-                    sQuery += " AND ";
+                sQuery += "AND apellido like '" + txtApellido.Text + "%'";
+                //if (txtDNI.Text != string.Empty)
+                    //sQuery += " AND ";
             }
             if (txtDNI.Text != string.Empty)
-                sQuery += "dniCliente = " + txtDNI.Text;
+                sQuery += "AND dniCliente = " + txtDNI.Text;
             //sQuery += " AND anulado = 0";
             return sQuery;
         }
