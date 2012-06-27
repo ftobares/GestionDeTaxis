@@ -86,7 +86,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
             if (!string.IsNullOrEmpty(txtModelo.Text))
                 strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtModelo.Text + "%'";
 
-            strQuery += " and fechaVersion between '" + dtpDesde.Value.ToString("yyyy-MM-dd") + "' and '" + dtpHasta.Value.ToString("yyyy-MM-dd") + "'";
+            strQuery += " and fechaVersion between '" + dtpDesde.Value.ToString("yyyyMMdd") + "' and '" + dtpHasta.Value.ToString("yyyyMMdd") + "'";
 
             strQuery += " order by " + consultaOrderBy;
 
