@@ -29,6 +29,7 @@ BEGIN
 		  ,[dniChofer] = @pDniChofer
 		  ,[turnoID] = @pTurnoID
 		  ,[patente] = @pPatente
+		  ,[anulado] = 0 
 	 WHERE asignacionID= @pId_Asign
 	
 END
