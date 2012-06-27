@@ -10,3 +10,6 @@ C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\Gest
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.csproj.GenerateResource.Cache
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.exe
 C:\Users\Mafiem\Documents\UTN\Gestion de Datos\Tp - bck2\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.pdb
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\bin\Release\GestorDeFlotasDesktop.exe.config
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.exe
+C:\Users\Mafiem\Documents\UTN\Gestion de Datos\TP\gestion-de-datos\Aplicacion Desktop\GestorDeFlotasDesktop\obj\Release\GestorDeFlotasDesktop.pdb
