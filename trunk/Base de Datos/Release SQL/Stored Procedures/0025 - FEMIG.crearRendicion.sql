@@ -48,9 +48,9 @@ BEGIN
 	end
 	
 	--Controlo que el auto que intenta la rendicion no tenga un reloj deshabilitado
-	if exists (select @sNroSerieReloj = r.nroSerieReloj from FEMIG.Relojes r where (select TOP(1) a.nroSerieReloj from femig.autos where patente = @sPatente) = r.nroSerieReloj AND anulado = 1)
+	if exists (select 1 from FEMIG.Relojes r where (select TOP(1) a.nroSerieReloj from femig.autos a where patente = @sPatente) = r.nroSerieReloj AND anulado = 1)
 	begin
-		set @retCatchError = 'El reloj ' + @sNroSerieReloj + ' esta deshabilitado.'
+		set @pRetCatchError = 'El reloj '  + 'asociado esta deshabilitado.'
 		return
 	end
 	
