@@ -44,7 +44,7 @@ namespace GestorDeFlotasDesktop.RolPantallas
 
             dgPantallas.DataSource = dtResultado;
 
-            dgPantallas.Columns["chk"].Visible = false;
+            //dgPantallas.Columns["chk"].Visible = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace GestorDeFlotasDesktop.RolPantallas
 
         private void dgPantallas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
+            if (e.ColumnIndex == 0 && e.RowIndex > 0)
             {
                 cambiarSeleccionRolPantalla(dgPantallas.Rows[e.RowIndex].Cells["pantallaID"].Value.ToString());
             }

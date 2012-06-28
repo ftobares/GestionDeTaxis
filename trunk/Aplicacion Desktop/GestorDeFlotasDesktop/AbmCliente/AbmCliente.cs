@@ -31,7 +31,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private bool controlarCamposCompletos()
         {
             if (this.txtNombre.Text == string.Empty && this.txtApellido.Text == string.Empty && this.txtDNI.Text == string.Empty)
-                return false;
+                return true;
             else
                 return true;
         }
