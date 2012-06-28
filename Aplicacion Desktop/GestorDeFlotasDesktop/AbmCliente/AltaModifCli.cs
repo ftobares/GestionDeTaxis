@@ -32,8 +32,8 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private bool controlarCamposCompletos()
         {
             if (this.txtNombre.Text == string.Empty || this.txtApellido.Text == string.Empty || this.txtDNI.Text == string.Empty
-                    || this.txtTel.Text == string.Empty || this.txtCalle.Text == string.Empty || this.txtCP.Text == string.Empty
-                        || this.txtLocalidad.Text == string.Empty || this.txtFchNac.Text == string.Empty || this.txtMail.Text == string.Empty)
+                    || this.txtTel.Text == string.Empty || this.txtCalle.Text == string.Empty
+                        || this.txtLocalidad.Text == string.Empty || this.txtFchNac.Text == string.Empty)
                 return true;
             else
                 return false;
@@ -216,11 +216,11 @@ namespace GestorDeFlotasDesktop.AbmCliente
                     string sQuery = "INSERT INTO FEMIG.Clientes VALUES (" + this.txtDNI.Text + ",'" + this.txtNombre.Text
                         + "','" + this.txtApellido.Text + "'," + this.txtTel.Text + ",'" + this.txtCalle.Text + "|" + this.txtNumCalle.Text + "|"
                             + this.txtPiso.Text + "|" + this.txtDpto.Text + "|" + this.txtLocalidad.Text + "|" + this.txtCP.Text + "',";
-                    if (this.txtMail.Text == string.Empty)
+                    /*if (this.txtMail.Text == string.Empty)
                         sQuery += "NULL";
-                    else
+                    else*/
                         sQuery += "'" + this.txtMail.Text + "'";
-                    sQuery += ",'" + this.txtFchNac.Text + "','" + sCheckAnulado + "')";
+                    sQuery += ",'" + this.txtFchNac.Text.Replace("/","") + "','" + sCheckAnulado + "')";
                     DataTable dtResult = new DataTable();
                     dtResult = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery(sQuery);
                     if (dtResult != null)

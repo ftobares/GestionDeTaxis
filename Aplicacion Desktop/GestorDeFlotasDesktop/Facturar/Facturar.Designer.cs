@@ -108,7 +108,6 @@
             this.txtImporte.ReadOnly = true;
             this.txtImporte.Size = new System.Drawing.Size(100, 20);
             this.txtImporte.TabIndex = 64;
-            this.txtImporte.Visible = false;
             // 
             // label4
             // 
@@ -120,7 +119,6 @@
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 63;
             this.label4.Text = "Imp. Total:";
-            this.label4.Visible = false;
             // 
             // txtCliente
             // 
