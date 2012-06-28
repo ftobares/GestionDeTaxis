@@ -32,6 +32,12 @@ BEGIN
 		return 
 	end
 	
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
+	begin
+		set @pRetCatchError = 'El cliente ' + @pDniCliente + ' se encuentra inhabilitado.'
+		return
+	end
+	
 	/*IF (@pTipoViaje = 'calle')
 	begin
 		set @pDniCliente = null;
