@@ -25,6 +25,8 @@ AS
 DECLARE @iAsignacionID numeric(18)
 DECLARE @iValorFicha numeric(18,2)
 DECLARE @iValorBandera numeric(18,2)
+DECLARE @sPatente varchar(10)
+DECLARE @sNroSerieReloj varchar(18)
 BEGIN
 
 	SET @pImporteTotal = 0
@@ -38,11 +40,18 @@ BEGIN
 		return
 	end
 
-	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
+	SELECT TOP(1) @iAsignacionID = asignacionId, @sPatente = patente FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
 		set @pRetCatchError = 'Los datos de la rendicion son incorrectos'
 		return 
+	end
+	
+	--Controlo que el auto que intenta la rendicion no tenga un reloj deshabilitado
+	if exists (select @sNroSerieReloj = r.nroSerieReloj from FEMIG.Relojes r where (select TOP(1) a.nroSerieReloj from femig.autos where patente = @sPatente) = r.nroSerieReloj AND anulado = 1)
+	begin
+		set @retCatchError = 'El reloj ' + @sNroSerieReloj + ' esta deshabilitado.'
+		return
 	end
 	
 	SELECT @iValorFicha = valorFicha, @iValorBandera = valorBandera FROM femig.Turnos where turnoID = @pTurnoID
