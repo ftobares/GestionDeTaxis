@@ -38,6 +38,12 @@ BEGIN
 		return
 	end
 	
+	if exists (select 1 from FEMIG.ChoferAutoTurno where asignacionID = @iAsignacionID and anulado = 1)
+	begin
+		set @pRetCatchError = 'El chofer ' + @pDniChofer + ' se encuentra inhabilitado en ese turno para esa fecha.'
+		return
+	end
+	
 	/*IF (@pTipoViaje = 'calle')
 	begin
 		set @pDniCliente = null;
