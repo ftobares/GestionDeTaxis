@@ -18,5 +18,5 @@ CREATE PROCEDURE [FEMIG].[eliminarChoferAutoTurno]
 	@pId_Asign			NUMERIC(18)
 AS
 BEGIN
-	update femig.ChoferAutoTurno set anulado = '1' where asignacionID = @pId_Asign
+	DELETE FROM femig.ChoferAutoTurno where asignacionID = @pId_Asign
 END

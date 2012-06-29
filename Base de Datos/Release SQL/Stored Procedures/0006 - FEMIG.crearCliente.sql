@@ -26,10 +26,17 @@ CREATE PROCEDURE [FEMIG].[cliente]
 	@retCatchError		VARCHAR(MAX) out
 AS
 BEGIN
-	--Controlo que no haya duplicados de Patente
+	--Controlo que no haya duplicados de DniCliente
 	if exists (select 1 from FEMIG.cliente where dniCliente = @pDniCliente)
 	begin
-		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + @pDniCliente + '.'
+		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
+		return
+	end
+
+	--Controlo que no haya duplicados de telefono
+	if exists (select 1 from FEMIG.cliente where telefono = @pTelefono)
+	begin
+		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
 		return
 	end
 
