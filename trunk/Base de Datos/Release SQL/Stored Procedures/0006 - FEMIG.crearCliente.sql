@@ -14,7 +14,7 @@ GO
 *	Ignacio Angel Tata                  *
 *	Fernando N. Tobares Garcia          *
 *+++++++++++++++++++++++++++++++++++++++*/
-CREATE PROCEDURE [FEMIG].[cliente] 
+CREATE PROCEDURE [FEMIG].[crearCliente] 
 	@pDniCliente		NUMERIC(18),
 	@pNombre			VARCHAR(255),
 	@pApellido			VARCHAR(255),
@@ -27,20 +27,20 @@ CREATE PROCEDURE [FEMIG].[cliente]
 AS
 BEGIN
 	--Controlo que no haya duplicados de DniCliente
-	if exists (select 1 from FEMIG.cliente where dniCliente = @pDniCliente)
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
 	begin
 		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
 		return
 	end
 
 	--Controlo que no haya duplicados de telefono
-	if exists (select 1 from FEMIG.cliente where telefono = @pTelefono)
+	if exists (select 1 from FEMIG.clientes where telefono = @pTelefono)
 	begin
 		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
 		return
 	end
 
-	INSERT INTO [GD1C2012].[FEMIG].[cliente]
+	INSERT INTO [GD1C2012].[FEMIG].[clientes]
            (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento,anulado)
     VALUES
            (@pDniCliente
