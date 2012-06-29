@@ -58,6 +58,12 @@ BEGIN
 		set @pDniCliente = null;
 	end*/
 		
+	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(day,fecha,@pFecha)=0)
+	begin
+		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
+		return
+	end
+	
 	INSERT INTO [GD1C2012].[FEMIG].[Viajes]
            (tipoViaje,asignacionId,cantFichas,fecha,dniCliente)
     VALUES
