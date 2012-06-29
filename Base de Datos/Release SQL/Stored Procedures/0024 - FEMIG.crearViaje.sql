@@ -19,13 +19,18 @@ CREATE PROCEDURE [FEMIG].[crearViaje]
 	@pDniCliente numeric(18),
 	@pRetCatchError		VARCHAR(MAX) out
 AS
-DECLARE @sFecha varchar(MAX) 
---SET @sFecha = SUBSTRING(cast(@pFecha as varchar),0,10) + ' %'
 DECLARE @iAsignacionID numeric(18) 
 DECLARE @sPatente varchar(10)
 BEGIN
 
-	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
+	--Controlo que no sea el mismo viaje
+	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(day,fecha,@pFecha)=0)
+	begin
+		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
+		return
+	end
+	
+	--Controlo los datos del viaje
 	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
@@ -41,26 +46,17 @@ BEGIN
 		return
 	end
 
+	--Controlo que el cliente este habilitado
 	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
 	begin
 		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' se encuentra inhabilitado.'
 		return
 	end
 	
+	--Controlo que la asignacion este habilitada
 	if exists (select 1 from FEMIG.ChoferAutoTurno where asignacionID = @iAsignacionID and anulado = 1)
 	begin
 		set @pRetCatchError = 'El chofer ' + cast(@pDniChofer as varchar) + ' se encuentra inhabilitado en ese turno para esa fecha.'
-		return
-	end
-	
-	/*IF (@pTipoViaje = 'calle')
-	begin
-		set @pDniCliente = null;
-	end*/
-		
-	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(day,fecha,@pFecha)=0)
-	begin
-		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
 		return
 	end
 	

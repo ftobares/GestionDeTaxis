@@ -40,6 +40,7 @@ BEGIN
 		return
 	end
 
+	--Controlo los datos de la rendicion
 	SELECT TOP(1) @iAsignacionID = asignacionId, @sPatente = patente FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
@@ -54,13 +55,6 @@ BEGIN
 		return
 	end
 
-	--Controlo que el auto que intenta la rendicion no tenga un reloj deshabilitado
-	if exists (select 1 from FEMIG.Relojes r where (select TOP(1) a.nroSerieReloj from femig.autos a where patente = @sPatente) = r.nroSerieReloj AND anulado = 1)
-	begin
-		set @pRetCatchError = 'El reloj asociado esta deshabilitado.'
-		return
-	end
-	
 	SELECT @iValorFicha = valorFicha, @iValorBandera = valorBandera FROM femig.Turnos where turnoID = @pTurnoID
 	
 	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
