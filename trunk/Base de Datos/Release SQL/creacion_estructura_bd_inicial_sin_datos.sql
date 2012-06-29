@@ -1,5 +1,5 @@
 /*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
+* Grupo: FEMIG							*
 *                                       *
 * Integrantes:                          *
 *	Emiliano Marcelo Ibarrola           *
@@ -81,6 +81,8 @@ ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Tur
 	
 ALTER TABLE GD1C2012.FEMIG.ChoferAutoTurno ADD CONSTRAINT FK_ChoferAutoTurno_Auto
 	FOREIGN KEY (patente) REFERENCES GD1C2012.FEMIG.Autos (patente)	
+	
+CREATE INDEX index_cat_dniChofer ON FEMIG.ChoferAutoTurno (dniChofer);
 
 CREATE TABLE GD1C2012.FEMIG.clientes ( 
 	dniCliente numeric(18) NOT NULL PRIMARY KEY CLUSTERED,
@@ -101,6 +103,8 @@ CREATE TABLE GD1C2012.FEMIG.Facturas (
 	importeTotal numeric(18,2) DEFAULT 0 NOT NULL
 );
 
+CREATE INDEX index_fac_dniCliente ON FEMIG.Facturas (dniCliente);
+
 CREATE TABLE GD1C2012.FEMIG.Rendiciones ( 
 	codRendicion numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
 	fecha datetime NOT NULL,
@@ -108,6 +112,8 @@ CREATE TABLE GD1C2012.FEMIG.Rendiciones (
 	turnoID varchar(20) NOT NULL,
 	importeTotal numeric(18,2) NOT NULL
 );
+
+CREATE INDEX index_ren_dniChofer ON FEMIG.Rendiciones (dniChofer);
 
 CREATE TABLE GD1C2012.FEMIG.viajes ( 
 	viajeID numeric(18) NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1,1),
@@ -129,6 +135,8 @@ ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion
 
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
 	FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.Clientes (dniCliente);
+	
+CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);
 
 CREATE TABLE GD1C2012.FEMIG.Pantalla ( 
 	pantallaID varchar(255) NOT NULL PRIMARY KEY CLUSTERED,
@@ -198,6 +206,144 @@ EXEC sp_addextendedproperty 'MS_Description', '0: El usuario está activo
 1: El usuario esta inhabilitado', 'Schema', FEMIG, 'table', Usuario, 'column', anulado;
 GO
 
+/*++++++++++++++++++++++++++++++++++++++*/
+/*		Migración de Datos				*/
+/*++++++++++++++++++++++++++++++++++++++*/
+BEGIN TRANSACTION migracion;
+
+BEGIN TRY
+
+	/*Inicio de Migración de la tabla Relojes*/
+	BEGIN	
+		DECLARE @nroSerie varchar(18);
+		DECLARE @marca varchar(255);
+		DECLARE @modelo varchar(255);
+		DECLARE @fecha datetime;
+		DECLARE @posicion int;
+		DECLARE @alfabeto varchar(26);
+		DECLARE @contador int;
+
+		SET @contador = 1;
+		SET @posicion = 1;
+		SET @alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+		DECLARE insert_relojes CURSOR FOR
+		SELECT DISTINCT(reloj_marca),reloj_modelo,reloj_fecha_ver
+		FROM gd_esquema.maestra
+		order by reloj_marca asc;
+
+		OPEN insert_relojes;
+
+		FETCH NEXT FROM insert_relojes
+		INTO  @marca, @modelo, @fecha;
+
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			IF @posicion < 27
+				BEGIN
+					SELECT @nroSerie = CHAR(ASCII(SUBSTRING(@alfabeto, @posicion, 1))); 
+					INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
+					VALUES (@nroSerie+cast(@contador as varchar(999)),@marca,@modelo,cast(@fecha as varchar(255)));
+					
+					FETCH NEXT FROM insert_relojes
+					INTO  @marca, @modelo, @fecha;
+
+					SET @posicion = @posicion + 1;
+					SET @contador = @contador + 1;
+				END
+			ELSE
+				BEGIN
+					SET @posicion = 1;
+
+					SELECT @nroSerie = CHAR(ASCII(SUBSTRING(@alfabeto, @posicion, 1))); 
+					INSERT INTO FEMIG.relojes (nroSerieReloj,marca,modelo,fechaVersion)
+					VALUES (@nroSerie+cast(@contador as varchar(999)),@marca,@modelo,cast(@fecha as varchar(255)));
+					
+					FETCH NEXT FROM insert_relojes
+					INTO  @marca, @modelo, @fecha;
+
+					SET @posicion = @posicion + 1;
+					SET @contador = @contador + 1;
+				END
+			
+		END
+		CLOSE insert_relojes;
+		DEALLOCATE insert_relojes;
+	END
+	/*Finalización de Migración de la tabla Relojes*/
+
+	INSERT INTO GD1C2012.FEMIG.marcas_autos (marca)
+	VALUES ('Otra');
+
+	INSERT INTO GD1C2012.FEMIG.marcas_autos (marca)
+	SELECT DISTINCT(auto_marca)
+	FROM gd_esquema.maestra
+	order by auto_marca asc;
+
+	INSERT INTO FEMIG.autos (patente,marca,modelo,licencia,rodado,nroSerieReloj)
+	SELECT DISTINCT(gd.auto_patente),gd.auto_marca,gd.auto_modelo,gd.auto_licencia,gd.auto_rodado,rel.nroSerieReloj
+	FROM gd_esquema.maestra gd, femig.relojes rel
+	WHERE rel.modelo = gd.reloj_modelo
+	and rel.marca = gd.reloj_marca
+	order by auto_patente asc;
+
+	INSERT INTO FEMIG.choferes (dniChofer,nombre,apellido,direccion,telefono,email,fechaNacimiento)
+	SELECT DISTINCT(chofer_dni),chofer_nombre,chofer_apellido,chofer_direccion,chofer_telefono,chofer_mail,chofer_fecha_nac
+	FROM gd_esquema.maestra
+	order by chofer_dni asc;
+
+	INSERT INTO FEMIG.turnos (horaInicio,horaFin,descripcion,valorFicha,valorBandera)
+	SELECT DISTINCT(turno_hora_inicio),turno_hora_fin,turno_descripcion,turno_valor_ficha,turno_valor_bandera
+	FROM gd_esquema.maestra
+	order by turno_hora_inicio asc;
+
+	INSERT INTO femig.ChoferAutoTurno (dniChofer,turnoID,patente,fecha)
+	SELECT DISTINCT(ch.dniChofer), tr.turnoID, at.patente, dateadd(dd, datediff(dd,0,gd.viaje_fecha),0) as viaje_fecha
+	FROM gd_esquema.maestra gd, femig.choferes ch, femig.autos at, femig.turnos tr
+	WHERE gd.chofer_dni = ch.dniChofer
+	AND gd.auto_patente = at.patente
+	AND gd.turno_hora_inicio = tr.horaInicio
+	and gd.turno_hora_fin = tr.horaFin
+	order by ch.dniChofer, tr.turnoID;
+
+	INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento) 
+	VALUES (0,'clienteCalle','clienteCalle',0,'no aplica','no aplica',cast(0 as datetime));
+
+	INSERT INTO FEMIG.clientes (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento)
+	SELECT DISTINCT(cliente_dni),cliente_nombre,cliente_apellido,cliente_telefono,cliente_direccion,cliente_mail,cliente_fecha_nac
+	FROM  gd_esquema.maestra
+	WHERE cliente_dni IS NOT NULL
+	order by cliente_dni asc;
+
+	SET IDENTITY_INSERT FEMIG.facturas ON
+	INSERT INTO FEMIG.facturas (codFactura,fechaInicio,fechaFin,dniCliente)
+	VALUES (0,cast(0 as datetime),cast(0 as datetime),0);
+	SET IDENTITY_INSERT FEMIG.facturas OFF
+
+	INSERT INTO FEMIG.facturas (fechaInicio,fechaFin,dniCliente,importeTotal)
+	select DISTINCT(factura_fecha_inicio),factura_fecha_fin, cliente_dni,
+	SUM((viaje_cant_fichas * turno_valor_ficha) + turno_valor_bandera) as importeTotal
+	from gd_esquema.maestra WHERE factura_fecha_inicio IS NOT NULL AND factura_fecha_fin IS NOT NULL
+	group by cliente_dni, factura_fecha_inicio, factura_fecha_fin
+	order by cliente_dni, factura_fecha_inicio;
+
+	INSERT INTO femig.rendiciones (fecha,dniChofer,turnoID,importeTotal)
+	select gd.rendicion_fecha, gd.chofer_dni, tr.turnoID,
+	SUM(DISTINCT(gd.viaje_cant_fichas * gd.turno_valor_ficha) + gd.turno_valor_bandera) as importeTotal
+	from gd_esquema.maestra gd, femig.turnos tr
+	where gd.rendicion_fecha is not null 
+	and tr.horaInicio = gd.turno_hora_inicio
+	and tr.horaFin = gd.turno_hora_fin
+	group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
+	order by chofer_dni, rendicion_fecha, turnoID;
+	
+	INSERT INTO femig.viajes(tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
+	select case when cliente_dni is null then 'calle' else 'cliente',
+	cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+	FROM gd_esquema.maestra m
+	INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+	INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+	INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
 
 /*++++++++++++++++++++++++++++++++++*/
 /*		Carga de Funcionalidades	*/
@@ -226,7 +372,22 @@ GO
 	INSERT INTO FEMIG.USUARIO VALUES ('Admin','Administrador','Administrador',null,'E6B87050BFCB8143FCB8DB0170A4DC9ED00D904DDD3E2A4AD1B1E8DC0FDC9BE7',0,10,'0')
 
 	insert into FEMIG.rolusuario values ('Admin','Administrador')
-	
+
+COMMIT TRANSACTION migracion;
+
+END TRY
+
+BEGIN CATCH
+	PRINT 'Warning: Se ha producido un error en la migracion de los datos'
+	PRINT 'Numero de Error: '+cast(ERROR_NUMBER() as varchar(255))
+	PRINT 'El error se ha producido en la linea: '+cast(ERROR_LINE() as varchar(255))
+	PRINT ERROR_MESSAGE()
+	PRINT 'La severidad del error es: '+cast(ERROR_SEVERITY() as varchar(255))
+END CATCH
+
+/*++++++++++++++++++++++++++++++++++++++*/
+/*		Store Procedures				*/
+/*++++++++++++++++++++++++++++++++++++++*/
 go
 USE [GD1C2012]
 GO
@@ -235,15 +396,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarCliente] 
 	@pDniCliente			NUMERIC(18)
 AS
@@ -256,15 +409,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[cliente] 
 	@pDniCliente		NUMERIC(18),
 	@pNombre			VARCHAR(255),
@@ -303,15 +448,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearAuto] 
 	@pPatente			VARCHAR(10),
 	@pMarca				VARCHAR(255),
@@ -355,15 +492,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarAuto] 
 	@pPatente			VARCHAR(10),
 	@pMarca				VARCHAR(255),
@@ -404,15 +533,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarAuto] 
 	@pPatente			VARCHAR(10)
 AS
@@ -425,15 +546,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearChofer] 
 	@pDniChofer			NUMERIC(18,0),
 	@pNombre			VARCHAR(255),
@@ -479,15 +592,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarChofer] 
 	@pDniChofer			NUMERIC(18,0),
 	@pNombre			VARCHAR(255),
@@ -530,15 +635,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarChofer] 
 	@pDniChofer			VARCHAR(10)
 AS
@@ -551,15 +648,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearTurno] 
 	@pTurnoId			NUMERIC(18,0),
 	@pDescripcion		VARCHAR(10),
@@ -599,15 +688,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarTurno] 
 	@pTurnoId			NUMERIC(18,0),
 	@pDescripcion		VARCHAR(10),
@@ -644,15 +725,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarTurno] 
 	@pTurnoId			VARCHAR(10)
 AS
@@ -665,15 +738,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearRendicion] 
 	@pFecha datetime,
 	@pDniChofer numeric(18),
@@ -730,15 +795,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarChoferAutoTurno] 
 	@pId_Asign 			numeric(18),
 	@pFecha 			datetime,
@@ -764,15 +821,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarChoferAutoTurno] 
 	@pId_Asign			NUMERIC(18)
 AS
@@ -785,15 +834,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearViaje] 
 	@pTipoViaje varchar(10),
 	@pDniChofer numeric(18) ,
@@ -837,15 +878,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearChoferAutoTurno] 
 	@pFecha 			datetime,
 	@pDniChofer		 	numeric(18),
@@ -883,15 +916,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarCliente] 
 	@pDniCliente		numeric(18),
 	@pNombre			VARCHAR(255),
@@ -928,15 +953,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearFacturacion] 
 	@pFechaInicio datetime,
 	@pFechaFin datetime,
@@ -983,15 +1000,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarPantalla] 
 	@pPantallaID		VARCHAR(255),
 	@pDescripcion		VARCHAR(255),
@@ -1016,15 +1025,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[getPantallasDeRol]
 	@pRolID	VARCHAR(20)
 AS
@@ -1043,15 +1044,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[ObtenerFuncionalidades]
 	@pUsuarioID	 varchar(20)	
 AS
@@ -1074,15 +1067,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[getRolesDeUsuario]
 	@pUsuarioID	VARCHAR(20)
 AS
@@ -1101,15 +1086,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearRol] 
 	@pRolID				VARCHAR(20),
 	@pDescripcion		VARCHAR(50),
@@ -1137,15 +1114,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarRol] 
 	@pRolID			VARCHAR(20)
 AS
@@ -1158,15 +1127,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarRol] 
 	@pRolID				VARCHAR(20),
 	@pDescripcion		VARCHAR(50),
@@ -1193,15 +1154,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[AsignarDesasignarRolPantalla]
 	@pRolID			VARCHAR(20),
 	@pPantallaID	VARCHAR(255)
@@ -1220,15 +1173,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 
 CREATE PROCEDURE [FEMIG].[verificarCredencialesLogueo]
 	@pUsuario	VARCHAR(20),
@@ -1257,15 +1202,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearUsuario] 
 	@pUsuarioID			VARCHAR(20),
 	@pNombre			VARCHAR(50),
@@ -1310,15 +1247,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarUsuario] 
 	@pUsuarioID			VARCHAR(20),
 	@pNombre			VARCHAR(50),
@@ -1360,15 +1289,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarUsuario] 
 	@pUsuarioID			VARCHAR(20)
 AS
@@ -1381,15 +1302,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[AsignarDesasignarRolUsuario]
 	@pUsuarioID		VARCHAR(20),
 	@pRolID			VARCHAR(255)
@@ -1408,15 +1321,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[crearReloj] 
 	@pNroSerieReloj		NUMERIC(18,0),
 	@pMarca				VARCHAR(255),
@@ -1449,15 +1354,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[editarReloj] 
 	@pNroSerieReloj		NUMERIC(18,0),
 	@pMarca				VARCHAR(255),
@@ -1487,15 +1384,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-/*+++++++++++++++++++++++++++++++++++++++
-* Grupo: FEMIG							*			
-*                                       *
-* Integrantes:                          *
-*	Emiliano Marcelo Ibarrola           *
-*	Marcos Andres Ibarrola              *
-*	Ignacio Angel Tata                  *
-*	Fernando N. Tobares Garcia          *
-*+++++++++++++++++++++++++++++++++++++++*/
+
 CREATE PROCEDURE [FEMIG].[eliminarReloj] 
 	@pNroSerieReloj			VARCHAR(10)
 AS

@@ -332,7 +332,7 @@ BEGIN TRY
 	/*Inicio de Migración de datos para la tabla Viajes*/
 	BEGIN
 	
-		DECLARE @chofer_dni numeric(8)
+		/*DECLARE @chofer_dni numeric(8)
 		DECLARE @cliente_dni numeric(8)
 		DECLARE @viaje_cant_fichas numeric(1)
 		DECLARE @viaje_fecha datetime
@@ -395,7 +395,35 @@ BEGIN TRY
 		END
 		CLOSE temp_maestra;
 		DEALLOCATE temp_maestra;		
-		DROP TABLE #maestra;
+		DROP TABLE #maestra;*/
+		
+		INSERT INTO femig.viajes(tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
+		select case when cliente_dni is null then 'calle' else 'cliente',
+		cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
+		FROM gd_esquema.maestra m
+		INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+		INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+		INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+		
+		/*INSERT INTO Viajes (Id_TipoViaje, Id_Chofer, Id_Cliente, Cantidad_Fichas, Fecha, Valor_Ficha,Valor_Bajada_Bandera, Id_Turno, Id_Auto)
+		select case when Cliente_Telefono is null then @Id_TipoViajeCalle else @Id_TipoViajeCliente end,
+        Choferes.Id_Chofer,
+        Clientes.Id_Cliente,
+        M.Viaje_Cant_Fichas,
+        M.Viaje_Fecha,
+        M.Turno_Valor_Ficha,
+        M.Turno_Valor_Bandera,
+        Turnos.Id_Turno,
+        Autos.Id_Auto    
+		from gd_esquema.maestra M
+		join Choferes on Choferes.Nombre = M.Chofer_Nombre and 
+                 Choferes.Apellido = M.Chofer_Apellido and
+                 Choferes.Dni = M.Chofer_Dni and
+                 Choferes.Telefono = M.Chofer_Telefono
+		left join Clientes on Clientes.Telefono = M.Cliente_Telefono
+		join Autos on (Autos.Licencia = M.Auto_Licencia and Autos.Modelo = M.Auto_Modelo and Autos.Patente = M.Auto_Patente and Autos.Rodado = M.Auto_Rodado)
+		join Turnos on Turnos.Descripcion = M.Turno_Descripcion
+		where M.Rendicion_Fecha is null and M.Factura_Fecha_Inicio is null*/
 	END
 	/*Finalización de Migración de datos para la tabla Viajes*/
 
@@ -418,7 +446,6 @@ BEGIN TRY
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmListado','Listados Estadísticos')
 	INSERT INTO FEMIG.PANTALLA VALUES ('abmPantalla','Pantallas del Sistema')
 	
-	/*ROL*/
 	INSERT INTO FEMIG.Rol VALUES ('Administrador','Administrador de Sistema')
 	
 	INSERT INTO FEMIG.ROLPANTALLA VALUES ('Administrador','abmPantalla','1')
