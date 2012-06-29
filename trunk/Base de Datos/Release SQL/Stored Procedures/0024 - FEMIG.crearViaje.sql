@@ -22,6 +22,7 @@ AS
 DECLARE @sFecha varchar(MAX) 
 --SET @sFecha = SUBSTRING(cast(@pFecha as varchar),0,10) + ' %'
 DECLARE @iAsignacionID numeric(18) 
+DECLARE @sPatente varchar(10)
 BEGIN
 
 	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
@@ -31,16 +32,24 @@ BEGIN
 		set @pRetCatchError = 'Los datos del Viaje son incorrectos'
 		return 
 	end
-	
+
+	--Controlo que el reloj este habilitado
+	select @sPatente = patente from femig.choferAutoTurno where asignacionID = @iAsignacionID
+	if exists (select 1 from FEMIG.relojes r where (select a.nroSerieReloj from FEMIG.Autos a where patente = @sPatente) = r.nroSerieReloj and r.anulado = 1)
+	begin
+		set @pRetCatchError = 'El rleoj se encuentra inhabilitado'
+		return
+	end
+
 	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
 	begin
-		set @pRetCatchError = 'El cliente ' + @pDniCliente + ' se encuentra inhabilitado.'
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' se encuentra inhabilitado.'
 		return
 	end
 	
 	if exists (select 1 from FEMIG.ChoferAutoTurno where asignacionID = @iAsignacionID and anulado = 1)
 	begin
-		set @pRetCatchError = 'El chofer ' + @pDniChofer + ' se encuentra inhabilitado en ese turno para esa fecha.'
+		set @pRetCatchError = 'El chofer ' + cast(@pDniChofer as varchar) + ' se encuentra inhabilitado en ese turno para esa fecha.'
 		return
 	end
 	
