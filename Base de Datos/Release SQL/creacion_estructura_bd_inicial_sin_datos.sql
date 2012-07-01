@@ -125,7 +125,7 @@ CREATE TABLE GD1C2012.FEMIG.viajes (
 	codFactura numeric(18),
 	codRendicion numeric(18)
 );
-ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+/*ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
 
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
 	FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.Facturas (codFactura);
@@ -136,7 +136,7 @@ ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
 	FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.Clientes (dniCliente);
 	
-CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);
+CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);*/
 
 CREATE TABLE GD1C2012.FEMIG.Pantalla ( 
 	pantallaID varchar(255) NOT NULL PRIMARY KEY CLUSTERED,
@@ -338,12 +338,33 @@ BEGIN TRY
 	order by chofer_dni, rendicion_fecha, turnoID;
 	
 	INSERT INTO femig.viajes(tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
-	select case when cliente_dni is null then 'calle' else 'cliente',
+	/*select (case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
 	cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
 	FROM gd_esquema.maestra m
 	INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
 	INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-	INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+	INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer*/
+	select DISTINCT(m.viaje_fecha),(case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
+	cat.asignacionID,m.viaje_cant_fichas,m.cliente_dni,fac.codFactura,ren.codRendicion
+	FROM gd_esquema.maestra m
+	JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
+	JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
+	JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
+	WHERE m.rendicion_fecha is null
+	and m.factura_fecha_inicio is null
+	
+	ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+
+	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
+	FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.Facturas (codFactura);
+
+	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion 
+	FOREIGN KEY (codRendicion) REFERENCES GD1C2012.FEMIG.Rendiciones (codRendicion);
+
+	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
+	FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.Clientes (dniCliente);
+	
+	CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);
 
 /*++++++++++++++++++++++++++++++++++*/
 /*		Carga de Funcionalidades	*/
