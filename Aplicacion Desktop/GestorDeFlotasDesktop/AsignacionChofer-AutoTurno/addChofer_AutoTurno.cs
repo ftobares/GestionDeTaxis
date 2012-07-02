@@ -123,7 +123,7 @@ namespace GestorDeFlotasDesktop.AsignacionChofer_AutoTurno
                     {
                         if (string.IsNullOrEmpty(pRetCatchError.Value.ToString()))
                         {
-                            MessageBox.Show("Fue editado y dado de alta exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Fue dado de alta exitosamente.", "Edición exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
                         }
                         else

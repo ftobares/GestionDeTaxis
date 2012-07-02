@@ -31,20 +31,20 @@ namespace GestorDeFlotasDesktop.Listados
         private void button3_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.MejoresClientes.MejoresClientes mC = GestorDeFlotasDesktop.MejoresClientes.MejoresClientes.Instance();
-            mC.Show();
+            mC.ShowDialog();
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.MejoresChoferes.MejoresChoferes mCh = GestorDeFlotasDesktop.MejoresChoferes.MejoresChoferes.Instance();
-            mCh.Show();
+            mCh.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             GestorDeFlotasDesktop.MejoresAutos.MejoresAutos mA = GestorDeFlotasDesktop.MejoresAutos.MejoresAutos.Instance();
-            mA.Show();
+            mA.ShowDialog();
         }
 
         private void Listados_Load(object sender, EventArgs e)

@@ -43,12 +43,14 @@ namespace GestorDeFlotasDesktop.AbmCliente
         {
             limpiarCampos();
             this.txtDNI.ReadOnly = false;
+            this.label15.Visible = false;
 
             if (modoAbm == "Editar")
             {
 
                 getDatosRegistro(dniCliente);
                 this.txtDNI.ReadOnly = true;
+                this.label15.Visible = true;
             }
         }
 
@@ -213,7 +215,15 @@ namespace GestorDeFlotasDesktop.AbmCliente
                 if (this.modoAbm == "Nuevo")
                 {
                     string sCheckAnulado = "0";
-                    string sQuery = "INSERT INTO FEMIG.Clientes VALUES (" + this.txtDNI.Text + ",'" + this.txtNombre.Text
+                    string sQuery = "SELECT * FROM FEMIG.Clientes where 1 = 1 and telefono = " + this.txtTel.Text+"";
+                    DataSet dsResultados = new DataSet();
+                    dsResultados = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery_DS(sQuery);
+                    if (dsResultados.Tables["Tabla"].Rows.Count > 0)
+                    {
+                        MessageBox.Show("Telefono ya ingresado, no se dará de alta al cliente", "Datos Insertados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    sQuery = "INSERT INTO FEMIG.Clientes VALUES (" + this.txtDNI.Text + ",'" + this.txtNombre.Text
                         + "','" + this.txtApellido.Text + "'," + this.txtTel.Text + ",'" + this.txtCalle.Text + "|" + this.txtNumCalle.Text + "|"
                             + this.txtPiso.Text + "|" + this.txtDpto.Text + "|" + this.txtLocalidad.Text + "|" + this.txtCP.Text + "',";
                     /*if (this.txtMail.Text == string.Empty)
