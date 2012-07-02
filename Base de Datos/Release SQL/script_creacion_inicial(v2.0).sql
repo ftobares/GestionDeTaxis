@@ -362,7 +362,7 @@ BEGIN TRY
 	--Calle
 	INSERT INTO femig.viajes(fecha,tipoViaje,asignacionID,cantFichas,dniCliente,codFactura,codRendicion)
 	select DISTINCT(m.viaje_fecha),(case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
-	cat.asignacionID,m.viaje_cant_fichas,m.cliente_dni,0,ren.codRendicion
+	cat.asignacionID,m.viaje_cant_fichas,0,0,ren.codRendicion
 	from femig.choferautoturno cat, femig.turnos tur, femig.rendiciones ren, gd_esquema.maestra m
 	where m.rendicion_fecha is null
 	and m.factura_fecha_inicio is null
