@@ -23,7 +23,7 @@ BEGIN
 	end
 	else
 	begin
-		UPDATE cat SET anulado = @anulado FROM femig.choferAutoTurno WHERE turnoID = @turnoID AND 
+		UPDATE cat SET anulado = @anulado FROM femig.choferAutoTurno cat WHERE turnoID = @turnoID AND 
 			NOT EXISTS (select 1 from femig.autos a where a.patente=cat.patente AND anulado = 1) AND
 				NOT EXISTS (select 1 from femig.choferes c where c.dniChofer=cat.dniChofer AND anulado = 1)
 	end
