@@ -125,7 +125,7 @@ CREATE TABLE GD1C2012.FEMIG.viajes (
 	codFactura numeric(18),
 	codRendicion numeric(18)
 );
-/*ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
 
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
 	FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.Facturas (codFactura);
@@ -136,7 +136,7 @@ ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
 	FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.Clientes (dniCliente);
 	
-CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);*/
+CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);
 
 CREATE TABLE GD1C2012.FEMIG.Pantalla ( 
 	pantallaID varchar(255) NOT NULL PRIMARY KEY CLUSTERED,
@@ -437,6 +437,7 @@ AS
 BEGIN
 	update femig.cliente set anulado = '1' where dniCliente = @pDniCliente
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[cliente]    Script Date: 06/27/2012 02:34:40 ******/
 SET ANSI_NULLS ON
@@ -476,6 +477,7 @@ BEGIN
            ,'0')
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearAuto]    Script Date: 06/27/2012 02:34:41 ******/
 SET ANSI_NULLS ON
@@ -520,6 +522,7 @@ BEGIN
            ,'0')
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarAuto]    Script Date: 06/27/2012 02:34:46 ******/
 SET ANSI_NULLS ON
@@ -561,6 +564,7 @@ BEGIN
 	 WHERE patente = @pPatente
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarAuto]    Script Date: 06/27/2012 02:34:49 ******/
 SET ANSI_NULLS ON
@@ -574,6 +578,7 @@ AS
 BEGIN
 	update femig.autos set anulado = '1' where patente = @pPatente
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearChofer]    Script Date: 06/27/2012 02:34:41 ******/
 SET ANSI_NULLS ON
@@ -620,6 +625,7 @@ BEGIN
            ,'0')
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarChofer]    Script Date: 06/27/2012 02:34:46 ******/
 SET ANSI_NULLS ON
@@ -663,6 +669,7 @@ BEGIN
 	 WHERE dniChofer = @pDniChofer
 		
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarChofer]    Script Date: 06/27/2012 02:34:50 ******/
 SET ANSI_NULLS ON
@@ -676,6 +683,7 @@ AS
 BEGIN
 	update femig.choferes set anulado = '1' where dniChofer = @pDniChofer
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearTurno]    Script Date: 06/27/2012 02:34:44 ******/
 SET ANSI_NULLS ON
@@ -716,6 +724,7 @@ BEGIN
            ,'0')
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarTurno]    Script Date: 06/27/2012 02:34:49 ******/
 SET ANSI_NULLS ON
@@ -753,6 +762,7 @@ BEGIN
 		,valorFicha = @pValorFicha
 	WHERE turnoID = @pTurnoId
 end
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarTurno]    Script Date: 06/27/2012 02:34:51 ******/
 SET ANSI_NULLS ON
@@ -766,6 +776,7 @@ AS
 BEGIN
 	update femig.turnos set anulado = '1' where turnoID = @pTurnoId
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearRendicion]    Script Date: 06/27/2012 02:34:43 ******/
 SET ANSI_NULLS ON
@@ -823,6 +834,7 @@ BEGIN
 		SET codRendicion = @pCodRendicion
 			WHERE asignacionID = @iASignacionID
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarChoferAutoTurno]    Script Date: 06/27/2012 02:34:47 ******/
 SET ANSI_NULLS ON
@@ -849,6 +861,7 @@ BEGIN
 	 WHERE asignacionID= @pId_Asign
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarChoferAutoTurno]    Script Date: 06/27/2012 02:34:50 ******/
 SET ANSI_NULLS ON
@@ -862,6 +875,7 @@ AS
 BEGIN
 	update femig.ChoferAutoTurno set anulado = '1' where asignacionID = @pId_Asign
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearViaje]    Script Date: 06/27/2012 02:34:45 ******/
 SET ANSI_NULLS ON
@@ -906,6 +920,7 @@ BEGIN
            ,@pDniCliente)
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearChoferAutoTurno]    Script Date: 06/27/2012 02:34:42 ******/
 SET ANSI_NULLS ON
@@ -944,6 +959,7 @@ BEGIN
            ,@pTurnoID
            ,@pPatente)
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarCliente]    Script Date: 06/27/2012 02:34:47 ******/
 SET ANSI_NULLS ON
@@ -981,6 +997,7 @@ BEGIN
 	 WHERE dniCliente = @pDniCliente
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearFacturacion]    Script Date: 06/27/2012 02:34:42 ******/
 SET ANSI_NULLS ON
@@ -1028,6 +1045,7 @@ BEGIN
 			WHERE viajeID = (SELECT viajeID FROM #ImportesCliente);
 
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarPantalla]    Script Date: 06/27/2012 02:34:47 ******/
 SET ANSI_NULLS ON
@@ -1053,6 +1071,7 @@ BEGIN
 	 WHERE pantallaID = @pPantallaID
 		
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[getPantallasDeRol]    Script Date: 06/27/2012 02:34:51 ******/
 SET ANSI_NULLS ON
@@ -1072,6 +1091,7 @@ BEGIN
 	SELECT 'False' AS chk,PANTALLAID AS pantallaID,P.DESCRIPCION  FROM FEMIG.PANTALLA P
 	WHERE NOT EXISTS (SELECT 1 FROM FEMIG.ROLPANTALLA RP WHERE RP.ROLID = @pRolID AND RP.PANTALLAID = P.PANTALLAID)
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[ObtenerFuncionalidades]    Script Date: 06/27/2012 02:34:51 ******/
 SET ANSI_NULLS ON
@@ -1095,6 +1115,7 @@ BEGIN
             and isnull(RP.acceso,'0')='1'
     ORDER BY P.DESCRIPCION
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[getRolesDeUsuario]    Script Date: 06/27/2012 02:34:51 ******/
 SET ANSI_NULLS ON
@@ -1114,6 +1135,7 @@ BEGIN
 	SELECT 'False' AS chk,ROLID AS rolID,R.DESCRIPCION  FROM FEMIG.ROL R
 	WHERE NOT EXISTS (SELECT 1 FROM FEMIG.ROLUSUARIO RU WHERE RU.UsuarioID = @pUsuarioID AND RU.ROLID = R.ROLID)
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearRol]    Script Date: 06/27/2012 02:34:43 ******/
 SET ANSI_NULLS ON
@@ -1142,6 +1164,7 @@ BEGIN
            ,@pAnulado)
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarRol]    Script Date: 06/27/2012 02:34:50 ******/
 SET ANSI_NULLS ON
@@ -1158,6 +1181,7 @@ END
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarRol]    Script Date: 06/27/2012 02:34:48 ******/
 SET ANSI_NULLS ON
+
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -1182,6 +1206,7 @@ BEGIN
 	 WHERE rolID = @pRolID
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[AsignarDesasignarRolPantalla]    Script Date: 06/27/2012 02:34:39 ******/
 SET ANSI_NULLS ON
@@ -1201,6 +1226,7 @@ BEGIN
 		DELETE FROM FEMIG.ROLPANTALLA WHERE ROLID = @pRolID AND PANTALLAID = @pPantallaID
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[verificarCredencialesLogueo]    Script Date: 06/27/2012 02:34:52 ******/
 SET ANSI_NULLS ON
@@ -1230,6 +1256,7 @@ BEGIN
 	return @pResultado
 		
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearUsuario]    Script Date: 06/27/2012 02:34:45 ******/
 SET ANSI_NULLS ON
@@ -1275,6 +1302,7 @@ BEGIN
            ,@pAnulado)
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarUsuario]    Script Date: 06/27/2012 02:34:49 ******/
 SET ANSI_NULLS ON
@@ -1317,6 +1345,7 @@ BEGIN
 	 WHERE usuarioID = @pUsuarioID
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarUsuario]    Script Date: 06/27/2012 02:34:51 ******/
 SET ANSI_NULLS ON
@@ -1330,6 +1359,7 @@ AS
 BEGIN
 	update femig.Usuario set anulado = '1' where usuarioID = @pUsuarioID
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[AsignarDesasignarRolUsuario]    Script Date: 06/27/2012 02:34:39 ******/
 SET ANSI_NULLS ON
@@ -1349,6 +1379,7 @@ BEGIN
 		DELETE FROM FEMIG.ROLUSUARIO WHERE USUARIOID = @pUsuarioID AND ROLID = @pRolID
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[crearReloj]    Script Date: 06/27/2012 02:34:43 ******/
 SET ANSI_NULLS ON
@@ -1382,6 +1413,7 @@ BEGIN
            ,'0')
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[editarReloj]    Script Date: 06/27/2012 02:34:48 ******/
 SET ANSI_NULLS ON
@@ -1412,6 +1444,7 @@ BEGIN
 	 WHERE nroSerieReloj = @pNroSerieReloj
 	
 END
+
 GO
 /****** Object:  StoredProcedure [FEMIG].[eliminarReloj]    Script Date: 06/27/2012 02:34:50 ******/
 SET ANSI_NULLS ON
