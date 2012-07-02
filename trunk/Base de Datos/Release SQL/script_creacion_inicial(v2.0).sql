@@ -337,34 +337,47 @@ BEGIN TRY
 	group by gd.rendicion_fecha, gd.chofer_dni, tr.turnoID
 	order by chofer_dni, rendicion_fecha, turnoID;
 	
-	INSERT INTO femig.viajes(tipoViaje,asignacionID,cantFichas,fecha,dniCliente,codFactura,codRendicion)
-	/*select (case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
-	cat.asignacionID,m.viaje_cant_fichas,m.viaje_fecha,m.cliente_dni,fac.codFactura,ren.codRendicion
-	FROM gd_esquema.maestra m
-	INNER JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
-	INNER JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-	INNER JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer*/
+	--Clientes
+	INSERT INTO femig.viajes(fecha,tipoViaje,asignacionID,cantFichas,dniCliente,codFactura,codRendicion)
 	select DISTINCT(m.viaje_fecha),(case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
 	cat.asignacionID,m.viaje_cant_fichas,m.cliente_dni,fac.codFactura,ren.codRendicion
-	FROM gd_esquema.maestra m
-	JOIN femig.facturas fac ON m.cliente_dni = fac.dniCliente
-	JOIN femig.choferautoturno cat ON m.chofer_dni = cat.dniChofer
-	JOIN femig.rendiciones ren ON m.chofer_dni = ren.dniChofer
-	WHERE m.rendicion_fecha is null
+	from femig.choferautoturno cat, femig.turnos tur, femig.facturas fac, femig.rendiciones ren, gd_esquema.maestra m
+	where m.rendicion_fecha is null
 	and m.factura_fecha_inicio is null
-	
-	ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+	and m.chofer_dni = cat.dniChofer
+	and m.cliente_dni = fac.dniCliente
+	and m.chofer_dni = ren.dniChofer
+	and m.turno_hora_inicio = tur.horaInicio
+	and m.turno_hora_fin = tur.horaFin
+	and tur.turnoID = cat.turnoID
+	and tur.turnoID = ren.turnoID
+	and month(m.viaje_fecha) = month(fac.fechaInicio)
+	and day(m.viaje_fecha) between (day(fac.fechaInicio)) and (day(fac.fechaFin))
+	and month(m.viaje_fecha) = month(ren.fecha)
+	and month(m.viaje_fecha) = month(cat.fecha)
+	and day(m.viaje_fecha) = day(ren.fecha)
+	and day(m.viaje_fecha) = day(cat.fecha)
+	order by m.viaje_fecha,m.cliente_dni
 
-	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
-	FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.Facturas (codFactura);
-
-	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Rendicion 
-	FOREIGN KEY (codRendicion) REFERENCES GD1C2012.FEMIG.Rendiciones (codRendicion);
-
-	ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Cliente 
-	FOREIGN KEY (dniCliente) REFERENCES GD1C2012.FEMIG.Clientes (dniCliente);
-	
-	CREATE INDEX index_via_dniCliente ON FEMIG.viajes (dniCliente);
+	--Calle
+	INSERT INTO femig.viajes(fecha,tipoViaje,asignacionID,cantFichas,dniCliente,codFactura,codRendicion)
+	select DISTINCT(m.viaje_fecha),(case when m.cliente_dni is null then 'calle' else 'cliente' end) as tipoViaje,
+	cat.asignacionID,m.viaje_cant_fichas,m.cliente_dni,0,ren.codRendicion
+	from femig.choferautoturno cat, femig.turnos tur, femig.rendiciones ren, gd_esquema.maestra m
+	where m.rendicion_fecha is null
+	and m.factura_fecha_inicio is null
+	and m.cliente_dni is null
+	and m.chofer_dni = cat.dniChofer
+	and m.chofer_dni = ren.dniChofer
+	and m.turno_hora_inicio = tur.horaInicio
+	and m.turno_hora_fin = tur.horaFin
+	and tur.turnoID = cat.turnoID
+	and tur.turnoID = ren.turnoID
+	and month(m.viaje_fecha) = month(ren.fecha)
+	and month(m.viaje_fecha) = month(cat.fecha)
+	and day(m.viaje_fecha) = day(ren.fecha)
+	and day(m.viaje_fecha) = day(cat.fecha)
+	order by m.viaje_fecha
 
 /*++++++++++++++++++++++++++++++++++*/
 /*		Carga de Funcionalidades	*/
