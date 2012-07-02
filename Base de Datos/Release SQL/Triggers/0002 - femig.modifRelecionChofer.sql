@@ -16,6 +16,7 @@ BEGIN
 
 	SET NOCOUNT ON;
 
+	SELECT TOP(1) @anulado = anulado, @dniChofer = dniChofer FROM INSERTED
 	if(@anulado = 1)
 	begin
 		UPDATE femig.ChoferAutoTurno SET anulado = @anulado WHERE dniChofer = @dniChofer 

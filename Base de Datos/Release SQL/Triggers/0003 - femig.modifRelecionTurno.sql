@@ -13,9 +13,10 @@ if update(anulado)
 BEGIN
 
 	-- SET NOCOUNT ON impide que se generen mensajes de texto con cada instrucción 
-
+	
 	SET NOCOUNT ON;
-
+	
+	SELECT TOP(1) @anulado = anulado, @turnoID = turnoID FROM INSERTED
 	if(@anulado = 1)
 	begin
 		UPDATE femig.ChoferAutoTurno SET anulado = @anulado WHERE turnoID = @turnoID 
