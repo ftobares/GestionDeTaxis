@@ -155,11 +155,12 @@
             this.dtpFecha.CustomFormat = "yyyy\'/\'MM\'/\'dd";
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFecha.Location = new System.Drawing.Point(131, 162);
-            this.dtpFecha.MinDate = new System.DateTime(2012, 6, 26, 0, 0, 0, 0);
+            this.dtpFecha.MaxDate = new System.DateTime(2999, 12, 31, 0, 0, 0, 0);
+            this.dtpFecha.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(82, 20);
             this.dtpFecha.TabIndex = 41;
-            this.dtpFecha.Value = new System.DateTime(2012, 6, 26, 0, 0, 0, 0);
+            this.dtpFecha.Value = new System.DateTime(2012, 7, 1, 23, 30, 7, 0);
             // 
             // dtHora
             // 

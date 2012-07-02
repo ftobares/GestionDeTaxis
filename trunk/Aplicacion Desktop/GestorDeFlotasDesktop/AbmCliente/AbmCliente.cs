@@ -160,7 +160,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
             string sCheck = dataGridView1.Rows[e.RowIndex].Cells["anulado"].Value.ToString();
             if (e.ColumnIndex == dataGridView1.ColumnCount - 1 && sCheck == "False")
             {
-                if (MessageBox.Show("¿Esta seguro que deséa eliminar este Auto?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("¿Esta seguro que deséa eliminar este Cliente?", "Confirmación de baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {    
                     string sCheckAnuklado = "1";
 

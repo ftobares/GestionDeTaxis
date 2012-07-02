@@ -129,6 +129,11 @@ namespace GestorDeFlotasDesktop.RegistrarViaje
                         {
                             MessageBox.Show("Se dio de Alta al Viaje correctamente","OK!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.DialogResult = DialogResult.OK;
+                            cmbViaje.Text = "";
+                            txtChofer.Text = "";
+                            txtCliente.Text = "";
+                            txtFichas.Text = "";
+                            txtTurno.Text = "";
                         }
                         else
                             MessageBox.Show(pRetCatchError.Value.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

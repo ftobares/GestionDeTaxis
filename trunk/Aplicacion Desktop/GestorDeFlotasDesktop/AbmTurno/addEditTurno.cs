@@ -150,18 +150,18 @@ namespace GestorDeFlotasDesktop.AbmTurno
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pTurnoID = new SqlParameter("@pTurnoID", SqlDbType.BigInt);
+                SqlParameter pTurnoID = new SqlParameter("@pTurnoID", SqlDbType.Int);
                 pTurnoID.Value = string.IsNullOrEmpty(turnoID) ? "0" : turnoID;
                 SqlParameter pDescripcion = new SqlParameter("@pDescripcion", SqlDbType.VarChar, 255);
                 pDescripcion.Value = txtDescripcion.Text;
-                SqlParameter pHoraInicio = new SqlParameter("@pHoraInicio", SqlDbType.BigInt);
+                SqlParameter pHoraInicio = new SqlParameter("@pHoraInicio", SqlDbType.Int);
                 pHoraInicio.Value = cmbHoraInicio.Text;
-                SqlParameter pHoraFin = new SqlParameter("@pHoraFin", SqlDbType.BigInt);
+                SqlParameter pHoraFin = new SqlParameter("@pHoraFin", SqlDbType.Int);
                 pHoraFin.Value = cmbHoraFin.Text;
-                SqlParameter pValorFicha = new SqlParameter("@pValorFicha", SqlDbType.BigInt);
-                pValorFicha.Value = txtValorFicha.Text;
-                SqlParameter pValorBandera = new SqlParameter("@pValorBandera", SqlDbType.BigInt);
-                pValorBandera.Value = txtValorBandera.Text;
+                SqlParameter pValorFicha = new SqlParameter("@pValorFicha", SqlDbType.Float);
+                pValorFicha.Value = txtValorFicha.Text.Replace(".",",");
+                SqlParameter pValorBandera = new SqlParameter("@pValorBandera", SqlDbType.Float);
+                pValorBandera.Value = txtValorBandera.Text.Replace(".", ",");
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
                 pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);

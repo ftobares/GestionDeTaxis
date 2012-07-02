@@ -44,7 +44,7 @@ namespace GestorDeFlotasDesktop.UsuariosRoles
 
             dgPantallas.DataSource = dtResultado;
 
-            dgPantallas.Columns["chk"].Visible = false;
+            //dgPantallas.Columns["chk"].Visible = false;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
