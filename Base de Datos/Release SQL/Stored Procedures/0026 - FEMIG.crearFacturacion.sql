@@ -26,6 +26,19 @@ DECLARE @iAsignacionID numeric(18,0)
 BEGIN
 
 	SET @pImporteTotal = 0
+	--Controlo que el cliente este habilitado
+	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
+	begin
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' no existe.'
+		return
+	end
+
+	--Controlo que el cliente este habilitado
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
+	begin
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' se encuentra inhabilitado.'
+		return
+	end
 
 ----------------------------------------------------
 --******************REVISARRRR**********************--
