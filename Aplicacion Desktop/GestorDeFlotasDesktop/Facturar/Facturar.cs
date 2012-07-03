@@ -58,7 +58,8 @@ namespace GestorDeFlotasDesktop.Facturar
         private bool validaCamposRequeridos()
         {
 
-            if (txtCliente.Text.Trim() == string.Empty || txtCliente.Text == "0" || dtpFecha.Text.Trim() == string.Empty || dtpFechaFin.Text.Trim() == string.Empty)
+            if (txtCliente.Text.Trim() == string.Empty || txtCliente.Text == "0" || dtpFecha.Text.Trim() == string.Empty || dtpFechaFin.Text.Trim() == string.Empty
+                    || this.dtpFecha.Value.CompareTo(this.dtpFechaFin.Value) == 1)
                 return false;
             else
                 return true;
@@ -79,6 +80,8 @@ namespace GestorDeFlotasDesktop.Facturar
                         frmErrores.agregarError("Debe especificar la Fecha Inicial de Facturacion.");
                     if (string.IsNullOrEmpty(dtpFecha.Text))
                         frmErrores.agregarError("Debe especificar la Fecha Final de Facturacion.");
+                    if (this.dtpFecha.Value.CompareTo(this.dtpFechaFin.Value) == 1)
+                        frmErrores.agregarError("La fecha desde no puede ser mayor que hasta");
                     
                     frmErrores.ShowDialog();
                     frmErrores.Dispose();
