@@ -25,7 +25,6 @@ AS
 DECLARE @iAsignacionID numeric(18,0)
 BEGIN
 
-	SET @pImporteTotal = 0
 	--Controlo que el cliente este habilitado
 	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
 	begin
@@ -48,7 +47,7 @@ BEGIN
 	INSERT INTO #ImportesCliente (viajeID, cantFichas, turnoID)
 	SELECT vi.viajeID, vi.cantFichas, cat.turnoID FROM Femig.viajes vi
 	INNER JOIN GD1C2012.FEMIG.ChoferAutoTurno cat on cat.asignacionId = vi.asignacionId
-	WHERE vi.dniCliente = @pDniCliente AND vi.fecha BETWEEN CONVERT(varchar(8), @pFechaInicio, 112) AND CONVERT(varchar(8), @pFechaFin, 112);
+	WHERE vi.dniCliente = @pDniCliente AND vi.fecha BETWEEN CONVERT(varchar(8), @pFechaInicio, 112) AND CONVERT(varchar(8), @pFechaFin, 112) AND vi.codFactura is null;
 	
 	SELECT @pImporteTotal = SUM(tur.valorBandera + (iC.CantFichas * tur.valorFicha)) FROM #ImportesCliente iC
 	INNER JOIN GD1C2012.FEMIG.turnos tur on tur.turnoID = iC.turnoID;
