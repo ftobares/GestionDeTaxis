@@ -43,13 +43,14 @@
             this.cmbHoraFin = new System.Windows.Forms.ComboBox();
             this.txtValorBandera = new System.Windows.Forms.TextBox();
             this.txtValorFicha = new System.Windows.Forms.TextBox();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(192, 191);
+            this.btnLimpiar.Location = new System.Drawing.Point(192, 210);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 35;
@@ -62,7 +63,7 @@
             // 
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(100, 191);
+            this.btnCancelar.Location = new System.Drawing.Point(100, 210);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 34;
@@ -75,7 +76,7 @@
             // 
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(17, 191);
+            this.btnAceptar.Location = new System.Drawing.Point(17, 210);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 33;
@@ -235,11 +236,22 @@
             this.txtValorFicha.TabIndex = 53;
             this.txtValorFicha.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValorFicha_KeyPress);
             // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(19, 176);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 54;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
             // addEditTurno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 227);
+            this.ClientSize = new System.Drawing.Size(289, 245);
+            this.Controls.Add(this.chkDeshabilitado);
             this.Controls.Add(this.txtValorFicha);
             this.Controls.Add(this.txtValorBandera);
             this.Controls.Add(this.cmbHoraFin);
@@ -279,5 +291,6 @@
         private System.Windows.Forms.ComboBox cmbHoraFin;
         private System.Windows.Forms.TextBox txtValorBandera;
         private System.Windows.Forms.TextBox txtValorFicha;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
     }
 }

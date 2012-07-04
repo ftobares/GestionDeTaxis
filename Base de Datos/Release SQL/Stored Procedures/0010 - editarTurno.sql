@@ -32,6 +32,7 @@ BEGIN
 		  ,[descripcion] = @pDescripcion
 		  ,[valorFicha] = @pValorFicha
 		  ,[valorBandera] = @pValorBandera
+		  ,[anulado] = @pAnulado
 	 WHERE turnoID = @pTurnoID
 	
 END

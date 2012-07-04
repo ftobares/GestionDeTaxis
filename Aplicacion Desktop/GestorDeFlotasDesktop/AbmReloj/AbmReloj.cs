@@ -12,8 +12,8 @@ namespace GestorDeFlotasDesktop.AbmReloj
 {
     public partial class AbmReloj : Form
     {
-        private string camposSelect = "nroSerieReloj, marca, modelo, fechaVersion";
-        private string whereObligatorio = "isnull(anulado,'0')='0'";
+        private string camposSelect = "nroSerieReloj, marca, modelo, fechaVersion, anulado";
+        private string whereObligatorio = "";//"isnull(anulado,'0')='0'";
         private string consultaOrderBy = "nroSerieReloj";
         private string nombreTabla = "Femig.Relojes";
         private string filtro1Value = "nroSerieReloj";
@@ -88,6 +88,10 @@ namespace GestorDeFlotasDesktop.AbmReloj
 
             strQuery += " and fechaVersion between '" + dtpDesde.Value.ToString("yyyyMMdd") + "' and '" + dtpHasta.Value.ToString("yyyyMMdd") + "'";
 
+            if (chkDeshabilitado.Checked)
+                strQuery += " and anulado='1'";
+            else
+                strQuery += " and isnull(anulado,'0')='0'";
             strQuery += " order by " + consultaOrderBy;
 
             return strQuery;

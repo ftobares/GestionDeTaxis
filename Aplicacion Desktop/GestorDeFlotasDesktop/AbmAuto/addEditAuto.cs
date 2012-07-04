@@ -57,7 +57,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private void getDatosRegistro(string patente)
         {
             DataTable dtValores = new DataTable();
-            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select patente, marca, modelo, licencia, rodado, nroSerieReloj from femig.autos where patente = '" + patente + "'");
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select patente, marca, modelo, licencia, rodado, nroSerieReloj, anulado from femig.autos where patente = '" + patente + "'");
             mtxtPatente.Text = dtValores.Rows[0]["patente"].ToString();
             cmbMarca.Text = dtValores.Rows[0]["marca"].ToString();
             txtModelo.Text = dtValores.Rows[0]["modelo"].ToString();
@@ -65,6 +65,10 @@ namespace GestorDeFlotasDesktop.AbmAuto
             txtReloj.Text = dtValores.Rows[0]["nroSerieReloj"].ToString();
             txtLicencia.Text = dtValores.Rows[0]["licencia"].ToString();
             txtRodado.Text = dtValores.Rows[0]["rodado"].ToString();
+            if (dtValores.Rows[0]["anulado"].ToString() == "True")
+                chkDeshabilitado.Checked = true;
+            else
+                chkDeshabilitado.Checked = false;
         }
 
         private void cargarMarcas()
@@ -126,7 +130,10 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.VarChar,18);
                 pNroSerieReloj.Value = txtReloj.Text;
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
-                pAnulado.Value = 0;
+                if (chkDeshabilitado.Checked)
+                    pAnulado.Value = 1;
+                else
+                    pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
@@ -202,6 +209,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             txtLicencia.Text = "";
             txtRodado.Text = "";
             txtReloj.Text = "";
+            chkDeshabilitado.Checked = false;
         }
     }
 }
