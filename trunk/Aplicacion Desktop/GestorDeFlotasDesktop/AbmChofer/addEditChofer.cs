@@ -58,7 +58,7 @@ namespace GestorDeFlotasDesktop.AbmChofer
         private void getDatosRegistro(long dniChofer)
         {
             DataTable dtValores = new DataTable();
-            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select dniChofer, nombre, apellido, direccion, telefono, email, fechaNacimiento from femig.choferes where dniChofer = " + dniChofer);
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select dniChofer, nombre, apellido, direccion, telefono, email, fechaNacimiento, anulado from femig.choferes where dniChofer = " + dniChofer);
             txtDniChofer.Text = dtValores.Rows[0]["dniChofer"].ToString();
             txtNombre.Text = dtValores.Rows[0]["nombre"].ToString();
             txtApellido.Text = dtValores.Rows[0]["apellido"].ToString();
@@ -66,6 +66,10 @@ namespace GestorDeFlotasDesktop.AbmChofer
             txtTelefono.Text = dtValores.Rows[0]["telefono"].ToString();
             txtEmail.Text = dtValores.Rows[0]["email"].ToString();
             dtpNacimiento.Value =  (DateTime)dtValores.Rows[0]["fechaNacimiento"];
+            if (dtValores.Rows[0]["anulado"].ToString() == "True")
+                chkDeshabilitado.Checked = true;
+            else
+                chkDeshabilitado.Checked = false;
         }
 
         private bool validaCamposRequeridos()
@@ -123,7 +127,10 @@ namespace GestorDeFlotasDesktop.AbmChofer
                 SqlParameter pFechaNacimiento = new SqlParameter("@pFechaNacimiento", SqlDbType.DateTime);
                 pFechaNacimiento.Value = dtpNacimiento.Value;
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
-                pAnulado.Value = 0;
+                if (chkDeshabilitado.Checked)
+                    pAnulado.Value = 1;
+                else
+                    pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar, 1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
@@ -179,6 +186,7 @@ namespace GestorDeFlotasDesktop.AbmChofer
             txtDireccion.Text = "";
             txtTelefono.Text = "";
             txtEmail.Text = "";
+            chkDeshabilitado.Checked = false;
         }
 
         private void txtDniChofer_KeyPress(object sender, KeyPressEventArgs e)

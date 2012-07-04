@@ -46,6 +46,7 @@
             this.dgTurnos = new System.Windows.Forms.DataGridView();
             this.btnNuevoTurno = new System.Windows.Forms.Button();
             this.lblFiltro = new System.Windows.Forms.Label();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgTurnos)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkDeshabilitado);
             this.groupBox2.Controls.Add(this.cmbHoraFin);
             this.groupBox2.Controls.Add(this.cmbHoraInicio);
             this.groupBox2.Controls.Add(this.lblMaxBandera);
@@ -104,7 +106,7 @@
             this.groupBox2.Controls.Add(this.btnFiltrar);
             this.groupBox2.Location = new System.Drawing.Point(6, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(673, 73);
+            this.groupBox2.Size = new System.Drawing.Size(673, 99);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filtros de Búsqueda";
@@ -252,12 +254,12 @@
             this.dgTurnos.AllowUserToDeleteRows = false;
             this.dgTurnos.AllowUserToResizeRows = false;
             this.dgTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTurnos.Location = new System.Drawing.Point(6, 149);
+            this.dgTurnos.Location = new System.Drawing.Point(6, 175);
             this.dgTurnos.MultiSelect = false;
             this.dgTurnos.Name = "dgTurnos";
             this.dgTurnos.ReadOnly = true;
             this.dgTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgTurnos.Size = new System.Drawing.Size(687, 255);
+            this.dgTurnos.Size = new System.Drawing.Size(687, 229);
             this.dgTurnos.TabIndex = 16;
             this.dgTurnos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgTurnos_CellContentClick);
             // 
@@ -282,6 +284,16 @@
             this.lblFiltro.Size = new System.Drawing.Size(35, 13);
             this.lblFiltro.TabIndex = 19;
             this.lblFiltro.Text = "label5";
+            // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(9, 76);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 35;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
             // 
             // AbmTurno
             // 
@@ -327,5 +339,6 @@
         private System.Windows.Forms.Label lblMaxFicha;
         private System.Windows.Forms.ComboBox cmbHoraFin;
         private System.Windows.Forms.ComboBox cmbHoraInicio;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
     }
 }

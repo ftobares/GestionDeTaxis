@@ -107,12 +107,16 @@ namespace GestorDeFlotasDesktop.AbmTurno
         private void getDatosRegistro(string patente)
         {
             DataTable dtValores = new DataTable();
-            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select horaInicio, horaFin, descripcion, valorFicha, valorBandera from femig.turnos where turnoID = '" + turnoID + "'");
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select horaInicio, horaFin, descripcion, valorFicha, valorBandera, anulado from femig.turnos where turnoID = '" + turnoID + "'");
             txtDescripcion.Text = dtValores.Rows[0]["descripcion"].ToString();
             cmbHoraInicio.Text = dtValores.Rows[0]["horaInicio"].ToString();
             cmbHoraFin.Text = dtValores.Rows[0]["horaFin"].ToString();
             txtValorFicha.Text = dtValores.Rows[0]["valorFicha"].ToString();
             txtValorBandera.Text = dtValores.Rows[0]["valorBandera"].ToString();
+            if (dtValores.Rows[0]["anulado"].ToString() == "True")
+                chkDeshabilitado.Checked = true;
+            else
+                chkDeshabilitado.Checked = false;
         }
 
         private bool validaCamposRequeridos()
@@ -163,7 +167,10 @@ namespace GestorDeFlotasDesktop.AbmTurno
                 SqlParameter pValorBandera = new SqlParameter("@pValorBandera", SqlDbType.Float);
                 pValorBandera.Value = txtValorBandera.Text.Replace(".", ",");
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
-                pAnulado.Value = 0;
+                if (chkDeshabilitado.Checked)
+                    pAnulado.Value = 1;
+                else
+                    pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar,1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
@@ -216,6 +223,7 @@ namespace GestorDeFlotasDesktop.AbmTurno
             txtValorBandera.Text = "";
             cmbHoraInicio.Text = "";
             cmbHoraFin.Text = "";
+            chkDeshabilitado.Checked = false;
         }
     }
 }

@@ -12,8 +12,8 @@ namespace GestorDeFlotasDesktop.AbmChofer
 {
     public partial class AbmChofer : Form
     {
-        private string camposSelect = "dniChofer, nombre, apellido, direccion, telefono, email, fechaNacimiento";
-        private string whereObligatorio = "isnull(anulado,'0')='0'";
+        private string camposSelect = "dniChofer, nombre, apellido, direccion, telefono, email, fechaNacimiento, anulado";
+        private string whereObligatorio = "";//"isnull(anulado,'0')='0'";
         private string consultaOrderBy = "nombre,apellido";
         private string nombreTabla = "Femig.Choferes";
         private string filtro1Value = "dniChofer";
@@ -86,6 +86,10 @@ namespace GestorDeFlotasDesktop.AbmChofer
                 strQuery += " and cast(" + filtro3Value + " as varchar) like '%" + txtNombre.Text + "%'";
             if (!string.IsNullOrEmpty(txtDireccion.Text))
                 strQuery += " and cast(" + filtro4Value + " as varchar) like '%" + txtDireccion.Text + "%'";
+            if (chkDeshabilitado.Checked)
+                strQuery += " and anulado='1'";
+            else
+                strQuery += " and isnull(anulado,'0')='0'";
             strQuery += " order by " + consultaOrderBy;
 
             return strQuery;

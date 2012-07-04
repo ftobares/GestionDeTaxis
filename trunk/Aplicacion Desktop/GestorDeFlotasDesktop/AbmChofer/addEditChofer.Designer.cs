@@ -47,13 +47,14 @@
             this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
             this.lblFNacimiento = new System.Windows.Forms.Label();
             this.txtDniChofer = new System.Windows.Forms.TextBox();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(207, 256);
+            this.btnLimpiar.Location = new System.Drawing.Point(207, 267);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 9;
@@ -66,7 +67,7 @@
             // 
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(115, 256);
+            this.btnCancelar.Location = new System.Drawing.Point(115, 267);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 8;
@@ -79,7 +80,7 @@
             // 
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(32, 256);
+            this.btnAceptar.Location = new System.Drawing.Point(32, 267);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 7;
@@ -226,11 +227,22 @@
             this.txtDniChofer.TabIndex = 0;
             this.txtDniChofer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDniChofer_KeyPress);
             // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(15, 244);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 46;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
             // addEditChofer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 291);
+            this.ClientSize = new System.Drawing.Size(326, 302);
+            this.Controls.Add(this.chkDeshabilitado);
             this.Controls.Add(this.txtDniChofer);
             this.Controls.Add(this.lblFNacimiento);
             this.Controls.Add(this.dtpNacimiento);
@@ -278,5 +290,6 @@
         private System.Windows.Forms.DateTimePicker dtpNacimiento;
         private System.Windows.Forms.Label lblFNacimiento;
         private System.Windows.Forms.TextBox txtDniChofer;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
     }
 }

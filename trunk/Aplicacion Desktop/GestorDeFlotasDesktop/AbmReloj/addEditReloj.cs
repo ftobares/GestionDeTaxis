@@ -54,11 +54,15 @@ namespace GestorDeFlotasDesktop.AbmReloj
         private void getDatosRegistro(string patente)
         {
             DataTable dtValores = new DataTable();
-            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select nroSerieReloj, marca, modelo, fechaVersion from femig.relojes where nroSerieReloj = '" + nroSerieReloj + "'");
+            dtValores = GestorDeFlotasDesktop.BD.GD1C2012.executeSqlQuery("Select nroSerieReloj, marca, modelo, fechaVersion, anulado from femig.relojes where nroSerieReloj = '" + nroSerieReloj + "'");
             txtNroSerieReloj.Text = dtValores.Rows[0]["nroSerieReloj"].ToString();
             txtMarca.Text = dtValores.Rows[0]["marca"].ToString();
             txtModelo.Text = dtValores.Rows[0]["modelo"].ToString();
             dtpVersion.Value = DateTime.Parse(dtValores.Rows[0]["fechaVersion"].ToString());
+            if (dtValores.Rows[0]["anulado"].ToString() == "True")
+                chkDeshabilitado.Checked = true;
+            else
+                chkDeshabilitado.Checked = false;
         }
 
         private bool validaCamposRequeridos()
@@ -105,7 +109,10 @@ namespace GestorDeFlotasDesktop.AbmReloj
                 SqlParameter pFechaVencimiento = new SqlParameter("@pFechaVersion", SqlDbType.DateTime);
                 pFechaVencimiento.Value = dtpVersion.Value;
                 SqlParameter pAnulado = new SqlParameter("@pAnulado", SqlDbType.Bit);
-                pAnulado.Value = 0;
+                if (chkDeshabilitado.Checked)
+                    pAnulado.Value = 1;
+                else
+                    pAnulado.Value = 0;
                 SqlParameter pRetCatchError = new SqlParameter("@pRetCatchError", SqlDbType.VarChar, 1000);
                 pRetCatchError.Direction = ParameterDirection.Output;
 
@@ -159,6 +166,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
             txtMarca.Text = "";
             txtModelo.Text = "";
             dtpVersion.Value = DateTime.Today;
+            chkDeshabilitado.Checked = false;
         }
 
         private void txtNroSerieReloj_KeyPress(object sender, KeyPressEventArgs e)

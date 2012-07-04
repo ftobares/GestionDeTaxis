@@ -46,6 +46,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnSeleccionarReloj = new System.Windows.Forms.Button();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblReloj
@@ -175,7 +176,7 @@
             // 
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(203, 229);
+            this.btnLimpiar.Location = new System.Drawing.Point(213, 243);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 8;
@@ -188,7 +189,7 @@
             // 
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(111, 229);
+            this.btnCancelar.Location = new System.Drawing.Point(121, 243);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 7;
@@ -201,7 +202,7 @@
             // 
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(28, 229);
+            this.btnAceptar.Location = new System.Drawing.Point(38, 243);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 6;
@@ -223,11 +224,22 @@
             this.btnSeleccionarReloj.UseVisualStyleBackColor = true;
             this.btnSeleccionarReloj.Click += new System.EventHandler(this.btnSeleccionarReloj_Click);
             // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(54, 220);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 27;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
             // addEditAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 268);
+            this.ClientSize = new System.Drawing.Size(323, 278);
+            this.Controls.Add(this.chkDeshabilitado);
             this.Controls.Add(this.btnSeleccionarReloj);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.txtReloj);
@@ -276,5 +288,6 @@
         private System.Windows.Forms.TextBox txtReloj;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnSeleccionarReloj;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
     }
 }

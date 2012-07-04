@@ -47,6 +47,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.txtPatente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblFiltro = new System.Windows.Forms.Label();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgAutos)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -93,6 +94,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkDeshabilitado);
             this.groupBox2.Controls.Add(this.txtLicencia);
             this.groupBox2.Controls.Add(this.lblLicencia);
             this.groupBox2.Controls.Add(this.btnLimpiar);
@@ -227,6 +229,16 @@ namespace GestorDeFlotasDesktop.AbmAuto
             this.lblFiltro.TabIndex = 14;
             this.lblFiltro.Text = "label5";
             // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(339, 48);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 35;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
             // AbmAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,5 +283,6 @@ namespace GestorDeFlotasDesktop.AbmAuto
         private TextBox txtLicencia;
         private Label lblLicencia;
         private Label lblFiltro;
+        private CheckBox chkDeshabilitado;
     }
 }

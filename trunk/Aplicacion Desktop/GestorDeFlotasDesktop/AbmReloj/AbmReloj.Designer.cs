@@ -46,6 +46,7 @@
             this.dgRelojes = new System.Windows.Forms.DataGridView();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.btnNuevoReloj = new System.Windows.Forms.Button();
+            this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgRelojes)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +90,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkDeshabilitado);
             this.groupBox2.Controls.Add(this.dtpHasta);
             this.groupBox2.Controls.Add(this.dtpDesde);
             this.groupBox2.Controls.Add(this.lblFechaDesde);
@@ -228,6 +230,16 @@
             this.btnNuevoReloj.UseVisualStyleBackColor = true;
             this.btnNuevoReloj.Click += new System.EventHandler(this.btnNuevoReloj_Click);
             // 
+            // chkDeshabilitado
+            // 
+            this.chkDeshabilitado.AutoSize = true;
+            this.chkDeshabilitado.Location = new System.Drawing.Point(368, 46);
+            this.chkDeshabilitado.Name = "chkDeshabilitado";
+            this.chkDeshabilitado.Size = new System.Drawing.Size(90, 17);
+            this.chkDeshabilitado.TabIndex = 35;
+            this.chkDeshabilitado.Text = "Deshabilitado";
+            this.chkDeshabilitado.UseVisualStyleBackColor = true;
+            // 
             // AbmReloj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,5 +284,6 @@
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.DateTimePicker dtpDesde;
         private System.Windows.Forms.DateTimePicker dtpHasta;
+        private System.Windows.Forms.CheckBox chkDeshabilitado;
     }
 }

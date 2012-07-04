@@ -12,8 +12,8 @@ namespace GestorDeFlotasDesktop.AbmTurno
 {
     public partial class AbmTurno : Form
     {
-        private string camposSelect = "turnoID, horaInicio, horaFin, descripcion, valorFicha, valorBandera";
-        private string whereObligatorio = "isnull(anulado,'0')='0'";
+        private string camposSelect = "turnoID, horaInicio, horaFin, descripcion, valorFicha, valorBandera, anulado";
+        private string whereObligatorio = "";//"isnull(anulado,'0')='0'";
         private string consultaOrderBy = "turnoID";
         private string nombreTabla = "Femig.Turnos";
         private string filtro1Value = "horaInicio";
@@ -99,6 +99,10 @@ namespace GestorDeFlotasDesktop.AbmTurno
                 strQuery += " and " + filtro4Value + " <= " + txtMaxFicha.Text;
             if (!string.IsNullOrEmpty(txtMaxBandera.Text))
                 strQuery += " and " + filtro5Value + " <= " + txtMaxBandera.Text;
+            if (chkDeshabilitado.Checked)
+                strQuery += " and anulado='1'";
+            else
+                strQuery += " and isnull(anulado,'0')='0'";
             strQuery += " order by " + consultaOrderBy;
 
             return strQuery;

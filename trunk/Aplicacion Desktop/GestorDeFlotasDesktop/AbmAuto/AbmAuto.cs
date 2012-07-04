@@ -12,8 +12,8 @@ namespace GestorDeFlotasDesktop.AbmAuto
 {
     public partial class AbmAuto : Form
     {
-        private string camposSelect = "patente, marca, modelo, licencia, rodado, nroSerieReloj";
-        private string whereObligatorio = "isnull(anulado,'0')='0'";
+        private string camposSelect = "patente, marca, modelo, licencia, rodado, nroSerieReloj, anulado";
+        private string whereObligatorio = "";//"isnull(anulado,'0')='0'";
         private string consultaOrderBy = "patente";
         private string nombreTabla = "Femig.Autos";
         private string filtro1Value = "patente";
@@ -91,6 +91,10 @@ namespace GestorDeFlotasDesktop.AbmAuto
                 strQuery += " and cast(" + filtro4Value + " as varchar) like '%" + txtReloj.Text + "%'";
             if (!string.IsNullOrEmpty(txtLicencia.Text))
                 strQuery += " and cast(" + filtro5Value + " as varchar) like '%" + txtLicencia.Text + "%'";
+            if (chkDeshabilitado.Checked)
+                strQuery += " and anulado='1'";
+            else
+                strQuery += " and isnull(anulado,'0')='0'";
             strQuery += " order by " + consultaOrderBy;
 
             return strQuery;
