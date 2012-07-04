@@ -58,7 +58,7 @@ BEGIN
 	SELECT @iValorFicha = valorFicha, @iValorBandera = valorBandera FROM femig.Turnos where turnoID = @pTurnoID
 	
 	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
-				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD
+				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD AND codRendicion is null
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Rendiciones]
            (fecha,dniChofer,turnoID,importeTotal)
