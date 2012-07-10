@@ -75,7 +75,7 @@ BEGIN
 	SELECT @pCodFactura = max(codFactura) from femig.Facturas;
 	UPDATE femig.Viajes
 		SET codFactura = @pCodFactura
-			WHERE viajeID = (SELECT viajeID FROM #ImportesCliente);
+			WHERE viajeID IN (SELECT ic.viajeID FROM #ImportesCliente ic where viajeID = ic.viajeID)
 	DROP TABLE #ImportesCliente
 
 END
