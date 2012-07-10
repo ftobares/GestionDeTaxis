@@ -24,7 +24,7 @@ DECLARE @sPatente varchar(10)
 BEGIN
 
 	--Controlo que no sea el mismo viaje
-	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(day,fecha,@pFecha)=0)
+	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(mi,fecha,@pFecha)=0 )
 	begin
 		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
 		return
