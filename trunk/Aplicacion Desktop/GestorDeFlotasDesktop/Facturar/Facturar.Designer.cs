@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgFacturas = new System.Windows.Forms.DataGridView();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgFacturas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +63,7 @@
             this.btnLimpiar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnLimpiar.Image = global::GestorDeFlotasDesktop.Properties.Resources.page_white;
             this.btnLimpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLimpiar.Location = new System.Drawing.Point(246, 169);
+            this.btnLimpiar.Location = new System.Drawing.Point(246, 180);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(83, 23);
             this.btnLimpiar.TabIndex = 8;
@@ -76,7 +77,7 @@
             this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnCancelar.Image = global::GestorDeFlotasDesktop.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(154, 169);
+            this.btnCancelar.Location = new System.Drawing.Point(154, 180);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(86, 23);
             this.btnCancelar.TabIndex = 7;
@@ -90,7 +91,7 @@
             this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnAceptar.Image = global::GestorDeFlotasDesktop.Properties.Resources.disk;
             this.btnAceptar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAceptar.Location = new System.Drawing.Point(71, 169);
+            this.btnAceptar.Location = new System.Drawing.Point(71, 180);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(77, 23);
             this.btnAceptar.TabIndex = 6;
@@ -102,7 +103,7 @@
             // txtImporte
             // 
             this.txtImporte.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtImporte.Location = new System.Drawing.Point(188, 143);
+            this.txtImporte.Location = new System.Drawing.Point(188, 154);
             this.txtImporte.MaxLength = 255;
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.ReadOnly = true;
@@ -114,7 +115,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(101, 146);
+            this.label4.Location = new System.Drawing.Point(101, 157);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 63;
@@ -123,7 +124,7 @@
             // txtCliente
             // 
             this.txtCliente.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txtCliente.Location = new System.Drawing.Point(188, 117);
+            this.txtCliente.Location = new System.Drawing.Point(188, 128);
             this.txtCliente.MaxLength = 255;
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.Size = new System.Drawing.Size(100, 20);
@@ -134,7 +135,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(101, 120);
+            this.label2.Location = new System.Drawing.Point(101, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 61;
@@ -179,12 +180,12 @@
             this.dgFacturas.AllowUserToDeleteRows = false;
             this.dgFacturas.AllowUserToResizeRows = false;
             this.dgFacturas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgFacturas.Location = new System.Drawing.Point(12, 198);
+            this.dgFacturas.Location = new System.Drawing.Point(12, 212);
             this.dgFacturas.MultiSelect = false;
             this.dgFacturas.Name = "dgFacturas";
             this.dgFacturas.ReadOnly = true;
             this.dgFacturas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgFacturas.Size = new System.Drawing.Size(384, 109);
+            this.dgFacturas.Size = new System.Drawing.Size(384, 95);
             this.dgFacturas.TabIndex = 67;
             this.dgFacturas.Visible = false;
             // 
@@ -199,11 +200,21 @@
             this.dtpFechaFin.TabIndex = 66;
             this.dtpFechaFin.Value = new System.DateTime(2012, 7, 1, 0, 0, 0, 0);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(185, 112);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(177, 13);
+            this.label5.TabIndex = 68;
+            this.label5.Text = "*Las fechas se toman desde las 0hs";
+            // 
             // Facturar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 337);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.dgFacturas);
             this.Controls.Add(this.dtpFechaFin);
             this.Controls.Add(this.lblTitulo);
@@ -241,5 +252,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgFacturas;
         public System.Windows.Forms.DateTimePicker dtpFechaFin;
+        private System.Windows.Forms.Label label5;
     }
 }
