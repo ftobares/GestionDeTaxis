@@ -25,6 +25,12 @@ AS
 DECLARE @iAsignacionID numeric(18,0)
 BEGIN
 
+	--Controlo que las fechas no sean iguales
+	if (@pFechaInicio = @pFechaFin)
+	begin
+		set @pRetCatchError = 'Las fechas no pueden ser iguales. Las fechas se toman desde las 0hs.'
+		return
+	end
 	--Controlo que el cliente este habilitado
 	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
 	begin
@@ -51,6 +57,12 @@ BEGIN
 	
 	SELECT @pImporteTotal = SUM(tur.valorBandera + (iC.CantFichas * tur.valorFicha)) FROM #ImportesCliente iC
 	INNER JOIN GD1C2012.FEMIG.turnos tur on tur.turnoID = iC.turnoID;
+
+	if (isnull(@pImporteTotal,0)=0)
+	begin
+		set @pRetCatchError = 'No existen viajes en el rango de la fecha para el cliente ' + cast(@pDniCliente as varchar) + '.'
+		return
+	end
 
 	INSERT INTO [GD1C2012].[FEMIG].[Facturas]
            (fechaInicio,fechaFin,dniCliente,importeTotal)
