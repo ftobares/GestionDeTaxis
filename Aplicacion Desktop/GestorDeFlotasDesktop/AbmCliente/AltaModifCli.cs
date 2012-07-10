@@ -57,6 +57,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private void Form1_Load(object sender, EventArgs e)
         {
             inicializarFormulario();
+            monthCalendar1.Visible = false;
         }
     
         private void txtNombre_keyPress(object sender, KeyPressEventArgs e)
@@ -172,6 +173,7 @@ namespace GestorDeFlotasDesktop.AbmCliente
         private void button1_Click(object sender, EventArgs e)
         {
             this.monthCalendar1.Visible = true;
+            monthCalendar1.BringToFront();
         }
 
         private void getDatosRegistro(string dniCliente)
