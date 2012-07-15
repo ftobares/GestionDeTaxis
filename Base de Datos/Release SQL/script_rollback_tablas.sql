@@ -1,3 +1,40 @@
+/*Eliminar Procedimientos*/
+DROP PROCEDURE [FEMIG].[AsignarDesasignarRolPantalla]
+DROP PROCEDURE [FEMIG].[crearRendicion]
+DROP PROCEDURE [FEMIG].[crearReloj]
+DROP PROCEDURE [FEMIG].[crearFacturacion]
+DROP PROCEDURE [FEMIG].[crearChoferAutoTurno]
+DROP PROCEDURE [FEMIG].[crearChofer]
+DROP PROCEDURE [FEMIG].[crearAuto]
+DROP PROCEDURE [FEMIG].[cliente]
+DROP PROCEDURE [FEMIG].[AsignarDesasignarRolUsuario]
+DROP PROCEDURE [FEMIG].[editarChoferAutoTurno]
+DROP PROCEDURE [FEMIG].[editarChofer]
+DROP PROCEDURE [FEMIG].[editarAuto]
+DROP PROCEDURE [FEMIG].[crearViaje]
+DROP PROCEDURE [FEMIG].[crearUsuario]
+DROP PROCEDURE [FEMIG].[crearTurno]
+DROP PROCEDURE [FEMIG].[crearRol]
+DROP PROCEDURE [FEMIG].[crearRendicion]
+DROP PROCEDURE [FEMIG].[ObtenerFuncionalidades]
+DROP PROCEDURE [FEMIG].[getRolesDeUsuario]
+DROP PROCEDURE [FEMIG].[getPantallasDeRol]
+DROP PROCEDURE [FEMIG].[eliminarUsuario]
+DROP PROCEDURE [FEMIG].[eliminarTurno]
+DROP PROCEDURE [FEMIG].[eliminarRol]
+DROP PROCEDURE [FEMIG].[eliminarReloj]
+DROP PROCEDURE [FEMIG].[eliminarCliente]
+DROP PROCEDURE [FEMIG].[eliminarChoferAutoTurno]
+DROP PROCEDURE [FEMIG].[eliminarChofer]
+DROP PROCEDURE [FEMIG].[eliminarAuto]
+DROP PROCEDURE [FEMIG].[editarUsuario]
+DROP PROCEDURE [FEMIG].[editarTurno]
+DROP PROCEDURE [FEMIG].[editarRol]
+DROP PROCEDURE [FEMIG].[editarReloj]
+DROP PROCEDURE [FEMIG].[editarPantalla]
+DROP PROCEDURE [FEMIG].[editarCliente]
+DROP PROCEDURE [FEMIG].[verificarCredencialesLogueo]
+/*Eliminar Tablas*/
 DROP TABLE GD1C2012.FEMIG.RolUsuario;
 DROP TABLE GD1C2012.FEMIG.Usuario;
 DROP TABLE GD1C2012.FEMIG.RolPantalla;
@@ -13,4 +50,5 @@ DROP TABLE GD1C2012.FEMIG.autos;
 DROP TABLE GD1C2012.FEMIG.marcas_autos;
 DROP TABLE GD1C2012.FEMIG.relojes;
 DROP TABLE GD1C2012.FEMIG.Rendiciones;
+/*Eliminar Esquema*/
 DROP SCHEMA FEMIG;
