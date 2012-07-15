@@ -435,17 +435,17 @@ CREATE PROCEDURE [FEMIG].[eliminarCliente]
 	@pDniCliente			NUMERIC(18)
 AS
 BEGIN
-	update femig.cliente set anulado = '1' where dniCliente = @pDniCliente
+	update femig.clientes set anulado = '1' where dniCliente = @pDniCliente
 END
 
 GO
-/****** Object:  StoredProcedure [FEMIG].[cliente]    Script Date: 06/27/2012 02:34:40 ******/
+/****** Object:  StoredProcedure [FEMIG].[crearCliente]    Script Date: 06/27/2012 02:34:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [FEMIG].[cliente] 
+CREATE PROCEDURE [FEMIG].[crearCliente] 
 	@pDniCliente		NUMERIC(18),
 	@pNombre			VARCHAR(255),
 	@pApellido			VARCHAR(255),
@@ -457,14 +457,21 @@ CREATE PROCEDURE [FEMIG].[cliente]
 	@retCatchError		VARCHAR(MAX) out
 AS
 BEGIN
-	--Controlo que no haya duplicados de Patente
-	if exists (select 1 from FEMIG.cliente where dniCliente = @pDniCliente)
+	--Controlo que no haya duplicados de DniCliente
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
 	begin
-		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + @pDniCliente + '.'
+		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
 		return
 	end
 
-	INSERT INTO [GD1C2012].[FEMIG].[cliente]
+	--Controlo que no haya duplicados de telefono
+	if exists (select 1 from FEMIG.clientes where telefono = @pTelefono)
+	begin
+		set @retCatchError = 'Ya existe un cliente con el mismo DNI ' + cast(@pDniCliente as varchar) + '.'
+		return
+	end
+
+	INSERT INTO [GD1C2012].[FEMIG].[clientes]
            (dniCliente,nombre,apellido,telefono,direccion,email,fechaNacimiento,anulado)
     VALUES
            (@pDniCliente
@@ -499,7 +506,7 @@ BEGIN
 	--Controlo que no haya duplicados de Patente
 	if exists (select 1 from FEMIG.autos where patente = @pPatente)
 	begin
-		set @pRetCatchError = 'Ya existe un auto con la patente ' + @pPatente + '.'
+		set @pRetCatchError = 'Ya existe un auto con la patente ' + cast(@pPatente as varchar) + '.'
 		return
 	end
 
@@ -544,7 +551,7 @@ BEGIN
 	--Controlo que no haya duplicados de Patente
 	if not exists (select 1 from FEMIG.autos where patente = @pPatente)
 	begin
-		set @pRetCatchError = 'No existe un auto con la patente ' + @pPatente + '.'
+		set @pRetCatchError = 'No existe un auto con la patente ' + cast(@pPatente as varchar) + '.'
 		return
 	end
 
@@ -561,6 +568,7 @@ BEGIN
 		  ,[licencia] = @pLicencia
 		  ,[rodado] = @pRodado
 		  ,[nroSerieReloj] = @pNroSerieReloj
+		  ,[anulado] = @pAnulado
 	 WHERE patente = @pPatente
 	
 END
@@ -622,8 +630,7 @@ BEGIN
            ,@pTelefono
            ,@pEmail
            ,@pFechaNacimiento
-           ,'0')
-	
+           ,'0')	
 END
 
 GO
@@ -666,6 +673,7 @@ BEGIN
 		  ,[telefono] = @pTelefono
 		  ,[email] = @pEmail
 		  ,[fechaNacimiento] = @pFechaNacimiento
+		  ,[anulado] = @pAnulado
 	 WHERE dniChofer = @pDniChofer
 		
 END
@@ -692,23 +700,31 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [FEMIG].[crearTurno] 
-	@pTurnoId			NUMERIC(18,0),
+	/*@pTurnoId			NUMERIC(18,0),
 	@pDescripcion		VARCHAR(10),
 	@pHoraInicio		VARCHAR(255),
 	@pHoraFin			VARCHAR(255),
 	@pValorFicha		VARCHAR(26),
 	@pValorBandera		VARCHAR(10),
 	@pAnulado			BIT,
+	@pRetCatchError		VARCHAR(1000) out*/
+	@pTurnoId			NUMERIC(18,0),
+	@pDescripcion		VARCHAR(255),
+	@pHoraInicio		NUMERIC(18,0),
+	@pHoraFin			NUMERIC(18,0),
+	@pValorFicha		NUMERIC(18,2),
+	@pValorBandera		NUMERIC(18,2),
+	@pAnulado			BIT,
 	@pRetCatchError		VARCHAR(1000) out
 AS
 BEGIN
 
 	--Controlo si 2 turnos activos solapan horarios
-	iF exists	(SELECT	1 FROM femig.turnos
-				WHERE	ISNULL(anulado,'0')='0'
+	IF exists	(SELECT	1 FROM femig.turnos
+				WHERE ISNULL(anulado,'0')='0'
 						AND ((@pHoraInicio >= horaInicio AND @pHoraInicio <= horaFin)
 						OR (@pHoraFin >= horaInicio AND @pHoraFin <= horaFin)))
-	begin
+	BEGIN
 		set @pRetCatchError = 'El turno que intenta ingresar se solapa con otros horarios.'
 		return
 	END
@@ -721,8 +737,7 @@ BEGIN
            ,@pDescripcion
            ,@pValorFicha
            ,@pValorBandera
-           ,'0')
-	
+           ,'0')	
 END
 
 GO
@@ -734,16 +749,15 @@ GO
 
 CREATE PROCEDURE [FEMIG].[editarTurno] 
 	@pTurnoId			NUMERIC(18,0),
-	@pDescripcion		VARCHAR(10),
-	@pHoraInicio		VARCHAR(255),
-	@pHoraFin			VARCHAR(255),
-	@pValorFicha		VARCHAR(26),
-	@pValorBandera		VARCHAR(10),
+	@pDescripcion		VARCHAR(255),
+	@pHoraInicio		NUMERIC(18,0),
+	@pHoraFin			NUMERIC(18,0),
+	@pValorFicha		NUMERIC(18,2),
+	@pValorBandera		NUMERIC(18,2),
 	@pAnulado			BIT,
 	@pRetCatchError		VARCHAR(1000) out
 AS
 BEGIN
-
 	--Controlo si 2 turnos activos solapan horarios
 	iF exists	(SELECT	1 FROM femig.turnos
 				WHERE	ISNULL(anulado,'0')='0'
@@ -755,12 +769,13 @@ BEGIN
 	END
 	
 	UPDATE [GD1C2012].[FEMIG].[turnos]
-	SET descripcion = @pDescripcion
-		,horaFin = @pHoraFin
-		,horaInicio = @pHoraInicio
-		,valorBandera = @pValorBandera
-		,valorFicha = @pValorFicha
-	WHERE turnoID = @pTurnoId
+	   SET [horaInicio] = @pHoraInicio
+		  ,[horaFin] = @pHoraFin
+		  ,[descripcion] = @pDescripcion
+		  ,[valorFicha] = @pValorFicha
+		  ,[valorBandera] = @pValorBandera
+		  ,[anulado] = @pAnulado
+	 WHERE turnoID = @pTurnoID
 end
 
 GO
@@ -795,6 +810,8 @@ AS
 DECLARE @iAsignacionID numeric(18)
 DECLARE @iValorFicha numeric(18,2)
 DECLARE @iValorBandera numeric(18,2)
+DECLARE @sPatente varchar(10)
+DECLARE @sNroSerieReloj varchar(18)
 BEGIN
 
 	SET @pImporteTotal = 0
@@ -808,17 +825,25 @@ BEGIN
 		return
 	end
 
-	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
+	--Controlo los datos de la rendicion
+	SELECT TOP(1) @iAsignacionID = asignacionId, @sPatente = patente FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
 		set @pRetCatchError = 'Los datos de la rendicion son incorrectos'
 		return 
 	end
 	
+	--Controlo que el reloj este habilitado
+	if exists (select 1 from FEMIG.relojes r where (select a.nroSerieReloj from FEMIG.Autos a where patente = @sPatente) = r.nroSerieReloj and r.anulado = 1)
+	begin
+		set @pRetCatchError = 'El rleoj se encuentra inhabilitado'
+		return
+	end
+
 	SELECT @iValorFicha = valorFicha, @iValorBandera = valorBandera FROM femig.Turnos where turnoID = @pTurnoID
 	
 	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
-				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD
+				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD AND codRendicion is null
 		
 	INSERT INTO [GD1C2012].[FEMIG].[Rendiciones]
            (fecha,dniChofer,turnoID,importeTotal)
@@ -892,24 +917,47 @@ CREATE PROCEDURE [FEMIG].[crearViaje]
 	@pDniCliente numeric(18),
 	@pRetCatchError		VARCHAR(MAX) out
 AS
-DECLARE @sFecha varchar(MAX) 
---SET @sFecha = SUBSTRING(cast(@pFecha as varchar),0,10) + ' %'
 DECLARE @iAsignacionID numeric(18) 
+DECLARE @sPatente varchar(10)
 BEGIN
 
-	--SET @iAsignacionID = SELECT TOP(1) asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID AND dniChofer = @pDniChofer AND fecha = @sFecha )
+	--Controlo que no sea el mismo viaje
+	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(mi,fecha,@pFecha)=0 )
+	begin
+		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
+		return
+	end
+	
+	--Controlo los datos del viaje
 	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
 		set @pRetCatchError = 'Los datos del Viaje son incorrectos'
 		return 
 	end
-	
-	/*IF (@pTipoViaje = 'calle')
+
+	--Controlo que el reloj este habilitado
+	select @sPatente = patente from femig.choferAutoTurno where asignacionID = @iAsignacionID
+	if exists (select 1 from FEMIG.relojes r where (select a.nroSerieReloj from FEMIG.Autos a where patente = @sPatente) = r.nroSerieReloj and r.anulado = 1)
 	begin
-		set @pDniCliente = null;
-	end*/
-		
+		set @pRetCatchError = 'El rleoj se encuentra inhabilitado'
+		return
+	end
+
+	--Controlo que el cliente este habilitado
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
+	begin
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' se encuentra inhabilitado.'
+		return
+	end
+	
+	--Controlo que la asignacion este habilitada
+	if exists (select 1 from FEMIG.ChoferAutoTurno where asignacionID = @iAsignacionID and anulado = 1)
+	begin
+		set @pRetCatchError = 'El chofer ' + cast(@pDniChofer as varchar) + ' se encuentra inhabilitado en ese turno para esa fecha.'
+		return
+	end
+	
 	INSERT INTO [GD1C2012].[FEMIG].[Viajes]
            (tipoViaje,asignacionId,cantFichas,fecha,dniCliente)
     VALUES
@@ -1008,7 +1056,7 @@ GO
 CREATE PROCEDURE [FEMIG].[crearFacturacion] 
 	@pFechaInicio datetime,
 	@pFechaFin datetime,
-	@pDniCliente numeric(18),
+	@pDniCliente numeric(18,0),
 	@pImporteTotal numeric(18,2) out,
 	@pCodFactura numeric(18) out,
 	@pRetCatchError		VARCHAR(MAX) out
@@ -1016,20 +1064,44 @@ AS
 DECLARE @iAsignacionID numeric(18,0)
 BEGIN
 
-	SET @pImporteTotal = 0
+	--Controlo que las fechas no sean iguales
+	if (@pFechaInicio = @pFechaFin)
+	begin
+		set @pRetCatchError = 'Las fechas no pueden ser iguales. Las fechas se toman desde las 0hs.'
+		return
+	end
+	--Controlo que el cliente este habilitado
+	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
+	begin
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' no existe.'
+		return
+	end
+
+	--Controlo que el cliente este habilitado
+	if exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente and anulado = 1)
+	begin
+		set @pRetCatchError = 'El cliente ' + cast(@pDniCliente as varchar) + ' se encuentra inhabilitado.'
+		return
+	end
 
 ----------------------------------------------------
 --******************REVISARRRR**********************--
 ----------------------------------------------------
 
 	CREATE TABLE #ImportesCliente (viajeID numeric(18,0) PRIMARY KEY, cantFichas numeric(18,0), turnoID numeric(18,0));
-	INSERT INTO #ImportesCliente (dniCliente, cantFichas, turnoID)
-	SELECT vi.dniCliente, vi.cantFichas, cat.turnoID FROM Femig.viajes vi
+	INSERT INTO #ImportesCliente (viajeID, cantFichas, turnoID)
+	SELECT vi.viajeID, vi.cantFichas, cat.turnoID FROM Femig.viajes vi
 	INNER JOIN GD1C2012.FEMIG.ChoferAutoTurno cat on cat.asignacionId = vi.asignacionId
-	WHERE vi.dniCliente = @pDniCliente AND vi.fecha BETWEEN CONVERT(varchar(8), @pFechaInicio, 112) AND CONVERT(varchar(8), @pFechaFin, 112);
+	WHERE vi.dniCliente = @pDniCliente AND vi.fecha BETWEEN CONVERT(varchar(8), @pFechaInicio, 112) AND CONVERT(varchar(8), @pFechaFin, 112) AND vi.codFactura is null;
 	
-	SELECT @pImporteTotal = SUM(tur.valorBandera + (iC.CantFichas * tur.valorFicha)) FROM #ImporteCliente iC
+	SELECT @pImporteTotal = SUM(tur.valorBandera + (iC.CantFichas * tur.valorFicha)) FROM #ImportesCliente iC
 	INNER JOIN GD1C2012.FEMIG.turnos tur on tur.turnoID = iC.turnoID;
+
+	if (isnull(@pImporteTotal,0)=0)
+	begin
+		set @pRetCatchError = 'No existen viajes en el rango de la fecha para el cliente ' + cast(@pDniCliente as varchar) + '.'
+		return
+	end
 
 	INSERT INTO [GD1C2012].[FEMIG].[Facturas]
            (fechaInicio,fechaFin,dniCliente,importeTotal)
@@ -1039,10 +1111,11 @@ BEGIN
            ,@pDniCliente
            ,@pImporteTotal)
 	
-	SELECT @pCodFactura = max(codFactura)+1 from femig.Facturas;
+	SELECT @pCodFactura = max(codFactura) from femig.Facturas;
 	UPDATE femig.Viajes
-		SET codFacturas = @pCodFactura
-			WHERE viajeID = (SELECT viajeID FROM #ImportesCliente);
+		SET codFactura = @pCodFactura
+			WHERE viajeID IN (SELECT ic.viajeID FROM #ImportesCliente ic where viajeID = ic.viajeID)
+	DROP TABLE #ImportesCliente
 
 END
 
@@ -1441,6 +1514,7 @@ BEGIN
 	   SET [marca] = @pMarca
 		  ,[modelo] = @pModelo
 		  ,[fechaVersion] = @pFechaVersion
+		  ,[anulado] = @pAnulado
 	 WHERE nroSerieReloj = @pNroSerieReloj
 	
 END
@@ -1459,3 +1533,105 @@ BEGIN
 	update femig.relojes set anulado = '1' where nroSerieReloj = @pNroSerieReloj
 END
 GO
+
+/*Triggers*/
+CREATE TRIGGER femig.modifRelecionAuto
+ON femig.autos
+AFTER UPDATE
+
+AS 
+
+DECLARE @anulado BIT
+DECLARE @patente VARCHAR(10)
+DECLARE @dniChofer NUMERIC(18,0)
+DECLARE @turnoID NUMERIC(18,0)
+
+if update(anulado)
+BEGIN
+
+	-- SET NOCOUNT ON impide que se generen mensajes de texto con cada instrucción 
+
+	SET NOCOUNT ON;
+
+	SELECT TOP(1) @anulado = anulado, @patente = patente FROM INSERTED
+	if(@anulado = 1)
+	begin
+		UPDATE femig.ChoferAutoTurno SET anulado = @anulado WHERE patente = @patente
+	end
+	else
+	begin
+		UPDATE cat SET anulado = @anulado FROM femig.choferAutoTurno cat WHERE patente = @patente AND 
+			NOT EXISTS (select 1 from femig.choferes c where c.dniChofer=cat.dniChofer AND anulado = 1) AND
+				NOT EXISTS (select 1 from femig.turnos t where t.turnoID=cat.turnoID AND anulado = 1)
+	end
+END
+
+/*--------------------------------------------*/
+
+CREATE TRIGGER femig.modifRelecionChofer
+ON femig.choferes
+AFTER UPDATE
+
+AS 
+
+DECLARE @anulado BIT
+DECLARE @patente VARCHAR(10)
+DECLARE @dniChofer NUMERIC(18,0)
+DECLARE @turnoID NUMERIC(18,0)
+
+if update(anulado)
+BEGIN
+
+	-- SET NOCOUNT ON impide que se generen mensajes de texto con cada instrucción 
+
+	SET NOCOUNT ON;
+
+	SELECT TOP(1) @anulado = anulado, @dniChofer = dniChofer FROM INSERTED
+	if(@anulado = 1)
+	begin
+		UPDATE femig.ChoferAutoTurno SET anulado = @anulado WHERE dniChofer = @dniChofer 
+	end
+	else
+	begin
+		UPDATE cat SET anulado = @anulado FROM femig.choferAutoTurno cat WHERE dniChofer = @dniChofer AND 
+			NOT EXISTS (select 1 from femig.autos a where a.patente=cat.patente AND anulado = 1) AND
+				NOT EXISTS (select 1 from femig.turnos t where t.turnoID=cat.turnoID AND anulado = 1)
+	end
+
+END
+
+
+/*--------------------------------------------*/
+
+
+CREATE TRIGGER femig.modifRelecionTurno
+ON femig.turnos
+AFTER UPDATE
+
+AS 
+
+DECLARE @anulado BIT
+DECLARE @patente VARCHAR(10)
+DECLARE @dniChofer NUMERIC(18,0)
+DECLARE @turnoID NUMERIC(18,0)
+
+if update(anulado)
+BEGIN
+
+	-- SET NOCOUNT ON impide que se generen mensajes de texto con cada instrucción 
+	
+	SET NOCOUNT ON;
+	
+	SELECT TOP(1) @anulado = anulado, @turnoID = turnoID FROM INSERTED
+	if(@anulado = 1)
+	begin
+		UPDATE femig.ChoferAutoTurno SET anulado = @anulado WHERE turnoID = @turnoID 
+	end
+	else
+	begin
+		UPDATE cat SET anulado = @anulado FROM femig.choferAutoTurno cat WHERE turnoID = @turnoID AND 
+			NOT EXISTS (select 1 from femig.autos a where a.patente=cat.patente AND anulado = 1) AND
+				NOT EXISTS (select 1 from femig.choferes c where c.dniChofer=cat.dniChofer AND anulado = 1)
+	end
+
+END
