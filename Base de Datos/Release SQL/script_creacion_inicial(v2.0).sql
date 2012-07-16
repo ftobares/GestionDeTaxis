@@ -125,7 +125,8 @@ CREATE TABLE GD1C2012.FEMIG.viajes (
 	codFactura numeric(18),
 	codRendicion numeric(18)
 );
-ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
+ALTER TABLE GD1C2012.FEMIG.viajes ADD CONSTRAINT FK_Viaje_ChoferAutoTurno 
+	FOREIGN KEY (asignacionId) REFERENCES GD1C2012.FEMIG.ChoferAutoTurno (asignacionId);
 
 ALTER TABLE GD1C2012.FEMIG.Viajes ADD CONSTRAINT FK_Viaje_Factura 
 	FOREIGN KEY (codFactura) REFERENCES GD1C2012.FEMIG.Facturas (codFactura);
@@ -1534,7 +1535,16 @@ BEGIN
 END
 GO
 
-/*Triggers*/
+/*++++++++++++++++++++++++++++++++++++++*/
+/*		Triggers						*/
+/*++++++++++++++++++++++++++++++++++++++*/
+GO
+/****** Object:  Trigger femig.modifRelecionAuto    ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE TRIGGER femig.modifRelecionAuto
 ON femig.autos
 AFTER UPDATE
@@ -1565,8 +1575,14 @@ BEGIN
 				NOT EXISTS (select 1 from femig.turnos t where t.turnoID=cat.turnoID AND anulado = 1)
 	end
 END
-
+GO
 /*--------------------------------------------*/
+GO
+/****** Object:  Trigger femig.modifRelecionChofer    ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
 CREATE TRIGGER femig.modifRelecionChofer
 ON femig.choferes
@@ -1599,10 +1615,15 @@ BEGIN
 	end
 
 END
-
+GO
 
 /*--------------------------------------------*/
-
+GO
+/****** Object:  Trigger femig.modifRelecionTurno    ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
 CREATE TRIGGER femig.modifRelecionTurno
 ON femig.turnos
@@ -1635,3 +1656,4 @@ BEGIN
 	end
 
 END
+GO
