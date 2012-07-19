@@ -38,10 +38,10 @@
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.lblModelo = new System.Windows.Forms.Label();
             this.lblMarca = new System.Windows.Forms.Label();
-            this.txtNroSerieReloj = new System.Windows.Forms.TextBox();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.dtpVersion = new System.Windows.Forms.DateTimePicker();
             this.chkDeshabilitado = new System.Windows.Forms.CheckBox();
+            this.txtNroSerieReloj = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnLimpiar
@@ -143,15 +143,6 @@
             this.lblMarca.TabIndex = 37;
             this.lblMarca.Text = "Marca:";
             // 
-            // txtNroSerieReloj
-            // 
-            this.txtNroSerieReloj.Location = new System.Drawing.Point(124, 60);
-            this.txtNroSerieReloj.MaxLength = 15;
-            this.txtNroSerieReloj.Name = "txtNroSerieReloj";
-            this.txtNroSerieReloj.Size = new System.Drawing.Size(100, 20);
-            this.txtNroSerieReloj.TabIndex = 0;
-            this.txtNroSerieReloj.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroSerieReloj_KeyPress);
-            // 
             // txtMarca
             // 
             this.txtMarca.Location = new System.Drawing.Point(124, 86);
@@ -178,15 +169,22 @@
             this.chkDeshabilitado.Text = "Deshabilitado";
             this.chkDeshabilitado.UseVisualStyleBackColor = true;
             // 
+            // txtNroSerieReloj
+            // 
+            this.txtNroSerieReloj.Location = new System.Drawing.Point(124, 60);
+            this.txtNroSerieReloj.Name = "txtNroSerieReloj";
+            this.txtNroSerieReloj.Size = new System.Drawing.Size(100, 20);
+            this.txtNroSerieReloj.TabIndex = 56;
+            // 
             // addEditReloj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 229);
+            this.Controls.Add(this.txtNroSerieReloj);
             this.Controls.Add(this.chkDeshabilitado);
             this.Controls.Add(this.dtpVersion);
             this.Controls.Add(this.txtMarca);
-            this.Controls.Add(this.txtNroSerieReloj);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -216,9 +214,9 @@
         private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label lblModelo;
         private System.Windows.Forms.Label lblMarca;
-        private System.Windows.Forms.TextBox txtNroSerieReloj;
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.DateTimePicker dtpVersion;
         private System.Windows.Forms.CheckBox chkDeshabilitado;
+        private System.Windows.Forms.TextBox txtNroSerieReloj;
     }
 }

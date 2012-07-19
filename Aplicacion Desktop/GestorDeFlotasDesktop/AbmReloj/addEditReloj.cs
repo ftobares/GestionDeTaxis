@@ -43,6 +43,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
             dtpVersion.Value = DateTime.Today;
             lblTitulo.Text = tituloPantalla;
             this.Text = tituloPantalla;
+            txtNroSerieReloj.ReadOnly = false;
 
             if (modoAbm == "Editar")
             {
@@ -100,7 +101,7 @@ namespace GestorDeFlotasDesktop.AbmReloj
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.BigInt);
+                SqlParameter pNroSerieReloj = new SqlParameter("@pNroSerieReloj", SqlDbType.VarChar, 255);
                 pNroSerieReloj.Value = txtNroSerieReloj.Text;
                 SqlParameter pMarca = new SqlParameter("@pMarca", SqlDbType.VarChar, 255);
                 pMarca.Value = txtMarca.Text;
