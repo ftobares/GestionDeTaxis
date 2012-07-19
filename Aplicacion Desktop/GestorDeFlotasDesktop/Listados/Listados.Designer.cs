@@ -92,7 +92,8 @@
             this.cbTrim.Items.AddRange(new object[] {
             "1",
             "2",
-            "3"});
+            "3",
+            "4"});
             this.cbTrim.Location = new System.Drawing.Point(144, 11);
             this.cbTrim.Name = "cbTrim";
             this.cbTrim.Size = new System.Drawing.Size(54, 21);
