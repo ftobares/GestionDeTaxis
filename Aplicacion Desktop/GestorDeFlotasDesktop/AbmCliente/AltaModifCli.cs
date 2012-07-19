@@ -247,9 +247,9 @@ namespace GestorDeFlotasDesktop.AbmCliente
                     string sQuery = "UPDATE FEMIG.Clientes SET nombre = '" + txtNombre.Text + "', apellido = '" + this.txtApellido.Text + "', telefono = "
                         + this.txtTel.Text + ", direccion = '" + this.txtCalle.Text + "|" + this.txtNumCalle.Text + "|" + this.txtPiso.Text + "|" + this.txtDpto.Text + "|"
                             + this.txtLocalidad.Text + "|" + this.txtCP.Text + "', email = ";
-                    if (this.txtMail.Text == string.Empty)
+                    /*if (this.txtMail.Text == string.Empty)
                         sQuery += "NULL";
-                    else
+                    else*/
                         sQuery += "'" + this.txtMail.Text + "'";
                     sQuery += ",fechaNacimiento = '" + this.txtFchNac.Text.Substring(0,10) + "', anulado ='" + sCheckAnuklado + "' WHERE dniCliente = " + this.txtDNI.Text;
                     DataTable dtResult = new DataTable();
