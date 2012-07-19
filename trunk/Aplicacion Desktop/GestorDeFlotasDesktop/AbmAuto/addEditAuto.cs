@@ -117,7 +117,7 @@ namespace GestorDeFlotasDesktop.AbmAuto
 
                 string retCatchError = string.Empty;
 
-                SqlParameter pPatente = new SqlParameter("@pPatente", SqlDbType.VarChar, 10);
+                SqlParameter pPatente = new SqlParameter("@pPatente", SqlDbType.VarChar, 18);
                 pPatente.Value = mtxtPatente.Text;
                 SqlParameter pMarca = new SqlParameter("@pMarca", SqlDbType.VarChar, 255);
                 pMarca.Value = cmbMarca.Text;

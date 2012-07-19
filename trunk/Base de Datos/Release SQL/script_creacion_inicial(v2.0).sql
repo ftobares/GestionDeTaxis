@@ -544,7 +544,7 @@ CREATE PROCEDURE [FEMIG].[editarAuto]
 	@pModelo			VARCHAR(255),
 	@pLicencia			VARCHAR(26),
 	@pRodado			VARCHAR(10),
-	@pNroSerieReloj		NUMERIC(18,0),
+	@pNroSerieReloj		VARCHAR(18),
 	@pAnulado			BIT,
 	@pRetCatchError		VARCHAR(1000) out
 AS
