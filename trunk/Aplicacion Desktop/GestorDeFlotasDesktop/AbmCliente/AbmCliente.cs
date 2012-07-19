@@ -141,7 +141,8 @@ namespace GestorDeFlotasDesktop.AbmCliente
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.ColumnIndex < 0 || e.RowIndex < 0)
+                return;
             if (e.ColumnIndex == 0) //Assuming the button column as second column, if not can change the index
             {
                 GestorDeFlotasDesktop.AbmCliente.AltaModifCli altaModifCliente = GestorDeFlotasDesktop.AbmCliente.AltaModifCli.Instance();
