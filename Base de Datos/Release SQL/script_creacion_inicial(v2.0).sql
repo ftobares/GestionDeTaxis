@@ -1462,7 +1462,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [FEMIG].[crearReloj] 
-	@pNroSerieReloj		NUMERIC(18,0),
+	@pNroSerieReloj		VARCHAR(18),
 	@pMarca				VARCHAR(255),
 	@pModelo			VARCHAR(255),
 	@pFechaVersion		DATETIME,
@@ -1496,7 +1496,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [FEMIG].[editarReloj] 
-	@pNroSerieReloj		NUMERIC(18,0),
+	@pNroSerieReloj		VARCHAR(18),
 	@pMarca				VARCHAR(255),
 	@pModelo			VARCHAR(255),
 	@pFechaVersion		DATETIME,
@@ -1528,7 +1528,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [FEMIG].[eliminarReloj] 
-	@pNroSerieReloj			VARCHAR(10)
+	@pNroSerieReloj			VARCHAR(18)
 AS
 BEGIN
 	update femig.relojes set anulado = '1' where nroSerieReloj = @pNroSerieReloj
