@@ -121,7 +121,7 @@ namespace GestorDeFlotasDesktop.AbmTurno
 
         private bool validaCamposRequeridos()
         {
-            if (txtDescripcion.Text.Trim() == string.Empty | cmbHoraInicio.Text.Trim() == string.Empty | cmbHoraFin.Text.Trim() == string.Empty | cmbHoraFin.Text.Trim() == string.Empty | txtValorFicha.Text.Trim() == string.Empty | txtValorBandera.Text.Trim() == string.Empty)
+            if (txtDescripcion.Text.Trim() == string.Empty | cmbHoraInicio.Text.Trim() == string.Empty | int.Parse(cmbHoraFin.Text) <= int.Parse(cmbHoraInicio.Text) | cmbHoraFin.Text.Trim() == string.Empty | txtValorFicha.Text.Trim() == string.Empty | txtValorBandera.Text.Trim() == string.Empty)
                 return false;
             else
                 return true;
@@ -140,11 +140,12 @@ namespace GestorDeFlotasDesktop.AbmTurno
                     if (string.IsNullOrEmpty(txtDescripcion.Text))
                         frmErrores.agregarError("Debe completar la descripción.");
                     if (int.Parse(cmbHoraFin.Text)<=int.Parse(cmbHoraInicio.Text))
-                        frmErrores.agregarError("La hora de Fin no puede ser menor a la de Inicio.");
+                        frmErrores.agregarError("La hora de Fin no puede ser menor o igual a la de Inicio.");
                     if (string.IsNullOrEmpty(txtValorFicha.Text))
                         frmErrores.agregarError("Debe especificar el valor de la ficha.");
                     if (string.IsNullOrEmpty(txtValorBandera.Text))
                         frmErrores.agregarError("Debe esepcificar el valor de bajada de bandera.");
+                    
 
                     frmErrores.ShowDialog();
                     frmErrores.Dispose();
