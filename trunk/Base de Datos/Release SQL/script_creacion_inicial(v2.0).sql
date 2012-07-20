@@ -723,8 +723,8 @@ BEGIN
 	--Controlo si 2 turnos activos solapan horarios
 	IF exists	(SELECT	1 FROM femig.turnos
 				WHERE ISNULL(anulado,'0')='0'
-						AND ((@pHoraInicio >= horaInicio AND @pHoraInicio <= horaFin)
-						OR (@pHoraFin >= horaInicio AND @pHoraFin <= horaFin)))
+						AND ((@pHoraInicio >= horaInicio AND @pHoraInicio < horaFin)
+						OR (@pHoraFin > horaInicio AND @pHoraFin <= horaFin)))
 	BEGIN
 		set @pRetCatchError = 'El turno que intenta ingresar se solapa con otros horarios.'
 		return
@@ -762,8 +762,8 @@ BEGIN
 	--Controlo si 2 turnos activos solapan horarios
 	iF exists	(SELECT	1 FROM femig.turnos
 				WHERE	ISNULL(anulado,'0')='0'
-						AND ((@pHoraInicio >= horaInicio AND @pHoraInicio <= horaFin)
-						OR (@pHoraFin >= horaInicio AND @pHoraFin <= horaFin)))
+						AND ((@pHoraInicio >= horaInicio AND @pHoraInicio < horaFin)
+						OR (@pHoraFin > horaInicio AND @pHoraFin <= horaFin)))
 	begin
 		set @pRetCatchError = 'El turno que intenta editar se solapa con otros horarios.'
 		return
@@ -818,13 +818,13 @@ BEGIN
 	SET @pImporteTotal = 0
 
 	--Controlo si hay 2 Rendiciones para el mismo chofer a la misma Fecha y el mismo turno
-	iF exists	(SELECT	1 FROM femig.Rendiciones
+	/*iF exists	(SELECT	1 FROM femig.Rendiciones
 				WHERE	 (DATEDIFF(day , fecha, @pFecha)=0) AND (turnoID = @pTurnoID)
 						AND (@pDniChofer = dniChofer) )
 	begin
 	set @pRetCatchError = 'La rendicion que intenta ingresar ya fue ingresada.'
 		return
-	end
+	end*/
 
 	--Controlo los datos de la rendicion
 	SELECT TOP(1) @iAsignacionID = asignacionId, @sPatente = patente FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
@@ -845,7 +845,16 @@ BEGIN
 	
 	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
 				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD AND codRendicion is null
-		
+	
+	IF (isnull(@pImporteTotal,0) = 0)
+	begin
+		set @pRetCatchError = 'No existen viajes sin rendir para ese chofer'
+		return 
+	end
+
+	SELECT @pImporteTotal = SUM(@iValorBandera + (cantFichas * @iValorFicha)) FROM femig.viajes 
+				WHERE datediff(day,@pFecha,fecha)= 0 AND asignacionID = @iAsignacioniD
+	
 	INSERT INTO [GD1C2012].[FEMIG].[Rendiciones]
            (fecha,dniChofer,turnoID,importeTotal)
     VALUES
@@ -922,10 +931,17 @@ DECLARE @iAsignacionID numeric(18)
 DECLARE @sPatente varchar(10)
 BEGIN
 
-	--Controlo que no sea el mismo viaje
+	--Controlo que no sea el mismo viaje para el mismo cliente
 	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(mi,fecha,@pFecha)=0 )
 	begin
 		set @pRetCatchError = 'Ya fue asignado un viaje para ese cliente en esa fecha y hora'
+		return
+	end
+
+	--Controlo que no sea el mismo viaje para el mismo chofer
+	if exists (select * from FEMIG.viajes v INNER JOIN femig.ChoferAutoTurno cat ON cat.asignacionID = v.asignacionID AND cat.dniChofer = @pDniChofer where datediff(mi,v.fecha,@pFecha)=0 )
+	begin
+		set @pRetCatchError = 'Ya fue asignado un viaje para ese chofer en esa fecha y hora'
 		return
 	end
 	
