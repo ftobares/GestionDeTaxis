@@ -931,6 +931,20 @@ DECLARE @iAsignacionID numeric(18)
 DECLARE @sPatente varchar(10)
 BEGIN
 
+	--Controlo que exista el chofer
+	if not exists (select 1 from FEMIG.choferes where dniChofer = @pDniChofer)
+	begin
+		set @pRetCatchError = 'El chofer ingresado no existe en el sistema'
+		return
+	end
+	
+	--Controlo que exista el cliente
+	if not exists (select 1 from FEMIG.clientes where dniCliente = @pDniCliente)
+	begin
+		set @pRetCatchError = 'El cliente ingresado no existe en el sistema'
+		return
+	end
+
 	--Controlo que no sea el mismo viaje para el mismo cliente
 	if exists (select 1 from FEMIG.viajes where dniCliente = @pDniCliente and datediff(mi,fecha,@pFecha)=0 )
 	begin
@@ -949,7 +963,7 @@ BEGIN
 	SELECT TOP(1) @iAsignacionID = asignacionId FROM femig.ChoferAutoTurno where (turnoID=@pTurnoID) AND (dniChofer = @pDniChofer) AND (datediff(day,fecha,@pFecha)=0)
 	IF (isnull(@iAsignacionID,0) = 0)
 	begin
-		set @pRetCatchError = 'Los datos del Viaje son incorrectos'
+		set @pRetCatchError = 'No fue asignado un turno para ese chofer'
 		return 
 	end
 
